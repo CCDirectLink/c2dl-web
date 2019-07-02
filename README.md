@@ -29,15 +29,15 @@ Possibilities:
 | `C2DL_SYS_PAGE`   | /src/page            | Helper for page creation                               |
 | `C2DL_LOG`        | /logs                | Log directory                                          |
 
-| Variable          | Value                | Used                                                  |
-|:----------------- |:-------------------- |:----------------------------------------------------- |
-| `APPLICATION_ENV` | `prod`               | Production environment                                |
-| `APPLICATION_ENV` | `dev`                | Developpment environment                              |
+| Variable          | Value                | Used                                                   |
+|:----------------- |:-------------------- |:------------------------------------------------------ |
+| `APPLICATION_ENV` | `prod`               | Production environment                                 |
+| `APPLICATION_ENV` | `dev`                | Developpment environment                               |
 
 ### Page specific
 
 | Variable          | Git Directory        | Used                                                   |
-|:----------------- |:-------------------- |: ----------------------------------------------------- |
+|:----------------- |:-------------------- |:------------------------------------------------------ |
 | `C2DL_WWW`        | /www-c2dl            | <https://c2dl.info> page root                          |
 | `C2DL_WWW_LOG`    | /logs/www-c2dl       | Logs for <https://c2dl.info> (*.log)                   |
 | `C2DL_WWW_RES`    | /www-c2dl/res        | Resource directory                                     |
