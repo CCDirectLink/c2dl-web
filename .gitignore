@@ -1,0 +1,10 @@
+.DS_Store
+www-c2dl/admin
+www-c2dl/media
+logs/*/*.log
+src/*/vendor
+.internal
+.local
+.idea
+cgi-bin
+usage

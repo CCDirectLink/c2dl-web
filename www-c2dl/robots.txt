@@ -1,0 +1,6 @@
+User-agent: Twitterbot
+Allow: /cc/bye
+Allow: /cc/yt-bye
+
+User-agent: *
+Disallow: /
