@@ -23,16 +23,16 @@ Possibilities:
 ### Global
 
 | Variable          | Git Directory        | Used                                                   |
-|:----------------- |:-------------------- |: ----------------------------------------------------- |
-| `C2DL_ROOT`       | /                    | Git root                                               |
+|:----------------- |:-------------------- |:------------------------------------------------------ |
+| C2DL_ROOT         | /                    | Git root                                               |
 | `C2DL_SYS`        | /src                 | Global sources (can be used for multiples sub/domains) |
 | `C2DL_SYS_PAGE`   | /src/page            | Helper for page creation                               |
 | `C2DL_LOG`        | /logs                | Log directory                                          |
 
-| Variable          | Value                | Used                                                   |
-|:----------------- |:-------------------- |: ----------------------------------------------------- |
-| `APPLICATION_ENV` | `prod`               | Production environment                                 |                                               |
-| `APPLICATION_ENV` | `dev`                | Developpment environment                               |
+| Variable          | Value                | Used                                                  |
+|:----------------- |:-------------------- |:----------------------------------------------------- |
+| `APPLICATION_ENV` | `prod`               | Production environment                                |
+| `APPLICATION_ENV` | `dev`                | Developpment environment                              |
 
 ### Page specific
 
@@ -48,14 +48,14 @@ Possibilities:
 This environment variables are automatically configured not accessible in the Production environment.
 They are required in your development environment.
 
-| Variable            | Used                                                   |
-|:------------------- |: ----------------------------------------------------- |
-| `C2DL_DB_MAIN_USER` | User for database `main`                               |                                               |
-| `C2DL_DB_MAIN_PASS` | Password for database `main`                           |
-| `C2DL_DB_MAIN_HOST` | Host for database `main`                               |
-| `C2DL_DB_MAIN_DB`   | Database name for database `main`                      |
-| `C2DL_NODE_EXEC`    | NodeJS executable                                      |
-| `C2DL_NPM_EXEC`     | NPM executable                                         |
+| Variable            | Used                                                  |
+|:------------------- |:----------------------------------------------------- |
+| `C2DL_DB_MAIN_USER` | User for database `main`                              |
+| `C2DL_DB_MAIN_PASS` | Password for database `main`                          |
+| `C2DL_DB_MAIN_HOST` | Host for database `main`                              |
+| `C2DL_DB_MAIN_DB`   | Database name for database `main`                     |
+| `C2DL_NODE_EXEC`    | NodeJS executable                                     |
+| `C2DL_NPM_EXEC`     | NPM executable                                        |
 
 ## Structure
 
