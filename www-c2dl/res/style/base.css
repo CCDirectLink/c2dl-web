@@ -26,15 +26,35 @@ article {
 **********/
 
 header {
+    display: flex;
+    flex-direction: column;
+    height: 9em;
+    background-color: var(--color-background-header);
+    grid-area: headbar;
+    font-family: sans-serif;
+    font-size: 100%;
+}
+
+.titleContainer {
+    height: 3em;
 	display: flex;
 	justify-content: center;
     align-items: center;
     font-size: 250%;
-    font-family: sans-serif;
-	height: 4em;
-    background-color: var(--color-background-header);
-    background-size: 400% 100%;
-    grid-area: headbar;
+}
+
+.navContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3em;
+    border-top: 1px solid;
+    background-color: var(--color-background-navigation);
+    border-color: var(--color-border-main);
+}
+
+.navElement {
+    padding-right: 0.5em;
 }
 
 main {

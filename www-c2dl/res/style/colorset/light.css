@@ -1,13 +1,14 @@
 :root {
 	--color-background: #ffffff;
 	--color-text: #000000;
-    
+
     --color-background-header: #e3e3e3;
+    --color-background-navigation: #c3c3c3;
     --color-background-footer: #e3e3e3;
-    
+
     --color-border-main: #000000;
     --color-border-footer: #000000;
-    
+
     --color-link: #2282c8;
     --color-link-visited: #8943d4;
 }

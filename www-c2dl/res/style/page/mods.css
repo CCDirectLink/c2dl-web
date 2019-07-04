@@ -1,0 +1,39 @@
+.modEntryList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.modInfo {
+    display: grid;
+    grid-template-areas: "modHead          downloadContainer"
+                         "modDescription   downloadContainer";
+    grid-template-rows: auto 1fr;
+    grid-template-columns: auto 20em;
+    background-color: var(--color-background-header);
+    margin-bottom: 0.3em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 0.5em;
+}
+
+.linkElement {
+    margin: 0.3em;
+}
+
+.modHead {
+    grid-area: modHead;
+    font-weight: bold;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 120%;
+}
+
+.modDescription {
+    grid-area: modDescription;
+}
+
+.downloadContainer {
+    grid-area: downloadContainer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
