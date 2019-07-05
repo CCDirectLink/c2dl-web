@@ -45,7 +45,7 @@ Possibilities:
 
 ### Additional - may be required In development environment
 
-This environment variables are automatically configured not accessible in the Production environment.
+This environment variables are automatically configured and not accessible in the Production environment.
 They are required in your development environment.
 
 | Variable            | Used                                                  |

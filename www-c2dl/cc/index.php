@@ -21,6 +21,7 @@
     // html templates
 
     if (Service::stringsEqual($redirectEntry, 'mods')) {
+        $title = 'CrossCode Mods';
         $pageEntry = 'mods';
         $pageCb = function($document) {
             $document->querySelector('#mod-list li')->setAttribute('data-template', '');
@@ -70,6 +71,7 @@
         };
     }
     else if (Service::stringsEqual($redirectEntry, 'news')) {
+        $title = 'CrossCode Community News';
         $newsPage = null;
 
         if (Service::inArray('p', $_GET)) {
@@ -92,6 +94,7 @@
         }
     }
     else if (Service::stringsEqual($redirectEntry, 'team')) {
+        $title = 'C2DL Team';
         $teamPage = null;
 
         if (Service::inArray('p', $_GET)) {
@@ -122,12 +125,14 @@
         }
     }
     else if (Service::stringsEqual($redirectEntry, 'discord')) {
+        $title = 'CrossCode Modding Discord';
         $pageCb = function($document) {};
         $cbDone = function($document) {};
 
         $pageEntry = 'discord';
     }
     else {
+        $title = 'CCDirectLink - CrossCode Community group';
         $pageEntry = 'main';
         $pageCb = function($document) {
             $document->querySelector('#uri-list li')->setAttribute('data-template', '');
@@ -161,7 +166,7 @@
         $style = $pageEntry;
     }
 
-    $document = $page->genrate($theme, $style, $pageCb, $cbDone);
+    $document = $page->genrate($title, $theme, $style, $pageCb, $cbDone);
     echo $document->__toString();
 
 ?>

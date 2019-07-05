@@ -23,11 +23,12 @@ class Page {
             '/template/page/' . $this->fileName . '.html');
     }
 
-    public function genrate($theme, $style, $cb, $cbDone) {
+    public function genrate($title, $theme, $style, $cb, $cbDone) {
         // prepare templates
         $document = new HTMLDocument($this->html, getenv('C2DL_WWW_RES') .
             '/template/_component');
 
+        $document->querySelector('title')->innerHTML = $title;
         $document->querySelector('main')->innerHTML = $this->pageData;
         $htmlHeadContent = $htmlHead = $document->querySelector('head')->innerHtml;
 
