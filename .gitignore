@@ -3,6 +3,9 @@ www-c2dl/admin
 www-c2dl/media
 logs/*/*.log
 src/*/vendor
+merriweather
+roboto
+materialfont
 .internal
 .local
 .idea

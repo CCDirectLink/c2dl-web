@@ -28,15 +28,15 @@ class Page {
         $document = new HTMLDocument($this->html, getenv('C2DL_WWW_RES') .
             '/template/_component');
 
-        $document->getElementById('content')->innerHTML = $this->pageData;
-        $htmlHeadContent = $htmlHead = $document->getElementById('head')->innerHtml;
+        $document->querySelector('main')->innerHTML = $this->pageData;
+        $htmlHeadContent = $htmlHead = $document->querySelector('head')->innerHtml;
 
         // set themes
         $htmlHeadContent = $htmlHeadContent . '<link rel="stylesheet" type="text/css" name="theme"
         href="/res/style/colorset/' . $theme . '.css" media="all" id="theme-css"/>';
         $htmlHeadContent = $htmlHeadContent . '<link rel="stylesheet" type="text/css" name="www-main"
             href="/res/style/page/' . $style . '.css" media="all" id="www-main-css"/>';
-        $htmlHead = $document->getElementById('head')->innerHtml = $htmlHeadContent;
+        $htmlHead = $document->querySelector('head')->innerHtml = $htmlHeadContent;
 
         $document->expandComponents();
         // Workaround: data-template not working for expandComponents

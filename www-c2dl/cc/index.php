@@ -23,7 +23,7 @@
     if (Service::stringsEqual($redirectEntry, 'mods')) {
         $pageEntry = 'mods';
         $pageCb = function($document) {
-            $document->querySelector('#modList ul li')->setAttribute('data-template', '');
+            $document->querySelector('#mod-list li')->setAttribute('data-template', '');
         };
         $cbDone = function($document) {
 
@@ -47,7 +47,7 @@
                             }
 
                             $entryData = array_merge($entryData, [
-                                'href' => $entry['archive_link'],
+                                'download' => $entry['archive_link'],
                                 'title' => $entry['name'],
                                 'description' => $entry['description'],
                                 'version' => $entry['version'],
@@ -65,14 +65,72 @@
             }
 
             // bind data
-            $document->getElementById('modList')->bindList($modListData);
+            $document->getElementById('mod-list')->bindList($modListData);
 
         };
+    }
+    else if (Service::stringsEqual($redirectEntry, 'news')) {
+        $newsPage = null;
+
+        if (Service::inArray('p', $_GET)) {
+            $newsPage = $_GET['p'];
+        }
+
+        $pageCb = function($document) {};
+        $cbDone = function($document) {};
+
+        if (Service::stringsEqual($newsPage, 'welcome')) {
+            $pageEntry = 'news/welcome';
+            $style = 'news';
+        }
+        else if (Service::stringsEqual($newsPage, 'contributing')) {
+            $pageEntry = 'news/contributing';
+            $style = 'news';
+        }
+        else {
+            $pageEntry = 'news';
+        }
+    }
+    else if (Service::stringsEqual($redirectEntry, 'team')) {
+        $teamPage = null;
+
+        if (Service::inArray('p', $_GET)) {
+            $teamPage = $_GET['p'];
+        }
+
+        $pageCb = function($document) {};
+        $cbDone = function($document) {};
+
+        if (Service::stringsEqual($teamPage, 'ac')) {
+            $pageEntry = 'team/ac';
+            $style = 'team';
+        }
+        else if (Service::stringsEqual($teamPage, 'ichi')) {
+            $pageEntry = 'team/ichi';
+            $style = 'team';
+        }
+        else if (Service::stringsEqual($teamPage, 'keanu')) {
+            $pageEntry = 'team/keanu';
+            $style = 'team';
+        }
+        else if (Service::stringsEqual($teamPage, 'mr')) {
+            $pageEntry = 'team/mr';
+            $style = 'team';
+        }
+        else {
+            $pageEntry = 'team';
+        }
+    }
+    else if (Service::stringsEqual($redirectEntry, 'discord')) {
+        $pageCb = function($document) {};
+        $cbDone = function($document) {};
+
+        $pageEntry = 'discord';
     }
     else {
         $pageEntry = 'main';
         $pageCb = function($document) {
-            $document->querySelector('#mainUriList ul li')->setAttribute('data-template', '');
+            $document->querySelector('#uri-list li')->setAttribute('data-template', '');
         };
         $cbDone = function($document) {
             // Link list
@@ -81,13 +139,12 @@
                 ['href' => 'https://store.steampowered.com/app/368340/CrossCode/', 'title' => 'Steam Page'],
                 ['href' => 'https://cross-code.com/en/home', 'title' => 'CrossCode-Website'],
                 ['href' => 'https://discord.gg/crosscode', 'title' => 'CrossCode Discord'],
-                ['href' => 'https://discord.gg/TFs6n5v', 'title' => 'CrossCode Modding Discord'],
                 ['href' => 'https://github.com/CCDirectLink', 'title' => 'CCDirectLink GitHub'],
                 ['href' => 'https://gitlab.com/CCDirectLink', 'title' => 'CCDirectLink GitLab'],
             ];
 
             // bind data
-            $document->getElementById('mainUriList')->bindList($uriListData);
+            $document->getElementById('uri-list')->bindList($uriListData);
         };
     }
 
@@ -100,7 +157,11 @@
         $theme = 'dark';
     }
 
-    $document = $page->genrate($theme, $pageEntry, $pageCb, $cbDone);
+    if (!isset($style)) {
+        $style = $pageEntry;
+    }
+
+    $document = $page->genrate($theme, $style, $pageCb, $cbDone);
     echo $document->__toString();
 
 ?>
