@@ -166,7 +166,7 @@
         $style = $pageEntry;
     }
 
-    $document = $page->genrate($title, $theme, $style, $pageCb, $cbDone);
+    $document = $page->generate($title, $theme, $style, $pageCb, $cbDone);
     echo $document->__toString();
 
 ?>

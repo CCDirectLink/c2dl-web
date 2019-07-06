@@ -23,7 +23,7 @@ class Page {
             '/template/page/' . $this->fileName . '.html');
     }
 
-    public function genrate($title, $theme, $style, $cb, $cbDone) {
+    public function generate($title, $theme, $style, $cb, $cbDone) {
         // prepare templates
         $document = new HTMLDocument($this->html, getenv('C2DL_WWW_RES') .
             '/template/_component');
