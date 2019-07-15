@@ -120,6 +120,10 @@
             $pageEntry = 'team/mr';
             $style = 'team';
         }
+        else if (Service::stringsEqual($teamPage, 'streetclaw')) {
+            $pageEntry = 'team/streetclaw';
+            $style = 'team';
+        }
         else {
             $pageEntry = 'team';
         }
