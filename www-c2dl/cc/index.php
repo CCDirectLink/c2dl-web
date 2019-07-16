@@ -128,13 +128,6 @@
             $pageEntry = 'team';
         }
     }
-    else if (Service::stringsEqual($redirectEntry, 'discord')) {
-        $title = 'CrossCode Modding Discord';
-        $pageCb = function($document) {};
-        $cbDone = function($document) {};
-
-        $pageEntry = 'discord';
-    }
     else {
         $title = 'CCDirectLink - CrossCode Community group';
         $pageEntry = 'main';
