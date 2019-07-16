@@ -15,6 +15,22 @@
     background: #03a9f4;
 }
 
-.demo-card-square > .mdl-card__accent {
+.demo-card-square > .mdl-card__keanu {
+    background: #ff9800;
+}
+
+.demo-card-square > .mdl-card__2767 {
+    background: #ff9800;
+}
+
+.demo-card-square > .mdl-card__ac2pic {
+    background: #ff9800;
+}
+
+.demo-card-square > .mdl-card__ichiki {
+    background: /res/img/team/ichiki.png;
+}
+
+.demo-card-square > .mdl-card__streetclaw {
     background: #ff9800;
 }
