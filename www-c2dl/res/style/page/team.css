@@ -15,6 +15,27 @@
     background: #03a9f4;
 }
 
-.demo-card-square > .mdl-card__accent {
-    background: #ff9800;
+.demo-card-square > .mdl-card__keanu {
+    background: url(/res/img/team/keanu.png);
+    background-size: 100%;
+}
+
+.demo-card-square > .mdl-card__2767 {
+    background: url(/res/img/team/2767mr.jpg);
+    background-size: 100%;
+}
+
+.demo-card-square > .mdl-card__ac2pic {
+    background: url(/res/img/team/ac2pic.png);
+    background-size: 100%;
+}
+
+.demo-card-square > .mdl-card__ichiki {
+    background: url(/res/img/team/ichiki.png);
+    background-size: 100%;
+}
+
+.demo-card-square > .mdl-card__streetclaw {
+    background: url(/res/img/team/streetclaw.png);
+    background-size: 100%;
 }
