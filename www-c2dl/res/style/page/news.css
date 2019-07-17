@@ -17,3 +17,14 @@
 .mdl-card__accent {
     background: #ff9800;
 }
+
+.mdl-card__c2dl {
+    background: url(/res/img/news/c2dl.png);
+    background-size: 100%;
+}
+
+.mdl-card__github {
+    background: url(/res/img/news/github.svg);
+    background-size: 100%;
+    background-position: center;
+}
