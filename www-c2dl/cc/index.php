@@ -128,6 +128,15 @@
             $pageEntry = 'team';
         }
     }
+    else if (Service::stringsEqual($redirectEntry, 'login')) {
+        $title = 'C2DL Login';
+
+        $pageCb = function($document) {};
+        $cbDone = function($document) {};
+
+        $pageEntry = 'login';
+        $style = 'login';
+    }
     else {
         $title = 'CCDirectLink - CrossCode Community group';
         $pageEntry = 'main';
