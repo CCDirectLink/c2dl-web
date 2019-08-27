@@ -68,8 +68,9 @@ class Redirect {
         $result = null;
 
         try {
-            $_statement = $this->_pdo->prepare('SELECT * FROM ' . $this->_table . ' WHERE ' . $this->_tableId . ' = ?');
-            $_statement->execute(array($entry));
+            $_statement = $this->_pdo->prepare('SELECT * FROM ' . $this->_table . ' WHERE ' . $this->_tableId . ' = :entry');
+            $_statement->bindParam(':entry', $entry, PDO::PARAM_STR);
+            $_statement->->execute();
             $result = $_statement->fetch();
             $_statement = null;
         }
@@ -130,7 +131,7 @@ class Redirect {
     }
 
     static private function _validEntry($entry): bool {
-        if (!isset($entry)) {
+        if ((!isset($entry)) || (!is_string($entry))) {
             return false;
         }
         if (!preg_match('/^[a-zA-Z0-9äöüÄÖÜß_\-\=\~\|]{1,64}$/', $entry)) {

@@ -6,7 +6,7 @@ class Service
     static public function inCorrectRoot($root, $shouldBe): bool {
         $docRoot = rtrim($root, '/');
         $compareRoot = rtrim($shouldBe, '/');
-        return (strcmp($docRoot, $compareRoot) == 0);
+        return (strcmp($docRoot, $compareRoot) === 0);
     }
 
 
@@ -15,10 +15,10 @@ class Service
             return false;
         }
 
-        if ($case == true) {
-            return (strcmp($a, $b) == 0);
+        if ($case === true) {
+            return (strcmp($a, $b) === 0);
         }
-        return (strcasecmp($a, $b) == 0);
+        return (strcasecmp($a, $b) === 0);
     }
 
     static public function inArray($key, $array, $strict = false): bool {
