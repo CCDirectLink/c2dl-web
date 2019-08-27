@@ -36,6 +36,13 @@ class Database {
                     'host' => $envGetter('C2DL_DB_EXT_HOST'),
                     'port' => $envGetter('C2DL_DB_EXT_PORT'),
                     'db' => $envGetter('C2DL_DB_EXT_DB')
+                ),
+                'acc' => array(
+                    'user' => $envGetter('C2DL_DB_ACC_USER'),
+                    'pass' => $envGetter('C2DL_DB_ACC_PASS'),
+                    'host' => $envGetter('C2DL_DB_ACC_HOST'),
+                    'port' => $envGetter('C2DL_DB_ACC_PORT'),
+                    'db' => $envGetter('C2DL_DB_ACC_DB')
                 )
             );
 
