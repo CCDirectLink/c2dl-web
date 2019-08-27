@@ -27,7 +27,32 @@ class Database {
                     'user' => $envGetter('C2DL_DB_MAIN_USER'),
                     'pass' => $envGetter('C2DL_DB_MAIN_PASS'),
                     'host' => $envGetter('C2DL_DB_MAIN_HOST'),
+                    'port' => $envGetter('C2DL_DB_MAIN_PORT'),
                     'db' => $envGetter('C2DL_DB_MAIN_DB')
+                ),
+                'ext' => array(
+                    'user' => $envGetter('C2DL_DB_EXT_USER'),
+                    'pass' => $envGetter('C2DL_DB_EXT_PASS'),
+                    'host' => $envGetter('C2DL_DB_EXT_HOST'),
+                    'port' => $envGetter('C2DL_DB_EXT_PORT'),
+                    'db' => $envGetter('C2DL_DB_EXT_DB')
+                )
+            );
+
+            unset($envGetter);
+
+        }
+        else if (Service::inCorrectRoot($_SERVER['DOCUMENT_ROOT'], getenv('C2DL_API', true))) {
+
+            require(getenv('C2DL_SYS', true) . '/_internal/envGetter.php');
+
+            $arr = array(
+                'ext' => array(
+                    'user' => $envGetter('C2DL_DB_EXT_USER'),
+                    'pass' => $envGetter('C2DL_DB_EXT_PASS'),
+                    'host' => $envGetter('C2DL_DB_EXT_HOST'),
+                    'port' => $envGetter('C2DL_DB_EXT_PORT'),
+                    'db' => $envGetter('C2DL_DB_EXT_DB')
                 )
             );
 
@@ -49,6 +74,7 @@ class Database {
         }
 
         $_data = self::_getData();
+
         $resultArray = array();
 
         if (is_null($_data)) {
@@ -60,6 +86,10 @@ class Database {
             // cancel if not array
 
             $dsn = 'mysql:host=' . $value['host'] . ';dbname=' . $value['db'] . ';charset=utf8mb4';
+
+            if (isset($value['port'])) {
+                $dsn = $dsn . ';port=' . $value['port'];
+            }
 
             try {
                 $entry = new PDO($dsn, $value['user'], $value['pass'], $_options);
