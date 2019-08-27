@@ -68,7 +68,9 @@ class Redirect {
         $result = null;
 
         try {
-            $_statement = $this->_pdo->prepare('SELECT * FROM ' . $this->_table . ' WHERE ' . $this->_tableId . ' = :entry');
+            $_statement = $this->_pdo->prepare(
+                'SELECT * FROM ' . $this->_table . ' WHERE ' . $this->_tableId . ' = :entry'
+            );
             $_statement->bindParam(':entry', $entry, PDO::PARAM_STR);
             $_statement->execute();
             $result = $_statement->fetch();
