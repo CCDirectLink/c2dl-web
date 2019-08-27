@@ -5,7 +5,10 @@ require_once( getenv('C2DL_SYS', true) . '/Service.php');
 
 use c2dl\sys\db\Database;
 use c2dl\sys\service\Service;
+use \PDO;
 use \Error;
+use \Exception;
+use \PDOException;
 
 class Redirect {
 
@@ -76,7 +79,13 @@ class Redirect {
             $result = $_statement->fetch();
             $_statement = null;
         }
-        catch (Error $e) {
+        catch (PDOException $e) {
+            error_log($e->getMessage());
+            $this->_valid = false;
+            $this->_error = 'Entry not found';
+            return;
+        }
+        catch (Exception $e) {
             error_log($e->getMessage());
             $this->_valid = false;
             $this->_error = 'Entry not found';
