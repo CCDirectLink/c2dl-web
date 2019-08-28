@@ -71,12 +71,8 @@ class Redirect {
             error_log($e->getMessage());
             return array('entry' => $entry, 'url' => null);
         }
-        catch (Exception $e) {
-            error_log($e->getMessage());
-            return array('entry' => $entry, 'url' => null);
-        }
 
-        if (!isset($result)) {
+        if ((!isset($result)) || ($result === false)) {
             return array('entry' => $entry, 'url' => null);
         }
 
