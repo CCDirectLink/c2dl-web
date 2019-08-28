@@ -29,7 +29,9 @@
             $modListData = [];
 
             try {
-                $modJson = file_get_contents('https://raw.githubusercontent.com/CCDirectLink/CCModDB/master/mods.json');
+                $modJson = file_get_contents(
+                    'https://raw.githubusercontent.com/CCDirectLink/CCModDB/master/mods.json'
+                );
                 $modJson = json_decode($modJson, true);
                 if (GeneralService::inArray('mods', $modJson)) {
                     foreach ($modJson['mods'] as $entry) {
@@ -65,6 +67,58 @@
 
             // bind data
             $document->getElementById('mod-list')->bindList($modListData);
+
+        };
+    }
+    else if (GeneralService::stringsEqual($redirectEntry, 'tools')) {
+        $title = 'CrossCode Tools';
+        $pageEntry = 'tools';
+        $pageCb = function($document) {
+            $document->querySelector('#mod-list li')->setAttribute('data-template', '');
+        };
+        $cbDone = function($document) {
+
+            $toolListData = [];
+
+            try {
+                $toolsJson = file_get_contents(
+                    'https://raw.githubusercontent.com/CCDirectLink/CCModDB/master/tools.json'
+                );
+                $toolsJson = json_decode($toolsJson, true);
+                if (GeneralService::inArray('tools', $toolsJson)) {
+                    foreach ($toolsJson['tools'] as $entry) {
+                        if ((GeneralService::inArray('archive_link', $entry)) &&
+                            (GeneralService::inArray('name', $entry)) &&
+                            (GeneralService::inArray('description', $entry))  &&
+                            (GeneralService::inArray('version', $entry))) {
+
+                            $entryData = [];
+                            if (GeneralService::inArray('page', $entry)) {
+                                foreach ($entry['page'] as $pageEntry) {
+                                    $entryData['page_' . $pageEntry['name']] = $pageEntry['url'];
+                                }
+                            }
+
+                            $entryData = array_merge($entryData, [
+                                'download' => $entry['archive_link'],
+                                'title' => $entry['name'],
+                                'description' => $entry['description'],
+                                'version' => $entry['version'],
+                                'license' => GeneralService::inArray('license', $entry) ? $entry['license'] : '(None)',
+                                'hash' => $entry['hash']['sha256'],
+                            ]);
+
+                            array_push($toolListData, $entryData);
+                        }
+                    }
+                }
+            }
+            catch (Error $err) {
+
+            }
+
+            // bind data
+            $document->getElementById('mod-list')->bindList($toolListData);
 
         };
     }
