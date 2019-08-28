@@ -1,26 +1,24 @@
 <?php
 
     require_once( getenv('C2DL_SYS_PAGE', true) . '/Page.php' );
-    require_once( getenv('C2DL_SYS', true) . '/Redirect.php' );
-    require_once( getenv('C2DL_SYS', true) . '/Service.php' );
+    require_once( getenv('C2DL_SYS', true) . '/service/Redirect.php' );
+    require_once( getenv('C2DL_SYS', true) . '/service/GeneralService.php' );
 
     use c2dl\sys\redirect\Redirect;
-    use c2dl\sys\service\Service;
+    use c2dl\sys\service\GeneralService;
     use c2dl\sys\page\Page;
 
     // redirect
     $redirectEntry = null;
 
-    if (Service::inArray('id', $_GET)) {
+    if (GeneralService::inArray('id', $_GET)) {
         $redirectEntry = $_GET['id'];
+        Redirect::redirect($redirectEntry);
     }
-
-    $redirect = new Redirect($redirectEntry);
-    $redirect->redirect();
 
     // html templates
 
-    if (Service::stringsEqual($redirectEntry, 'mods')) {
+    if (GeneralService::stringsEqual($redirectEntry, 'mods')) {
         $title = 'CrossCode Mods';
         $pageEntry = 'mods';
         $pageCb = function($document) {
@@ -33,15 +31,15 @@
             try {
                 $modJson = file_get_contents('https://raw.githubusercontent.com/CCDirectLink/CCModDB/master/mods.json');
                 $modJson = json_decode($modJson, true);
-                if (Service::inArray('mods', $modJson)) {
+                if (GeneralService::inArray('mods', $modJson)) {
                     foreach ($modJson['mods'] as $entry) {
-                        if ((Service::inArray('archive_link', $entry)) &&
-                            (Service::inArray('name', $entry)) &&
-                            (Service::inArray('description', $entry))  &&
-                            (Service::inArray('version', $entry))) {
+                        if ((GeneralService::inArray('archive_link', $entry)) &&
+                            (GeneralService::inArray('name', $entry)) &&
+                            (GeneralService::inArray('description', $entry))  &&
+                            (GeneralService::inArray('version', $entry))) {
 
                             $entryData = [];
-                            if (Service::inArray('page', $entry)) {
+                            if (GeneralService::inArray('page', $entry)) {
                                 foreach ($entry['page'] as $pageEntry) {
                                     $entryData['page_' . $pageEntry['name']] = $pageEntry['url'];
                                 }
@@ -52,7 +50,7 @@
                                 'title' => $entry['name'],
                                 'description' => $entry['description'],
                                 'version' => $entry['version'],
-                                'license' => Service::inArray('license', $entry) ? $entry['license'] : '(None)',
+                                'license' => GeneralService::inArray('license', $entry) ? $entry['license'] : '(None)',
                                 'hash' => $entry['hash']['sha256'],
                             ]);
 
@@ -70,22 +68,22 @@
 
         };
     }
-    else if (Service::stringsEqual($redirectEntry, 'news')) {
+    else if (GeneralService::stringsEqual($redirectEntry, 'news')) {
         $title = 'CrossCode Community News';
         $newsPage = null;
 
-        if (Service::inArray('p', $_GET)) {
+        if (GeneralService::inArray('p', $_GET)) {
             $newsPage = $_GET['p'];
         }
 
         $pageCb = function($document) {};
         $cbDone = function($document) {};
 
-        if (Service::stringsEqual($newsPage, 'welcome')) {
+        if (GeneralService::stringsEqual($newsPage, 'welcome')) {
             $pageEntry = 'news/welcome';
             $style = 'news';
         }
-        else if (Service::stringsEqual($newsPage, 'contributing')) {
+        else if (GeneralService::stringsEqual($newsPage, 'contributing')) {
             $pageEntry = 'news/contributing';
             $style = 'news';
         }
@@ -93,34 +91,34 @@
             $pageEntry = 'news';
         }
     }
-    else if (Service::stringsEqual($redirectEntry, 'team')) {
+    else if (GeneralService::stringsEqual($redirectEntry, 'team')) {
         $title = 'C2DL Team';
         $teamPage = null;
 
-        if (Service::inArray('p', $_GET)) {
+        if (GeneralService::inArray('p', $_GET)) {
             $teamPage = $_GET['p'];
         }
 
         $pageCb = function($document) {};
         $cbDone = function($document) {};
 
-        if (Service::stringsEqual($teamPage, 'ac')) {
+        if (GeneralService::stringsEqual($teamPage, 'ac')) {
             $pageEntry = 'team/ac';
             $style = 'team';
         }
-        else if (Service::stringsEqual($teamPage, 'ichi')) {
+        else if (GeneralService::stringsEqual($teamPage, 'ichi')) {
             $pageEntry = 'team/ichi';
             $style = 'team';
         }
-        else if (Service::stringsEqual($teamPage, 'keanu')) {
+        else if (GeneralService::stringsEqual($teamPage, 'keanu')) {
             $pageEntry = 'team/keanu';
             $style = 'team';
         }
-        else if (Service::stringsEqual($teamPage, 'mr')) {
+        else if (GeneralService::stringsEqual($teamPage, 'mr')) {
             $pageEntry = 'team/mr';
             $style = 'team';
         }
-        else if (Service::stringsEqual($teamPage, 'streetclaw')) {
+        else if (GeneralService::stringsEqual($teamPage, 'streetclaw')) {
             $pageEntry = 'team/streetclaw';
             $style = 'team';
         }
@@ -128,7 +126,7 @@
             $pageEntry = 'team';
         }
     }
-    else if (Service::stringsEqual($redirectEntry, 'login')) {
+    else if (GeneralService::stringsEqual($redirectEntry, 'login')) {
         $title = 'C2DL Login';
 
         $pageCb = function($document) {};
@@ -164,7 +162,7 @@
     // theme selector
     $theme = 'light';
 
-    if (Service::inArrayIsString('theme', $_GET,'dark', false)) {
+    if (GeneralService::inArrayIsString('theme', $_GET,'dark', false)) {
         $theme = 'dark';
     }
 

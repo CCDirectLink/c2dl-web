@@ -1,6 +1,6 @@
 <?php namespace c2dl\sys\service;
 
-class Service
+class GeneralService
 {
 
     static public function inCorrectRoot($root, $shouldBe): bool {

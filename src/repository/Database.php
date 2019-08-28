@@ -1,13 +1,23 @@
 <?php namespace c2dl\sys\db;
-require_once( getenv('C2DL_SYS') . '/Service.php');
+require_once( getenv('C2DL_SYS') . '/service/GeneralService.php');
 
 use \PDO;
 use \Exception;
-use c2dl\sys\service\Service;
+use c2dl\sys\service\GeneralService;
 
 class Database {
 
-    static private function _defaultOptions() {
+    private $_connection;
+    private static $_instance;
+
+    public static function getInstance($options = null): Database {
+        if(!self::$_instance) {
+            self::$_instance = new self($options);
+        }
+        return self::$_instance;
+    }
+
+    static private function _defaultOptions(): iterable {
         return [
             PDO::ATTR_EMULATE_PREPARES   => false,
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -15,10 +25,10 @@ class Database {
         ];
     }
 
-    static private function _getData() {
+    static private function _getData(): iterable {
         $arr = null;
 
-        if (Service::inCorrectRoot($_SERVER['DOCUMENT_ROOT'], getenv('C2DL_WWW', true))) {
+        if (GeneralService::inCorrectRoot($_SERVER['DOCUMENT_ROOT'], getenv('C2DL_WWW', true))) {
 
             require(getenv('C2DL_SYS', true) . '/_internal/envGetter.php');
 
@@ -49,7 +59,7 @@ class Database {
             unset($envGetter);
 
         }
-        else if (Service::inCorrectRoot($_SERVER['DOCUMENT_ROOT'], getenv('C2DL_API', true))) {
+        else if (GeneralService::inCorrectRoot($_SERVER['DOCUMENT_ROOT'], getenv('C2DL_API', true))) {
 
             require(getenv('C2DL_SYS', true) . '/_internal/envGetter.php');
 
@@ -73,7 +83,7 @@ class Database {
         return $arr;
     }
 
-    static public function createPDO($options = null): iterable {
+    static private function createPDO($options = null): iterable {
         $_options = self::_defaultOptions();
 
         if (isset($options)) {
@@ -116,6 +126,16 @@ class Database {
         unset($_data);
 
         return $resultArray;
+    }
+
+    private function __construct($options = null) {
+        $this->_connection = self::createPDO($options);
+    }
+
+    private function __clone() { }
+
+    public function getConnection(): iterable {
+        return $this->_connection;
     }
 
 }

@@ -1,8 +1,8 @@
 <?php namespace c2dl\sys\node;
 
-require_once( getenv('C2DL_SYS', true) . '/Service.php');
+require_once( getenv('C2DL_SYS', true) . '/service/GeneralService.php');
 
-use c2dl\sys\service\Service;
+use c2dl\sys\service\GeneralService;
 use \Exception;
 
 class Node
@@ -12,7 +12,7 @@ class Node
 
         $disabled = false;
 
-        if (!Service::inCorrectRoot($_SERVER['DOCUMENT_ROOT'], getenv('C2DL_WWW', true))) {
+        if (!GeneralService::inCorrectRoot($_SERVER['DOCUMENT_ROOT'], getenv('C2DL_WWW', true))) {
             return '';
         }
 
@@ -39,7 +39,7 @@ class Node
 
         $disabled = true;
 
-        if (!Service::inCorrectRoot($_SERVER['DOCUMENT_ROOT'], getenv('C2DL_WWW', true))) {
+        if (!GeneralService::inCorrectRoot($_SERVER['DOCUMENT_ROOT'], getenv('C2DL_WWW', true))) {
             return '';
         }
 
