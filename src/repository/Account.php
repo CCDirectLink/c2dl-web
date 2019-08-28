@@ -223,10 +223,83 @@ class Account {
     }
 
     public function getAuthByUserId($id): ?iterable {
+        $_tableId = 'userId';
+        $result = null;
+        try {
+            $_statement = $this->_pdo->prepare(
+                'SELECT * FROM ' . $this->_tableAuth . ' WHERE ' . $_tableId . ' = :id'
+            );
+            $_statement->bindParam(':id', $id, PDO::PARAM_INT);
+            $_statement->execute();
+            $result = $_statement->fetchAll();
+            $_statement = null;
+        }
+        catch (PDOException $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+
+        if ((!isset($result)) || (empty($result))) {
+            return null;
+        }
+
+        $_resArray = array();
+
+        foreach ($result as &$row) {
+            $_resArray[$row['id']] = array(
+                'mainAuth' => $row['mainAuth'],
+                'required' => $row['required'],
+                'type' => $row['type']
+            );
+        }
+
+        return $_resArray;
+    }
+
+    public function validateAuthByAuthId($id, $auth, $function): ?bool {
+        $_tableId = 'id';
+        $_tableTypeEntry = 'type';
+        $_privateDataEntry = 'data';
+        $result = null;
+        try {
+            $_statement = $this->_pdo->prepare(
+                'SELECT ' . $_privateDataEntry . ', ' . $_tableTypeEntry . ' FROM ' .
+                $this->_tableAuth . ' WHERE ' . $_tableId . ' = :id'
+            );
+            $_statement->bindParam(':id', $id, PDO::PARAM_INT);
+            $_statement->execute();
+            $result = $_statement->fetch();
+            $_statement = null;
+        }
+        catch (PDOException $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+
+        if ((!isset($result)) || ($result === false)) {
+            return null;
+        }
+
+        return $function($result[$_tableTypeEntry], $auth, $result[$_privateDataEntry]);
+    }
+
+    public function setUserData($id, $data): iterable {
 
     }
 
-    public function validateAuthById($id, $auth, $function): ?bool {
+    public function setLink($id, $type, $data): iterable {
+
+    }
+
+    public function setAuth($id, $data): void {
+
+    }
+
+    public function addUser($data): iterable {
+
+    }
+
+    public function addAuth($userId, $data): void {
 
     }
 
