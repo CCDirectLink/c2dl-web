@@ -303,4 +303,8 @@ class Account {
 
     }
 
+    public function removeUser($id): iterable {
+
+    }
+
 }
