@@ -22,14 +22,14 @@ class Account {
     private $_tableUserRights;
     private $_tableGroupRights;
 
-    public static function getInstance($dbEntry = 'main'): Account {
+    public static function getInstance($dbEntry = 'acc'): Account {
         if(!self::$_instance) {
             self::$_instance = new self($dbEntry);
         }
         return self::$_instance;
     }
 
-    private function __construct($entry = null, $dbEntry = 'acc') {
+    private function __construct($dbEntry = 'acc') {
         $this->_tableUser = 'acc_user';
         $this->_tableAuth = 'acc_auth';
         $this->_tableSessions = 'acc_sessions';
@@ -40,17 +40,7 @@ class Account {
         $this->_tableUserRights = 'acc_user_rights';
         $this->_tableGroupRights = 'acc_group_rights';
 
-        $this->setPDO($dbEntry);
-    }
-
-    private function setPDO($dbEntry): void {
-        $_db = Database::getInstance()->getConnection();
-        if (GeneralService::inArray($dbEntry, $_db)) {
-            $this->_pdo = $_db[$dbEntry];
-        }
-        else {
-            $this->_pdo = null;
-        }
+        $this->_pdo = Database::getInstance()->getConnection($dbEntry);
     }
 
     private function __clone() { }

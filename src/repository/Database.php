@@ -134,8 +134,14 @@ class Database {
 
     private function __clone() { }
 
-    public function getConnection(): iterable {
-        return $this->_connection;
+    public function getConnection($dbEntry = null) {
+        if (!isset($dbEntry)) {
+            return $this->_connection;
+        }
+        if (GeneralService::inArray($dbEntry, $this->_connection)) {
+            return $this->_connection[$dbEntry];
+        }
+        return null;
     }
 
 }

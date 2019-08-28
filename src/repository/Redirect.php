@@ -31,20 +31,10 @@ class Redirect {
         $this->_tableUrl = 'url';
         $this->_tableActive = 'active';
 
-        $this->setPDO($dbEntry);
+        $this->_pdo = Database::getInstance()->getConnection($dbEntry);
     }
 
     private function __clone() { }
-
-    private function setPDO($dbEntry): void {
-        $_db = Database::getInstance()->getConnection();
-        if (GeneralService::inArray($dbEntry, $_db)) {
-            $this->_pdo = $_db[$dbEntry];
-        }
-        else {
-            $this->_pdo = null;
-        }
-    }
 
     public function hasRedirect($entry): ?iterable {
 
