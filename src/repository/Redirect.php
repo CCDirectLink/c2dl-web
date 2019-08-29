@@ -2,6 +2,7 @@
 
 require_once( getenv('C2DL_SYS', true) . '/repository/Database.php');
 require_once( getenv('C2DL_SYS', true) . '/service/GeneralService.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/Structure.php');
 
 use c2dl\sys\service\GeneralService;
 use \PDO;
@@ -13,10 +14,7 @@ class Redirect {
     private static $_instance;
 
     private $_pdo;
-    private $_table;
-    private $_tableId;
-    private $_tableUrl;
-    private $_tableActive;
+    private $_tableStructure;
 
     public static function getInstance($dbEntry = 'main'): Redirect {
         if(!self::$_instance) {
@@ -26,10 +24,16 @@ class Redirect {
     }
 
     private function __construct($dbEntry = 'main') {
-        $this->_table = 'www_redirectList';
-        $this->_tableId = 'id';
-        $this->_tableUrl = 'url';
-        $this->_tableActive = 'active';
+        $this->_tableStructure = [
+            'redirect' => DatabaseTable::create('www_redirectList',
+                DatabaseColumn::create('id', PDO::PARAM_STR,
+                    [DatabaseColumnStringRegexConstraints::create('/^[a-zA-Z0-9äöüÄÖÜß_\-\=\~\|]{1,64}$/')]), [
+                        'url' => DatabaseColumn::create(
+                            'url', PDO::PARAM_STR, [DatabaseColumnStringSizeConstraints::create(10, 1024)]
+                        ),
+                        'active' => DatabaseColumn::create('active', PDO::PARAM_BOOL)
+                ])
+        ];
 
         $this->_pdo = Database::getInstance()->getConnection($dbEntry);
     }
@@ -37,52 +41,26 @@ class Redirect {
     private function __clone() { }
 
     public function hasRedirect($entry): ?iterable {
-
         if ((!isset($entry)) || (is_null($this->_pdo))) {
             return array('entry' => null, 'url' => null);
         }
 
-        if (!self::_validEntry($entry)) {
-            return array('entry' => null, 'url' => null);
-        }
+        $_redirectTable = $this->_tableStructure['redirect'];
+        $result = Structure::executeSelectPDO($this->_pdo, '*', $_redirectTable->name(),
+            Structure::prepareStatementString(array($_redirectTable->key())),
+            array($_redirectTable->key()), array($entry));
 
-        $result = null;
-
-        try {
-            $_statement = $this->_pdo->prepare(
-                'SELECT * FROM ' . $this->_table . ' WHERE ' . $this->_tableId . ' = :entry'
-            );
-            $_statement->bindParam(':entry', $entry, PDO::PARAM_STR);
-            $_statement->execute();
-            $result = $_statement->fetch();
-            $_statement = null;
-        }
-        catch (PDOException $e) {
-            error_log($e->getMessage());
+        if (!isset($result)) {
             return array('entry' => $entry, 'url' => null);
         }
 
-        if ((!isset($result)) || ($result === false)) {
-            return array('entry' => $entry, 'url' => null);
-        }
-
-        $_active = $result[$this->_tableActive];
+        $_active = $result[$_redirectTable->data()['active']->name()];
 
         if ($_active == 0) {
             return array('entry' => $entry, 'url' => null);
         }
 
-        return array('entry' => $entry, 'url' => $result[$this->_tableUrl]);
-    }
-
-    static private function _validEntry($entry): bool {
-        if ((!isset($entry)) || (!is_string($entry))) {
-            return false;
-        }
-        if (!preg_match('/^[a-zA-Z0-9äöüÄÖÜß_\-\=\~\|]{1,64}$/', $entry)) {
-            return false;
-        }
-        return true;
+        return array('entry' => $entry, 'url' => $result[$_redirectTable->data()['url']->name()]);
     }
 
 }

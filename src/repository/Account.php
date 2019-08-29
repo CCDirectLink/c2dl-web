@@ -2,6 +2,7 @@
 
 require_once( getenv('C2DL_SYS', true) . '/repository/Database.php');
 require_once( getenv('C2DL_SYS', true) . '/service/GeneralService.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/Structure.php');
 
 use c2dl\sys\service\GeneralService;
 use \PDO;
@@ -12,15 +13,7 @@ class Account {
     private static $_instance;
 
     private $_pdo;
-    private $_tableUser;
-    private $_tableAuth;
-    private $_tableSessions;
-    private $_tableGroups;
-    private $_tableHistory;
-    private $_tableLinked;
-
-    private $_tableUserRights;
-    private $_tableGroupRights;
+    private $_tableStructure;
 
     public static function getInstance($dbEntry = 'acc'): Account {
         if(!self::$_instance) {
@@ -30,164 +23,124 @@ class Account {
     }
 
     private function __construct($dbEntry = 'acc') {
-        $this->_tableUser = 'acc_user';
-        $this->_tableAuth = 'acc_auth';
-        $this->_tableSessions = 'acc_sessions';
-        $this->_tableGroups = 'acc_groups';
-        $this->_tableHistory = 'acc_history';
-        $this->_tableLinked = 'acc_linked';
-
-        $this->_tableUserRights = 'acc_user_rights';
-        $this->_tableGroupRights = 'acc_group_rights';
+        $this->_tableStructure = [
+            'user' => DatabaseTable::create('acc_user',
+                DatabaseColumn::create('id', PDO::PARAM_INT), [
+                    'user' => DatabaseColumn::create(
+                        'user', PDO::PARAM_STR, [DatabaseColumnStringSizeConstraints::create(3, 32)]
+                    ),
+                    'mail' => DatabaseColumn::create(
+                        'mail', PDO::PARAM_STR, [DatabaseColumnStringSizeConstraints::create(5, 64)]
+                    ),
+                    'mailValid' => DatabaseColumn::create('mailValid', PDO::PARAM_BOOL),
+                    'mailLogin' => DatabaseColumn::create('mailLogin', PDO::PARAM_BOOL),
+                    'active' => DatabaseColumn::create('active', PDO::PARAM_BOOL)
+            ]),
+            'auth' => DatabaseTable::create('acc_auth',
+                DatabaseColumn::create('id', PDO::PARAM_INT), [
+                    'userId' => DatabaseColumn::create('userId', PDO::PARAM_INT),
+                    'mainAuth' => DatabaseColumn::create('mainAuth', PDO::PARAM_INT),
+                    'required' => DatabaseColumn::create('required', PDO::PARAM_INT),
+                    'type' => DatabaseColumn::create(
+                        'type', PDO::PARAM_STR, [DatabaseColumnStringSizeConstraints::create(1, 32)]
+                    ),
+                    'data' => DatabaseColumn::create('data', PDO::PARAM_LOB)
+            ]),
+            'linked' => DatabaseTable::create('acc_linked',
+                DatabaseColumn::create('userId', PDO::PARAM_INT), [
+                    'facebook' => DatabaseColumn::create('facebook', PDO::PARAM_INT),
+                    'google' => DatabaseColumn::create('google', PDO::PARAM_INT),
+                    'github' => DatabaseColumn::create('github', PDO::PARAM_INT),
+                    'gitlab' => DatabaseColumn::create('gitlab', PDO::PARAM_INT),
+                    'discord' => DatabaseColumn::create('discord', PDO::PARAM_INT)
+            ])
+        ];
 
         $this->_pdo = Database::getInstance()->getConnection($dbEntry);
     }
 
     private function __clone() { }
 
+
+
     public function getUserDataByUserId($id): ?iterable {
-        $_tableId = 'id';
-        $result = null;
-        try {
-            $_statement = $this->_pdo->prepare(
-                'SELECT * FROM ' . $this->_tableUser . ' WHERE ' . $_tableId . ' = :id'
-            );
-            $_statement->bindParam(':id', $id, PDO::PARAM_INT);
-            $_statement->execute();
-            $result = $_statement->fetch();
-            $_statement = null;
-        }
-        catch (PDOException $e) {
-            error_log($e->getMessage());
+        if ((!isset($id)) || (is_null($this->_pdo))) {
             return null;
         }
 
-        if ((!isset($result)) || ($result === false)) {
-            return null;
-        }
-
-        return $result;
+        $_userTable = $this->_tableStructure['user'];
+        return Structure::executeSelectPDO($this->_pdo, '*', $_userTable->name(),
+            Structure::prepareStatementString(array($_userTable->key())),
+            array($_userTable->key()), array($id));
     }
 
     public function getUserIdByUsername($username): ?int {
-        $_tableId = 'id';
-        $_tableUser = 'user';
-        $result = null;
-        try {
-            $_statement = $this->_pdo->prepare(
-                'SELECT ' . $_tableId . ' FROM ' . $this->_tableUser . ' WHERE ' . $_tableUser . ' = :username'
-            );
-            $_statement->bindParam(':username', $username, PDO::PARAM_STR);
-            $_statement->execute();
-            $result = $_statement->fetch();
-            $_statement = null;
-        }
-        catch (PDOException $e) {
-            error_log($e->getMessage());
+        if ((!isset($username)) || (is_null($this->_pdo))) {
             return null;
         }
 
-        if ((!isset($result)) || ($result === false)) {
+        $_userTable = $this->_tableStructure['user'];
+        $result = Structure::executeSelectPDO($this->_pdo, $_userTable->key()->name(), $_userTable->name(),
+            Structure::prepareStatementString(array($_userTable->data()['user'])),
+            array($_userTable->data()['user']), array($username));
+
+        if (!isset($result)) {
             return null;
         }
 
-        return $result[$_tableId];
+        return $result[$_userTable->key()->name()];
     }
 
     public function getUserIdByMail($mail): ?int {
-        $_tableId = 'id';
-        $_tableMail = 'mail';
-        $result = null;
-        try {
-            $_statement = $this->_pdo->prepare(
-                'SELECT ' . $_tableId . ' FROM ' . $this->_tableUser . ' WHERE ' . $_tableMail . ' = :mail'
-            );
-            $_statement->bindParam(':mail', $mail, PDO::PARAM_STR);
-            $_statement->execute();
-            $result = $_statement->fetch();
-            $_statement = null;
-        }
-        catch (PDOException $e) {
-            error_log($e->getMessage());
+        if ((!isset($mail)) || (is_null($this->_pdo))) {
             return null;
         }
 
-        if ((!isset($result)) || ($result === false)) {
+        $_userTable = $this->_tableStructure['user'];
+
+        $result = Structure::executeSelectPDO($this->_pdo, $_userTable->key()->name(), $_userTable->name(),
+            Structure::prepareStatementString(array($_userTable->data()['mail'])),
+            array($_userTable->data()['mail']), array($mail));
+
+        if (!isset($result)) {
             return null;
         }
 
-        return $result[$_tableId];
+        return $result[$_userTable->key()->name()];
     }
 
     public function getLinkedByUserId($id): ?iterable {
-        $_tableId = 'userId';
-        $result = null;
-        try {
-            $_statement = $this->_pdo->prepare(
-                'SELECT * FROM ' . $this->_tableLinked . ' WHERE ' . $_tableId . ' = :id'
-            );
-            $_statement->bindParam(':id', $id, PDO::PARAM_INT);
-            $_statement->execute();
-            $result = $_statement->fetch();
-            $_statement = null;
-        }
-        catch (PDOException $e) {
-            error_log($e->getMessage());
+        if ((!isset($id)) || (is_null($this->_pdo))) {
             return null;
         }
 
-        if ((!isset($result)) || ($result === false)) {
-            return null;
-        }
-
-        return $result;
+        $_linkedTable = $this->_tableStructure['linked'];
+        return Structure::executeSelectPDO($this->_pdo, '*', $_linkedTable->name(),
+            Structure::prepareStatementString(array($_linkedTable->key())),
+            array($_linkedTable->key()), array($id));
     }
 
-    static private function _typeCheck($type): ?string {
-        if (GeneralService::stringsEqual($type, 'facebook')) {
-            return 'facebook';
-        }
-        else if (GeneralService::stringsEqual($type, 'google')) {
-            return 'google';
-        }
-        else if (GeneralService::stringsEqual($type, 'github')) {
-            return 'github';
-        }
-        else if (GeneralService::stringsEqual($type, 'gitlab')) {
-            return 'gitlab';
-        }
-        else if (GeneralService::stringsEqual($type, 'discord')) {
-            return 'discord';
+    static private function _typeCheck($dbStructure, $type): ?DatabaseColumn {
+        foreach ($dbStructure as &$entry) {
+            if (GeneralService::stringsEqual($type, $entry->name())) {
+                return $entry;
+            }
         }
         return null;
     }
 
     public function hasLinkedByUserId($id, $type): ?bool {
-        $_tableId = 'userId';
-        $_type = self::_typeCheck($type);
-        if ($_type === null) {
-            return null;
-        }
-        $result = null;
-        try {
-            $_statement = $this->_pdo->prepare(
-                'SELECT ' . $_type . ' FROM ' . $this->_tableLinked . ' WHERE ' . $_tableId . ' = :id'
-            );
-            $_statement->bindParam(':id', $id, PDO::PARAM_INT);
-            $_statement->execute();
-            $result = $_statement->fetch();
-            $_statement = null;
-        }
-        catch (PDOException $e) {
-            error_log($e->getMessage());
+        if ((!isset($id)) || (!isset($type)) || (is_null($this->_pdo))) {
             return null;
         }
 
-        if ((!isset($result)) || ($result === false)) {
-            return null;
-        }
+        $_linkedTable = $this->_tableStructure['linked'];
+        $_type = self::_typeCheck($_linkedTable->data(), $type);
+        $result = Structure::executeSelectPDO($this->_pdo, $_type->name(), $_linkedTable->name(),
+            Structure::prepareStatementString(array($_linkedTable->key())),
+            array($_linkedTable->key()), array($id));
 
-        if ($result[$_type] === null) {
+        if ($result[$_type->name()] === null) {
             return false;
         }
 
@@ -195,53 +148,28 @@ class Account {
     }
 
     public function getUserIdByLinked($type, $linked): ?int {
-        $_tableId = 'userId';
-        $_type = self::_typeCheck($type);
-        if ($_type === null) {
-            return null;
-        }
-        $result = null;
-        try {
-            $_statement = $this->_pdo->prepare(
-                'SELECT ' . $_tableId . ' FROM ' . $this->_tableLinked . ' WHERE ' . $_type . ' = :linked'
-            );
-            $_statement->bindParam(':linked', $linked, PDO::PARAM_INT);
-            $_statement->execute();
-            $result = $_statement->fetch();
-            $_statement = null;
-        }
-        catch (PDOException $e) {
-            error_log($e->getMessage());
+        if ((!isset($type)) || (!isset($linked)) || (is_null($this->_pdo))) {
             return null;
         }
 
-        if ((!isset($result)) || ($result === false)) {
-            return null;
-        }
+        $_linkedTable = $this->_tableStructure['linked'];
+        $_type = self::_typeCheck($_linkedTable->data(), $type);
+        $result = Structure::executeSelectPDO($this->_pdo, $_linkedTable->key()->name(), $_linkedTable->name(),
+            Structure::prepareStatementString(array($_type)),
+            array($_type), array($linked));
 
-        return $result[$_tableId];
+        return $result[$_linkedTable->key()->name()];
     }
 
     public function getAuthByUserId($id): ?iterable {
-        $_tableId = 'userId';
-        $result = null;
-        try {
-            $_statement = $this->_pdo->prepare(
-                'SELECT * FROM ' . $this->_tableAuth . ' WHERE ' . $_tableId . ' = :id'
-            );
-            $_statement->bindParam(':id', $id, PDO::PARAM_INT);
-            $_statement->execute();
-            $result = $_statement->fetchAll();
-            $_statement = null;
-        }
-        catch (PDOException $e) {
-            error_log($e->getMessage());
+        if ((!isset($id)) || (is_null($this->_pdo))) {
             return null;
         }
 
-        if ((!isset($result)) || (empty($result))) {
-            return null;
-        }
+        $_authTable = $this->_tableStructure['auth'];
+        $result = Structure::executeSelectPDO($this->_pdo, '*', $_authTable->name(),
+            Structure::prepareStatementString(array($_authTable->data()['userId'])),
+            array($_authTable->data()['userId']), array($id), true);
 
         $_resArray = array();
 
@@ -257,16 +185,46 @@ class Account {
     }
 
     public function validateAuthByAuthId($id, $auth, $function): ?bool {
+        if ((!isset($id)) || (!isset($auth)) || (!isset($function)) ||
+            (!is_callable($function)) || (is_null($this->_pdo))) {
+            return null;
+        }
+
+        $_authTable = $this->_tableStructure['auth'];
+        $result = Structure::executeSelectPDO($this->_pdo, '*', $_authTable->name(),
+            Structure::prepareStatementString(array($_authTable->key())),
+            array($_authTable->key()), array($id));
+
+        if (!isset($result)) {
+            return null;
+        }
+
+        return $function($result[$_authTable->data()['type']->name()],
+            $auth,
+            $result[$_authTable->data()['data']->name()]);
+    }
+
+    public function setUserData($id, $data): iterable {
+        if ((!isset($id)) || (!isset($data)) || (is_null($this->_pdo))) {
+            return null;
+        }
+
+        $_setList = Structure::prepareStatementStringFilter($this->_tableStructure['user']->data(), $data);
+
+        // executeUpdatePDO
+
+        var_dump($_setList);
+        return array();
+
         $_tableId = 'id';
-        $_tableTypeEntry = 'type';
-        $_privateDataEntry = 'data';
+
         $result = null;
         try {
             $_statement = $this->_pdo->prepare(
-                'SELECT ' . $_privateDataEntry . ', ' . $_tableTypeEntry . ' FROM ' .
-                $this->_tableAuth . ' WHERE ' . $_tableId . ' = :id'
+                'UPDATE ' . $this->_tableUser . ' SET ' . $_setList . ' WHERE ' . $_tableId . ' = :id'
             );
             $_statement->bindParam(':id', $id, PDO::PARAM_INT);
+
             $_statement->execute();
             $result = $_statement->fetch();
             $_statement = null;
@@ -280,11 +238,7 @@ class Account {
             return null;
         }
 
-        return $function($result[$_tableTypeEntry], $auth, $result[$_privateDataEntry]);
-    }
-
-    public function setUserData($id, $data): iterable {
-
+        return $result;
     }
 
     public function setLink($id, $type, $data): iterable {
