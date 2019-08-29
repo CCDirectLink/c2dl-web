@@ -8,6 +8,9 @@ use c2dl\sys\service\GeneralService;
 use \PDO;
 use \PDOException;
 
+/*
+ * Account Repository interface
+ */
 class Account {
 
     private static $_instance;
@@ -24,8 +27,9 @@ class Account {
 
     private function __construct($dbEntry = 'acc') {
         $this->_tableStructure = [
-            'user' => DatabaseTable::create('acc_user',
-                DatabaseColumn::create('id', PDO::PARAM_INT), [
+            'user' => DatabaseTable::create('acc_user', // name
+                DatabaseColumn::create('id', PDO::PARAM_INT), [ // key
+                    // data
                     'user' => DatabaseColumn::create(
                         'user', PDO::PARAM_STR, [DatabaseColumnStringSizeConstraints::create(3, 32)]
                     ),
@@ -36,8 +40,9 @@ class Account {
                     'mailLogin' => DatabaseColumn::create('mailLogin', PDO::PARAM_BOOL),
                     'active' => DatabaseColumn::create('active', PDO::PARAM_BOOL)
             ]),
-            'auth' => DatabaseTable::create('acc_auth',
-                DatabaseColumn::create('id', PDO::PARAM_INT), [
+            'auth' => DatabaseTable::create('acc_auth', // name
+                DatabaseColumn::create('id', PDO::PARAM_INT), [ // key
+                    // data
                     'userId' => DatabaseColumn::create('userId', PDO::PARAM_INT),
                     'mainAuth' => DatabaseColumn::create('mainAuth', PDO::PARAM_INT),
                     'required' => DatabaseColumn::create('required', PDO::PARAM_INT),
@@ -46,8 +51,9 @@ class Account {
                     ),
                     'data' => DatabaseColumn::create('data', PDO::PARAM_LOB)
             ]),
-            'linked' => DatabaseTable::create('acc_linked',
-                DatabaseColumn::create('userId', PDO::PARAM_INT), [
+            'linked' => DatabaseTable::create('acc_linked', // name
+                DatabaseColumn::create('userId', PDO::PARAM_INT), [ // key
+                    // data
                     'facebook' => DatabaseColumn::create('facebook', PDO::PARAM_INT),
                     'google' => DatabaseColumn::create('google', PDO::PARAM_INT),
                     'github' => DatabaseColumn::create('github', PDO::PARAM_INT),
@@ -60,8 +66,6 @@ class Account {
     }
 
     private function __clone() { }
-
-
 
     public function getUserDataByUserId($id): ?iterable {
         if ((!isset($id)) || (is_null($this->_pdo))) {

@@ -9,6 +9,9 @@ use \PDO;
 use \Exception;
 use \PDOException;
 
+/*
+ * Redirect Repository interface
+ */
 class Redirect {
 
     private static $_instance;

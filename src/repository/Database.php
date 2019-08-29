@@ -5,6 +5,9 @@ use \PDO;
 use \Exception;
 use c2dl\sys\service\GeneralService;
 
+/*
+ * Database Access information
+ */
 class Database {
 
     private $_connection;
