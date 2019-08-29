@@ -3,28 +3,43 @@
 require_once( getenv('C2DL_SYS', true) . '/repository/Database.php');
 require_once( getenv('C2DL_SYS', true) . '/service/GeneralService.php');
 require_once( getenv('C2DL_SYS', true) . '/repository/Structure.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/IAccount.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseTable.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseColumn.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseColumnStringSizeConstraints.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseColumnStringRegexConstraints.php');
 
 use c2dl\sys\service\GeneralService;
 use \PDO;
 use \PDOException;
 
 /*
- * Account Repository interface
+ * Account Repository (singleton)
  */
-class Account {
+class Account implements IAccount {
 
     private static $_instance;
 
     private $_pdo;
     private $_tableStructure;
 
-    public static function getInstance($dbEntry = 'acc'): Account {
+    /*
+     * Get Account repository instance
+     * @param string|null $dbEntry database name
+     * @return Account Account repository
+     */
+    public static function getInstance($dbEntry = 'acc'): IAccount {
         if(!self::$_instance) {
             self::$_instance = new self($dbEntry);
         }
         return self::$_instance;
     }
 
+    /*
+     * Constructor
+     * @param string|null $dbEntry database name
+     * @return Account Account repository
+     */
     private function __construct($dbEntry = 'acc') {
         $this->_tableStructure = [
             'user' => DatabaseTable::create('acc_user', // name
@@ -65,8 +80,33 @@ class Account {
         $this->_pdo = Database::getInstance()->getConnection($dbEntry);
     }
 
+    /*
+     * No Clone
+     */
     private function __clone() { }
 
+    /*
+     * Check if linked type (facebook, ...) is in database structure
+     * @param DatabaseColumn[] $dbStructure database structure
+     * @param string $type linked type
+     * @return DatabaseColumn|null null if not in structure
+     */
+    static private function _typeCheck($dbStructure, $type): ?DatabaseColumn {
+        foreach ($dbStructure as &$entry) {
+            if (GeneralService::stringsEqual($type, $entry->name())) {
+                return $entry;
+            }
+        }
+        return null;
+    }
+
+    /*
+     * Get userData by userId
+     * id (int), user (string), mail (string|null), mailValid (bool), mailLogin (bool), active (bool)
+     *
+     * @param int $id User Id
+     * @return mixed[] User data
+     */
     public function getUserDataByUserId($id): ?iterable {
         if ((!isset($id)) || (is_null($this->_pdo))) {
             return null;
@@ -78,6 +118,11 @@ class Account {
             array($_userTable->key()), array($id));
     }
 
+    /*
+     * Get userId by username
+     * @param string $username Username
+     * @return int User Id
+     */
     public function getUserIdByUsername($username): ?int {
         if ((!isset($username)) || (is_null($this->_pdo))) {
             return null;
@@ -95,6 +140,11 @@ class Account {
         return $result[$_userTable->key()->name()];
     }
 
+    /*
+     * Get userId by mail
+     * @param string $mail Mail
+     * @return int User Id
+     */
     public function getUserIdByMail($mail): ?int {
         if ((!isset($mail)) || (is_null($this->_pdo))) {
             return null;
@@ -113,6 +163,13 @@ class Account {
         return $result[$_userTable->key()->name()];
     }
 
+    /*
+     * Get linkedData by userId
+     * userId (int), facebook (int), google (int), github (int), gitlab (int), discord (int)
+     *
+     * @param int $id user Id
+     * @return mixed[] linked data
+     */
     public function getLinkedByUserId($id): ?iterable {
         if ((!isset($id)) || (is_null($this->_pdo))) {
             return null;
@@ -124,15 +181,12 @@ class Account {
             array($_linkedTable->key()), array($id));
     }
 
-    static private function _typeCheck($dbStructure, $type): ?DatabaseColumn {
-        foreach ($dbStructure as &$entry) {
-            if (GeneralService::stringsEqual($type, $entry->name())) {
-                return $entry;
-            }
-        }
-        return null;
-    }
-
+    /*
+     * Check if linked type (facebook, ...) exist for user id
+     * @param int $id user id
+     * @param string $type linked type
+     * @return bool true if exist
+     */
     public function hasLinkedByUserId($id, $type): ?bool {
         if ((!isset($id)) || (!isset($type)) || (is_null($this->_pdo))) {
             return null;
@@ -151,6 +205,12 @@ class Account {
         return true;
     }
 
+    /*
+     * Get user id by linked entry
+     * @param string $type linked type
+     * @param int $linked linked id
+     * @return int user id
+     */
     public function getUserIdByLinked($type, $linked): ?int {
         if ((!isset($type)) || (!isset($linked)) || (is_null($this->_pdo))) {
             return null;
@@ -165,6 +225,11 @@ class Account {
         return $result[$_linkedTable->key()->name()];
     }
 
+    /*
+     * Get auth data by user id
+     * @param int $id user id
+     * @return mixed[] auth data
+     */
     public function getAuthByUserId($id): ?iterable {
         if ((!isset($id)) || (is_null($this->_pdo))) {
             return null;
@@ -188,6 +253,13 @@ class Account {
         return $_resArray;
     }
 
+    /*
+     * Validate auth data
+     * @param int $id user id
+     * @param mixed $auth auth data
+     * @param callable $function auth validator
+     * @return bool true if auth successful
+     */
     public function validateAuthByAuthId($id, $auth, $function): ?bool {
         if ((!isset($id)) || (!isset($auth)) || (!isset($function)) ||
             (!is_callable($function)) || (is_null($this->_pdo))) {
@@ -208,6 +280,12 @@ class Account {
             $result[$_authTable->data()['data']->name()]);
     }
 
+    /*
+     * Set user data
+     * @param int $id user id
+     * @param mixed[] $data user data
+     * @return mixed[] new user data
+     */
     public function setUserData($id, $data): iterable {
         if ((!isset($id)) || (!isset($data)) || (is_null($this->_pdo))) {
             return null;
@@ -245,22 +323,50 @@ class Account {
         return $result;
     }
 
+    /*
+     * Set link data
+     * @param int $id user id
+     * @param string $type link type
+     * @param int $data link data
+     * @return mixed[] new link data
+     */
     public function setLink($id, $type, $data): iterable {
 
     }
 
+    /*
+     * Set auth data
+     * @param int $id user id
+     * @param mixed[] $data auth data
+     */
     public function setAuth($id, $data): void {
 
     }
 
+    /*
+     * Add user data
+     * @param mixed[] $data user data
+     * @return mixed[] created user data
+     */
     public function addUser($data): iterable {
 
     }
 
-    public function addAuth($userId, $data): void {
+    /*
+     * Add auth data
+     * @param int $userId user id
+     * @param mixed[] $data auth data
+     * @return mixed[] created user data
+     */
+    public function addAuth($userId, $data): iterable {
 
     }
 
+    /*
+     * Remove user
+     * @param int $id user id
+     * @return mixed[] user data
+     */
     public function removeUser($id): iterable {
 
     }

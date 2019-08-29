@@ -1,25 +1,47 @@
 <?php namespace c2dl\sys\db;
 require_once( getenv('C2DL_SYS') . '/service/GeneralService.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/IDatabase.php');
 
 use \PDO;
 use \Exception;
 use c2dl\sys\service\GeneralService;
 
 /*
- * Database Access information
+ * Database Access information (singleton)
  */
-class Database {
+class Database implements IDatabase {
 
     private $_connection;
     private static $_instance;
 
-    public static function getInstance($options = null): Database {
+    /*
+     * Get Database instance
+     * @param mixed[] $options PDO options
+     * @return IDatabase Database instance
+     */
+    public static function getInstance($options = null): IDatabase {
         if(!self::$_instance) {
             self::$_instance = new self($options);
         }
         return self::$_instance;
     }
 
+    /*
+     * Constructor
+     * @param mixed[] $options PDO options
+     */
+    private function __construct($options = null) {
+        $this->_connection = self::createPDO($options);
+    }
+
+    /*
+     * No Clone
+     */
+    private function __clone() { }
+
+    /*
+     * Default options
+     */
     static private function _defaultOptions(): iterable {
         return [
             PDO::ATTR_EMULATE_PREPARES   => false,
@@ -28,6 +50,10 @@ class Database {
         ];
     }
 
+    /*
+     * Get Access information
+     * @return mixed[] Access information
+     */
     static private function _getData(): iterable {
         $arr = null;
 
@@ -86,6 +112,11 @@ class Database {
         return $arr;
     }
 
+    /*
+     * Create PDO array
+     * @param mixed[] $options PDO options
+     * @return PDO[] PDO array
+     */
     static private function createPDO($options = null): iterable {
         $_options = self::_defaultOptions();
 
@@ -131,12 +162,11 @@ class Database {
         return $resultArray;
     }
 
-    private function __construct($options = null) {
-        $this->_connection = self::createPDO($options);
-    }
-
-    private function __clone() { }
-
+    /*
+     * Get PDO object (db connection)
+     * @param string|null $dbEntry database name
+     * @return PDO[]|PDO|null PDO array if no $dbEntry, PDO if existing $dbEntry, null if invalid
+     */
     public function getConnection($dbEntry = null) {
         if (!isset($dbEntry)) {
             return $this->_connection;

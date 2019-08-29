@@ -3,6 +3,7 @@
 require_once( getenv('C2DL_SYS', true) . '/repository/Database.php');
 require_once( getenv('C2DL_SYS', true) . '/service/GeneralService.php');
 require_once( getenv('C2DL_SYS', true) . '/repository/Structure.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/IRedirect.php');
 
 use c2dl\sys\service\GeneralService;
 use \PDO;
@@ -10,22 +11,30 @@ use \Exception;
 use \PDOException;
 
 /*
- * Redirect Repository interface
+ * Redirect Repository (Singleton)
  */
-class Redirect {
+class Redirect implements IRedirect {
 
     private static $_instance;
 
     private $_pdo;
     private $_tableStructure;
 
-    public static function getInstance($dbEntry = 'main'): Redirect {
+    /*
+     * Get Redirect instance
+     * @param string|void $dbEntry used database
+     */
+    public static function getInstance($dbEntry = 'main'): IRedirect {
         if(!self::$_instance) {
             self::$_instance = new self($dbEntry);
         }
         return self::$_instance;
     }
 
+    /*
+     * Constructor
+     * @param string|void $dbEntry used database
+     */
     private function __construct($dbEntry = 'main') {
         $this->_tableStructure = [
             'redirect' => DatabaseTable::create('www_redirectList',
@@ -41,8 +50,16 @@ class Redirect {
         $this->_pdo = Database::getInstance()->getConnection($dbEntry);
     }
 
+    /*
+     * No Clone
+     */
     private function __clone() { }
 
+    /*
+     * Get redirect data
+     * @param string|null $entry redirect entry name
+     * @return mixed[] redirect result
+     */
     public function hasRedirect($entry): ?iterable {
         if ((!isset($entry)) || (is_null($this->_pdo))) {
             return array('entry' => null, 'url' => null);
