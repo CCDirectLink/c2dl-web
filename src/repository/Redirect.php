@@ -5,6 +5,11 @@ require_once( getenv('C2DL_SYS', true) . '/service/GeneralService.php');
 require_once( getenv('C2DL_SYS', true) . '/repository/Structure.php');
 require_once( getenv('C2DL_SYS', true) . '/repository/IRedirect.php');
 
+require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseTable.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseColumn.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseColumnStringSizeConstraints.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseColumnStringRegexConstraints.php');
+
 use c2dl\sys\service\GeneralService;
 use \PDO;
 use \Exception;
