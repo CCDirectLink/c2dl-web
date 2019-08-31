@@ -71,6 +71,14 @@ class DatabaseTable implements IDatabaseTable {
     }
 
     /*
+     * Get All Table Columns
+     * @return DatabaseColumn[]|null All Table Columns
+     */
+    public function allColumns(): ?iterable {
+        return array_merge($this->_data, array(self::PRIMARY => $this->_key));
+    }
+
+    /*
      * Set Table Name
      * @param string $name Table Name
      */

@@ -1,0 +1,20 @@
+{
+	"name": "c2dl/logging",
+	"description": "c2dl Logging",
+	"type": "library",
+
+	"license": "MIT",
+
+	"require": {
+		"monolog/monolog": "^2.0"
+	},
+
+	"authors": [
+		{
+			"name": "Streetclaw",
+			"homepage": "https://c2dl.info",
+			"email": "streetclaw@c2dl.info",
+			"role": "Developer"
+		}
+	]
+}

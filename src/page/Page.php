@@ -1,4 +1,4 @@
-<?php  namespace c2dl\sys\page;
+<?php namespace c2dl\sys\page;
 
 require_once( getenv('C2DL_SYS_PAGE', true) . '/vendor/autoload.php' );
 

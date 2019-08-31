@@ -2,7 +2,14 @@
 
 require_once( getenv('C2DL_SYS', true) . '/repository/IStructure.php');
 require_once( getenv('C2DL_SYS', true) . '/repository/IDatabaseColumn.php');
+require_once( getenv('C2DL_SYS', true) . '/error/ConstraintException.php');
 
+require_once( getenv('C2DL_SYS', true) . '/logger/Log.php');
+
+use c2dl\sys\log\Log;
+use c2dl\sys\err\ConstraintException;
+use c2dl\sys\service\GeneralService;
+use http\Exception;
 use \PDOException;
 
 /*
@@ -19,6 +26,8 @@ class Structure implements IStructure {
      * @return string Statement string
      */
     public static function prepareStatementString($dbStructure): string {
+        $log = Log::getInstance()->getLogger('db');
+
         $result = '';
         $first = true;
 
@@ -29,6 +38,7 @@ class Structure implements IStructure {
             }
         }
 
+        $log->info(__FUNCTION__, ['out' => $result]);
         return $result;
     }
 
@@ -44,6 +54,8 @@ class Structure implements IStructure {
      * @return string Statement string
      */
     public static function prepareStatementStringFilter($dbStructure, $data): string {
+        $log = Log::getInstance()->getLogger('db');
+
         $result = '';
         $first = true;
 
@@ -58,6 +70,7 @@ class Structure implements IStructure {
             }
         }
 
+        $log->info(__FUNCTION__, ['out' => $result]);
         return $result;
     }
 
@@ -75,13 +88,25 @@ class Structure implements IStructure {
      */
     public static function executeSelectPDO($pdo, $elements, $table, $where,
                                              $dbStructure, $data, $multi = false): ?iterable {
+        $log = Log::getInstance()->getLogger('db');
+        $_loggedStatements = [];
+
         $result = null;
         try {
             $_statement = $pdo->prepare(
                 'SELECT ' . $elements . ' FROM ' . $table . ' WHERE ' . $where
             );
             foreach ($dbStructure as $key => &$entry) {
+                if (!GeneralService::inArray($key, $data)) {
+                    array_push($_loggedStatements,
+                        ':' . $entry->name() . ' skipped (' . $entry->type() . ')'
+                    );
+                    continue 1;
+                }
                 $_statement->bindParam(':' . $entry->name(), $data[$key], $entry->type());
+                array_push($_loggedStatements,
+                    ':' . $entry->name() . ' = ' . $data[$key] . ' (' . $entry->type() . ')'
+                );
             }
             $_statement->execute();
             if ($multi) {
@@ -93,14 +118,18 @@ class Structure implements IStructure {
             $_statement = null;
         }
         catch (PDOException $e) {
-            error_log($e->getMessage());
-            return null;
+            throw $e;
         }
 
         if ((!isset($result)) || ($result === false)) {
             return null;
         }
 
+        $log->info(__FUNCTION__, [
+            'sql' => 'SELECT ' . $elements . ' FROM ' . $table . ' WHERE ' . $where,
+            'bind' => $_loggedStatements,
+            'out' => $result
+        ]);
         return $result;
     }
 
@@ -116,31 +145,45 @@ class Structure implements IStructure {
      * @return mixed[] Requested data
      */
     public static function executeUpdatePDO($pdo, $table, $setList, $where,
-                                             $dbStructure, $data): ?iterable {
+                                             $dbStructure, $data): void {
+        $log = Log::getInstance()->getLogger('db');
+        $_loggedStatements = [];
+
         try {
             $_statement = $pdo->prepare(
                 'UPDATE ' . $table . ' SET ' . $setList . ' WHERE ' . $where
             );
             foreach ($dbStructure as $key => &$entry) {
+                if (!GeneralService::inArray($key, $data)) {
+                    array_push($_loggedStatements,
+                        ':' . $entry->name() . ' skipped (' . $entry->type() . ')'
+                    );
+                    continue 1;
+                }
                 if (is_array($entry->constraints())) {
                     foreach ($entry->constraints() as &$constraint) {
-                        if (!$constraint->validate()) {
+                        if (!$constraint->validate($data[$key])) {
                             $_statement = null;
-                            return [ 'error' => 'invalid', 'data' => $entry->name() ];
+                            throw new ConstraintException('Constraint not met in '. $key, 0, $key);
                         }
                     }
                 }
                 $_statement->bindParam(':' . $entry->name(), $data[$key], $entry->type());
+                array_push($_loggedStatements,
+                    ':' . $entry->name() . ' = ' . $data[$key] . ' (' . $entry->type() . ')'
+                );
             }
             $_statement->execute();
             $_statement = null;
         }
         catch (PDOException $e) {
-            error_log($e->getMessage());
-            return [ 'error' => 'pdo', 'data' => $e->getMessage() ];
+            throw $e;
         }
 
-        return null;
+        $log->info(__FUNCTION__, [
+            'sql' => 'UPDATE ' . $table . ' SET ' . $setList . ' WHERE ' . $where,
+            'bind' => $_loggedStatements
+        ]);
     }
 
 }

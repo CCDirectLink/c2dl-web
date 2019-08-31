@@ -52,9 +52,8 @@ interface IStructure {
      * @param string $where Condition
      * @param DatabaseColumn[] $dbStructure parameter binding
      * @param mixed[] $data used data
-     * @return mixed[] Requested data
      */
     public static function executeUpdatePDO($pdo, $table, $setList, $where,
-                                            $dbStructure, $data): ?iterable;
+                                            $dbStructure, $data): void;
 
 }

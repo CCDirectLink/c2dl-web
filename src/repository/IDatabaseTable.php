@@ -6,6 +6,8 @@ require_once( getenv('C2DL_SYS', true) . '/repository/IDatabaseColumn.php');
  * Database table interface
  */
 interface IDatabaseTable {
+    public const PRIMARY = 'PRIMARY_KEY';
+
     /*
      * Create Database Table
      * @param string|null $name Table Name
@@ -39,6 +41,12 @@ interface IDatabaseTable {
      * @return DatabaseColumn[]|null Table Data Columns
      */
     public function data(): ?iterable;
+
+    /*
+     * Get All Table Columns
+     * @return DatabaseColumn[]|null All Table Columns
+     */
+    public function allColumns(): ?iterable;
 
     /*
      * Set Table Name

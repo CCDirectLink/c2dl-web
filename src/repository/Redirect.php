@@ -10,10 +10,10 @@ require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseColumn.php');
 require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseColumnStringSizeConstraints.php');
 require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseColumnStringRegexConstraints.php');
 
-use c2dl\sys\service\GeneralService;
+require_once( getenv('C2DL_SYS', true) . '/logger/Log.php');
+
+use c2dl\sys\log\Log;
 use \PDO;
-use \Exception;
-use \PDOException;
 
 /*
  * Redirect Repository (Singleton)
@@ -66,6 +66,8 @@ class Redirect implements IRedirect {
      * @return mixed[] redirect result
      */
     public function hasRedirect($entry): ?iterable {
+        $log = Log::getInstance()->getLogger('db');
+
         if ((!isset($entry)) || (is_null($this->_pdo))) {
             return array('entry' => null, 'url' => null);
         }
@@ -74,6 +76,11 @@ class Redirect implements IRedirect {
         $result = Structure::executeSelectPDO($this->_pdo, '*', $_redirectTable->name(),
             Structure::prepareStatementString(array($_redirectTable->key())),
             array($_redirectTable->key()), array($entry));
+
+        $log->info(__FUNCTION__, [
+            'entry' => $entry,
+            'result' => $result
+        ]);
 
         if (!isset($result)) {
             return array('entry' => $entry, 'url' => null);
