@@ -567,7 +567,28 @@ class Account implements IAccount {
      * @param mixed[] $data auth data
      */
     public function setAuth($id, $data): void {
+        if (is_null($this->_pdo)) {
+            $this->_logger->error(__FUNCTION__ . ' No PDO', [
+                'exception' => 'NoDatabaseException'
+            ]);
+            throw new NoDatabaseException('PDO not set');
+        }
+        if ((!isset($id)) || (!isset($data))) {
+            $this->_logger->error(__FUNCTION__ . ' Param not set', [
+                'exception' => 'TypeException',
+                'id' => gettype($id),
+                'data' => gettype($data)
+            ]);
+            throw new TypeException('Param not set or types invalid', 1);
+        }
 
+        $_authTable = $this->_tableStructure['auth'];
+        $_setList = call_user_func($this->_prepareStatementFilter, $_authTable->data(), $data, $this->_logger);
+
+        call_user_func($this->_executeUpdate, $this->_pdo, $_authTable->name(), $_setList,
+            call_user_func($this->_prepareStatement, array($_authTable->key()), $this->_logger),
+            $_authTable->allColumns(),
+            array_merge($data, array($_authTable::PRIMARY => $id)), $this->_logger);
     }
 
     /*
