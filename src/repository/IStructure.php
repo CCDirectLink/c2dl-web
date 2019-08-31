@@ -11,9 +11,10 @@ interface IStructure {
      * DatabaseColumn[name=a,...][...b...] -> "a = :a, b = :b"
      *
      * @param DatabaseColumn[] $dbStructure Database structure (Columns)
+     * @param null|Logger $logger logger
      * @return string Statement string
      */
-    public static function prepareStatementString($dbStructure): string;
+    public static function prepareStatementString($dbStructure, $logger = null): string;
 
     /*
      * Prepare Statement String Filter
@@ -24,9 +25,10 @@ interface IStructure {
      *
      * @param DatabaseColumn[] $dbStructure Database structure (Columns)
      * @param mixed[] Data to check (key ===? DatabaseColumn name)
+     * @param null|Logger $logger logger
      * @return string Statement string
      */
-    public static function prepareStatementStringFilter($dbStructure, $data): string;
+    public static function prepareStatementStringFilter($dbStructure, $data, $logger = null): string;
 
     /*
      * SQL Select request
@@ -37,11 +39,12 @@ interface IStructure {
      * @param string $where Condition
      * @param DatabaseColumn[] $dbStructure parameter binding
      * @param mixed[] $data used data
+     * @param null|Logger $logger logger
      * @param bool $multi fetchAll if true
      * @return mixed[] Requested data
      */
     public static function executeSelectPDO($pdo, $elements, $table, $where,
-                                            $dbStructure, $data, $multi = false): ?iterable;
+                                            $dbStructure, $data, $logger = null, $multi = false): ?iterable;
 
     /*
      * SQL Update request
@@ -52,8 +55,9 @@ interface IStructure {
      * @param string $where Condition
      * @param DatabaseColumn[] $dbStructure parameter binding
      * @param mixed[] $data used data
+     * @param null|Logger $logger logger
      */
     public static function executeUpdatePDO($pdo, $table, $setList, $where,
-                                            $dbStructure, $data): void;
+                                            $dbStructure, $data, $logger = null): void;
 
 }

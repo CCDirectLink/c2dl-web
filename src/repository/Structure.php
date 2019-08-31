@@ -9,7 +9,6 @@ require_once( getenv('C2DL_SYS', true) . '/logger/Log.php');
 use c2dl\sys\log\Log;
 use c2dl\sys\err\ConstraintException;
 use c2dl\sys\service\GeneralService;
-use http\Exception;
 use \PDOException;
 
 /*
@@ -23,11 +22,10 @@ class Structure implements IStructure {
      * DatabaseColumn[name=a,...][...b...] -> "a = :a, b = :b"
      *
      * @param DatabaseColumn[] $dbStructure Database structure (Columns)
+     * @param null|Logger $logger logger
      * @return string Statement string
      */
-    public static function prepareStatementString($dbStructure): string {
-        $log = Log::getInstance()->getLogger('db');
-
+    public static function prepareStatementString($dbStructure, $logger = null): string {
         $result = '';
         $first = true;
 
@@ -38,7 +36,9 @@ class Structure implements IStructure {
             }
         }
 
-        $log->info(__FUNCTION__, ['out' => $result]);
+        if (isset($logger)) {
+            $logger->info(__FUNCTION__, ['out' => $result]);
+        }
         return $result;
     }
 
@@ -51,11 +51,10 @@ class Structure implements IStructure {
      *
      * @param DatabaseColumn[] $dbStructure Database structure (Columns)
      * @param mixed[] Data to check (key ===? DatabaseColumn name)
+     * @param null|Logger $logger logger
      * @return string Statement string
      */
-    public static function prepareStatementStringFilter($dbStructure, $data): string {
-        $log = Log::getInstance()->getLogger('db');
-
+    public static function prepareStatementStringFilter($dbStructure, $data, $logger = null): string {
         $result = '';
         $first = true;
 
@@ -70,7 +69,9 @@ class Structure implements IStructure {
             }
         }
 
-        $log->info(__FUNCTION__, ['out' => $result]);
+        if (isset($logger)) {
+            $logger->info(__FUNCTION__, ['out' => $result]);
+        }
         return $result;
     }
 
@@ -83,12 +84,12 @@ class Structure implements IStructure {
      * @param string $where Condition
      * @param DatabaseColumn[] $dbStructure parameter binding
      * @param mixed[] $data used data
+     * @param null|Logger $logger logger
      * @param bool $multi fetchAll if true
      * @return mixed[] Requested data
      */
     public static function executeSelectPDO($pdo, $elements, $table, $where,
-                                             $dbStructure, $data, $multi = false): ?iterable {
-        $log = Log::getInstance()->getLogger('db');
+                                             $dbStructure, $data, $logger = null, $multi = false): ?iterable {
         $_loggedStatements = [];
 
         $result = null;
@@ -125,11 +126,13 @@ class Structure implements IStructure {
             return null;
         }
 
-        $log->info(__FUNCTION__, [
-            'sql' => 'SELECT ' . $elements . ' FROM ' . $table . ' WHERE ' . $where,
-            'bind' => $_loggedStatements,
-            'out' => $result
-        ]);
+        if (isset($logger)) {
+            $logger->info(__FUNCTION__, [
+                'sql' => 'SELECT ' . $elements . ' FROM ' . $table . ' WHERE ' . $where,
+                'bind' => $_loggedStatements,
+                'out' => $result
+            ]);
+        }
         return $result;
     }
 
@@ -142,11 +145,10 @@ class Structure implements IStructure {
      * @param string $where Condition
      * @param DatabaseColumn[] $dbStructure parameter binding
      * @param mixed[] $data used data
-     * @return mixed[] Requested data
+     * @param null|Logger $logger logger
      */
     public static function executeUpdatePDO($pdo, $table, $setList, $where,
-                                             $dbStructure, $data): void {
-        $log = Log::getInstance()->getLogger('db');
+                                             $dbStructure, $data, $logger = null): void {
         $_loggedStatements = [];
 
         try {
@@ -180,10 +182,12 @@ class Structure implements IStructure {
             throw $e;
         }
 
-        $log->info(__FUNCTION__, [
-            'sql' => 'UPDATE ' . $table . ' SET ' . $setList . ' WHERE ' . $where,
-            'bind' => $_loggedStatements
-        ]);
+        if (isset($logger)) {
+            $logger->info(__FUNCTION__, [
+                'sql' => 'UPDATE ' . $table . ' SET ' . $setList . ' WHERE ' . $where,
+                'bind' => $_loggedStatements
+            ]);
+        }
     }
 
 }

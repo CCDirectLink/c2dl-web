@@ -24,6 +24,10 @@ class Redirect implements IRedirect {
 
     private $_pdo;
     private $_tableStructure;
+    private $_logger;
+
+    private $_executeSelect;
+    private $_prepareStatement;
 
     /*
      * Get Redirect instance
@@ -31,16 +35,28 @@ class Redirect implements IRedirect {
      */
     public static function getInstance($dbEntry = 'main'): IRedirect {
         if(!self::$_instance) {
-            self::$_instance = new self($dbEntry);
+            self::$_instance = new self(Database::getInstance()->getConnection($dbEntry),
+                Log::getInstance()->getLogger('db'),
+                [ 'c2dl\\sys\\db\\Structure', 'executeSelectPDO'],
+                [ 'c2dl\\sys\\db\\Structure', 'prepareStatementString']);
         }
         return self::$_instance;
     }
 
     /*
-     * Constructor
-     * @param string|void $dbEntry used database
+     * Test only
+     * @param PDO $dummyPdo database
+     * @return Account Account repository
      */
-    private function __construct($dbEntry = 'main') {
+    public static function createTestDummy($dummyPdo, $logger, $select, $prepareStatement): IRedirect {
+        return new self($dummyPdo, $logger, $select, $prepareStatement);
+    }
+
+    /*
+     * Constructor
+     * @param PDO $pdo used database
+     */
+    private function __construct($pdo, $logger, $select, $prepareStatement) {
         $this->_tableStructure = [
             'redirect' => DatabaseTable::create('www_redirectList',
                 DatabaseColumn::create('id', PDO::PARAM_STR,
@@ -52,7 +68,10 @@ class Redirect implements IRedirect {
                 ])
         ];
 
-        $this->_pdo = Database::getInstance()->getConnection($dbEntry);
+        $this->_pdo = $pdo;
+        $this->_logger = $logger;
+        $this->_executeSelect = $select;
+        $this->_prepareStatement = $prepareStatement;
     }
 
     /*
@@ -66,18 +85,16 @@ class Redirect implements IRedirect {
      * @return mixed[] redirect result
      */
     public function hasRedirect($entry): ?iterable {
-        $log = Log::getInstance()->getLogger('db');
-
         if ((!isset($entry)) || (is_null($this->_pdo))) {
             return array('entry' => null, 'url' => null);
         }
 
-        $_redirectTable = $this->_tableStructure['redirect'];
-        $result = Structure::executeSelectPDO($this->_pdo, '*', $_redirectTable->name(),
-            Structure::prepareStatementString(array($_redirectTable->key())),
-            array($_redirectTable->key()), array($entry));
+            $_redirectTable = $this->_tableStructure['redirect'];
+        $result = call_user_func($this->_executeSelect, $this->_pdo, '*', $_redirectTable->name(),
+            call_user_func($this->_prepareStatement, array($_redirectTable->key()), $this->_logger),
+            array($_redirectTable->key()), array($entry), $this->_logger);
 
-        $log->info(__FUNCTION__, [
+        $this->_logger->info(__FUNCTION__, [
             'entry' => $entry,
             'result' => $result
         ]);

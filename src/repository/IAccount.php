@@ -13,6 +13,15 @@ interface IAccount {
     public static function getInstance($dbEntry = 'acc'): IAccount;
 
     /*
+     * Test only
+     * @param PDO $dummyPdo database
+     * @param Log $logger logger
+     * @return Account Account repository
+     */
+    public static function createTestDummy($dummyPdo, $logger,
+                                           $select, $update, $prepareStatement, $filter): IAccount;
+
+    /*
      * Get userData by userId
      * id (int), user (string), mail (string|null), mailValid (bool), mailLogin (bool), active (bool)
      *

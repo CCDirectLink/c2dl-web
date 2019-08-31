@@ -33,6 +33,12 @@ class Account implements IAccount {
 
     private $_pdo;
     private $_tableStructure;
+    private $_logger;
+
+    private $_executeSelect;
+    private $_executeUpdate;
+    private $_prepareStatement;
+    private $_prepareStatementFilter;
 
     /*
      * Get Account repository instance
@@ -41,17 +47,34 @@ class Account implements IAccount {
      */
     public static function getInstance($dbEntry = 'acc'): IAccount {
         if(!self::$_instance) {
-            self::$_instance = new self($dbEntry);
+
+            self::$_instance = new self(Database::getInstance()->getConnection($dbEntry),
+                Log::getInstance()->getLogger('db'),
+                [ 'c2dl\\sys\\db\\Structure', 'executeSelectPDO'],
+                [ 'c2dl\\sys\\db\\Structure', 'executeUpdatePDO'],
+                [ 'c2dl\\sys\\db\\Structure', 'prepareStatementString'],
+                [ 'c2dl\\sys\\db\\Structure', 'prepareStatementStringFilter']);
         }
         return self::$_instance;
     }
 
     /*
-     * Constructor
-     * @param string|null $dbEntry database name
+     * Test only
+     * @param PDO $dummyPdo database
+     * @param Log $logger logger
      * @return Account Account repository
      */
-    private function __construct($dbEntry = 'acc') {
+    public static function createTestDummy($dummyPdo, $logger,
+                                           $select, $update, $prepareStatement, $filter): IAccount {
+        return new self($dummyPdo, $logger, $select, $update, $prepareStatement, $filter);
+    }
+
+    /*
+     * Constructor
+     * @param PDO $dbEntry database
+     * @return Account Account repository
+     */
+    private function __construct($pdo, $logger, $select, $update, $prepareStatement, $filter) {
         $this->_tableStructure = [
             'user' => DatabaseTable::create('acc_user', // name
                 DatabaseColumn::create('id', PDO::PARAM_INT), [ // key
@@ -88,7 +111,13 @@ class Account implements IAccount {
             ])
         ];
 
-        $this->_pdo = Database::getInstance()->getConnection($dbEntry);
+        $this->_pdo = $pdo;
+        $this->_logger = $logger;
+
+        $this->_executeSelect = $select;
+        $this->_executeUpdate = $update;
+        $this->_prepareStatement = $prepareStatement;
+        $this->_prepareStatementFilter = $filter;
     }
 
     /*
@@ -119,16 +148,14 @@ class Account implements IAccount {
      * @return mixed[] User data
      */
     public function getUserDataByUserId($id): ?iterable {
-        $log = Log::getInstance()->getLogger('db');
-
         if (is_null($this->_pdo)) {
-            $log->error(__FUNCTION__ . ' No PDO', [
+            $this->_logger->error(__FUNCTION__ . ' No PDO', [
                 'exception' => 'NoDatabaseException'
             ]);
             throw new NoDatabaseException('PDO not set');
         }
         if (!isset($id)) {
-            $log->error(__FUNCTION__ . ' Param not set', [
+            $this->_logger->error(__FUNCTION__ . ' Param not set', [
                 'exception' => 'TypeException',
                 'id' => gettype($id)
             ]);
@@ -136,12 +163,12 @@ class Account implements IAccount {
         }
 
         $_userTable = $this->_tableStructure['user'];
-        $result = Structure::executeSelectPDO($this->_pdo, '*', $_userTable->name(),
-            Structure::prepareStatementString(array($_userTable->key())),
-            array($_userTable->key()), array($id));
+        $result = call_user_func($this->_executeSelect, $this->_pdo, '*', $_userTable->name(),
+            call_user_func($this->_prepareStatement, array($_userTable->key()), $this->_logger),
+            array($_userTable->key()), array($id), $this->_logger);
 
         if (!isset($result)) {
-            $log->error(__FUNCTION__ . ' No result', [
+            $this->_logger->error(__FUNCTION__ . ' No result', [
                 'exception' => 'RequestException'
             ]);
             throw new RequestException('Database request failed: No result');
@@ -156,16 +183,14 @@ class Account implements IAccount {
      * @return int User Id
      */
     public function getUserIdByUsername($username): ?int {
-        $log = Log::getInstance()->getLogger('db');
-
         if (is_null($this->_pdo)) {
-            $log->error(__FUNCTION__ . ' No PDO', [
+            $this->_logger->error(__FUNCTION__ . ' No PDO', [
                 'exception' => 'NoDatabaseException'
             ]);
             throw new NoDatabaseException('PDO not set');
         }
         if (!isset($username)) {
-            $log->error(__FUNCTION__ . ' Param not set', [
+            $this->_logger->error(__FUNCTION__ . ' Param not set', [
                 'exception' => 'TypeException',
                 'username' => gettype($username)
             ]);
@@ -174,18 +199,18 @@ class Account implements IAccount {
 
         $_userTable = $this->_tableStructure['user'];
 
-        $result = Structure::executeSelectPDO($this->_pdo, $_userTable->key()->name(), $_userTable->name(),
-            Structure::prepareStatementString(array($_userTable->data()['user'])),
-            array($_userTable->data()['user']), array($username));
+        $result = call_user_func($this->_executeSelect, $this->_pdo, $_userTable->key()->name(), $_userTable->name(),
+            call_user_func($this->_prepareStatement, array($_userTable->data()['user']), $this->_logger),
+            array($_userTable->data()['user']), array($username), $this->_logger);
 
         if (!isset($result)) {
-            $log->error(__FUNCTION__ . ' No result', [
+            $this->_logger->error(__FUNCTION__ . ' No result', [
                 'exception' => 'RequestException'
             ]);
             throw new RequestException('Database request failed: No result');
         }
         if (!GeneralService::inArray($_userTable->key()->name(), $result, true)) {
-            $log->error(__FUNCTION__ . ' No result', [
+            $this->_logger->error(__FUNCTION__ . ' No result', [
                 'exception' => 'RequestException'
             ]);
             throw new RequestException('Database request failed: No username');
@@ -200,16 +225,14 @@ class Account implements IAccount {
      * @return int User Id
      */
     public function getUserIdByMail($mail): ?int {
-        $log = Log::getInstance()->getLogger('db');
-
         if (is_null($this->_pdo)) {
-            $log->error(__FUNCTION__ . ' No PDO', [
+            $this->_logger->error(__FUNCTION__ . ' No PDO', [
                 'exception' => 'NoDatabaseException'
             ]);
             throw new NoDatabaseException('PDO not set');
         }
         if (!isset($mail)) {
-            $log->error(__FUNCTION__ . ' Param not set', [
+            $this->_logger->error(__FUNCTION__ . ' Param not set', [
                 'exception' => 'TypeException',
                 'mail' => gettype($mail)
             ]);
@@ -218,18 +241,18 @@ class Account implements IAccount {
 
         $_userTable = $this->_tableStructure['user'];
 
-        $result = Structure::executeSelectPDO($this->_pdo, $_userTable->key()->name(), $_userTable->name(),
-            Structure::prepareStatementString(array($_userTable->data()['mail'])),
-            array($_userTable->data()['mail']), array($mail));
+        $result = call_user_func($this->_executeSelect, $this->_pdo, $_userTable->key()->name(), $_userTable->name(),
+            call_user_func($this->_prepareStatement, array($_userTable->data()['mail']), $this->_logger),
+            array($_userTable->data()['mail']), array($mail), $this->_logger);
 
         if (!isset($result)) {
-            $log->error(__FUNCTION__ . ' No result', [
+            $this->_logger->error(__FUNCTION__ . ' No result', [
                 'exception' => 'RequestException'
             ]);
             throw new RequestException('Database request failed: No result');
         }
         if (!GeneralService::inArray($_userTable->key()->name(), $result, true)) {
-            $log->error(__FUNCTION__ . ' No result', [
+            $this->_logger->error(__FUNCTION__ . ' No result', [
                 'exception' => 'RequestException'
             ]);
             throw new RequestException('Database request failed: No mail');
@@ -246,16 +269,14 @@ class Account implements IAccount {
      * @return mixed[] linked data
      */
     public function getLinkedByUserId($id): ?iterable {
-        $log = Log::getInstance()->getLogger('db');
-
         if (is_null($this->_pdo)) {
-            $log->error(__FUNCTION__ . ' No PDO', [
+            $this->_logger->error(__FUNCTION__ . ' No PDO', [
                 'exception' => 'NoDatabaseException'
             ]);
             throw new NoDatabaseException('PDO not set');
         }
         if (!isset($id)) {
-            $log->error(__FUNCTION__ . ' Param not set', [
+            $this->_logger->error(__FUNCTION__ . ' Param not set', [
                 'exception' => 'TypeException',
                 'id' => gettype($id)
             ]);
@@ -263,12 +284,12 @@ class Account implements IAccount {
         }
 
         $_linkedTable = $this->_tableStructure['linked'];
-        $result = Structure::executeSelectPDO($this->_pdo, '*', $_linkedTable->name(),
-            Structure::prepareStatementString(array($_linkedTable->key())),
-            array($_linkedTable->key()), array($id));
+        $result = call_user_func($this->_executeSelect, $this->_pdo, '*', $_linkedTable->name(),
+            call_user_func($this->_prepareStatement, array($_linkedTable->key()), $this->_logger),
+            array($_linkedTable->key()), array($id), $this->_logger);
 
         if (!isset($result)) {
-            $log->error(__FUNCTION__ . ' No result', [
+            $this->_logger->error(__FUNCTION__ . ' No result', [
                 'exception' => 'RequestException'
             ]);
             throw new RequestException('Database request failed: No result');
@@ -284,16 +305,14 @@ class Account implements IAccount {
      * @return bool true if exist
      */
     public function hasLinkedByUserId($id, $type): ?bool {
-        $log = Log::getInstance()->getLogger('db');
-
         if (is_null($this->_pdo)) {
-            $log->error(__FUNCTION__ . ' No PDO', [
+            $this->_logger->error(__FUNCTION__ . ' No PDO', [
                 'exception' => 'NoDatabaseException'
             ]);
             throw new NoDatabaseException('PDO not set');
         }
         if ((!isset($id)) || (!isset($type))) {
-            $log->error(__FUNCTION__ . ' Param not set', [
+            $this->_logger->error(__FUNCTION__ . ' Param not set', [
                 'exception' => 'TypeException',
                 'id' => gettype($id),
                 'type' => gettype($type)
@@ -303,19 +322,19 @@ class Account implements IAccount {
 
         $_linkedTable = $this->_tableStructure['linked'];
         $_type = self::_typeCheck($_linkedTable->data(), $type);
-        $result = Structure::executeSelectPDO($this->_pdo, $_type->name(), $_linkedTable->name(),
-            Structure::prepareStatementString(array($_linkedTable->key())),
-            array($_linkedTable->key()), array($id));
+        $result = call_user_func($this->_executeSelect, $this->_pdo, $_type->name(), $_linkedTable->name(),
+            call_user_func($this->_prepareStatement, array($_linkedTable->key()), $this->_logger),
+            array($_linkedTable->key()), array($id), $this->_logger);
 
         if (!isset($result)) {
-            $log->error(__FUNCTION__ . ' No result', [
+            $this->_logger->error(__FUNCTION__ . ' No result', [
                 'exception' => 'RequestException'
             ]);
             throw new RequestException('Database request failed: No result');
         }
 
         if (!GeneralService::inArray($_type->name(), $result, true)) {
-            $log->error(__FUNCTION__ . ' No result', [
+            $this->_logger->error(__FUNCTION__ . ' No result', [
                 'exception' => 'RequestException'
             ]);
             throw new RequestException('Database request failed: No id');
@@ -335,16 +354,14 @@ class Account implements IAccount {
      * @return int user id
      */
     public function getUserIdByLinked($type, $linked): int {
-        $log = Log::getInstance()->getLogger('db');
-
         if (is_null($this->_pdo)) {
-            $log->error(__FUNCTION__ . ' No PDO', [
+            $this->_logger->error(__FUNCTION__ . ' No PDO', [
                 'exception' => 'NoDatabaseException'
             ]);
             throw new NoDatabaseException('PDO not set');
         }
         if ((!isset($type)) || (!isset($linked))) {
-            $log->error(__FUNCTION__ . ' Param not set', [
+            $this->_logger->error(__FUNCTION__ . ' Param not set', [
                 'exception' => 'TypeException',
                 'type' => gettype($type),
                 'linked' => gettype($linked)
@@ -354,18 +371,19 @@ class Account implements IAccount {
 
         $_linkedTable = $this->_tableStructure['linked'];
         $_type = self::_typeCheck($_linkedTable->data(), $type);
-        $result = Structure::executeSelectPDO($this->_pdo, $_linkedTable->key()->name(), $_linkedTable->name(),
-            Structure::prepareStatementString(array($_type)),
-            array($_type), array($linked));
+        $result = call_user_func($this->_executeSelect, $this->_pdo, $_linkedTable->key()->name(),
+            $_linkedTable->name(),
+            call_user_func($this->_prepareStatement, array($_type), $this->_logger),
+            array($_type), array($linked), $this->_logger);
 
         if (!isset($result)) {
-            $log->error(__FUNCTION__ . ' No result', [
+            $this->_logger->error(__FUNCTION__ . ' No result', [
                 'exception' => 'RequestException'
             ]);
             throw new RequestException('Database request failed: No result');
         }
         if (!GeneralService::inArray($_linkedTable->key()->name(), $result, true)) {
-            $log->error(__FUNCTION__ . ' No result', [
+            $this->_logger->error(__FUNCTION__ . ' No result', [
                 'exception' => 'RequestException'
             ]);
             throw new RequestException('Database request failed: No id');
@@ -380,16 +398,14 @@ class Account implements IAccount {
      * @return mixed[] auth data
      */
     public function getAuthByUserId($id): iterable {
-        $log = Log::getInstance()->getLogger('db');
-
         if (is_null($this->_pdo)) {
-            $log->error(__FUNCTION__ . ' No PDO', [
+            $this->_logger->error(__FUNCTION__ . ' No PDO', [
                 'exception' => 'NoDatabaseException'
             ]);
             throw new NoDatabaseException('PDO not set');
         }
         if (!isset($id)) {
-            $log->error(__FUNCTION__ . ' Param not set', [
+            $this->_logger->error(__FUNCTION__ . ' Param not set', [
                 'exception' => 'TypeException',
                 'id' => gettype($id)
             ]);
@@ -397,12 +413,12 @@ class Account implements IAccount {
         }
 
         $_authTable = $this->_tableStructure['auth'];
-        $result = Structure::executeSelectPDO($this->_pdo, '*', $_authTable->name(),
-            Structure::prepareStatementString(array($_authTable->data()['userId'])),
-            array($_authTable->data()['userId']), array($id), true);
+        $result = call_user_func($this->_executeSelect, $this->_pdo, '*', $_authTable->name(),
+            call_user_func($this->_prepareStatement, array($_authTable->data()['userId']), $this->_logger),
+            array($_authTable->data()['userId']), array($id), $this->_logger, true);
 
         if (!isset($result)) {
-            $log->error(__FUNCTION__ . ' No result', [
+            $this->_logger->error(__FUNCTION__ . ' No result', [
                 'exception' => 'RequestException'
             ]);
             throw new RequestException('Database request failed: No result');
@@ -429,16 +445,14 @@ class Account implements IAccount {
      * @return bool true if auth successful
      */
     public function validateAuthByAuthId($id, $auth, $function): bool {
-        $log = Log::getInstance()->getLogger('db');
-
         if (is_null($this->_pdo)) {
-            $log->error(__FUNCTION__ . ' No PDO', [
+            $this->_logger->error(__FUNCTION__ . ' No PDO', [
                 'exception' => 'NoDatabaseException'
             ]);
             throw new NoDatabaseException('PDO not set');
         }
         if ((!isset($id)) || (!isset($auth)) || (!isset($function))) {
-            $log->error(__FUNCTION__ . ' Param not set', [
+            $this->_logger->error(__FUNCTION__ . ' Param not set', [
                 'exception' => 'TypeException',
                 'id' => gettype($id),
                 'auth' => gettype($auth),
@@ -447,7 +461,7 @@ class Account implements IAccount {
             throw new TypeException('Param not set', 1);
         }
         if (!is_callable($function)) {
-            $log->error(__FUNCTION__ . ' param function not callable', [
+            $this->_logger->error(__FUNCTION__ . ' param function not callable', [
                 'exception' => 'TypeException',
                 'function' => $function
             ]);
@@ -455,12 +469,12 @@ class Account implements IAccount {
         }
 
         $_authTable = $this->_tableStructure['auth'];
-        $result = Structure::executeSelectPDO($this->_pdo, '*', $_authTable->name(),
-            Structure::prepareStatementString(array($_authTable->key())),
-            array($_authTable->key()), array($id));
+        $result = call_user_func($this->_executeSelect, $this->_pdo, '*', $_authTable->name(),
+            call_user_func($this->_prepareStatement, array($_authTable->key()), $this->_logger),
+            array($_authTable->key()), array($id), $this->_logger);
 
         if (!isset($result)) {
-            $log->error(__FUNCTION__ . ' No result', [
+            $this->_logger->error(__FUNCTION__ . ' No result', [
                 'exception' => 'RequestException'
             ]);
             throw new RequestException('Database request failed: No result');
@@ -470,7 +484,7 @@ class Account implements IAccount {
             $auth,
             $result[$_authTable->data()['data']->name()]);
 
-        $log->info(__FUNCTION__, [
+        $this->_logger->info(__FUNCTION__, [
             'valid' => $valResult
         ]);
 
@@ -484,16 +498,14 @@ class Account implements IAccount {
      * @return mixed[] new user data
      */
     public function setUserData($id, $data): iterable {
-        $log = Log::getInstance()->getLogger('db');
-
         if (is_null($this->_pdo)) {
-            $log->error(__FUNCTION__ . ' No PDO', [
+            $this->_logger->error(__FUNCTION__ . ' No PDO', [
                 'exception' => 'NoDatabaseException'
             ]);
             throw new NoDatabaseException('PDO not set');
         }
         if ((!isset($id)) || (!isset($data))) {
-            $log->error(__FUNCTION__ . ' Param not set', [
+            $this->_logger->error(__FUNCTION__ . ' Param not set', [
                 'exception' => 'TypeException',
                 'id' => gettype($id),
                 'data' => gettype($data)
@@ -502,12 +514,14 @@ class Account implements IAccount {
         }
 
         $_userTable = $this->_tableStructure['user'];
-        $_setList = Structure::prepareStatementStringFilter($_userTable->data(), $data);
+        $_setList = call_user_func($this->_prepareStatementFilter, $_userTable->data(), $data, $this->_logger);
 
         // exception handling in service/UI
-        Structure::executeUpdatePDO($this->_pdo, $_userTable->name(), $_setList,
-            Structure::prepareStatementString(array($_userTable->key())), $_userTable->allColumns(),
-            array_merge($data, array($_userTable::PRIMARY => $id)));
+
+        call_user_func($this->_executeUpdate, $this->_pdo, $_userTable->name(), $_setList,
+            call_user_func($this->_prepareStatement, array($_userTable->key()), $this->_logger),
+            $_userTable->allColumns(),
+            array_merge($data, array($_userTable::PRIMARY => $id)), $this->_logger);
 
         return $this->getUserDataByUserId($id);
     }
@@ -520,7 +534,31 @@ class Account implements IAccount {
      * @return mixed[] new link data
      */
     public function setLink($id, $type, $data): iterable {
+        if (is_null($this->_pdo)) {
+            $this->_logger->error(__FUNCTION__ . ' No PDO', [
+                'exception' => 'NoDatabaseException'
+            ]);
+            throw new NoDatabaseException('PDO not set');
+        }
+        if ((!isset($id)) || (!isset($data))) {
+            $this->_logger->error(__FUNCTION__ . ' Param not set', [
+                'exception' => 'TypeException',
+                'id' => gettype($id),
+                'data' => gettype($data)
+            ]);
+            throw new TypeException('Param not set or types invalid', 1);
+        }
 
+        $_linkedTable = $this->_tableStructure['linked'];
+        $_type = self::_typeCheck($_linkedTable->data(), $type);
+        $_setList = call_user_func($this->_prepareStatementFilter, [$_type], $data, $this->_logger);
+
+        call_user_func($this->_executeUpdate, $this->_pdo, $_linkedTable->name(), $_setList,
+            call_user_func($this->_prepareStatement, array($_linkedTable->key()), $this->_logger),
+            $_linkedTable->allColumns(),
+            array_merge(array($_type => $data), array($_linkedTable::PRIMARY => $id)), $this->_logger);
+
+        return $this->getLinkedByUserId($id);
     }
 
     /*
