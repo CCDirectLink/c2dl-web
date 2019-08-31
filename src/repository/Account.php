@@ -168,10 +168,7 @@ class Account implements IAccount {
             array($_userTable->key()), array($id), $this->_logger);
 
         if (!isset($result)) {
-            $this->_logger->error(__FUNCTION__ . ' No result', [
-                'exception' => 'RequestException'
-            ]);
-            throw new RequestException('Database request failed: No result');
+            return null;
         }
 
         return $result;
@@ -204,10 +201,7 @@ class Account implements IAccount {
             array($_userTable->data()['user']), array($username), $this->_logger);
 
         if (!isset($result)) {
-            $this->_logger->error(__FUNCTION__ . ' No result', [
-                'exception' => 'RequestException'
-            ]);
-            throw new RequestException('Database request failed: No result');
+            return null;
         }
         if (!GeneralService::inArray($_userTable->key()->name(), $result, true)) {
             $this->_logger->error(__FUNCTION__ . ' No result', [
@@ -246,10 +240,7 @@ class Account implements IAccount {
             array($_userTable->data()['mail']), array($mail), $this->_logger);
 
         if (!isset($result)) {
-            $this->_logger->error(__FUNCTION__ . ' No result', [
-                'exception' => 'RequestException'
-            ]);
-            throw new RequestException('Database request failed: No result');
+            return null;
         }
         if (!GeneralService::inArray($_userTable->key()->name(), $result, true)) {
             $this->_logger->error(__FUNCTION__ . ' No result', [
@@ -289,10 +280,7 @@ class Account implements IAccount {
             array($_linkedTable->key()), array($id), $this->_logger);
 
         if (!isset($result)) {
-            $this->_logger->error(__FUNCTION__ . ' No result', [
-                'exception' => 'RequestException'
-            ]);
-            throw new RequestException('Database request failed: No result');
+            return null;
         }
 
         return $result;
@@ -327,10 +315,7 @@ class Account implements IAccount {
             array($_linkedTable->key()), array($id), $this->_logger);
 
         if (!isset($result)) {
-            $this->_logger->error(__FUNCTION__ . ' No result', [
-                'exception' => 'RequestException'
-            ]);
-            throw new RequestException('Database request failed: No result');
+            return null;
         }
 
         if (!GeneralService::inArray($_type->name(), $result, true)) {
@@ -353,7 +338,7 @@ class Account implements IAccount {
      * @param int $linked linked id
      * @return int user id
      */
-    public function getUserIdByLinked($type, $linked): int {
+    public function getUserIdByLinked($type, $linked): ?int {
         if (is_null($this->_pdo)) {
             $this->_logger->error(__FUNCTION__ . ' No PDO', [
                 'exception' => 'NoDatabaseException'
@@ -377,10 +362,7 @@ class Account implements IAccount {
             array($_type), array($linked), $this->_logger);
 
         if (!isset($result)) {
-            $this->_logger->error(__FUNCTION__ . ' No result', [
-                'exception' => 'RequestException'
-            ]);
-            throw new RequestException('Database request failed: No result');
+            return null;
         }
         if (!GeneralService::inArray($_linkedTable->key()->name(), $result, true)) {
             $this->_logger->error(__FUNCTION__ . ' No result', [
@@ -397,7 +379,7 @@ class Account implements IAccount {
      * @param int $id user id
      * @return mixed[] auth data
      */
-    public function getAuthByUserId($id): iterable {
+    public function getAuthByUserId($id): ?iterable {
         if (is_null($this->_pdo)) {
             $this->_logger->error(__FUNCTION__ . ' No PDO', [
                 'exception' => 'NoDatabaseException'
@@ -418,10 +400,7 @@ class Account implements IAccount {
             array($_authTable->data()['userId']), array($id), $this->_logger, true);
 
         if (!isset($result)) {
-            $this->_logger->error(__FUNCTION__ . ' No result', [
-                'exception' => 'RequestException'
-            ]);
-            throw new RequestException('Database request failed: No result');
+            return null;
         }
 
         $_resArray = array();
@@ -444,7 +423,7 @@ class Account implements IAccount {
      * @param callable $function auth validator
      * @return bool true if auth successful
      */
-    public function validateAuthByAuthId($id, $auth, $function): bool {
+    public function validateAuthByAuthId($id, $auth, $function): ?bool {
         if (is_null($this->_pdo)) {
             $this->_logger->error(__FUNCTION__ . ' No PDO', [
                 'exception' => 'NoDatabaseException'
@@ -474,10 +453,7 @@ class Account implements IAccount {
             array($_authTable->key()), array($id), $this->_logger);
 
         if (!isset($result)) {
-            $this->_logger->error(__FUNCTION__ . ' No result', [
-                'exception' => 'RequestException'
-            ]);
-            throw new RequestException('Database request failed: No result');
+            return null;
         }
 
         $valResult = $function($result[$_authTable->data()['type']->name()],
