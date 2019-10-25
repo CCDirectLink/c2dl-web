@@ -1,19 +1,27 @@
 <?php namespace c2dl\sys\db;
 
-require_once( getenv('C2DL_SYS', true) . '/repository/Database.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/base/Database.php');
 require_once( getenv('C2DL_SYS', true) . '/service/GeneralService.php');
-require_once( getenv('C2DL_SYS', true) . '/repository/Structure.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/base/Structure.php');
 require_once( getenv('C2DL_SYS', true) . '/repository/IRedirect.php');
 
-require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseTable.php');
-require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseColumn.php');
-require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseColumnStringSizeConstraints.php');
-require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseColumnStringRegexConstraints.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/struct/DatabaseTable.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/struct/DatabaseColumn.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/struct/DatabaseColumnStringSizeConstraints.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/struct/DatabaseColumnStringRegexConstraints.php');
+
+require_once( getenv('C2DL_SYS', true) . '/repository/access/TableAccess.php');
 
 require_once( getenv('C2DL_SYS', true) . '/logger/Log.php');
 
+use c2dl\sys\db\access\TableAccess;
 use c2dl\sys\log\Log;
 use \PDO;
+use c2dl\sys\db\base\Database;
+use c2dl\sys\db\struct\DatabaseTable;
+use c2dl\sys\db\struct\DatabaseColumn;
+use c2dl\sys\db\struct\DatabaseColumnStringRegexConstraints;
+use c2dl\sys\db\struct\DatabaseColumnStringSizeConstraints;
 
 /*
  * Redirect Repository (Singleton)
@@ -22,12 +30,11 @@ class Redirect implements IRedirect {
 
     private static $_instance;
 
-    private $_pdo;
-    private $_tableStructure;
-    private $_logger;
+    private static $_loggerEntry = 'db';
 
-    private $_executeSelect;
-    private $_prepareStatement;
+    private $_logger;
+    private $_tableAccess;
+    private $_tableStructure;
 
     /*
      * Get Redirect instance
@@ -35,43 +42,38 @@ class Redirect implements IRedirect {
      */
     public static function getInstance($dbEntry = 'main'): IRedirect {
         if(!self::$_instance) {
-            self::$_instance = new self(Database::getInstance()->getConnection($dbEntry),
-                Log::getInstance()->getLogger('db'),
-                [ 'c2dl\\sys\\db\\Structure', 'executeSelectPDO'],
-                [ 'c2dl\\sys\\db\\Structure', 'prepareStatementString']);
+            $log = Log::getInstance()->getLogger(self::$_loggerEntry);
+            $pdo = Database::getInstance()->getConnection($dbEntry);
+            self::$_instance = new self($log,
+                TableAccess::createInstance($pdo, $log));
         }
         return self::$_instance;
     }
 
     /*
      * Test only
-     * @param PDO $dummyPdo database
-     * @return Account Account repository
+     * @param Log $logger logger
+     * @param TableAccess $tableAccess table Access
      */
-    public static function createTestDummy($dummyPdo, $logger, $select, $prepareStatement): IRedirect {
-        return new self($dummyPdo, $logger, $select, $prepareStatement);
+    public static function createTestDummy($logger, $tableAccess): IRedirect {
+        return new self($logger, $tableAccess);
     }
 
     /*
      * Constructor
      * @param PDO $pdo used database
      */
-    private function __construct($pdo, $logger, $select, $prepareStatement) {
-        $this->_tableStructure = [
-            'redirect' => DatabaseTable::create('www_redirectList',
+    private function __construct($logger, $tableAccess) {
+        $this->_logger = $logger;
+        $this->_tableAccess = $tableAccess;
+        $this->_tableStructure =  DatabaseTable::create('www_redirectList',
                 DatabaseColumn::create('id', PDO::PARAM_STR,
                     [DatabaseColumnStringRegexConstraints::create('/^[a-zA-Z0-9äöüÄÖÜß_\-\=\~\|]{1,64}$/')]), [
                         'url' => DatabaseColumn::create(
                             'url', PDO::PARAM_STR, [DatabaseColumnStringSizeConstraints::create(10, 1024)]
                         ),
                         'active' => DatabaseColumn::create('active', PDO::PARAM_BOOL)
-                ])
-        ];
-
-        $this->_pdo = $pdo;
-        $this->_logger = $logger;
-        $this->_executeSelect = $select;
-        $this->_prepareStatement = $prepareStatement;
+                ]);
     }
 
     /*
@@ -85,14 +87,14 @@ class Redirect implements IRedirect {
      * @return mixed[] redirect result
      */
     public function hasRedirect($entry): ?iterable {
-        if ((!isset($entry)) || (is_null($this->_pdo))) {
+        if (!isset($entry)) {
             return array('entry' => null, 'url' => null);
         }
 
-            $_redirectTable = $this->_tableStructure['redirect'];
-        $result = call_user_func($this->_executeSelect, $this->_pdo, '*', $_redirectTable->name(),
-            call_user_func($this->_prepareStatement, array($_redirectTable->key()), $this->_logger),
-            array($_redirectTable->key()), array($entry), $this->_logger);
+        $_redirectTable = $this->_tableStructure;
+        $result = $this->_tableAccess->executeSelectPDO('*', $_redirectTable->name(),
+            $this->_tableAccess->prepareStatementString([$_redirectTable->key()], $this->_logger),
+            [$_redirectTable->key()], [$entry], $this->_logger);
 
         $this->_logger->info(__FUNCTION__, [
             'entry' => $entry,

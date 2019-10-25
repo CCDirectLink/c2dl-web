@@ -1,6 +1,6 @@
-<?php namespace c2dl\sys\db;
-require_once( getenv('C2DL_SYS') . '/service/GeneralService.php');
-require_once( getenv('C2DL_SYS', true) . '/repository/IDatabase.php');
+<?php namespace c2dl\sys\db\base;
+require_once( getenv('C2DL_SYS', true) . '/service/GeneralService.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/base/IDatabase.php');
 
 use \PDO;
 use \Exception;

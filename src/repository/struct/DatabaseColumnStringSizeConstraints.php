@@ -1,7 +1,8 @@
-<?php namespace c2dl\sys\db;
+<?php namespace c2dl\sys\db\struct;
 
-require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseColumnConstraints.php');
-require_once( getenv('C2DL_SYS', true) . '/repository/IDatabaseColumnStringSizeConstraints.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/struct/DatabaseColumnConstraints.php');
+require_once( getenv('C2DL_SYS', true) .
+    '/repository/struct/IDatabaseColumnStringSizeConstraints.php');
 
 /*
  * Column Size Constraints

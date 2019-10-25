@@ -1,6 +1,6 @@
-<?php namespace c2dl\sys\db;
+<?php namespace c2dl\sys\db\struct;
 
-require_once( getenv('C2DL_SYS', true) . '/repository/IDatabaseColumn.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/struct/IDatabaseColumn.php');
 
 use \TypeError;
 

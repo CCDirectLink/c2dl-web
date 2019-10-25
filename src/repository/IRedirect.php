@@ -13,10 +13,10 @@ interface IRedirect {
 
     /*
      * Test only
-     * @param PDO $dummyPdo database
-     * @return Account Account repository
+     * @param Log $logger logger
+     * @param TableAccess $tableAccess table Access
      */
-    public static function createTestDummy($dummyPdo, $logger, $select, $prepareStatement): IRedirect;
+    public static function createTestDummy($logger, $tableAccess): IRedirect;
 
     /*
      * Get redirect data

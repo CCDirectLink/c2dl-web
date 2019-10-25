@@ -11,13 +11,13 @@ require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseColumnStringSizeCo
 require_once( getenv('C2DL_SYS', true) . '/repository/DatabaseColumnStringRegexConstraints.php');
 
 require_once( getenv('C2DL_SYS', true) . '/error/NoDatabaseException.php');
-require_once( getenv('C2DL_SYS', true) . '/error/TypeException.php');
 require_once( getenv('C2DL_SYS', true) . '/error/RequestException.php');
 
 require_once( getenv('C2DL_SYS', true) . '/logger/Log.php');
 
+use \TypeError;
+
 use c2dl\sys\err\RequestException;
-use c2dl\sys\err\TypeException;
 use c2dl\sys\err\NoDatabaseException;
 
 use c2dl\sys\log\Log;
@@ -156,10 +156,10 @@ class Account implements IAccount {
         }
         if (!isset($id)) {
             $this->_logger->error(__FUNCTION__ . ' Param not set', [
-                'exception' => 'TypeException',
+                'exception' => 'TypeError',
                 'id' => gettype($id)
             ]);
-            throw new TypeException('Param not set', 1);
+            throw new TypeError('Param not set', 1);
         }
 
         $_userTable = $this->_tableStructure['user'];
@@ -188,10 +188,10 @@ class Account implements IAccount {
         }
         if (!isset($username)) {
             $this->_logger->error(__FUNCTION__ . ' Param not set', [
-                'exception' => 'TypeException',
+                'exception' => 'TypeError',
                 'username' => gettype($username)
             ]);
-            throw new TypeException('Param not set', 1);
+            throw new TypeError('Param not set', 1);
         }
 
         $_userTable = $this->_tableStructure['user'];
@@ -227,10 +227,10 @@ class Account implements IAccount {
         }
         if (!isset($mail)) {
             $this->_logger->error(__FUNCTION__ . ' Param not set', [
-                'exception' => 'TypeException',
+                'exception' => 'TypeError',
                 'mail' => gettype($mail)
             ]);
-            throw new TypeException('Param not set', 1);
+            throw new TypeError('Param not set', 1);
         }
 
         $_userTable = $this->_tableStructure['user'];
@@ -268,10 +268,10 @@ class Account implements IAccount {
         }
         if (!isset($id)) {
             $this->_logger->error(__FUNCTION__ . ' Param not set', [
-                'exception' => 'TypeException',
+                'exception' => 'TypeError',
                 'id' => gettype($id)
             ]);
-            throw new TypeException('Param not set', 1);
+            throw new TypeError('Param not set', 1);
         }
 
         $_linkedTable = $this->_tableStructure['linked'];
@@ -301,11 +301,11 @@ class Account implements IAccount {
         }
         if ((!isset($id)) || (!isset($type))) {
             $this->_logger->error(__FUNCTION__ . ' Param not set', [
-                'exception' => 'TypeException',
+                'exception' => 'TypeError',
                 'id' => gettype($id),
                 'type' => gettype($type)
             ]);
-            throw new TypeException('Param not set', 1);
+            throw new TypeError('Param not set', 1);
         }
 
         $_linkedTable = $this->_tableStructure['linked'];
@@ -347,11 +347,11 @@ class Account implements IAccount {
         }
         if ((!isset($type)) || (!isset($linked))) {
             $this->_logger->error(__FUNCTION__ . ' Param not set', [
-                'exception' => 'TypeException',
+                'exception' => 'TypeError',
                 'type' => gettype($type),
                 'linked' => gettype($linked)
             ]);
-            throw new TypeException('Param not set', 1);
+            throw new TypeError('Param not set', 1);
         }
 
         $_linkedTable = $this->_tableStructure['linked'];
@@ -388,10 +388,10 @@ class Account implements IAccount {
         }
         if (!isset($id)) {
             $this->_logger->error(__FUNCTION__ . ' Param not set', [
-                'exception' => 'TypeException',
+                'exception' => 'TypeError',
                 'id' => gettype($id)
             ]);
-            throw new TypeException('Param not set', 1);
+            throw new TypeError('Param not set', 1);
         }
 
         $_authTable = $this->_tableStructure['auth'];
@@ -432,19 +432,19 @@ class Account implements IAccount {
         }
         if ((!isset($id)) || (!isset($auth)) || (!isset($function))) {
             $this->_logger->error(__FUNCTION__ . ' Param not set', [
-                'exception' => 'TypeException',
+                'exception' => 'TypeError',
                 'id' => gettype($id),
                 'auth' => gettype($auth),
                 'function' => gettype($function)
             ]);
-            throw new TypeException('Param not set', 1);
+            throw new TypeError('Param not set', 1);
         }
         if (!is_callable($function)) {
             $this->_logger->error(__FUNCTION__ . ' param function not callable', [
-                'exception' => 'TypeException',
+                'exception' => 'TypeError',
                 'function' => $function
             ]);
-            throw new TypeException('Param with invalid type: function not callable', 2);
+            throw new TypeError('Param with invalid type: function not callable', 2);
         }
 
         $_authTable = $this->_tableStructure['auth'];
@@ -482,11 +482,11 @@ class Account implements IAccount {
         }
         if ((!isset($id)) || (!isset($data))) {
             $this->_logger->error(__FUNCTION__ . ' Param not set', [
-                'exception' => 'TypeException',
+                'exception' => 'TypeError',
                 'id' => gettype($id),
                 'data' => gettype($data)
             ]);
-            throw new TypeException('Param not set or types invalid', 1);
+            throw new TypeError('Param not set or types invalid', 1);
         }
 
         $_userTable = $this->_tableStructure['user'];
@@ -518,11 +518,11 @@ class Account implements IAccount {
         }
         if ((!isset($id)) || (!isset($data))) {
             $this->_logger->error(__FUNCTION__ . ' Param not set', [
-                'exception' => 'TypeException',
+                'exception' => 'TypeError',
                 'id' => gettype($id),
                 'data' => gettype($data)
             ]);
-            throw new TypeException('Param not set or types invalid', 1);
+            throw new TypeError('Param not set or types invalid', 1);
         }
 
         $_linkedTable = $this->_tableStructure['linked'];
@@ -551,11 +551,11 @@ class Account implements IAccount {
         }
         if ((!isset($id)) || (!isset($data))) {
             $this->_logger->error(__FUNCTION__ . ' Param not set', [
-                'exception' => 'TypeException',
+                'exception' => 'TypeError',
                 'id' => gettype($id),
                 'data' => gettype($data)
             ]);
-            throw new TypeException('Param not set or types invalid', 1);
+            throw new TypeError('Param not set or types invalid', 1);
         }
 
         $_authTable = $this->_tableStructure['auth'];
@@ -580,7 +580,7 @@ class Account implements IAccount {
      * Add auth data
      * @param int $userId user id
      * @param mixed[] $data auth data
-     * @return mixed[] created user data
+     * @return mixed[] auth information
      */
     public function addAuth($userId, $data): iterable {
 
@@ -592,6 +592,15 @@ class Account implements IAccount {
      * @return mixed[] user data
      */
     public function removeUser($id): iterable {
+
+    }
+
+    /*
+     * Remove user
+     * @param int $id user id
+     * @return mixed[] user data
+     */
+    public function removeAuth($id): iterable {
 
     }
 

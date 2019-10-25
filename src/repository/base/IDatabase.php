@@ -1,4 +1,4 @@
-<?php namespace c2dl\sys\db;
+<?php namespace c2dl\sys\db\base;
 
 /*
  * Database Access information interface (singleton)

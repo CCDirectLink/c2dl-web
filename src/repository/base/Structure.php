@@ -1,7 +1,7 @@
-<?php namespace c2dl\sys\db;
+<?php namespace c2dl\sys\db\base;
 
-require_once( getenv('C2DL_SYS', true) . '/repository/IStructure.php');
-require_once( getenv('C2DL_SYS', true) . '/repository/IDatabaseColumn.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/base/IStructure.php');
+require_once( getenv('C2DL_SYS', true) . '/repository/struct/IDatabaseColumn.php');
 require_once( getenv('C2DL_SYS', true) . '/error/ConstraintException.php');
 
 require_once( getenv('C2DL_SYS', true) . '/logger/Log.php');
@@ -9,6 +9,7 @@ require_once( getenv('C2DL_SYS', true) . '/logger/Log.php');
 use c2dl\sys\log\Log;
 use c2dl\sys\err\ConstraintException;
 use c2dl\sys\service\GeneralService;
+use c2dl\sys\db\struct\IDatabaseColumn;
 use \PDOException;
 
 /*

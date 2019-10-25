@@ -131,4 +131,11 @@ interface IAccount {
      */
     public function removeUser($id): iterable;
 
+    /*
+     * Remove user
+     * @param int $id user id
+     * @return mixed[] user data
+     */
+    public function removeAuth($id): iterable;
+
 }
