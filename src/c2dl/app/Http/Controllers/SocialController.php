@@ -67,7 +67,7 @@ class SocialController extends Controller
     {
         return new \App\DTO\Social([
             'type' => 'reddit',
-            'main' => 'CCDirectLink',
+            'main' => 'CCModding',
             'link' => 'https://www.reddit.com/r/CrossCodeModding/',
         ]);
     }
