@@ -1,0 +1,81 @@
+.c2dl-news-box {
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+}
+
+.c2dl-news-main {
+    width: 70%;
+    min-width: 380px;
+    max-width: 1000px;
+    margin: 8px;
+}
+
+.c2dl-news-content p {
+    margin-bottom: 0.6em;
+}
+
+.c2dl-news-nav-element {
+    background: transparent;
+    border: none;
+    border-radius: 2px;
+    color: var(--news-nav-foreground);
+    position: relative;
+    height: 36px;
+    margin: 0;
+    min-width: 64px;
+    padding: 0 16px;
+    display: inline-block;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    overflow: hidden;
+    will-change: box-shadow;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1),
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    line-height: 36px;
+    vertical-align: middle;
+}
+
+.c2dl-news-nav-element:hover {
+    color: var(--news-hover-foreground);
+    background-color: var(--news-hover-background);
+}
+
+.c2dl-current-page {
+    cursor: default;
+    color: var(--news-nav-current);
+}
+
+.c2dl-current-page:hover {
+    color: var(--news-nav-current);
+    background-color: inherit;
+}
+
+/*
+animation
+*/
+
+@media (prefers-reduced-motion: reduce) {
+    .c2dl-news-nav-element {
+        transition: none;
+    }
+}
+
+/*
+breakpoints
+*/
+
+@media screen and (max-width: 839px) {
+    .c2dl-news-main {
+        width: 100%;
+        margin: 8px;
+    }
+}

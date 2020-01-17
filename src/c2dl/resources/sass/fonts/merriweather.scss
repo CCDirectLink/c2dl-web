@@ -1,0 +1,77 @@
+// Copyright 2016 The Merriweather Project Authors (https://github.com/EbenSorkin/Merriweather)
+// License: https://github.com/EbenSorkin/Merriweather/blob/master/OFL.txt
+// Authors: https://github.com/EbenSorkin/Merriweather/blob/master/AUTHORS.txt
+// Contributors: https://github.com/EbenSorkin/Merriweather/blob/master/CONTRIBUTORS.txt
+// Trademarks: https://github.com/EbenSorkin/Merriweather/blob/master/TRADEMARKS.txt
+
+// Regular
+@font-face {
+    font-family: 'Merriweather';
+    font-weight: normal;
+    font-style: normal;
+    src: local('Merriweather Regular'), local('Merriweather-Regular'),
+    url(/fonts/merriweather/v2-002/merriweather-regular.otf) format('opentype');
+}
+
+// Light Italic
+@font-face {
+    font-family: 'Merriweather';
+    font-weight: normal;
+    font-style: italic;
+    src: local('Merriweather LightItalic'), local('Merriweather-LightItalic'),
+    url(/fonts/merriweather/v2-002/merriweather-italic.otf) format('opentype');
+}
+
+// Bold
+@font-face {
+    font-family: 'Merriweather';
+    font-weight: bold;
+    font-style: normal;
+    src: local('Merriweather Bold'), local('Merriweather-Bold'),
+    url(/fonts/merriweather/v2-002/merriweather-bold.otf) format('opentype');
+}
+
+// Bold Italic
+@font-face {
+    font-family: 'Merriweather';
+    font-weight: bold;
+    font-style: italic;
+    src: local('Merriweather BoldItalic'), local('Merriweather-BoldItalic'),
+    url(/fonts/merriweather/v2-002/merriweather-boldItalic.otf) format('opentype');
+}
+
+// Light
+@font-face {
+    font-family: 'Merriweather';
+    font-weight: 200;
+    font-style: normal;
+    src: local('Merriweather Light'), local('Merriweather-Light'),
+    url(/fonts/merriweather/v2-002/merriweather-light.otf) format('opentype');
+}
+
+// Light Italic
+@font-face {
+    font-family: 'Merriweather';
+    font-weight: 200;
+    font-style: italic;
+    src: local('Merriweather LightItalic'), local('Merriweather-LightItalic'),
+    url(/fonts/merriweather/v2-002/merriweather-lightItalic.otf) format('opentype');
+}
+
+// Black
+@font-face {
+    font-family: 'Merriweather';
+    font-weight: 800;
+    font-style: normal;
+    src: local('Merriweather Black'), local('Merriweather-Black'),
+    url(/fonts/merriweather/v2-002/merriweather-black.otf) format('opentype');
+}
+
+// Black Italic
+@font-face {
+    font-family: 'Merriweather';
+    font-weight: 800;
+    font-style: italic;
+    src: local('Merriweather BlackItalic'), local('Merriweather-BlackItalic'),
+    url(/fonts/merriweather/v2-002/merriweather-blackItalic.otf) format('opentype');
+}

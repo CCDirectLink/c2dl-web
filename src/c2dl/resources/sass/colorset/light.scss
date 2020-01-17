@@ -1,0 +1,93 @@
+:root {
+    --debug-background: rgba(230, 155, 165, 1.0);
+
+    --base-color: rgba(25, 25, 25, 1.0);
+
+    --base-link-foreground: rgba(125, 185, 215, 1.0);
+
+    --selection-background: rgba(125, 185, 215, 0.5);
+
+    --header-foreground: rgba(25, 25, 25, 1.0);
+    --header-hover-foreground: rgba(125, 185, 215, 1.0);
+    --header-hover-background: rgba(25, 25, 25, 0.6);
+
+    --header-link: rgba(25, 25, 25, 1.0);
+
+    --header-foreground-hamburger: rgba(25, 25, 25, 1.0);
+    --header-hover-hamburger-foreground: rgba(125, 185, 215, 1.0);
+    --header-hover-hamburger-background: rgba(25, 25, 25, 0.6);
+
+    --header-background-a: rgba(75, 145, 230, 1.0);
+    --header-background-b: rgba(125, 185, 215, 1.0);
+    --header-background-40: rgba(100, 175, 245, 0.7);
+    --header-background-60: rgba(100, 175, 245, 1.0);
+
+    --header-background: linear-gradient(to right, transparent,
+        var(--header-background-40) 40%, var(--header-background-60) 60%) no-repeat left,
+    url('/images/bg/cc-lea.png') no-repeat left 18.5em top 0.4em,
+    url('/images/bg/cc-sergey.png') no-repeat left 24em top -4em,
+    url('/dynimages/bg/curcuit_bg?height=128px&width=128px') repeat left,
+    linear-gradient(var(--header-background-a), var(--header-background-b)) no-repeat left;
+
+    --header-shadow: 0 2px 2px 0
+    rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0
+    rgba(0, 0, 0, 0.12);
+
+
+    --drawer-foreground: rgba(25, 25, 25, 1.0);
+    --drawer-background-a: rgba(125, 185, 215, 1.0);
+    --drawer-background-b: rgba(100, 175, 245, 1.0);
+    --drawer-background-60: rgba(100, 175, 245, 0.6);
+    --drawer-background-90: rgba(100, 175, 245, 1.0);
+    --drawer-separator: rgba(25, 25, 25, 0.6);
+
+    --drawer-link: rgba(25, 25, 25, 1.0);
+
+    --drawer-hover-foreground: rgba(125, 185, 215, 1.0);
+    --drawer-hover-background: rgba(25, 25, 25, 0.6);
+
+    --drawer-background: url('/dynimages/bg/curcuit_bg?height=128px&width=128px') repeat left,
+        linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
+
+
+    --newscard-background: rgba(255, 255, 255, 1.0);
+    --newscard-shadow: 0 2px 2px 0
+    rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0
+    rgba(0, 0, 0, 0.12);
+
+    --newscard-hover-shadow: 0 8px 10px 1px
+    rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px
+    rgba(0, 0, 0, .2);
+
+    --newscard-title: rgba(25, 25, 25, 1.0);
+    --newscard-info: rgba(25, 25, 25, 0.6);
+    --newscard-text: rgba(25, 25, 25, 0.6);
+    --newscard-separator: rgba(25, 25, 25, 0.2);
+
+    --news-hover-foreground: rgba(25, 25, 25, 1.0);
+    --news-hover-background: rgba(125, 185, 215, 1.0);
+
+    --news-nav-foreground: rgba(125, 185, 215, 1.0);
+    --news-nav-current: rgba(25, 25, 25, 1.0);
+
+    --news-separator: rgba(25, 25, 25, 0.2);
+
+
+    --social-background: rgba(255, 255, 255, 1.0);
+    --social-shadow: 0 2px 2px 0
+    rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0
+    rgba(0, 0, 0, 0.12);
+
+    --social-nav-foreground: rgba(125, 185, 215, 1.0);
+
+    --social-hover-foreground: rgba(25, 25, 25, 1.0);
+    --social-hover-background: rgba(125, 185, 215, 1.0);
+
+    --social-subtext: rgba(25, 25, 25, 0.6);
+
+    --social-github: url('/dynimages/elem/github') no-repeat;
+    --social-gitlab: url('/dynimages/elem/gitlab_color') no-repeat;
+    --social-reddit: url('/dynimages/elem/reddit') no-repeat;
+    --social-twitter: url('/dynimages/elem/twitter') no-repeat;
+    --social-discord: url('/dynimages/elem/discord') no-repeat;
+}

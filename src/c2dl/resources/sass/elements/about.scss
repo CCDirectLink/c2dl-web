@@ -1,0 +1,19 @@
+.c2dl-aboutpage-content {
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+}
+
+.c2dl-aboutpage-main {
+    width: 70%;
+    min-width: 380px;
+    max-width: 1000px;
+    margin: 8px;
+}
+
+@media screen and (max-width: 839px) {
+    .c2dl-aboutpage-main {
+        width: 100%;
+        margin: 8px;
+    }
+}

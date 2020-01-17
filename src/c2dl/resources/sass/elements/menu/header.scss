@@ -1,0 +1,340 @@
+.c2dl-header {
+    background: var(--header-background);
+    display: grid;
+    grid-template-columns: min-content auto;
+    grid-template-areas: 'hamburger-trigger menu-bar';
+    color: var(--header-foreground);
+    min-height: min-content;
+    width: 100%;
+    overflow: hidden;
+    flex-grow: 0;
+    flex-shrink: 0;
+    box-shadow: var(--header-shadow);
+}
+
+.c2dl-menu-hamburger {
+    display: none;
+    flex-direction: column-reverse;
+    grid-area: hamburger-trigger;
+}
+
+.c2dl-menu-trigger {
+
+}
+
+.c2dl-svg-hamburger {
+    fill: var(--header-foreground-hamburger);
+    transition: fill 0.4s;
+}
+
+.c2dl-menu-trigger-hamburger {
+    display: block;
+    margin: 0.3em;
+    padding: 0.2em;
+    width: min-content;
+    height: min-content;
+    bottom: 0;
+    z-index: 0;
+}
+
+.c2dl-menu-trigger-label {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+
+.c2dl-menu-trigger-hamburger {
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    transition: background-color 0.4s;
+}
+
+.c2dl-menu-trigger-hamburger:hover {
+    background: var(--header-hover-hamburger-background);
+}
+
+.c2dl-menu-trigger-hamburger:hover .c2dl-svg-hamburger {
+    fill: var(--header-hover-hamburger-foreground);
+}
+
+.c2dl-menu-drawer {
+    height: calc(100% - 3.5em);
+    max-height: calc(100% - 3.5em);
+    max-width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 3.5em;
+    right: 0;
+    bottom: 0;
+    left: -22em;
+    width: 22em;
+    z-index: 20;
+    color: var(--drawer-foreground);
+    background: var(--drawer-background);
+    transition: left 0.4s;
+}
+
+#c2dl-menu-trigger-t1 {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
+#c2dl-menu-trigger-t1:focus ~ .c2dl-menu-trigger-hamburger {
+    background: var(--header-hover-hamburger-background);
+}
+
+#c2dl-menu-trigger-t1:focus ~ .c2dl-menu-trigger-hamburger .c2dl-svg-hamburger {
+    fill: var(--header-hover-hamburger-foreground);
+}
+
+#c2dl-menu-trigger-t1:checked ~ .c2dl-menu-drawer {
+    left: 0;
+}
+
+.c2dl-menu-drawer-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
+    padding: 0.5em;
+    border-top: solid 2px var(--drawer-separator);
+}
+
+.c2dl-menu-drawer-logo {
+    height: 2em;
+    width: 2em;
+}
+
+.c2dl-menu-drawer-first {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.c2dl-menu-drawer-title {
+    font-size: 14pt;
+    line-height: 18px;
+}
+
+.c2dl-menu-drawer-info {
+    font-size: 12pt;
+    line-height: 16px;
+    font-style: italic;
+    quotes: "»" "«";
+}
+
+.c2dl-menu-drawer-info::before {
+    content: open-quote;
+}
+
+.c2dl-menu-drawer-info::after {
+    content: close-quote;
+}
+
+.c2dl-menu-drawer-nav {
+}
+
+.c2dl-menu-entry-list {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0;
+}
+
+.c2dl-menu-bar {
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-end;
+    grid-area: menu-bar;
+}
+
+.c2dl-menu-bar-content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.c2dl-menu-bar-logo {
+    max-width: 10em;
+    max-height: 10em;
+    width: 6em;
+    height: 6em;
+    padding: 0.5em 0.5em 0 1em;
+    transition: width 0.4s;
+}
+
+.c2dl-menu-bar-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.c2dl-menu-bar-title {
+    font-size: 20pt;
+    line-height: 26px;
+}
+
+.c2dl-menu-bar-info {
+    font-size: 12pt;
+    line-height: 16px;
+    font-style: italic;
+    quotes: "»" "«";
+}
+
+.c2dl-menu-bar-info::before {
+    content: open-quote;
+}
+
+.c2dl-menu-bar-info::after {
+    content: close-quote;
+}
+
+.c2dl-menu-bar-nav {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    grid-area: menu-bar-nav;
+    width: 100%;
+    height: min-content;
+}
+
+.c2dl-menu-bar-nav .c2dl-menu-entry-list {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    width: min-content;
+}
+
+.c2dl-menu-drawer .c2dl-menu-entry-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.c2dl-menu-entry {
+    list-style-type: none;
+}
+
+.c2dl-menu-link {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0;
+    text-decoration: none;
+}
+
+.c2dl-menu-bar-nav .c2dl-menu-link:hover {
+    color: var(--header-hover-foreground);
+    background: var(--header-hover-background);
+    text-decoration: none;
+    border: none;
+    border-radius: 2px;
+}
+
+.c2dl-menu-bar-nav .c2dl-menu-entry {
+    padding: 0;
+    margin: 0;
+}
+
+.c2dl-menu-bar-nav .c2dl-menu-link {
+    display: block;
+    color: var(--header-link);
+    padding: 0.5em 1.5em 0.5em 1.5em;
+    transition: color 0.4s, padding 0.4s;
+}
+
+.c2dl-menu-drawer .c2dl-menu-entry {
+    padding: 0;
+    margin: 0;
+}
+
+.c2dl-menu-drawer .c2dl-menu-link {
+    display: block;
+    color: var(--drawer-link);
+    padding: 0.5em 1.5em 0.5em 1.5em;
+    width: 100%;
+    transition: color 0.4s;
+}
+
+.c2dl-menu-drawer .c2dl-menu-entry:hover {
+    background: var(--drawer-hover-background);
+    transition: background-color 0.4s;
+}
+
+.c2dl-menu-drawer .c2dl-menu-link:hover {
+    color: var(--drawer-hover-foreground);
+}
+
+/*
+breakpoints
+*/
+
+@media screen and (max-width: 1024px) {
+    .c2dl-menu-bar-nav .c2dl-menu-link {
+        padding: 0.5em 1em 0.5em 1em;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .c2dl-menu-bar-nav {
+        display: none;
+    }
+
+    .c2dl-menu-hamburger {
+        display: flex;
+    }
+
+    .c2dl-menu-bar-logo {
+        width: 3em;
+        height: 3em;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .c2dl-menu-bar-info {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .c2dl-menu-bar-text {
+        display: none;
+    }
+}
+
+/*
+animation
+*/
+
+@media (prefers-reduced-motion: reduce) {
+    .c2dl-menu-trigger-hamburger {
+        transition: none;
+    }
+
+    .c2dl-menu-drawer .c2dl-menu-link {
+        transition: none;
+    }
+
+    .c2dl-menu-bar-nav .c2dl-menu-link {
+        transition: none;
+    }
+
+    .c2dl-svg-hamburger {
+        transition: none;
+    }
+
+    .c2dl-menu-drawer {
+        transition: none;
+    }
+
+    .c2dl-menu-bar-logo {
+        transition: none;
+    }
+}

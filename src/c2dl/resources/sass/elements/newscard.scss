@@ -1,0 +1,74 @@
+.c2dl-news-list {
+
+}
+
+.c2dl-newscard-cardlink {
+    text-decoration: none;
+}
+
+.c2dl-newscard {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    font-weight: 400;
+    overflow: hidden;
+    position: relative;
+    background: var(--newscard-background);
+    border-radius: 2px;
+    box-sizing: border-box;
+    width: 100%;
+    float: left;
+    margin: 1rem 0 1rem;
+    box-shadow: var(--newscard-shadow);
+}
+
+.c2dl-newscard:hover {
+    box-shadow: var(--newscard-hover-shadow);
+}
+
+.c2dl-newscard-title {
+    display: flex;
+    color: var(--newscard-title);
+    flex-direction: column;
+    padding: 16px 16px;
+}
+
+.c2dl-newscard-title-text {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: normal;
+    overflow: hidden;
+    transform-origin: 149px 48px;
+    margin: 0 0 0.2em 0;
+}
+
+.c2dl-newscard-info {
+    display: flex;
+    flex-direction: row;
+    color: var(--newscard-info);
+}
+
+.c2dl-newscard-updated {
+    font-style: italic;
+}
+
+.c2dl-newscard-preview-text {
+    color: var(--newscard-text);
+    font-family: "Merriweather", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, "Times New Roman", Times, serif;
+    font-size: 1rem;
+    line-height: 18px;
+    overflow: hidden;
+    padding: 16px 16px;
+    width: 90%;
+}
+
+.c2dl-newscard-nav {
+    border-top: 1px solid var(--newscard-separator);
+    font-size: 16px;
+    line-height: normal;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
