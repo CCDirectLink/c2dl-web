@@ -35,8 +35,8 @@ class SvgController extends Controller
 
         if (!isset($rules)) {
             $rules = [
-                'fg' => ['nullable', "regex:/(^([ a-zA-z0-9\,\'\(\)\_]+)$)/u"],
-                'bg' => ['nullable', "regex:/(^([ a-zA-z0-9\,\'\(\)\_]+)$)/u"],
+                'fg' => ['nullable', "regex:/(^([ a-zA-z0-9\.\,\'\(\)\_]+)$)/u"],
+                'bg' => ['nullable', "regex:/(^([ a-zA-z0-9\.\,\'\(\)\_]+)$)/u"],
                 'height' => ['nullable', "regex:/(^([0-9\.]+)(\%|px|pt|pc|em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|in)$)/u"],
                 '$width' => ['nullable', "regex:/(^([0-9\.]+)(\%|px|pt|pc|em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|in)$)/u"],
             ];
