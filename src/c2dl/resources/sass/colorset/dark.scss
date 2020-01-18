@@ -35,17 +35,17 @@
     rgba(125, 185, 215, 0.12);
 
 
-    --drawer-foreground: rgba(25, 25, 25, 1.0);
-    --drawer-background-a: rgba(125, 185, 215, 1.0);
-    --drawer-background-b: rgba(100, 175, 245, 1.0);
-    --drawer-background-60: rgba(100, 175, 245, 0.6);
-    --drawer-background-90: rgba(100, 175, 245, 1.0);
-    --drawer-separator: rgba(25, 25, 25, 0.6);
+    --drawer-foreground: rgba(190, 190, 200, 1.0);
+    --drawer-background-a: rgba(45, 45, 55, 1.0);
+    --drawer-background-b: rgba(25, 25, 25, 1.0);
+    --drawer-background-60: rgba(25, 25, 25, 0.6);
+    --drawer-background-90: rgba(25, 25, 25, 1.0);
+    --drawer-separator: rgba(190, 190, 200, 0.6);
 
-    --drawer-link: rgba(25, 25, 25, 1.0);
+    --drawer-link: rgba(125, 185, 215, 1.0);
 
-    --drawer-hover-foreground: rgba(125, 185, 215, 1.0);
-    --drawer-hover-background: rgba(25, 25, 25, 0.6);
+    --drawer-hover-foreground: rgba(25, 25, 25, 1.0);
+    --drawer-hover-background: rgba(125, 185, 215, 0.6);
 
     --drawer-background: url('/dynimages/bg/curcuit_bg?height=128px&width=128px') repeat left,
     linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
