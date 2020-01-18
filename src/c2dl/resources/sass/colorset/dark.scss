@@ -47,7 +47,7 @@
     --drawer-hover-foreground: rgba(25, 25, 25, 1.0);
     --drawer-hover-background: rgba(125, 185, 215, 0.6);
 
-    --drawer-background: url('/dynimages/bg/curcuit_bg?height=128px&width=128px') repeat left,
+    --drawer-background: url('/dynimages/bg/curcuit_bg?height=128px&width=128px&fg=rgba(125, 185, 215, 0.2)') repeat left,
     linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
 
 
