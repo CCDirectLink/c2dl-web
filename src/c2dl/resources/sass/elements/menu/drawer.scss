@@ -1,0 +1,185 @@
+.c2dl-menu-hamburger {
+    display: none;
+    flex-direction: column-reverse;
+    grid-area: hamburger-trigger;
+}
+
+.c2dl-menu-trigger {
+
+}
+
+.c2dl-svg-hamburger {
+    fill: var(--header-foreground-hamburger);
+    transition: fill 0.4s;
+}
+
+.c2dl-menu-trigger-hamburger {
+    display: block;
+    margin: 0.3em;
+    padding: 0.2em;
+    width: min-content;
+    height: min-content;
+    bottom: 0;
+    z-index: 0;
+}
+
+.c2dl-menu-trigger-label {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+
+.c2dl-menu-trigger-hamburger {
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    transition: background-color 0.4s;
+}
+
+.c2dl-menu-trigger-hamburger:hover {
+    background: var(--header-hover-hamburger-background);
+}
+
+.c2dl-menu-trigger-hamburger:hover .c2dl-svg-hamburger {
+    fill: var(--header-hover-hamburger-foreground);
+}
+
+.c2dl-menu-drawer {
+    height: calc(100% - 3.5em);
+    max-height: calc(100% - 3.5em);
+    max-width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 3.5em;
+    right: 0;
+    bottom: 0;
+    left: -22em;
+    width: 22em;
+    z-index: 20;
+    color: var(--drawer-foreground);
+    background: var(--drawer-background);
+    transition: left 0.4s;
+}
+
+#c2dl-menu-trigger-t1 {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
+#c2dl-menu-trigger-t1:focus ~ .c2dl-menu-trigger-hamburger {
+    background: var(--header-hover-hamburger-background);
+}
+
+#c2dl-menu-trigger-t1:focus ~ .c2dl-menu-trigger-hamburger .c2dl-svg-hamburger {
+    fill: var(--header-hover-hamburger-foreground);
+}
+
+#c2dl-menu-trigger-t1:checked ~ .c2dl-menu-drawer {
+    left: 0;
+}
+
+.c2dl-menu-drawer-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
+    padding: 0.5em;
+    border-top: solid 2px var(--drawer-separator);
+}
+
+.c2dl-menu-drawer-logo {
+    height: 2em;
+    width: 2em;
+}
+
+.c2dl-menu-drawer-first {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.c2dl-menu-drawer-title {
+    font-size: 14pt;
+    line-height: 18px;
+}
+
+.c2dl-menu-drawer-info {
+    font-size: 12pt;
+    line-height: 16px;
+    font-style: italic;
+    quotes: "»" "«";
+}
+
+.c2dl-menu-drawer-info::before {
+    content: open-quote;
+}
+
+.c2dl-menu-drawer-info::after {
+    content: close-quote;
+}
+
+.c2dl-menu-drawer-nav {
+    width: 100%;
+}
+
+.c2dl-menu-drawer .c2dl-menu-entry-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.c2dl-menu-drawer .c2dl-menu-entry {
+    padding: 0;
+    margin: 0;
+}
+
+.c2dl-menu-drawer .c2dl-menu-link {
+    display: block;
+    color: var(--drawer-link);
+    padding: 0.5em 1.5em 0.5em 1.5em;
+    width: inherit;
+    transition: color 0.4s, background-color 0.4s;
+}
+
+.c2dl-menu-drawer .c2dl-menu-link:hover {
+    color: var(--drawer-hover-foreground);
+    background: var(--drawer-hover-background);
+}
+
+/*
+breakpoints
+*/
+
+@media screen and (max-width: 680px) {
+    .c2dl-menu-hamburger {
+        display: flex;
+    }
+}
+
+/*
+animation
+*/
+
+@media (prefers-reduced-motion: reduce) {
+    .c2dl-menu-trigger-hamburger {
+        transition: none;
+    }
+
+    .c2dl-menu-drawer .c2dl-menu-link {
+        transition: none;
+    }
+
+    .c2dl-svg-hamburger {
+        transition: none;
+    }
+
+    .c2dl-menu-drawer {
+        transition: none;
+    }
+}

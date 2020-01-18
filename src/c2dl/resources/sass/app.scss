@@ -4,7 +4,10 @@
 
 // Colorset
 @import 'colorset/light';
-//@import 'colorset/dark';
+
+@media (prefers-color-scheme: dark) {
+    @import 'colorset/dark';
+}
 
 // Bootstrap
 //@import '~bootstrap/scss/bootstrap';

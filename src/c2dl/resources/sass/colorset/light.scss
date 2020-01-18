@@ -2,16 +2,17 @@
     --debug-background: rgba(230, 155, 165, 1.0);
 
     --base-color: rgba(25, 25, 25, 1.0);
+    --base-background: rgba(255, 255, 255, 1.0);
 
     --base-link-foreground: rgba(125, 185, 215, 1.0);
 
     --selection-background: rgba(125, 185, 215, 0.5);
 
     --header-foreground: rgba(25, 25, 25, 1.0);
-    --header-hover-foreground: rgba(125, 185, 215, 1.0);
-    --header-hover-background: rgba(25, 25, 25, 0.6);
 
     --header-link: rgba(25, 25, 25, 1.0);
+    --header-hover-foreground: rgba(125, 185, 215, 1.0);
+    --header-hover-background: rgba(25, 25, 25, 0.6);
 
     --header-foreground-hamburger: rgba(25, 25, 25, 1.0);
     --header-hover-hamburger-foreground: rgba(125, 185, 215, 1.0);
@@ -90,4 +91,17 @@
     --social-reddit: url('/dynimages/elem/reddit') no-repeat;
     --social-twitter: url('/dynimages/elem/twitter') no-repeat;
     --social-discord: url('/dynimages/elem/discord') no-repeat;
+
+    --c2dl-chevron-background: url('/dynimages/elem/chevron_right') no-repeat;
+    --c2dl-download-background: url('/dynimages/elem/download?fg=rgba(125,185,215,1.0)') no-repeat;
+    --c2dl-download-hover-background: url('/dynimages/elem/download') no-repeat;
+
+    --c2dl-github-background: url('/dynimages/elem/github?fg=rgba(125,185,215,1.0)') no-repeat;
+    --c2dl-github-hover-background: url('/dynimages/elem/github') no-repeat;
+
+    --c2dl-gitlab-background: url('/dynimages/elem/gitlab?fg=rgba(125,185,215,1.0)') no-repeat;
+    --c2dl-gitlab-hover-background: url('/dynimages/elem/gitlab') no-repeat;
+
+    --entrylist-foreground: rgba(25, 25, 25, 0.87);
+    --entrylist-description-foreground: rgba(25, 25, 25, 0.54);
 }
