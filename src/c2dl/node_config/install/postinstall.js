@@ -26,25 +26,11 @@ function _init(param) {
 
 }
 
-const { exec } = require('child_process');
+const { spawn } = require('child_process');
+const options = { shell: true, stdio: 'inherit' };
 
-exec('composer install', (err, stdout, stderr) => {
-  if (err) {
-    //some err occurred
-    console.error(err)
-  } else {
-   // the *entire* stdout and stderr (buffered)
-   console.log(`stdout: ${stdout}`);
-   console.log(`stderr: ${stderr}`);
-  }
-});
-exec('npm run dev', (err, stdout, stderr) => {
-  if (err) {
-    //some err occurred
-    console.error(err)
-  } else {
-   // the *entire* stdout and stderr (buffered)
-   console.log(`stdout: ${stdout}`);
-   console.log(`stderr: ${stderr}`);
-  }
-});
+const composerInstall = 'composer install';
+const devInstall = 'npm run dev';
+
+spawn(composerInstall, [], options);
+spawn(devInstall, [], options);

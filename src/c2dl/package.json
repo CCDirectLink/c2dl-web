@@ -10,7 +10,7 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "light": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --hide-modules --config=node_config/webpack/wp_data_dev.js",
         "postinstall": "node node_config/install/postinstall.js",
-        "start": "node node_config/start/start.js"
+        "start": "node node_config/run/start.js"
     },
     "devDependencies": {
         "axios": "^0.19",
@@ -26,5 +26,8 @@
         "sass-loader": "7.*",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "minimist": "^1.2.0"
     }
 }
