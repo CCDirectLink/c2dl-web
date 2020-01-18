@@ -4,24 +4,24 @@
     --base-color: rgba(25, 25, 25, 1.0);
     --base-background: rgba(255, 255, 255, 1.0);
 
-    --base-link-foreground: rgba(125, 185, 215, 1.0);
+    --base-link-foreground: rgba(55, 80, 130, 1.0);
 
     --selection-background: rgba(125, 185, 215, 0.5);
 
     --header-foreground: rgba(25, 25, 25, 1.0);
 
-    --header-link: rgba(25, 25, 25, 1.0);
-    --header-hover-foreground: rgba(125, 185, 215, 1.0);
-    --header-hover-background: rgba(25, 25, 25, 0.6);
+    --header-link: rgba(40, 55, 80, 1.0);
+    --header-hover-foreground: rgba(140, 180, 230, 1.0);
+    --header-hover-background: rgba(40, 55, 80, 0.7);
 
-    --header-foreground-hamburger: rgba(25, 25, 25, 1.0);
+    --header-foreground-hamburger: rgba(40, 55, 80, 1.0);
     --header-hover-hamburger-foreground: rgba(125, 185, 215, 1.0);
-    --header-hover-hamburger-background: rgba(25, 25, 25, 0.6);
+    --header-hover-hamburger-background: rgba(40, 55, 80, 0.6);
 
     --header-background-a: rgba(75, 145, 230, 1.0);
-    --header-background-b: rgba(125, 185, 215, 1.0);
-    --header-background-40: rgba(100, 175, 245, 0.7);
-    --header-background-60: rgba(100, 175, 245, 1.0);
+    --header-background-b: rgba(140, 180, 230, 1.0);
+    --header-background-40: rgba(140, 180, 230, 0.7);
+    --header-background-60: rgba(140, 180, 230, 1.0);
 
     --header-background: linear-gradient(to right, transparent,
         var(--header-background-40) 40%, var(--header-background-60) 60%) no-repeat left,
@@ -36,16 +36,14 @@
 
 
     --drawer-foreground: rgba(25, 25, 25, 1.0);
-    --drawer-background-a: rgba(125, 185, 215, 1.0);
-    --drawer-background-b: rgba(100, 175, 245, 1.0);
-    --drawer-background-60: rgba(100, 175, 245, 0.6);
-    --drawer-background-90: rgba(100, 175, 245, 1.0);
+    --drawer-background-a: rgba(140, 180, 230, 1.0);
+    --drawer-background-b: rgba(125, 185, 215, 1.0);
     --drawer-separator: rgba(25, 25, 25, 0.6);
 
-    --drawer-link: rgba(25, 25, 25, 1.0);
+    --drawer-link: rgba(40, 55, 80, 1.0);
 
     --drawer-hover-foreground: rgba(125, 185, 215, 1.0);
-    --drawer-hover-background: rgba(25, 25, 25, 0.6);
+    --drawer-hover-background: rgba(40, 55, 80, 0.7);
 
     --drawer-background: url('/dynimages/bg/curcuit_bg?height=128px&width=128px') repeat left,
         linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
@@ -65,11 +63,13 @@
     --newscard-text: rgba(25, 25, 25, 0.6);
     --newscard-separator: rgba(25, 25, 25, 0.2);
 
-    --news-hover-foreground: rgba(25, 25, 25, 1.0);
-    --news-hover-background: rgba(125, 185, 215, 1.0);
+    --news-hover-foreground: rgba(255, 255, 255, 1.0);
+    --news-hover-background: rgba(60, 105, 160, 1.0);
 
-    --news-nav-foreground: rgba(125, 185, 215, 1.0);
-    --news-nav-current: rgba(25, 25, 25, 1.0);
+    --news-nav-foreground: rgba(60, 105, 160, 1.0);
+
+    --news-nav-current-foreground: rgba(255, 255, 255, 1.0);
+    --news-nav-current-background: rgba(25, 25, 25, 1.0);
 
     --news-separator: rgba(25, 25, 25, 0.2);
 
@@ -79,10 +79,10 @@
     rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0
     rgba(0, 0, 0, 0.12);
 
-    --social-nav-foreground: rgba(125, 185, 215, 1.0);
+    --social-nav-foreground: rgba(60, 105, 160, 1.0);
 
-    --social-hover-foreground: rgba(25, 25, 25, 1.0);
-    --social-hover-background: rgba(125, 185, 215, 1.0);
+    --social-hover-foreground: rgba(255, 255, 255, 1.0);
+    --social-hover-background: rgba(60, 105, 160, 1.0);
 
     --social-subtext: rgba(25, 25, 25, 0.6);
 

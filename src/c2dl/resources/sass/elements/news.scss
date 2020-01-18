@@ -51,12 +51,14 @@
 
 .c2dl-current-page {
     cursor: default;
-    color: var(--news-nav-current);
+
+    color: var(--news-nav-current-foreground);
+    background: var(--news-nav-current-background);
 }
 
 .c2dl-current-page:hover {
-    color: var(--news-nav-current);
-    background-color: inherit;
+    color: var(--news-nav-current-foreground);
+    background: var(--news-nav-current-background);
 }
 
 /*

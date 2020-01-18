@@ -3,7 +3,7 @@
     <title>Curcuit layout</title>
     <style>
         .c2c-bg{fill:{{ $bg ?? 'transparent' }};}
-        .c2c{fill:{{ $fg ?? 'rgb(30,83,129,0.2)' }};fill-rule:evenodd;stroke-miterlimit:2;}
+        .c2c{fill:{{ $fg ?? 'rgb(30,83,129,0.1)' }};fill-rule:evenodd;stroke-miterlimit:2;}
     </style>
     <g id="Curcuit">
         <rect class="c2c-bg" x="0" y="0" width="64" height="64"/>
