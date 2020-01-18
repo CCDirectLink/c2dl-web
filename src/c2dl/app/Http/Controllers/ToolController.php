@@ -20,11 +20,16 @@ class ToolController extends Controller
     {
         $list = [];
 
-        $mod_list_raw = file_get_contents(
-            'https://raw.githubusercontent.com/CCDirectLink/CCModDB/master/tools.json'
-        );
-
-        $mod_list_json = json_decode($mod_list_raw, true);
+        try {
+            $mod_list_raw = file_get_contents(
+                'https://raw.githubusercontent.com/CCDirectLink/CCModDB/master/tools.json'
+            );
+            $mod_list_json = json_decode($mod_list_raw, true);
+        }
+        catch (\Throwable $e)
+        {
+            return [];
+        }
 
         if (!isset($mod_list_json['tools'])) {
             return [];
