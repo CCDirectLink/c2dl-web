@@ -16,7 +16,7 @@
             </nav>
             <div class="c2dl-menu-drawer-footer">
                 <div class="c2dl-menu-drawer-first">
-                    <img class="c2dl-menu-drawer-logo" src="{{ $icon }}" alt="{{ $title }} Logo" />
+                    <img class="c2dl-menu-drawer-logo" src="{{ $icon }}" alt="{{ $title }} Logo" title="{{ $title }}" />
                     <span class="c2dl-menu-drawer-title">{{ $title }}</span>
                 </div>
                 <span class="c2dl-menu-drawer-info">{{ $desc }}</span>

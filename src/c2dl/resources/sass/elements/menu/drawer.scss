@@ -111,15 +111,6 @@
     font-size: 12pt;
     line-height: 16px;
     font-style: italic;
-    quotes: "»" "«";
-}
-
-.c2dl-menu-drawer-info::before {
-    content: open-quote;
-}
-
-.c2dl-menu-drawer-info::after {
-    content: close-quote;
 }
 
 .c2dl-menu-drawer-nav {

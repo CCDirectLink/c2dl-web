@@ -111,7 +111,7 @@
     vertical-align: middle;
 }
 
-.c2dl-social-link:hover {
+.c2dl-social-link:hover, .c2dl-social-link:focus {
     color: var(--social-hover-foreground);
     background-color: var(--social-hover-background);
 }

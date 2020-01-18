@@ -56,15 +56,6 @@
     font-size: 12pt;
     line-height: 16px;
     font-style: italic;
-    quotes: "»" "«";
-}
-
-.c2dl-menu-bar-info::before {
-    content: open-quote;
-}
-
-.c2dl-menu-bar-info::after {
-    content: close-quote;
 }
 
 .c2dl-menu-bar-nav {
@@ -109,6 +100,14 @@
 }
 
 .c2dl-menu-bar-nav .c2dl-menu-link:hover {
+    color: var(--header-hover-foreground);
+    background: var(--header-hover-background);
+    text-decoration: none;
+    border: none;
+    border-radius: 2px;
+}
+
+.c2dl-menu-bar-nav .c2dl-menu-link:focus {
     color: var(--header-hover-foreground);
     background: var(--header-hover-background);
     text-decoration: none;

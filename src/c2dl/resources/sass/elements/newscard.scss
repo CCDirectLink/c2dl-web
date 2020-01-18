@@ -28,7 +28,6 @@
 
 .c2dl-newscard-title {
     display: flex;
-    color: var(--newscard-title);
     flex-direction: column;
     padding: 16px 16px;
 }
@@ -40,6 +39,7 @@
     overflow: hidden;
     transform-origin: 149px 48px;
     margin: 0 0 0.2em 0;
+    color: var(--newscard-title);
 }
 
 .c2dl-newscard-info {

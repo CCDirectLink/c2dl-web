@@ -1,8 +1,8 @@
 :root {
     --debug-background: rgba(230, 155, 165, 1.0);
 
-    --base-color: rgba(190, 190, 200, 1.0);
-    --base-background: rgba(45, 45, 55, 1.0);
+    --base-color: rgba(210, 210, 220, 1.0);
+    --base-background: rgba(30, 30, 35, 1.0);
 
     --base-link-foreground: rgba(125, 185, 215, 1.0);
 
@@ -47,11 +47,11 @@
     --drawer-hover-foreground: rgba(25, 25, 25, 1.0);
     --drawer-hover-background: rgba(125, 185, 215, 0.6);
 
-    --drawer-background: url('/dynimages/bg/curcuit_bg?height=128px&width=128px&fg=rgba(125, 185, 215, 0.2)') repeat left,
+    --drawer-background: url('/dynimages/bg/curcuit_bg?height=128px&width=128px&fg=rgba(35,95,125,0.2)') repeat left,
     linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
 
 
-    --newscard-background: rgba(45, 45, 55, 1.0);
+    --newscard-background: rgba(30, 30, 35, 1.0);
     --newscard-shadow: 0 2px 2px 0
     rgba(125, 185, 215, 0.14), 0 3px 1px -2px rgba(125, 185, 215, 0.2), 0 1px 5px 0
     rgba(125, 185, 215, 0.12);
@@ -60,21 +60,21 @@
     rgba(125, 185, 215, .14), 0 3px 14px 2px rgba(125, 185, 215, .12), 0 5px 5px -3px
     rgba(125, 185, 215, .2);
 
-    --newscard-title: rgba(190, 190, 200, 1.0);
-    --newscard-info: rgba(190, 190, 200, 0.6);
-    --newscard-text: rgba(190, 190, 200, 0.6);
-    --newscard-separator: rgba(190, 190, 200, 0.2);
+    --newscard-title: rgba(210, 210, 220, 1.0);
+    --newscard-info: rgba(210, 210, 220, 0.7);
+    --newscard-text: rgba(210, 210, 220, 0.7);
+    --newscard-separator: rgba(210, 210, 220, 0.2);
 
-    --news-hover-foreground: rgba(45, 45, 55, 1.0);
+    --news-hover-foreground: rgba(30, 30, 35, 1.0);
     --news-hover-background: rgba(125, 185, 215, 1.0);
 
     --news-nav-foreground: rgba(125, 185, 215, 1.0);
-    --news-nav-current: rgba(190, 190, 200, 1.0);
+    --news-nav-current: rgba(210, 210, 220, 1.0);
 
-    --news-separator: rgba(190, 190, 200, 0.2);
+    --news-separator: rgba(210, 210, 220, 0.2);
 
 
-    --social-background: rgba(45, 45, 55, 1.0);
+    --social-background: rgba(30, 30, 35, 1.0);
     --social-shadow: 0 2px 2px 0
     rgba(125, 185, 215, 0.14), 0 3px 1px -2px rgba(125, 185, 215, 0.2), 0 1px 5px 0
     rgba(125, 185, 215, 0.12);
@@ -84,7 +84,7 @@
     --social-hover-foreground: rgba(45, 45, 55, 1.0);
     --social-hover-background: rgba(125, 185, 215, 1.0);
 
-    --social-subtext: rgba(190, 190, 200, 0.6);
+    --social-subtext: rgba(210, 210, 220, 0.6);
 
     --social-github: url('/dynimages/elem/github?fg=rgba(190,190,200,1.0)') no-repeat;
     --social-gitlab: url('/dynimages/elem/gitlab_color') no-repeat;

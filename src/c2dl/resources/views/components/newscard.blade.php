@@ -1,4 +1,4 @@
-<a class="c2dl-newscard-cardlink" href="{{ route('news', $entry->id) }}"><article class="c2dl-newscard">
+<article class="c2dl-newscard">
     <header class="c2dl-newscard-title">
         <h1 class="c2dl-newscard-title-text">{{ $entry->title }}</h1>
         <div class="c2dl-newscard-info">
@@ -22,4 +22,4 @@
             @endforeach
         @endif
     </nav>
-</article></a>
+</article>

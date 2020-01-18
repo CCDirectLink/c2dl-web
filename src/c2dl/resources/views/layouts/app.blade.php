@@ -40,7 +40,7 @@
         <div class="c2dl-content">
             @pageheader([
             'title' => Config::get('app.name'),
-            'desc' => 'Connects the CrossCode Community',
+            'desc' => '»Connects the CrossCode Community«',
             'icon' => '/images/logo/svg/CCDirectLink.svg'
             ])
             <ul class="c2dl-menu-entry-list">
