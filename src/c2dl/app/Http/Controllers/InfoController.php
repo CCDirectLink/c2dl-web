@@ -23,7 +23,7 @@ class InfoController extends Controller
                 '<li>CrossCode Discord Mod</li></ul>' ]),
             new \App\DTO\User([ 1, '2767mr', '<ul><li>CCDirectLink Admin</li><li>c2dl.info Management</li></ul>' ]),
             new \App\DTO\User([ 2, 'ac2pic', '<ul><li>CCDirectLink Admin</li><li>c2dl.info Management</li></ul>' ]),
-            new \App\DTO\User([ 3, 'omega12', 'CCDirectLink Admin' ]),
+            new \App\DTO\User([ 3, 'omega12', '<ul><li>CCDirectLink Admin</li><li>c2dl.info Management</li></ul>' ]),
             new \App\DTO\User([ 4, 'Streetclaw', '<ul><li>CCDirectLink Admin</li>' .
                     '<li>c2dl.info Host & Management</li><li>CrossCode Discord Mod</li></ul>' ]),
         ];
