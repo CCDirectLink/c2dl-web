@@ -9,7 +9,11 @@ return [
     |
     */
 
+    'title' => 'About CCDirectLink',
+    'titleImpressum' => 'CCDirectLink - CrossCode Impressum',
+    'titlePrivacy' => 'CCDirectLink - About Privacy',
     'about' => 'About',
-    'team' => 'Team',
+    'admins' => 'Admins',
+    'publicMember' => 'Public Member',
 
 ];

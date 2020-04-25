@@ -1,13 +1,21 @@
 .c2dl-chevron-right {
     width: 12.5px;
     height: 16px;
-    background: var(--c2dl-chevron-background);
     flex-grow: 0;
     flex-shrink: 0;
     margin-right: 1em;
 }
 
+.c2dl-chevron-right .c2dl-lcv-fg {
+    fill: var(--c2dl-chevron-color);
+}
+
 .c2dl-data-link {
+    min-width: 36px;
+    padding: 0 0;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1),
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    fill 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     margin: 0.2em;
 }
@@ -31,28 +39,12 @@
     padding: 0;
 }
 
-.c2dl-download-icon {
-    background: var(--c2dl-download-background);
+.c2dl-data-link .c2dl-link-icon .svg-fg {
+    fill: var(--base-link-foreground);
 }
 
-.c2dl-download-icon:hover {
-    background: var(--c2dl-download-hover-background);
-}
-
-.c2dl-github-icon {
-    background: var(--c2dl-github-background);
-}
-
-.c2dl-github-icon:hover {
-    background: var(--c2dl-github-hover-background);
-}
-
-.c2dl-gitlab-icon {
-    background: var(--c2dl-gitlab-background);
-}
-
-.c2dl-gitlab-icon:hover {
-    background: var(--c2dl-gitlab-hover-background);
+.c2dl-data-link:hover .c2dl-link-icon .svg-fg, .c2dl-data-link:focus .c2dl-link-icon .svg-fg {
+    fill: var(--base-link-hover-foreground);
 }
 
 .c2dl-list-entry {
@@ -95,4 +87,14 @@
 .c2dl-entry-links {
     display: flex;
     flex-direction: row;
+}
+
+/*
+animation
+*/
+
+@media (prefers-reduced-motion: reduce) {
+    .c2dl-data-link {
+        transition: none;
+    }
 }

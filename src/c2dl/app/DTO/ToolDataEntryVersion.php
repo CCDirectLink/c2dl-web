@@ -2,7 +2,7 @@
 
 namespace App\DTO;
 
-class DataEntryVersion
+class ToolDataEntryVersion
 {
     public $page_list;
     public $source_list;

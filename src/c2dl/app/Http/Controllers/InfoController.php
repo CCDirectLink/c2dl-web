@@ -16,21 +16,30 @@ class InfoController extends Controller
         //$this->middleware('auth');
     }
 
-    static public function teamList()
+    static public function adminList()
     {
-        $team_list = [
-            new \App\DTO\User([ 0, 'Streetclaw', '<ul><li>CCDirectLink Admin</li>' .
-                    '<li>c2dl.info Host & Developer</li><li>CrossCode Discord Mod</li></ul>' ]),
-            new \App\DTO\User([ 1, 'Keanu', 'c2dl.info Admin & Developer' ]),
-            new \App\DTO\User([ 2, 'ac2pic', '<ul><li>CCDirectLink Admin</li><li>c2dl.info Management</li></ul>' ]),
-            new \App\DTO\User([ 3, '2767mr', '<ul><li>CCDirectLink Admin</li><li>c2dl.info Management</li></ul>' ]),
-            new \App\DTO\User([ 4, 'Nnubes256', '<ul><li>CCDirectLink Admin</li><li>c2dl.info Management</li>'.
+        $admin_list = [
+            new \App\DTO\User([ 0, 'Nnubes256', '<ul><li>CCDirectLink Admin</li><li>c2dl.info Management</li>'.
                 '<li>CrossCode Discord Mod</li></ul>' ]),
-            new \App\DTO\User([ 5, 'omega12', 'CCDirectLink Admin' ]),
-            new \App\DTO\User([ 6, 'Polliwham', 'CCDirectLink Admin' ])
+            new \App\DTO\User([ 1, '2767mr', '<ul><li>CCDirectLink Admin</li><li>c2dl.info Management</li></ul>' ]),
+            new \App\DTO\User([ 2, 'ac2pic', '<ul><li>CCDirectLink Admin</li><li>c2dl.info Management</li></ul>' ]),
+            new \App\DTO\User([ 3, 'omega12', 'CCDirectLink Admin' ]),
+            new \App\DTO\User([ 4, 'Streetclaw', '<ul><li>CCDirectLink Admin</li>' .
+                    '<li>c2dl.info Host & Management</li><li>CrossCode Discord Mod</li></ul>' ]),
         ];
 
-        return $team_list;
+        return $admin_list;
+    }
+
+    static public function publicMemberList()
+    {
+        $public_member_list = [
+            new \App\DTO\User([ 0, 'Keanu', '<ul><li>CCDirectLink Member</li><li>c2dl.info Management</li></ul>' ]),
+            new \App\DTO\User([ 1, 'dmitmel', 'CCDirectLink Member' ]),
+            new \App\DTO\User([ 2, 'Vankerkom', 'CCDirectLink Member' ]),
+        ];
+
+        return $public_member_list;
     }
 
     /**
@@ -40,9 +49,12 @@ class InfoController extends Controller
      */
     public function about()
     {
-        $team_list = InfoController::teamList();
+        $team_list = [
+            'admin' => InfoController::adminList(),
+            'publicMember' => InfoController::publicMemberList(),
+        ];
 
-        return view('about', ['title' => 'About CCDirectLink', 'team_list' => $team_list]);
+        return view('about', ['team_list' => $team_list]);
     }
 
     /**
@@ -52,7 +64,7 @@ class InfoController extends Controller
      */
     public function impressum()
     {
-        return view('impressum', ['title' => 'CCDirectLink - CrossCode Impressum']);
+        return view('impressum');
     }
 
     /**
@@ -62,6 +74,6 @@ class InfoController extends Controller
      */
     public function privacy()
     {
-        return view('privacy', ['title' => 'CCDirectLink - About Privacy']);
+        return view('privacy');
     }
 }

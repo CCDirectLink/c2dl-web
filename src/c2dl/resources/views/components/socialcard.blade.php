@@ -1,6 +1,11 @@
+@inject('svgProvider', 'App\Http\Controllers\SvgProvider')
+
 <article class="c2dl-social c2dl-social-{{ $entry->type }}">
     <header class="c2dl-social-header">
-        <i class="c2dl-social-logo c2dl-social-{{ $entry->type }}-logo" title="{{ $entry->type }}"></i>
+        {!! $svgProvider::provide([
+        'path' => '/ext/'.$entry->logo.'.svg',
+        'class' => 'c2dl-social-logo c2dl-social-'.$entry->type.'-logo'
+        ]) !!}
         <div class="c2dl-social-title">
             <span class="c2dl-social-title-text c2dl-social-{{ $entry->type }}-main">{{ $entry->main }}</span>
             @isset($entry->sub)
@@ -14,7 +19,7 @@
         @endisset
     </header>
     <nav class="c2dl-social-nav">
-        <a class="c2dl-social-link c2dl-social-{{ $entry->type }}-link" rel="noopener" target="_blank"
+        <a class="c2dl-link-button c2dl-social-link c2dl-social-{{ $entry->type }}-link" rel="noopener" target="_blank"
            href="{{ $entry->link }}">
             @if ($entry->link_type == 'join')
                 {{ __('home.join') }}

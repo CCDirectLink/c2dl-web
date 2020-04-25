@@ -27,17 +27,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Components
-        Blade::component('components.newscard', 'newscard');
-        Blade::component('components.pageheader', 'pageheader');
+        Blade::aliasComponent('components.newscard', 'newscard');
+        Blade::aliasComponent('components.pageheader', 'pageheader');
 
-        Blade::component('components.menudrawer', 'menudrawer');
-        Blade::component('components.menucontainer', 'menucontainer');
+        Blade::aliasComponent('components.menudrawer', 'menudrawer');
+        Blade::aliasComponent('components.menucontainer', 'menucontainer');
 
-        Blade::component('components.dataentry', 'dataentry');
-        Blade::component('components.teamcard', 'teamcard');
-        Blade::component('components.socialcard', 'socialcard');
+        Blade::aliasComponent('components.modentry', 'modentry');
+        Blade::aliasComponent('components.toolentry', 'toolentry');
 
-        // Svg
-        Blade::component('svgdata.hamburger', 'hamburgersvg');
+        Blade::aliasComponent('components.teamcard', 'teamcard');
+        Blade::aliasComponent('components.socialcard', 'socialcard');
     }
 }

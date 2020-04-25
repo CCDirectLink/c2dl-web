@@ -53,8 +53,16 @@ audio, canvas, iframe, img, svg, video {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: underline;
+    transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     color: var(--base-link-foreground);
+}
+
+a:hover, a:focus {
+    text-decoration: none;
+    color: var(--base-link-hover-foreground);
+    background-color: var(--base-link-hover-background);
 }
 
 ul {
@@ -95,4 +103,14 @@ ul {
 .c2dl-debug-container {
     background-color: var(--debug-background);
     width: 100%;
+}
+
+/*
+animation
+*/
+
+@media (prefers-reduced-motion: reduce) {
+    a {
+        transition: none;
+    }
 }

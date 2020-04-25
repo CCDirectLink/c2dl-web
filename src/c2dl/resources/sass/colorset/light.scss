@@ -4,24 +4,27 @@
     --base-color: rgba(25, 25, 25, 1.0);
     --base-background: rgba(255, 255, 255, 1.0);
 
-    --base-link-foreground: rgba(55, 80, 130, 1.0);
+    --base-link-foreground: rgba(40, 55, 80, 1.0);
+
+    --base-link-hover-background: rgba(40, 55, 80, 1.0);
+    --base-link-hover-foreground: rgba(255, 255, 255, 1.0);
 
     --selection-background: rgba(125, 185, 215, 0.5);
 
     --header-foreground: rgba(25, 25, 25, 1.0);
 
     --header-link: rgba(40, 55, 80, 1.0);
-    --header-hover-foreground: rgba(140, 180, 230, 1.0);
-    --header-hover-background: rgba(40, 55, 80, 0.7);
+    --header-hover-foreground: rgba(195, 220, 250, 1.0);
+    --header-hover-background: rgba(40, 55, 80, 1.0);
 
     --header-foreground-hamburger: rgba(40, 55, 80, 1.0);
     --header-hover-hamburger-foreground: rgba(125, 185, 215, 1.0);
     --header-hover-hamburger-background: rgba(40, 55, 80, 0.6);
 
-    --header-background-a: rgba(75, 145, 230, 1.0);
-    --header-background-b: rgba(140, 180, 230, 1.0);
-    --header-background-40: rgba(140, 180, 230, 0.7);
-    --header-background-60: rgba(140, 180, 230, 1.0);
+    --header-background-a: rgba(195, 220, 250, 1.0);
+    --header-background-b: rgba(180, 215, 250, 1.0);
+    --header-background-40: rgba(180, 215, 250, 0.7);
+    --header-background-60: rgba(180, 215, 250, 1.0);
 
     --header-background: linear-gradient(to right, transparent,
         var(--header-background-40) 40%, var(--header-background-60) 60%) no-repeat left,
@@ -36,13 +39,13 @@
 
 
     --drawer-foreground: rgba(25, 25, 25, 1.0);
-    --drawer-background-a: rgba(140, 180, 230, 1.0);
-    --drawer-background-b: rgba(125, 185, 215, 1.0);
+    --drawer-background-a: rgba(180, 215, 250, 1.0);
+    --drawer-background-b: rgba(195, 220, 250, 1.0);
     --drawer-separator: rgba(25, 25, 25, 0.6);
 
     --drawer-link: rgba(40, 55, 80, 1.0);
 
-    --drawer-hover-foreground: rgba(125, 185, 215, 1.0);
+    --drawer-hover-foreground: rgba(195, 220, 250, 1.0);
     --drawer-hover-background: rgba(40, 55, 80, 0.7);
 
     --drawer-background: url('/dynimages/bg/curcuit_bg?height=128px&width=128px') repeat left,
@@ -63,15 +66,32 @@
     --newscard-text: rgba(25, 25, 25, 0.6);
     --newscard-separator: rgba(25, 25, 25, 0.2);
 
-    --news-hover-foreground: rgba(255, 255, 255, 1.0);
-    --news-hover-background: rgba(60, 105, 160, 1.0);
 
-    --news-nav-foreground: rgba(60, 105, 160, 1.0);
+    --teamcard-background: rgba(255, 255, 255, 1.0);
+    --teamcard-shadow: 0 2px 2px 0
+    rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0
+    rgba(0, 0, 0, 0.12);
 
-    --news-nav-current-foreground: rgba(255, 255, 255, 1.0);
-    --news-nav-current-background: rgba(25, 25, 25, 1.0);
+    --teamcard-hover-shadow: 0 8px 10px 1px
+    rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px
+    rgba(0, 0, 0, .2);
+
+    --teamcard-title: rgba(25, 25, 25, 1.0);
+    --teamcard-text: rgba(25, 25, 25, 0.6);
+    --teamcard-separator: rgba(25, 25, 25, 0.2);
+
+
+    --nav-hover-foreground: rgba(255, 255, 255, 1.0);
+    --nav-hover-background: rgba(40, 55, 80, 1.0);
+
+    --nav-foreground: rgb(40, 55, 80);
+
+    --nav-current-foreground: rgba(25, 25, 25, 1.0);
+    --nav-current-background: none;
+    --nav-current-border: rgba(25, 25, 25, 0.2);
 
     --news-separator: rgba(25, 25, 25, 0.2);
+    --dataentry-separator: rgba(25, 25, 25, 0.2);
 
 
     --social-background: rgba(255, 255, 255, 1.0);
@@ -79,29 +99,22 @@
     rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0
     rgba(0, 0, 0, 0.12);
 
-    --social-nav-foreground: rgba(60, 105, 160, 1.0);
+    --social-nav-foreground: rgba(40, 55, 80, 1.0);
 
+    --linkbutton-hover-background: rgba(40, 55, 80, 1.0);
     --social-hover-foreground: rgba(255, 255, 255, 1.0);
-    --social-hover-background: rgba(60, 105, 160, 1.0);
 
     --social-subtext: rgba(25, 25, 25, 0.6);
 
-    --social-github: url('/dynimages/elem/github') no-repeat;
-    --social-gitlab: url('/dynimages/elem/gitlab_color') no-repeat;
-    --social-reddit: url('/dynimages/elem/reddit') no-repeat;
-    --social-twitter: url('/dynimages/elem/twitter') no-repeat;
-    --social-discord: url('/dynimages/elem/discord') no-repeat;
+    --social-github-color: rgba(25, 25, 25);
 
-    --c2dl-chevron-background: url('/dynimages/elem/chevron_right') no-repeat;
-    --c2dl-download-background: url('/dynimages/elem/download?fg=rgba(125,185,215,1.0)') no-repeat;
-    --c2dl-download-hover-background: url('/dynimages/elem/download') no-repeat;
+    --c2dl-chevron-color: rgb(25, 25, 25);
 
-    --c2dl-github-background: url('/dynimages/elem/github?fg=rgba(125,185,215,1.0)') no-repeat;
-    --c2dl-github-hover-background: url('/dynimages/elem/github') no-repeat;
 
-    --c2dl-gitlab-background: url('/dynimages/elem/gitlab?fg=rgba(125,185,215,1.0)') no-repeat;
-    --c2dl-gitlab-hover-background: url('/dynimages/elem/gitlab') no-repeat;
+    --entrylist-foreground: rgba(25, 25, 25, 1.0);
+    --entrylist-description-foreground: rgba(25, 25, 25, 0.6);
 
-    --entrylist-foreground: rgba(25, 25, 25, 0.87);
-    --entrylist-description-foreground: rgba(25, 25, 25, 0.54);
+
+    --scrollbar-track: rgba(255, 255, 255, 1.0);
+    --scrollbar-thumb: rgba(25, 25, 25, 0.6);
 }

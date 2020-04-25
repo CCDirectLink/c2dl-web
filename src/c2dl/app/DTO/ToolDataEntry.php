@@ -2,7 +2,7 @@
 
 namespace App\DTO;
 
-class DataEntry
+class ToolDataEntry
 {
     public $name;
     public $description;
@@ -29,6 +29,6 @@ class DataEntry
         }
 
         $this->last_version = $_version;
-        $this->version_list[$_version] = new DataEntryVersion($data);
+        $this->version_list[$_version] = new ToolDataEntryVersion($data);
     }
 }

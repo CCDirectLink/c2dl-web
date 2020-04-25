@@ -81,7 +81,59 @@ class News
 
     }
 
-    private function _getDateTimeString($date, $format = null, $timezone = 'UTC')
+    private function _convertGregorian(\DateTime $dateTime, string $format, string $calender) : string
+    {
+        $format = str_replace('C', '_000000_', $format);
+
+        // 'GR'
+        $calender_type = 0;
+        $calender_info = false;
+
+        if (strcmp($calender, 'HE') == 0) {
+            $calender_type = 1;
+        }
+        else if (strcmp($calender, 'HE.HTML') == 0) {
+            $calender_type = 1;
+            $calender_info = true;
+        }
+
+        if ($calender_type == 1) {
+
+            $gregorian_year = getdate(strtotime($dateTime->format('F d, Y H:i:s T')))['year'];
+
+            $_he_info_hover = __('date.he_info', [ 'year' => $gregorian_year ]);
+            $_he_info = __('date.he');
+            $_he_info_html_start = '';
+            $_he_info_html_end = '';
+
+            if ($calender_info) {
+                $_he_info_html_start = '<span title="' . $_he_info_hover . '" class="c2dl-hoverinfo">';
+                $_he_info_html_end = '</span>';
+            }
+
+            $format = str_replace('Y', '_000001_', $format);
+            $gregorian_date_yearplaceholder = $dateTime->format($format);
+
+            $he_year = [
+                'upper' => '1' . intdiv($gregorian_year, 1000),
+                'lower' => str_pad('' . $gregorian_year % 1000,
+                    3, '0', STR_PAD_LEFT),
+            ];
+
+            $he_date = str_replace('_000001_',
+                $_he_info_html_start . $he_year['upper'] . ',' . $he_year['lower'],
+                $gregorian_date_yearplaceholder);
+            $he_date = str_replace('_000000_', $_he_info . $_he_info_html_end, $he_date);
+
+            return $he_date;
+        }
+
+        $grg_date = $dateTime->format($format);
+        $he_date = str_replace(' _000000_', '', $grg_date);
+        return $he_date;
+    }
+
+    private function _getDateTimeString($date, string $timezone, string $calender, string $format = null) : string
     {
         if (!is_string($format)) {
             $format = config('app.default_datetime_format');
@@ -89,20 +141,22 @@ class News
         try {
             $dateTime = new \DateTime ($date);
             $dateTime->setTimezone(new \DateTimeZone($timezone));
-            return $dateTime->format($format);
+
         } catch (\Exception $e) {
             return '(unknown)';
         }
+
+        return $this->_convertGregorian($dateTime, $format, $calender);
     }
 
-    function created($format = null, $timezone = 'UTC') : string
+    function created(string $format = null, string $timezone = 'UTC', string $calender = 'HE.HTML') : string
     {
-        return $this->_getDateTimeString($this->_created, $format, $timezone);
+        return $this->_getDateTimeString($this->_created, $timezone, $calender, $format);
     }
 
-    function updated($format = null, $timezone = 'UTC') : string
+    function updated(string $format = null, string $timezone = 'UTC', string $calender = 'HE.HTML') : string
     {
-        return $this->_getDateTimeString($this->_updated, $format, $timezone);
+        return $this->_getDateTimeString($this->_updated, $timezone, $calender, $format);
     }
 
     function is_updated() : bool

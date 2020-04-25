@@ -1,25 +1,50 @@
-.c2dl-team-keanu {
-    background: url(/img/team/keanu.png);
-    background-size: 100%;
+.c2dl-teamcard {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    font-weight: 400;
+    overflow: hidden;
+    position: relative;
+    background: var(--teamcard-background);
+    border-radius: 2px;
+    box-sizing: border-box;
+    width: 30%;
+    min-width: 220px;
+    float: left;
+    margin: 1rem 0.8rem 1rem 0.8rem;
+    box-shadow: var(--teamcard-shadow);
 }
 
-.c2dl-team-2767 {
-    background: url(/img/team/2767mr.jpg);
-    background-size: 100%;
+.c2dl-teamcard:hover {
+    box-shadow: var(--teamcard-hover-shadow);
 }
 
-.c2dl-team-ac2pic {
-    background: url(/img/team/ac2pic.png);
-    background-size: 100%;
+.c2dl-teamcard-title {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 16px;
 }
 
-.c2dl-team-ichiki {
-    background: url(/img/team/ichiki.png);
-    background-size: 100%;
-    background-position: center;
+.c2dl-teamcard-sep {
+    display: inline-block;
 }
 
-.c2dl-team-streetclaw {
-    background: url(/img/team/streetclaw.png);
-    background-size: 100%;
+.c2dl-teamcard-title-text {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: normal;
+    overflow: hidden;
+    transform-origin: 149px 48px;
+    margin: 0 0 0.2em 0;
+    color: var(--teamcard-title);
+}
+
+.c2dl-teamcard-text {
+    color: var(--teamcard-text);
+    font-family: "Merriweather", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, "Times New Roman", Times, serif;
+    font-size: 1rem;
+    line-height: 18px;
+    overflow: hidden;
+    padding: 16px 16px;
+    width: 90%;
 }

@@ -6,6 +6,9 @@
 
     --base-link-foreground: rgba(125, 185, 215, 1.0);
 
+    --base-link-hover-background: rgba(125, 185, 215, 1.0);
+    --base-link-hover-foreground: rgba(25, 25, 25, 1.0);
+
     --selection-background: rgba(125, 185, 215, 0.5);
 
     --header-foreground: rgba(190, 190, 200, 1.0);
@@ -65,15 +68,32 @@
     --newscard-text: rgba(210, 210, 220, 0.7);
     --newscard-separator: rgba(210, 210, 220, 0.2);
 
-    --news-hover-foreground: rgba(30, 30, 35, 1.0);
-    --news-hover-background: rgba(125, 185, 215, 1.0);
 
-    --news-nav-foreground: rgba(125, 185, 215, 1.0);
+    --teamcard-background: rgba(30, 30, 35, 1.0);
+    --teamcard-shadow: 0 2px 2px 0
+    rgba(125, 185, 215, 0.14), 0 3px 1px -2px rgba(125, 185, 215, 0.2), 0 1px 5px 0
+    rgba(125, 185, 215, 0.12);
 
-    --news-nav-current-foreground: rgba(30, 30, 35, 1.0);
-    --news-nav-current-background: rgba(210, 210, 220, 1.0);
+    --teamcard-hover-shadow: 0 8px 10px 1px
+    rgba(125, 185, 215, .14), 0 3px 14px 2px rgba(125, 185, 215, .12), 0 5px 5px -3px
+    rgba(125, 185, 215, .2);
+
+    --teamcard-title: rgba(210, 210, 220, 1.0);
+    --teamcard-text: rgba(210, 210, 220, 0.7);
+    --teamcard-separator: rgba(210, 210, 220, 0.2);
+
+
+    --nav-hover-foreground: rgba(30, 30, 35, 1.0);
+    --nav-hover-background: rgba(125, 185, 215, 1.0);
+
+    --nav-foreground: rgba(125, 185, 215, 1.0);
+
+    --nav-current-foreground: rgba(210, 210, 220, 1.0);
+    --nav-current-background: none;
+    --nav-current-border: rgba(210, 210, 220, 0.2);
 
     --news-separator: rgba(210, 210, 220, 0.2);
+    --dataentry-separator: rgba(210, 210, 220, 0.2);
 
 
     --social-background: rgba(30, 30, 35, 1.0);
@@ -83,27 +103,20 @@
 
     --social-nav-foreground: rgba(125, 185, 215, 1.0);
 
+    --linkbutton-hover-background: rgba(125, 185, 215, 1.0);
     --social-hover-foreground: rgba(45, 45, 55, 1.0);
-    --social-hover-background: rgba(125, 185, 215, 1.0);
 
     --social-subtext: rgba(210, 210, 220, 0.6);
 
-    --social-github: url('/dynimages/elem/github?fg=rgba(190,190,200,1.0)') no-repeat;
-    --social-gitlab: url('/dynimages/elem/gitlab_color') no-repeat;
-    --social-reddit: url('/dynimages/elem/reddit') no-repeat;
-    --social-twitter: url('/dynimages/elem/twitter') no-repeat;
-    --social-discord: url('/dynimages/elem/discord') no-repeat;
+    --social-github-color: rgba(210, 210, 220);
 
-    --c2dl-chevron-background: url('/dynimages/elem/chevron_right?fg=rgba(190,190,200,1.0)') no-repeat;
-    --c2dl-download-background: url('/dynimages/elem/download?fg=rgba(125,185,215,1.0)') no-repeat;
-    --c2dl-download-hover-background: url('/dynimages/elem/download?fg=rgba(190,190,200,1.0)') no-repeat;
+    --c2dl-chevron-color: rgb(210, 210, 220);
 
-    --c2dl-github-background: url('/dynimages/elem/github?fg=rgba(125,185,215,1.0)') no-repeat;
-    --c2dl-github-hover-background: url('/dynimages/elem/github?fg=rgba(190,190,200,1.0)') no-repeat;
 
-    --c2dl-gitlab-background: url('/dynimages/elem/gitlab?fg=rgba(125,185,215,1.0)') no-repeat;
-    --c2dl-gitlab-hover-background: url('/dynimages/elem/gitlab?fg=rgba(190,190,200,1.0)') no-repeat;
+    --entrylist-foreground: rgba(210, 210, 220, 1.0);
+    --entrylist-description-foreground: rgba(210, 210, 220, 0.7);
 
-    --entrylist-foreground: rgba(190, 190, 200, 0.87);
-    --entrylist-description-foreground: rgba(190, 190, 200, 0.54);
+
+    --scrollbar-track: rgba(30, 30, 35, 1.0);
+    --scrollbar-thumb: rgb(210, 210, 220, 1.0);
 }

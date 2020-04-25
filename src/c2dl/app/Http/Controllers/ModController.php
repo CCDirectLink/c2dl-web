@@ -16,41 +16,35 @@ class ModController extends Controller
         //$this->middleware('auth');
     }
 
-    static public function getModList()
+    static public function getModList(int $page = 1): \App\DTO\ModInfo
     {
-        $list = [];
-
         try {
             $mod_list_raw = file_get_contents(
-                'https://raw.githubusercontent.com/CCDirectLink/CCModDB/master/mods.json'
+                'https://raw.githubusercontent.com/CCDirectLink/CCModDB/master/npDatabase.json'
             );
             $mod_list_json = json_decode($mod_list_raw, true);
         }
         catch (\Throwable $e)
         {
-            return [];
+            return new \App\DTO\ModInfo();
         }
 
-        if (!isset($mod_list_json['mods'])) {
-            return [];
-        }
-
-        foreach ($mod_list_json['mods'] as $mod) {
-            array_push($list, new \App\DTO\DataEntry($mod));
-        }
-
-        return $list;
+        return new \App\DTO\ModInfo($mod_list_json, $page);
     }
 
     /**
-     * Show the mod view
+     * Show mods
      *
+     * @param Request $request
+     * @param int $news_id
+     * @param int $page
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function show()
+    public function show(Request $request,
+                         int $page = 1) : \Illuminate\Contracts\Support\Renderable
     {
-        $mod_list = ModController::getModList();
+        $result = ModController::getModList($page);
 
-        return view('mods', ['title' => 'CCDirectLink - CrossCode Mods', 'mod_list' => $mod_list]);
+        return view('mods', ['mod_info' => $result]);
     }
 }

@@ -9,6 +9,7 @@ return [
     |
     */
 
+    'title' => 'CCDirectLink – CrossCode Community group',
     'name' => 'Home',
     'news' => 'News',
     'media' => 'Media',

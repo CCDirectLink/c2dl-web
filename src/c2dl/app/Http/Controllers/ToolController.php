@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\ToolInfo;
 use Illuminate\Http\Request;
 
 class ToolController extends Controller
@@ -16,41 +17,35 @@ class ToolController extends Controller
         //$this->middleware('auth');
     }
 
-    static public function getToolList()
+    static public function getToolList(int $page = 1): \App\DTO\ToolInfo
     {
-        $list = [];
-
         try {
-            $mod_list_raw = file_get_contents(
+            $tool_list_raw = file_get_contents(
                 'https://raw.githubusercontent.com/CCDirectLink/CCModDB/master/tools.json'
             );
-            $mod_list_json = json_decode($mod_list_raw, true);
+            $tool_list_json = json_decode($tool_list_raw, true);
         }
         catch (\Throwable $e)
         {
-            return [];
+            return new \App\DTO\ToolInfo();
         }
 
-        if (!isset($mod_list_json['tools'])) {
-            return [];
-        }
-
-        foreach ($mod_list_json['tools'] as $mod) {
-            array_push($list, new \App\DTO\DataEntry($mod));
-        }
-
-        return $list;
+        return new \App\DTO\ToolInfo($tool_list_json, $page);
     }
 
     /**
-     * Show the tool view
+     * Show tools
      *
+     * @param Request $request
+     * @param int $news_id
+     * @param int $page
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function show()
+    public function show(Request $request,
+                         int $page = 1) : \Illuminate\Contracts\Support\Renderable
     {
-        $tool_list = ToolController::getToolList();
+        $result = ToolController::getToolList();
 
-        return view('tools', ['title' => 'CCDirectLink - CrossCode Tools', 'tool_list' => $tool_list]);
+        return view('tools', ['tool_info' => $result]);
     }
 }

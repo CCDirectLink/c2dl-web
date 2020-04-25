@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@inject('socialController', 'App\Http\Controllers\SocialController')
+@inject('newsController', 'App\Http\Controllers\NewsController')
+
+@section('title')
+{{ __('home.title') }}
+@endsection
+
 @section('content')
 <div class="home-content">
     <article class="home-main">
@@ -7,13 +14,14 @@
             <h1>{{ __('home.news') }}</h1>
         </header>
         <main class="c2dl-news-list">
-            @foreach ($news_list as $news)
+            @foreach ($newsController::getNewsList(true) as $news)
                 @newscard(['entry' => $news ])
                 @endnewscard
             @endforeach
         </main>
     </article>
     <div class="home-sidebar">
+        @if (false)
         <article>
             <header>
                 <h1>{{ __('home.media') }}</h1>
@@ -29,12 +37,13 @@
                 </ul>
             </main>
         </article>
+        @endif
         <article>
             <header>
                 <h1>{{ __('home.social_media') }}</h1>
             </header>
             <main class="c2dl-social-list">
-                @foreach ($social as $social_entry)
+                @foreach ($socialController::getSocial() as $social_entry)
                 @socialcard([ 'entry' => $social_entry ])
                 @endsocialcard
                 @endforeach

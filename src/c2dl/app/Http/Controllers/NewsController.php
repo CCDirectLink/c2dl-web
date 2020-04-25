@@ -148,6 +148,6 @@ class NewsController extends Controller
             abort(404,'Page not found');
         }
 
-        return view('news', [ 'title' => $result->title, 'entry' => $result ]);
+        return view('news', [ 'entry' => $result ]);
     }
 }

@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'default_datetime_format' => 'F d, Y H:i:s T',
+    'default_datetime_format' => 'd. F Y C H:i:s T',
 
     /*
     |--------------------------------------------------------------------------

@@ -1,26 +1,39 @@
+// dimensions
+* {
+    --c2dl-transition-effect: 0.4s;
+
+    --c2dl-menu-trigger-hamburger-width: min-content;
+    --c2dl-menu-trigger-hamburger-height: min-content;
+    --c2dl-menu-trigger-hamburger-margin: 0.3em;
+    --c2dl-menu-trigger-hamburger-padding: 0.2em;
+    --c2dl-menu-trigger-hamburger-bottom: 0;
+    --c2dl-menu-trigger-hamburger-z-index: 30;
+    --c2dl-menu-trigger-hamburger-border-radius: 2px;
+
+    --c2dl-menu-drawer-height: calc(100% - 3.5em);
+    --c2dl-menu-drawer-max-height: var(--c2dl-menu-drawer-height);
+
+    --c2dl-menu-drawer-width: 22em;
+    --c2dl-menu-drawer-max-width: 100%;
+}
+
+// structure
+
 .c2dl-menu-hamburger {
     display: none;
+
     flex-direction: column-reverse;
     grid-area: hamburger-trigger;
 }
 
-.c2dl-menu-trigger {
-
-}
-
 .c2dl-svg-hamburger {
-    fill: var(--header-foreground-hamburger);
-    transition: fill 0.4s;
+    width: 2em;
+    height: 2em;
 }
 
-.c2dl-menu-trigger-hamburger {
-    display: block;
-    margin: 0.3em;
-    padding: 0.2em;
-    width: min-content;
-    height: min-content;
-    bottom: 0;
-    z-index: 30;
+.c2dl-svg-hamburger .c2dl-hamburger-icon-fg {
+    fill: var(--header-foreground-hamburger);
+    transition: fill var(--c2dl-transition-effect);
 }
 
 .c2dl-menu-trigger-label {
@@ -29,41 +42,60 @@
 }
 
 .c2dl-menu-trigger-hamburger {
+    display: block;
+
+    width: var(--c2dl-menu-trigger-hamburger-width);
+    height: var(--c2dl-menu-trigger-hamburger-height);
+    margin: var(--c2dl-menu-trigger-hamburger-margin);
+    padding: var(--c2dl-menu-trigger-hamburger-padding);
+
+    bottom: var(--c2dl-menu-trigger-hamburger-bottom);
+    z-index: var(--c2dl-menu-trigger-hamburger-z-index);
+
     cursor: pointer;
     border: none;
-    border-radius: 2px;
-    transition: background-color 0.4s;
+    border-radius: var(--c2dl-menu-trigger-hamburger-border-radius);
+    transition: background-color var(--c2dl-transition-effect);
 }
 
 .c2dl-menu-trigger-hamburger:hover {
     background: var(--header-hover-hamburger-background);
 }
 
-.c2dl-menu-trigger-hamburger:hover .c2dl-svg-hamburger {
+.c2dl-menu-trigger-hamburger:hover .c2dl-hamburger-icon-fg {
     fill: var(--header-hover-hamburger-foreground);
 }
 
 .c2dl-menu-drawer {
-    height: calc(100% - 3.5em);
-    max-height: calc(100% - 3.5em);
+    position: absolute;
+
+    height: var(--c2dl-menu-drawer-height);
+    max-height: var(--c2dl-menu-drawer-max-height);
+
+    width: var(--c2dl-menu-drawer-width);
     max-width: 100%;
+
     overflow-y: auto;
     overflow-x: hidden;
-    position: absolute;
+
     top: 3.5em;
     right: 0;
     bottom: 0;
     left: -22em;
-    width: 22em;
+
     z-index: 20;
+
     color: var(--drawer-foreground);
     background: var(--drawer-background);
-    transition: left 0.4s;
+
+    transition: left var(--c2dl-transition-effect);
 }
 
 #c2dl-menu-trigger-t1 {
     position: absolute;
+
     opacity: 0;
+
     height: 0;
     width: 0;
 }
@@ -72,7 +104,7 @@
     background: var(--header-hover-hamburger-background);
 }
 
-#c2dl-menu-trigger-t1:focus ~ .c2dl-menu-trigger-hamburger .c2dl-svg-hamburger {
+#c2dl-menu-trigger-t1:focus ~ .c2dl-menu-trigger-hamburger .c2dl-hamburger-icon-fg {
     fill: var(--header-hover-hamburger-foreground);
 }
 
@@ -147,7 +179,7 @@
 breakpoints
 */
 
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 839px) {
     .c2dl-menu-hamburger {
         display: flex;
     }
@@ -166,7 +198,7 @@ animation
         transition: none;
     }
 
-    .c2dl-svg-hamburger {
+    .c2dl-svg-hamburger .c2dl-hamburger-icon-fg {
         transition: none;
     }
 

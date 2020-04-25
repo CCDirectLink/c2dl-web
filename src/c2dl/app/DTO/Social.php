@@ -5,6 +5,8 @@ namespace App\DTO;
 class Social
 {
     public $type;
+    public $name;
+    public $logo;
     public $main;
     public $sub;
     public $side;
@@ -14,6 +16,8 @@ class Social
     public function __construct($data = null)
     {
         $this->type = null;
+        $this->name = null;
+        $this->logo = null;
         $this->main = null;
         $this->sub = null;
         $this->side = null;
@@ -22,6 +26,14 @@ class Social
 
         if (isset($data['type']) && is_string($data['type'])) {
             $this->type = $data['type'];
+        }
+
+        if (isset($data['name']) && is_string($data['name'])) {
+            $this->name = $data['name'];
+        }
+
+        if (isset($data['logo']) && is_string($data['logo'])) {
+            $this->logo = $data['logo'];
         }
 
         if (isset($data['main']) && is_string($data['main'])) {

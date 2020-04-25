@@ -11,6 +11,11 @@
     margin: 8px;
 }
 
+.c2dl-aboutpage-section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 @media screen and (max-width: 839px) {
     .c2dl-aboutpage-main {
         min-width: 310px;

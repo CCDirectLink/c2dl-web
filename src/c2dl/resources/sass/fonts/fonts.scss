@@ -1,0 +1,96 @@
+@mixin font-face-range($range-type) {
+    $font-range-types: ('cyrillic-ext': (U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F),
+        'cyrillic': (U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116),
+        'greek-ext': (U+1F00-1FFF),
+        'greek': (U+0370-03FF),
+        'vietnamese': (U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB),
+        'latin-ext': (U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+        U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF),
+        'latin': (U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+        U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD)
+    );
+
+    @if map-has-key($font-range-types, $range-type) {
+        unicode-range: map-get($font-range-types, $range-type);
+    }
+    @else {
+        @error 'Font range #{$range-type} not found';
+    }
+}
+
+@mixin font-face($name, $dir-path, $weight : 'regular', $style : normal, $format : 'woff2', $range-type : null) {
+    $font-weights: ('light': 300, 'regular': 400, 'medium': 500, 'bold': 700, 'black': 800);
+    $format-list: ('woff2': 'woff2', 'otf': 'opentype');
+    $format-name: $format;
+
+    @if map-has-key($format-list, $format) {
+        $format-name: map-get($format-list, $format);
+    }
+    @else {
+        @error 'Font name for #{$format} not found';
+    }
+
+    $src: null;
+    $src-base: null;
+    $is-regular: true;
+
+    $name-lowercase: to-lower-case($name);
+
+    $weight-name: 'regular';
+    $weight-name-case: 'Regular';
+    $weight-numeric: 400;
+
+    @if map-has-key($font-weights, $weight) {
+        $weight-name: $weight;
+        $weight-name-case: to-upper-case(str-slice($weight, 1, 1)) + str-slice($weight, 2);
+        $weight-numeric: map-get($font-weights, $weight);
+        @if ($weight != 'regular') {
+            $is-regular: false;
+        }
+    }
+
+    @if $style == italic {
+        $styleCase: to-upper-case(str-slice(quote($style), 1, 1)) + str-slice(quote($style), 2);
+        @if $is-regular {
+            $src-base: append($src-base, local(quote($name + ' ' + $styleCase)), comma);
+        }
+        @else {
+            $src-base: append($src-base, local(quote($name + ' ' + $weight-name-case + $styleCase)), comma);
+        }
+        $src-base: append($src-base, local(quote($name + '-' + $weight-name-case + $styleCase)), comma);
+    }
+    @else {
+        @if $is-regular {
+            $src-base: append($src-base, local(quote($name)), comma);
+        }
+        @else {
+            $src-base: append($src-base, local(quote($name + ' ' + $weight-name-case)), comma);
+        }
+        $src-base: append($src-base, local(quote($name + '-' + $weight-name-case)), comma);
+    }
+
+    @if $range-type != null {
+        @each $range in $range-type {
+            $path: $dir-path + $name-lowercase + '-' + $weight-name + '-' + $range;
+            $src: append($src-base, url(unquote($path + '.' + $format)), comma);
+            @font-face {
+                font-family: quote($name);
+                font-style: $style;
+                font-weight: $weight-numeric;
+                src: $src format($format);
+                @include font-face-range($range);
+            }
+        }
+    }
+    @else {
+        $path: $dir-path + $name-lowercase + '-' + $weight-name;
+        $src: append($src-base, url(unquote($path + '.' + $format)), comma);
+        @font-face {
+            font-family: quote($name);
+            font-style: $style;
+            font-weight: $weight-numeric;
+            src: $src format($format-name);
+        }
+    }
+}

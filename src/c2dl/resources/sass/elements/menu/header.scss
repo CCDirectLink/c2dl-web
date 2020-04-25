@@ -22,15 +22,17 @@
 
 .c2dl-menu-bar {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-items: flex-end;
     grid-area: menu-bar;
+    align-items: flex-end;
 }
 
 .c2dl-menu-bar-content {
     display: flex;
     align-items: center;
     height: 100%;
+    width: 50%;
 }
 
 .c2dl-menu-bar-logo {
@@ -63,7 +65,7 @@
     flex-direction: column-reverse;
     align-items: flex-end;
     grid-area: menu-bar-nav;
-    width: 100%;
+    width: 50%;
     height: min-content;
 }
 
@@ -84,7 +86,7 @@
     font-size: 14px;
     line-height: 24px;
     letter-spacing: 0;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .c2dl-menu-bar-nav .c2dl-menu-entry {
@@ -125,7 +127,11 @@ breakpoints
     }
 }
 
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 839px) {
+    .c2dl-menu-bar-content {
+        width: 100%;
+    }
+
     .c2dl-menu-bar-nav {
         display: none;
     }

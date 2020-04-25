@@ -9,6 +9,7 @@ return [
     |
     */
 
+    'title' => 'CCDirectLink - CrossCode Mods',
     'name' => 'Mods',
 
 ];

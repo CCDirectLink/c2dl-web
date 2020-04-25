@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="ltr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="ltr" @yield('htmlExt')>
 	<head>
-		<title>{{ $title }}</title>
+		<title>@yield('title')</title>
 
 		<meta charset="utf-8"/>
 
@@ -24,7 +24,7 @@
               href="{{ asset('/css/.dev.css') }}" media="all" id="c2dl-aditional">
         @endif
 
-        @yield('style')
+        @yield('head')
 
         <script src="{{ asset('/js/app.js') }}"></script>
         @if(Config::get('app.debug') == 1)
@@ -64,6 +64,7 @@
                     <a class="c2dl-menu-link" href="{{ route('about') }}">{{ __('info.about') }}</a>
                 </li>
                 @endif
+                @if (false)
                 @guest
                     <li class="c2dl-menu-entry">
                         <a class="c2dl-menu-link" href="{{ route('login') }}">{{ __('auth.login') }}</a>
@@ -75,6 +76,7 @@
                     @endif
                 @else
                 @endguest
+                @endif
             </ul>
             @endpageheader
             <main class="c2dl-main" id="c2dl-main-app">

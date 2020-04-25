@@ -1,8 +1,14 @@
+@inject('svgProvider', 'App\Http\Controllers\SvgProvider')
+
 <div class="c2dl-menu-bar">
     <div class="c2dl-menu-bar-content">
-        <img class="c2dl-menu-bar-logo" id="c2dl-menu-bar-logo-1" src="{{ $icon }}" alt="{{ $title }} Logo" />
+        {!! $svgProvider::provide([
+            'path' => 'logo.svg',
+            'class' => 'c2dl-menu-bar-logo',
+            'id' => 'c2dl-menu-bar-logo-1'
+        ]) !!}
         <div class="c2dl-menu-bar-text">
-            <span class="c2dl-menu-bar-title">{{ $title }}</span>
+            <span itemprop="publisher" itemscope itemtype="http://schema.org/Organization" class="c2dl-menu-bar-title">{{ $title }}</span>
             <span class="c2dl-menu-bar-info">{{ $desc }}</span>
         </div>
     </div>
