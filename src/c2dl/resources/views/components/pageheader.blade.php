@@ -1,7 +1,9 @@
 <header class="c2dl-header">
-    @menudrawer(['title' => $title, 'desc' => $desc])
-        {{ $slot }}
-    @endmenudrawer
+    @isNotTextBrowser
+        @menudrawer(['title' => $title, 'desc' => $desc])
+            {{ $slot }}
+        @endmenudrawer
+    @endisNotTextBrowser
     @menucontainer(['title' => $title, 'desc' => $desc])
         {{ $slot }}
     @endmenucontainer

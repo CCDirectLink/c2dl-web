@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\BrowserController;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 
@@ -38,5 +39,9 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::aliasComponent('components.teamcard', 'teamcard');
         Blade::aliasComponent('components.socialcard', 'socialcard');
+
+        Blade::if('isNotTextBrowser', function () {
+            return !BrowserController::isTextBrowser();
+        });
     }
 }

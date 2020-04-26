@@ -10,6 +10,7 @@ class SvgRequest
     public $path;
     public $width;
     public $height;
+    public $alt;
 
     public function __construct($data = null)
     {
@@ -19,6 +20,7 @@ class SvgRequest
         $this->class = null;
         $this->width = null;
         $this->height = null;
+        $this->alt = null;
 
         if (isset($data['path']) && is_string($data['path'])) {
             $this->path = $data['path'];
@@ -42,6 +44,10 @@ class SvgRequest
 
         if (isset($data['height']) && is_string($data['height'])) {
             $this->height = $data['height'];
+        }
+
+        if (isset($data['alt']) && is_string($data['alt'])) {
+            $this->alt = $data['alt'];
         }
     }
 }

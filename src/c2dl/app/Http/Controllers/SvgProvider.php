@@ -32,6 +32,13 @@ class SvgProvider extends Controller
             return '';
         }
 
+        if (BrowserController::isTextBrowser()) {
+            if (is_null($svgRequest->alt)) {
+                return '';
+            }
+            return '<span>'. $svgRequest->alt .'</span>';
+        }
+
         $svg = new \DOMDocument();
 
         try {
