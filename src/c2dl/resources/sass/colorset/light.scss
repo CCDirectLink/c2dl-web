@@ -30,7 +30,7 @@
         var(--header-background-40) 40%, var(--header-background-60) 60%) no-repeat left,
     url('/images/bg/cc-lea.png') no-repeat left 19.5em top 0.4em,
     url('/images/bg/cc-sergey.png') no-repeat left 25em top -4em,
-    url('/dynimages/bg/curcuit_bg?height=128px&width=128px') repeat left,
+    url('/images/bg/circuit_pattern_light.svg') repeat left,
     linear-gradient(var(--header-background-a), var(--header-background-b)) no-repeat left;
 
     --header-shadow: 0 2px 2px 0
@@ -48,7 +48,7 @@
     --drawer-hover-foreground: rgba(195, 220, 250, 1.0);
     --drawer-hover-background: rgba(40, 55, 80, 0.7);
 
-    --drawer-background: url('/dynimages/bg/curcuit_bg?height=128px&width=128px') repeat left,
+    --drawer-background: url('/images/bg/circuit_pattern_light.svg') repeat left,
         linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
 
 

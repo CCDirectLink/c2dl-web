@@ -60,9 +60,5 @@ Route::prefix('/cc')->group(function () {
 
 });
 
-Route::prefix('/dynimages')->group(function () {
-    Route::get('/bg/curcuit_bg', 'SvgController@show')->defaults('svg', 'curcuit');
-});
-
 Route::redirect('/r/yt-bye', 'https://www.youtube.com/watch?v=LcAFxc_sbYM');
 Route::get('/r/md', 'SocialController@redirectDiscordJoin');
