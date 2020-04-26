@@ -4,7 +4,9 @@
     <header class="c2dl-social-header">
         {!! $svgProvider::provide([
         'path' => '/ext/'.$entry->logo.'.svg',
-        'class' => 'c2dl-social-logo c2dl-social-'.$entry->type.'-logo'
+        'class' => 'c2dl-social-logo c2dl-social-'.$entry->type.'-logo',
+        'width' => '22px',
+        'height' => '22px'
         ]) !!}
         <div class="c2dl-social-title">
             <span class="c2dl-social-title-text c2dl-social-{{ $entry->type }}-main">{{ $entry->main }}</span>

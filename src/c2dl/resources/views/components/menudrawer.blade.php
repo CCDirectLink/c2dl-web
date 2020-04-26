@@ -8,7 +8,9 @@
             {!! $svgProvider::provide([
                 'path' => 'hamburger_icon.svg',
                 'class' => 'c2dl-svg-hamburger',
-                'id' => 'c2dl-hamburger-icon-1'
+                'id' => 'c2dl-hamburger-icon-1',
+                'width' => '2em',
+                'height' => '2em'
             ]) !!}
         </span>
         <div class="c2dl-menu-drawer">
@@ -20,7 +22,9 @@
                     {!! $svgProvider::provide([
                         'path' => 'logo.svg',
                         'class' => 'c2dl-menu-drawer-logo',
-                        'id' => 'c2dl-menu-drawer-logo-1'
+                        'id' => 'c2dl-menu-drawer-logo-1',
+                        'width' => '2em',
+                        'height' => '2em'
                     ]) !!}
                     <span class="c2dl-menu-drawer-title">{{ $title }}</span>
                 </div>

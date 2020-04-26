@@ -5,7 +5,9 @@
           <div class="c2dl-entry">
               {!! $svgProvider::provide([
                 'path' => 'chevron_right.svg',
-                'class' => 'c2dl-chevron-right'
+                'class' => 'c2dl-chevron-right',
+                'width' => '12.5px',
+                'height' => '16px'
               ]) !!}
               <div class="c2dl-entry-content">
                 <span class="c2dl-entry-name">
@@ -20,7 +22,9 @@
                href="{{ $data->metadata->homepage }}" rel="noopener" target="_blank" title="GitHub">
                 {!! $svgProvider::provide([
                 'path' => 'ext/github_logo.svg',
-                'class' => 'c2dl-link-icon c2dl-github-icon'
+                'class' => 'c2dl-link-icon c2dl-github-icon',
+                'width' => '22px',
+                'height' => '22px'
                 ]) !!}
             </a>
             @endif
@@ -29,7 +33,9 @@
                href="{{ $data->metadata->homepage }}" rel="noopener" target="_blank" title="GitLab">
                 {!! $svgProvider::provide([
                 'path' => 'ext/gitlab_logo.svg',
-                'class' => 'c2dl-link-icon c2dl-gitlab-icon'
+                'class' => 'c2dl-link-icon c2dl-gitlab-icon',
+                'width' => '22px',
+                'height' => '22px'
                 ]) !!}
             </a>
             @endif
@@ -37,7 +43,9 @@
             <a class="c2dl-link-button c2dl-data-link c2dl-download" href="{{ $data->installation[0]->url }}" rel="noopener" target="_blank" title="Download">
                 {!! $svgProvider::provide([
                 'path' => 'download_icon.svg',
-                'class' => 'c2dl-link-icon c2dl-download-icon'
+                'class' => 'c2dl-link-icon c2dl-download-icon',
+                'width' => '22px',
+                'height' => '22px'
                 ]) !!}
             </a>
             @endisset

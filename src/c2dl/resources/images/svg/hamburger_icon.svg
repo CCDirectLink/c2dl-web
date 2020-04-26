@@ -1,7 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64">
     <title>Hamburger Menu</title>
     <style>
-        .c2dl-hamburger-icon-bg{fill:none}
         .c2dl-hamburger-icon-fg{fill:rgb(0, 0, 0)}
     </style>
     <g transform="matrix(2,0,0,2,-461,-412.5)">

@@ -5,7 +5,9 @@
         {!! $svgProvider::provide([
             'path' => 'logo.svg',
             'class' => 'c2dl-menu-bar-logo',
-            'id' => 'c2dl-menu-bar-logo-1'
+            'id' => 'c2dl-menu-bar-logo-1',
+            'width' => '2em',
+            'height' => '2em'
         ]) !!}
         <div class="c2dl-menu-bar-text">
             <span itemprop="publisher" itemscope itemtype="http://schema.org/Organization" class="c2dl-menu-bar-title">{{ $title }}</span>

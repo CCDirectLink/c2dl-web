@@ -49,6 +49,12 @@ class SvgProvider extends Controller
         if (!is_null($svgRequest->title)) {
             $svg->documentElement->setAttribute('title', $svgRequest->title);
         }
+        if (!is_null($svgRequest->width)) {
+            $svg->documentElement->setAttribute('width', $svgRequest->width);
+        }
+        if (!is_null($svgRequest->height)) {
+            $svg->documentElement->setAttribute('height', $svgRequest->height);
+        }
 
         return $svg->saveXML($svg->documentElement);
     }

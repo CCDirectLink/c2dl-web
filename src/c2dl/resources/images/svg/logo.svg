@@ -1,7 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 28 28">
     <title>C2DL Logo (with blured tail)</title>
     <style>
-        .c2dl-logo-bg{fill: none}
         .c2dl-logo-fg-inner-a{fill: rgb(255, 255, 255)}
         .c2dl-logo-fg-inner-b{fill: rgb(189, 204, 210)}
         .c2dl-logo-fg-inner-c{fill: rgb(119, 168, 187)}
@@ -40,6 +39,5 @@
             <use xlink:href="#c2la" width="23" height="23"/>
         </g>
     </defs>
-    <rect class="c2dl-logo-bg" width="28" height="28"><desc>Transparent background</desc></rect>
     <use xlink:href="#c2lb" width="28" height="28"/>
 </svg>
