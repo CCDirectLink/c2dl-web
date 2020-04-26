@@ -21,7 +21,7 @@ Content of the c2dl.info website(s)
 - Configure `/src/c2dl/.env` (see also `php artisan key:generate`)
 - Run `php artisan migrate` for setting up the database
 **[OR]** Run `php artisan migrate --seed` for setting up the database and seed it
-- Add required *svg data* to `/src/c2dl/resources/views/svgdata/ext`
+- Add required *svg data* to `/src/c2dl/resources/images/svg/ext`
 - Add required *images* to `/src/c2dl/public/www-c2dl/images`
 - Add required *fonts* to `/src/c2dl/public/www-c2dl/fonts`
 
