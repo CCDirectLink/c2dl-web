@@ -1,9 +1,9 @@
-@inject('svgProvider', 'App\Http\Controllers\SvgProvider')
+@inject('svgController', 'App\Http\Controllers\SvgController')
 
 <ul class="mdl-list" id="mod-list">
     <li class="c2dl-list-entry">
           <div class="c2dl-entry">
-              {!! $svgProvider::provide([
+              {!! $svgController::provide([
                 'path' => 'chevron_right.svg',
                 'class' => 'c2dl-chevron-right',
                 'width' => '12.5px',
@@ -20,7 +20,7 @@
             @isset($data->version_list[$data->last_version]->page_list['GitHub'])
             <a class="c2dl-link-button c2dl-data-link c2dl-github"
                href="{{ $data->version_list[$data->last_version]->page_list['GitHub'] }}" rel="noopener" target="_blank" title="GitHub">
-                {!! $svgProvider::provide([
+                {!! $svgController::provide([
                 'path' => 'ext/github_logo.svg',
                 'class' => 'c2dl-link-icon c2dl-github-icon',
                 'width' => '22px',
@@ -31,7 +31,7 @@
             @isset($data->version_list[$data->last_version]->page_list['GitLab'])
             <a class="c2dl-link-button c2dl-data-link c2dl-gitlab"
                href="{{ $data->version_list[$data->last_version]->page_list['GitLab'] }}" rel="noopener" target="_blank" title="GitLab">
-                {!! $svgProvider::provide([
+                {!! $svgController::provide([
                 'path' => 'ext/gitlab_logo.svg',
                 'class' => 'c2dl-link-icon c2dl-gitlab-icon',
                 'width' => '22px',
@@ -41,7 +41,7 @@
             @endisset
             @isset($data->version_list[$data->last_version]->source_list[0])
             <a class="c2dl-link-button c2dl-data-link c2dl-download" href="{{ $data->version_list[$data->last_version]->source_list[0] }}" rel="noopener" target="_blank" title="Download">
-                {!! $svgProvider::provide([
+                {!! $svgController::provide([
                 'path' => 'download_icon.svg',
                 'class' => 'c2dl-link-icon c2dl-download-icon',
                 'width' => '22px',

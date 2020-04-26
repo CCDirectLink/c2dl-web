@@ -1,8 +1,8 @@
-@inject('svgProvider', 'App\Http\Controllers\SvgProvider')
+@inject('svgController', 'App\Http\Controllers\SvgController')
 
 <div class="c2dl-menu-bar">
     <div class="c2dl-menu-bar-content">
-        {!! $svgProvider::provide([
+        {!! $svgController::provide([
             'path' => 'logo.svg',
             'class' => 'c2dl-menu-bar-logo',
             'id' => 'c2dl-menu-bar-logo-1',

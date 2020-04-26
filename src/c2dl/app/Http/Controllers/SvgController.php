@@ -6,7 +6,7 @@ use App\DTO\SvgRequest;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Iterable_;
 
-class SvgProvider extends Controller
+class SvgController extends Controller
 {
 
     /**

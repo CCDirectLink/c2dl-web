@@ -1,9 +1,9 @@
-@inject('svgProvider', 'App\Http\Controllers\SvgProvider')
+@inject('svgController', 'App\Http\Controllers\SvgController')
 
 <article class="c2dl-social c2dl-social-{{ $entry->type }}">
     <header class="c2dl-social-header">
         <div class="c2dl-social-container">
-        {!! $svgProvider::provide([
+        {!! $svgController::provide([
         'path' => '/ext/'.$entry->logo.'.svg',
         'class' => 'c2dl-social-logo c2dl-social-'.$entry->type.'-logo',
         'width' => '22px',
