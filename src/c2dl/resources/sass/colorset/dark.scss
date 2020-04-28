@@ -1,30 +1,32 @@
 :root {
-    --debug-background: rgba(230, 155, 165, 1.0);
+    --debug-background: rgb(230, 155, 165);
 
-    --base-color: rgba(210, 210, 220, 1.0);
-    --base-background: rgba(30, 30, 35, 1.0);
+    --base-color: rgb(210, 210, 220);
+    --base-background: rgb(30, 30, 35);
 
-    --base-link-foreground: rgba(125, 185, 215, 1.0);
+    --base-link-foreground: rgb(125, 185, 215);
 
-    --base-link-hover-background: rgba(125, 185, 215, 1.0);
-    --base-link-hover-foreground: rgba(25, 25, 25, 1.0);
+    --base-link-hover-background: rgb(125, 185, 215);
+    --base-link-hover-foreground: rgb(25, 25, 25);
+
+    --base-dotlink-foreground: inherit;
 
     --selection-background: rgba(125, 185, 215, 0.5);
 
-    --header-foreground: rgba(190, 190, 200, 1.0);
+    --header-foreground: rgb(190, 190, 200);
 
-    --header-link: rgba(125, 185, 215, 1.0);
-    --header-hover-foreground: rgba(25, 25, 25, 1.0);
+    --header-link: rgb(125, 185, 215);
+    --header-hover-foreground: rgb(25, 25, 25);
     --header-hover-background: rgba(125, 185, 215, 0.8);
 
-    --header-foreground-hamburger: rgba(125, 185, 215, 1.0);
-    --header-hover-hamburger-foreground: rgba(25, 25, 25, 1.0);
+    --header-foreground-hamburger: rgb(125, 185, 215);
+    --header-hover-hamburger-foreground: rgb(25, 25, 25);
     --header-hover-hamburger-background: rgba(125, 185, 215, 0.8);
 
-    --header-background-a: rgba(45, 45, 55, 1.0);
+    --header-background-a: rgb(45, 45, 55);
     --header-background-b: rgba(25, 25, 25, 0.6);
     --header-background-40: rgba(25, 25, 25, 0.7);
-    --header-background-60: rgba(25, 25, 25, 1.0);
+    --header-background-60: rgb(25, 25, 25);
 
     --header-background: linear-gradient(to right, transparent,
         var(--header-background-40) 40%, var(--header-background-60) 60%) no-repeat left,
@@ -38,23 +40,23 @@
     rgba(125, 185, 215, 0.12);
 
 
-    --drawer-foreground: rgba(190, 190, 200, 1.0);
-    --drawer-background-a: rgba(45, 45, 55, 1.0);
-    --drawer-background-b: rgba(25, 25, 25, 1.0);
+    --drawer-foreground: rgb(190, 190, 200);
+    --drawer-background-a: rgb(45, 45, 55);
+    --drawer-background-b: rgb(25, 25, 25);
     --drawer-background-60: rgba(25, 25, 25, 0.6);
-    --drawer-background-90: rgba(25, 25, 25, 1.0);
+    --drawer-background-90: rgb(25, 25, 25);
     --drawer-separator: rgba(190, 190, 200, 0.6);
 
-    --drawer-link: rgba(125, 185, 215, 1.0);
+    --drawer-link: rgb(125, 185, 215);
 
-    --drawer-hover-foreground: rgba(25, 25, 25, 1.0);
+    --drawer-hover-foreground: rgb(25, 25, 25);
     --drawer-hover-background: rgba(125, 185, 215, 0.6);
 
     --drawer-background: url('/images/bg/circuit_pattern_dark.svg') repeat left,
     linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
 
 
-    --newscard-background: rgba(30, 30, 35, 1.0);
+    --newscard-background: rgb(30, 30, 35);
     --newscard-shadow: 0 2px 2px 0
     rgba(125, 185, 215, 0.14), 0 3px 1px -2px rgba(125, 185, 215, 0.2), 0 1px 5px 0
     rgba(125, 185, 215, 0.12);
@@ -63,13 +65,13 @@
     rgba(125, 185, 215, .14), 0 3px 14px 2px rgba(125, 185, 215, .12), 0 5px 5px -3px
     rgba(125, 185, 215, .2);
 
-    --newscard-title: rgba(210, 210, 220, 1.0);
+    --newscard-title: rgb(210, 210, 220);
     --newscard-info: rgba(210, 210, 220, 0.7);
     --newscard-text: rgba(210, 210, 220, 0.7);
     --newscard-separator: rgba(210, 210, 220, 0.2);
 
 
-    --teamcard-background: rgba(30, 30, 35, 1.0);
+    --teamcard-background: rgb(30, 30, 35);
     --teamcard-shadow: 0 2px 2px 0
     rgba(125, 185, 215, 0.14), 0 3px 1px -2px rgba(125, 185, 215, 0.2), 0 1px 5px 0
     rgba(125, 185, 215, 0.12);
@@ -78,17 +80,17 @@
     rgba(125, 185, 215, .14), 0 3px 14px 2px rgba(125, 185, 215, .12), 0 5px 5px -3px
     rgba(125, 185, 215, .2);
 
-    --teamcard-title: rgba(210, 210, 220, 1.0);
+    --teamcard-title: rgb(210, 210, 220);
     --teamcard-text: rgba(210, 210, 220, 0.7);
     --teamcard-separator: rgba(210, 210, 220, 0.2);
 
 
-    --nav-hover-foreground: rgba(30, 30, 35, 1.0);
-    --nav-hover-background: rgba(125, 185, 215, 1.0);
+    --nav-hover-foreground: rgb(30, 30, 35);
+    --nav-hover-background: rgb(125, 185, 215);
 
-    --nav-foreground: rgba(125, 185, 215, 1.0);
+    --nav-foreground: rgb(125, 185, 215);
 
-    --nav-current-foreground: rgba(210, 210, 220, 1.0);
+    --nav-current-foreground: rgb(210, 210, 220);
     --nav-current-background: none;
     --nav-current-border: rgba(210, 210, 220, 0.2);
 
@@ -96,27 +98,27 @@
     --dataentry-separator: rgba(210, 210, 220, 0.2);
 
 
-    --social-background: rgba(30, 30, 35, 1.0);
+    --social-background: rgb(30, 30, 35);
     --social-shadow: 0 2px 2px 0
     rgba(125, 185, 215, 0.14), 0 3px 1px -2px rgba(125, 185, 215, 0.2), 0 1px 5px 0
     rgba(125, 185, 215, 0.12);
 
-    --social-nav-foreground: rgba(125, 185, 215, 1.0);
+    --social-nav-foreground: rgb(125, 185, 215);
 
-    --linkbutton-hover-background: rgba(125, 185, 215, 1.0);
-    --social-hover-foreground: rgba(45, 45, 55, 1.0);
+    --linkbutton-hover-background: rgb(125, 185, 215);
+    --social-hover-foreground: rgb(45, 45, 55);
 
     --social-subtext: rgba(210, 210, 220, 0.6);
 
-    --social-github-color: rgba(210, 210, 220);
+    --social-github-color: rgb(210, 210, 220);
 
     --c2dl-chevron-color: rgb(210, 210, 220);
 
 
-    --entrylist-foreground: rgba(210, 210, 220, 1.0);
+    --entrylist-foreground: rgb(210, 210, 220);
     --entrylist-description-foreground: rgba(210, 210, 220, 0.7);
 
 
-    --scrollbar-track: rgba(30, 30, 35, 1.0);
-    --scrollbar-thumb: rgb(210, 210, 220, 1.0);
+    --scrollbar-track: rgb(30, 30, 35);
+    --scrollbar-thumb: rgb(210, 210, 220);
 }
