@@ -13,7 +13,8 @@
                 'height' => '2em'
             ]) !!}
         </span>
-        <div class="c2dl-menu-drawer">
+        <div class="c2dl-menu-drawer
+        @browser('isSafari') c2dl-menu-drawer-safari-bg @else c2dl-menu-drawer-img-bg @endbrowser">
             <nav class="c2dl-menu-drawer-nav">
                 {{ $slot }}
             </nav>

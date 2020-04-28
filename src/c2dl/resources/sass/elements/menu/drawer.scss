@@ -86,9 +86,16 @@
     z-index: 20;
 
     color: var(--drawer-foreground);
-    background: var(--drawer-background);
 
     transition: left var(--c2dl-transition-effect);
+}
+
+.c2dl-menu-drawer-img-bg {
+    background: var(--drawer-img-background);
+}
+
+.c2dl-menu-drawer-safari-bg {
+    background: var(--drawer-safari-background);
 }
 
 #c2dl-menu-trigger-t1 {

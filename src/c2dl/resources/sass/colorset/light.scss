@@ -50,7 +50,9 @@
     --drawer-hover-foreground: rgb(255, 255, 255);
     --drawer-hover-background: rgba(20, 90, 160, 0.9);
 
-    --drawer-background: url('/images/bg/circuit_pattern_light.svg') repeat left,
+    --drawer-img-background: url('/images/bg/circuit_pattern_light.svg') repeat left,
+        linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
+    --drawer-safari-background:
         linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
 
 

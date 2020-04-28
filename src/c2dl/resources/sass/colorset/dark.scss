@@ -43,8 +43,6 @@
     --drawer-foreground: rgb(190, 190, 200);
     --drawer-background-a: rgb(45, 45, 55);
     --drawer-background-b: rgb(25, 25, 25);
-    --drawer-background-60: rgba(25, 25, 25, 0.6);
-    --drawer-background-90: rgb(25, 25, 25);
     --drawer-separator: rgba(190, 190, 200, 0.6);
 
     --drawer-link: rgb(125, 185, 215);
@@ -52,8 +50,10 @@
     --drawer-hover-foreground: rgb(25, 25, 25);
     --drawer-hover-background: rgba(125, 185, 215, 0.6);
 
-    --drawer-background: url('/images/bg/circuit_pattern_dark.svg') repeat left,
+    --drawer-img-background: url('/images/bg/circuit_pattern_dark.svg') repeat left,
     linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
+    --drawer-safari-background:
+        linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
 
 
     --newscard-background: rgb(30, 30, 35);
