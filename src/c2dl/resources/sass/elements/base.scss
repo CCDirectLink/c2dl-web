@@ -61,7 +61,7 @@ a {
 
 .c2dl-dotlink {
     text-decoration-style: dotted;
-    color: inherit;
+    color: var(--base-dotlink-foreground);
 }
 
 a:hover, a:focus {
