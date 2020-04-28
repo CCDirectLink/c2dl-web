@@ -3,10 +3,15 @@
     <style>
         .c2dl-hamburger-icon-fg{fill:rgb(0, 0, 0)}
     </style>
-    <g transform="matrix(2,0,0,2,-461,-412.5)">
-        <desc>Hamburger Menu icon</desc>
-        <path class="c2dl-hamburger-icon-fg" d="M233,213.75C233,212.784 233.779,212 234.751,212L258.249,212C259.216,212 260,212.777 260,213.75C260,214.717 259.221,215.5 258.249,215.5L234.751,215.5C233.784,215.5 233,214.723 233,213.75ZM233,222.25C233,221.284 233.779,220.5 234.751,220.5L258.249,220.5C259.216,220.5 260,221.277 260,222.25C260,223.217 259.221,224 258.249,224L234.751,224C233.784,224 233,223.223 233,222.25ZM233,230.75C233,229.784 233.779,229 234.751,229L258.249,229C259.216,229 260,229.777 260,230.75C260,231.717 259.221,232.5 258.249,232.5L234.751,232.5C233.784,232.5 233,231.723 233,230.75Z">
-            <desc>Shape - Three bars stacked up</desc>
+    <defs>
+        <path id="c2dl-hamburger-bar" class="c2dl-hamburger-icon-fg" d="M3,0H51A1,1 0 0 1 51,6H3A1,1 0 0 1 3,0Z">
+            <desc>Shape - Rounded rectangle</desc>
         </path>
+    </defs>
+    <g>
+        <desc>Hamburger Menu icon - Three bars stacked up</desc>
+        <use xlink:href="#c2dl-hamburger-bar" width="54" height="6" x="5" y="12" />
+        <use xlink:href="#c2dl-hamburger-bar" width="54" height="6" x="5" y="29" />
+        <use xlink:href="#c2dl-hamburger-bar" width="54" height="6" x="5" y="46" />
     </g>
 </svg>
