@@ -107,8 +107,11 @@ class News
             $_he_info_html_end = '';
 
             if ($calender_info) {
-                $_he_info_html_start = '<span title="' . $_he_info_hover . '" class="c2dl-hoverinfo">';
-                $_he_info_html_end = '</span>';
+                $_he_info_html_start = '<a class="c2dl-dotlink" '.
+                    'href="https://en.wikipedia.org/wiki/Holocene_calendar" ' .
+                    'rel="noopener" target="_blank" '.
+                    'title="' . $_he_info_hover . '" class="c2dl-hoverinfo">';
+                $_he_info_html_end = '</a>';
             }
 
             $format = str_replace('Y', '_000001_', $format);
