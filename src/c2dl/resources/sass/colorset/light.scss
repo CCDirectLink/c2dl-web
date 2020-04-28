@@ -17,11 +17,11 @@
 
     --header-link: rgb(20, 90, 160);
     --header-hover-foreground: rgb(255, 255, 255);
-    --header-hover-background: rgba(20, 90, 160, 0.8);
+    --header-hover-background: rgb(20, 90, 160);
 
     --header-foreground-hamburger: rgb(20, 90, 160);
     --header-hover-hamburger-foreground: rgb(255, 255, 255);
-    --header-hover-hamburger-background: rgba(20, 90, 160, 0.8);
+    --header-hover-hamburger-background: rgb(20, 90, 160);
 
     --header-background-a: rgb(255, 255, 255);
     --header-background-b: rgb(205, 230, 245);
@@ -41,14 +41,14 @@
 
 
     --drawer-foreground: rgba(25, 25, 25, 1.0);
-    --drawer-background-a: rgb(255, 255, 255);
-    --drawer-background-b: rgb(205, 230, 245);
+    --drawer-background-a: rgb(205, 230, 245);
+    --drawer-background-b: rgb(255, 255, 255);
     --drawer-separator: rgba(25, 25, 25, 0.6);
 
     --drawer-link: rgb(20, 90, 160);
 
     --drawer-hover-foreground: rgb(255, 255, 255);
-    --drawer-hover-background: rgba(20, 90, 160, 0.8);
+    --drawer-hover-background: rgba(20, 90, 160, 0.9);
 
     --drawer-background: url('/images/bg/circuit_pattern_light.svg') repeat left,
         linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
