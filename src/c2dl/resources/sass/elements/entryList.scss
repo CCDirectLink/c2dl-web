@@ -14,8 +14,7 @@
     min-width: 36px;
     padding: 0 0;
     transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1),
-    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-    fill 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     margin: 0.2em;
 }
@@ -40,6 +39,7 @@
 }
 
 .c2dl-data-link .c2dl-link-icon .svg-fg {
+    transition: fill 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     fill: var(--base-link-foreground);
 }
 
@@ -95,6 +95,10 @@ animation
 
 @media (prefers-reduced-motion: reduce) {
     .c2dl-data-link {
+        transition: none;
+    }
+
+    .c2dl-data-link .c2dl-link-icon .svg-fg {
         transition: none;
     }
 }
