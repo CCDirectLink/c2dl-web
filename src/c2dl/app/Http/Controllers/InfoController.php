@@ -19,13 +19,13 @@ class InfoController extends Controller
     static public function adminList()
     {
         $admin_list = [
-            new \App\DTO\User([ 0, 'Nnubes256', '<ul><li>CCDirectLink Admin</li><li>c2dl.info Management</li>'.
-                '<li>CrossCode Discord Mod</li></ul>' ]),
-            new \App\DTO\User([ 1, '2767mr', '<ul><li>CCDirectLink Admin</li><li>c2dl.info Management</li></ul>' ]),
-            new \App\DTO\User([ 2, 'ac2pic', '<ul><li>CCDirectLink Admin</li><li>c2dl.info Management</li></ul>' ]),
-            new \App\DTO\User([ 3, 'omega12', '<ul><li>CCDirectLink Admin</li><li>c2dl.info Management</li></ul>' ]),
-            new \App\DTO\User([ 4, 'Streetclaw', '<ul><li>CCDirectLink Admin</li>' .
-                    '<li>c2dl.info Host & Management</li><li>CrossCode Discord Mod</li></ul>' ]),
+            new \App\DTO\User([ 0, 'Nnubes256', '<ul><li>CCDirectLink admin</li><li>c2dl.info management</li>'.
+                '<li>CrossCode discord mod</li></ul>' ]),
+            new \App\DTO\User([ 1, '2767mr', '<ul><li>CCDirectLink admin</li><li>c2dl.info management</li></ul>' ]),
+            new \App\DTO\User([ 2, 'ac2pic', '<ul><li>CCDirectLink admin</li><li>c2dl.info management</li></ul>' ]),
+            new \App\DTO\User([ 3, 'omega12', '<ul><li>CCDirectLink admin</li><li>c2dl.info management</li></ul>' ]),
+            new \App\DTO\User([ 4, 'Streetclaw', '<ul><li>CCDirectLink admin</li>' .
+                    '<li>c2dl.info host & management</li><li>CrossCode discord mod</li></ul>' ]),
         ];
 
         return $admin_list;
@@ -34,9 +34,10 @@ class InfoController extends Controller
     static public function publicMemberList()
     {
         $public_member_list = [
-            new \App\DTO\User([ 0, 'Keanu', '<ul><li>CCDirectLink Member</li><li>c2dl.info Management</li></ul>' ]),
-            new \App\DTO\User([ 1, 'dmitmel', 'CCDirectLink Member' ]),
-            new \App\DTO\User([ 2, 'Vankerkom', 'CCDirectLink Member' ]),
+            new \App\DTO\User([ 0, 'Keanu', '<ul><li>CCDirectLink member</li><li>c2dl.info management</li></ul>' ]),
+            new \App\DTO\User([ 1, 'dmitmel', 'CCDirectLink member' ]),
+            new \App\DTO\User([ 2, 'Vankerkom', 'CCDirectLink member' ]),
+            new \App\DTO\User([ 3, 'Alwinfy', '<ul><li>CCDirectLink member</li><li>Article editor</li></ul>' ]),
         ];
 
         return $public_member_list;
