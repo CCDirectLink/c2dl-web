@@ -6,7 +6,7 @@
     color: var(--header-foreground);
     min-height: min-content;
     width: 100%;
-    overflow: hidden;
+    overflow: visible;
     flex-grow: 0;
     flex-shrink: 0;
     box-shadow: var(--header-shadow);
