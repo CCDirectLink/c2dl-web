@@ -164,7 +164,7 @@ class News
 
     function is_updated() : bool
     {
-        return ($this->_created != $this->_updated);
+        return ((!is_null($this->_updated)) && ($this->_created != $this->_updated));
     }
 
 }
