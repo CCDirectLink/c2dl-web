@@ -1,3 +1,21 @@
+@mixin c2dl-header-background-small {
+    --header-background: linear-gradient(to right, transparent,
+    var(--header-background-40) 40%, var(--header-background-60) 60%) no-repeat left,
+    url('/images/bg/cc-lea-small.png') no-repeat left 23.5em top 6px,
+    url('/images/bg/cc-sergey-small.png') no-repeat left 27em top -28px,
+    url('/images/bg/circuit_pattern_dark.svg') repeat left,
+    linear-gradient(var(--header-background-a), var(--header-background-b)) no-repeat left;
+}
+
+@mixin c2dl-header-background-full {
+    --header-background: linear-gradient(to right, transparent,
+        var(--header-background-40) 40%, var(--header-background-60) 60%) no-repeat left,
+    url('/images/bg/cc-lea.png') no-repeat left 19.5em top 6px,
+    url('/images/bg/cc-sergey.png') no-repeat left 25em top -56px,
+    url('/images/bg/circuit_pattern_dark.svg') repeat left,
+    linear-gradient(var(--header-background-a), var(--header-background-b)) no-repeat left;
+}
+
 :root {
     --debug-background: rgb(230, 155, 165);
 
@@ -28,12 +46,7 @@
     --header-background-40: rgba(25, 25, 25, 0.7);
     --header-background-60: rgb(25, 25, 25);
 
-    --header-background: linear-gradient(to right, transparent,
-        var(--header-background-40) 40%, var(--header-background-60) 60%) no-repeat left,
-    url('/images/bg/cc-lea.png') no-repeat left 19.5em top 0.4em,
-    url('/images/bg/cc-sergey.png') no-repeat left 25em top -4em,
-    url('/images/bg/circuit_pattern_dark.svg') repeat left,
-    linear-gradient(var(--header-background-a), var(--header-background-b)) no-repeat left;
+    @include c2dl-header-background-small;
 
     --header-shadow: 0 2px 2px 0
     rgba(125, 185, 215, 0.14), 0 3px 1px -2px rgba(125, 185, 215, 0.2), 0 1px 5px 0

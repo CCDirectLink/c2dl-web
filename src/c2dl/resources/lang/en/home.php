@@ -16,7 +16,7 @@ return [
     'social_media' => 'Social Media',
     'read_more' => 'Read More',
     'page' => 'Page',
-    'member' => 'Member',
+    'member' => '{0} :count Members|{1} :count Member|[2,*] :count Members',
     'join' => 'Join',
     'visit' => 'Visit',
 

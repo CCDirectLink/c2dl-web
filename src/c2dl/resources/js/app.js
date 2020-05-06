@@ -23,14 +23,7 @@ function motionReduced(win) {
     return win.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('CCDirectLink - init');
-
-    let main = document.getElementById('c2dl-main-app');
-
-    let headerLogo = document.getElementById('c2dl-menu-bar-logo-1');
-    let menuBar = document.getElementById('c2dl-menu-bar-nav-1');
-
+function slidingHeader(main, headerLogo, menuBar) {
     let headerResizeHandler = () => {
         let pos = main.scrollTop;
 
@@ -61,4 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
             headerResizeHandler();
         });
     }
-});
+}
+
+function c2dlMain() {
+    console.log('CCDirectLink - init');
+
+    let main = document.getElementById('c2dl-main-app');
+    let headerLogo = document.getElementById('c2dl-menu-bar-logo-1');
+    let menuBar = document.getElementById('c2dl-menu-bar-nav-1');
+    //slidingHeader(main, headerLogo, menuBar);
+}
+
+document.addEventListener('DOMContentLoaded', c2dlMain);

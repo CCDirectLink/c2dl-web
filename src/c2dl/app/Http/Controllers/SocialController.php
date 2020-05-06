@@ -72,7 +72,7 @@ class SocialController extends Controller
             'logo' => 'discord_logo',
             'main' => $discord_widget_json['name'] ?? $fallback['main'],
             'sub' => '#' . $discord_widget_json['id'] ?? $fallback['sub'],
-            'side' => $discord_widget_json['presence_count'] . ' ' . __('home.member') ?? null,
+            'side' => trans_choice('home.member', $discord_widget_json['presence_count']) ?? null,
             'link' => $discord_widget_json['instant_invite'] ?? $fallback['link'],
             'link_type' => 'join',
         ]);

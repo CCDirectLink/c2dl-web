@@ -35,11 +35,20 @@
     width: 50%;
 }
 
+@mixin c2dl-full-menu-bar {
+    width: 6em;
+    height: 6em;
+}
+
+@mixin c2dl-short-menu-bar {
+    width: 3em;
+    height: 3em;
+}
+
 .c2dl-menu-bar-logo {
     max-width: 10em;
     max-height: 10em;
-    width: 6em;
-    height: 6em;
+    @include c2dl-short-menu-bar;
     padding: 0.5em 0.5em 0 1em;
     transition: width 0.4s;
 }
@@ -99,6 +108,7 @@
     color: var(--header-link);
     padding: 0.5em 1.5em 0.5em 1.5em;
     transition: color 0.4s, padding 0.4s, background 0.4s;
+    border-radius: 2px 2px 0 0;
 }
 
 .c2dl-menu-bar-nav .c2dl-menu-link:hover {
@@ -106,7 +116,6 @@
     background: var(--header-hover-background);
     text-decoration: none;
     border: none;
-    border-radius: 2px;
 }
 
 .c2dl-menu-bar-nav .c2dl-menu-link:focus {
@@ -137,8 +146,7 @@ breakpoints
     }
 
     .c2dl-menu-bar-logo {
-        width: 3em;
-        height: 3em;
+        @include c2dl-short-menu-bar;
     }
 }
 
@@ -168,8 +176,7 @@ animation
     }
 
     .c2dl-menu-bar-logo {
-        width: 3em;
-        height: 3em;
+        @include c2dl-short-menu-bar;
         transition: none;
     }
 }
