@@ -19,7 +19,7 @@ class ToolInfo
             $_size = count($data['tools']);
 
             $_entriesPerPage = (($entriesPerPage > 0) ? $entriesPerPage : 15);
-            $_maxPage = intdiv($_size, $_entriesPerPage) + ((($_entriesPerPage % $_size) === 0) ? (1) : (0));
+            $_maxPage = intdiv($_size, $_entriesPerPage) + ((($_size % $_entriesPerPage) === 0) ? (0) : (1));
             $_maxPage = (($_maxPage > 0) ? $_maxPage : 1);
             $_page = (($page > $_maxPage) ? ($_maxPage) : ($page));
             $_start = ($_page - 1) * $_entriesPerPage;
