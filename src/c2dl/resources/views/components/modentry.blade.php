@@ -11,8 +11,11 @@
               ]) !!}
               <div class="c2dl-entry-content">
                 <span class="c2dl-entry-name">
-                    <span class="c2dl-entry-title">{{ $data->metadata->name }}</span> – <span class="c2dl-entry-version">{{ $data->metadata->version }}</span>
+                    <span class="c2dl-entry-title">{{ $data->metadata->getVisibleName() }}</span> – <span class="c2dl-entry-version">{{ $data->metadata->version }}</span>
                 </span>
+                  @if($data->metadata->hasReadableName())
+                  <span class="c2dl-entry-codename">({{ $data->metadata->name }})</span>
+                  @endif
                   <span class="c2dl-entry-description">{{ $data->metadata->description }}</span>
               </div>
           </div>
