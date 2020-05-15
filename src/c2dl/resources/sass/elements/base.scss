@@ -81,6 +81,8 @@ ul {
     position: relative;
     display: inline-block;
     overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
     flex-grow: 1;
     z-index: 0;
 }
@@ -117,5 +119,9 @@ animation
 @media (prefers-reduced-motion: reduce) {
     a {
         transition: none;
+    }
+
+    .c2dl-main {
+        scroll-behavior: auto;
     }
 }
