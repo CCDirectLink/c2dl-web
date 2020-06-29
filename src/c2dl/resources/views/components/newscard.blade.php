@@ -2,7 +2,11 @@
     <header class="c2dl-newscard-title" itemscope itemtype="http://schema.org/Article">
         <h1 itemprop="name" class="c2dl-newscard-title-text">{{ $entry->title }}</h1>
         <div class="c2dl-newscard-info">
-            <span itemprop="author" name="author" class="c2dl-newscard-info-elem c2dl-newscard-author">{{ $entry->author->name }}</span>
+            @if ($entry->author->hasName())
+                <span itemprop="author" name="author" class="c2dl-newscard-info-elem c2dl-newscard-author">{{ $entry->author->name }}</span>
+            @else
+                <span class="c2dl-newscard-info-elem c2dl-newscard-author c2dl-newscard-authorUnknown">{{ __('news.unknownUser') }}</span>
+            @endif
             <span class="c2dl-newscard-info-elem c2dl-newscard-sep" name="separator" hidden>&nbsp;&ndash;&nbsp;</span>
             <time datetime="{{ $entry->created('c', 'UTC', 'GR') }}" itemprop="datePublished" class="c2dl-newscard-info-elem c2dl-newscard-created" name="time_created">{!! $entry->created() !!}</time>
             @if ($entry->is_updated())

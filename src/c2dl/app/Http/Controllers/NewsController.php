@@ -115,12 +115,14 @@ class NewsController extends Controller
         $page_data = NewsController::getNewsPages($entry->news_id, $entry->lang, $entry->page_number);
         $preview = NewsController::contentToPreview($entry->content);
 
-        $_author = null;
+        $_author = 0;
         if (isset($entry->author_id) && is_int($entry->author_id)) {
             $_author = $entry->author_id;
         }
-
-        $author = new \App\DTO\User([ $_author, 'CCDirectLink' ]);
+        $author = UserController::getUser($_author);
+        if (is_null($author)) {
+            $author = new \App\DTO\User();
+        }
 
         return new \App\DTO\News($entry, $preview, $author, $page_data);
     }

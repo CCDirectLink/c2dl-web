@@ -13,7 +13,9 @@ itemscope itemtype="http://schema.org/Article"
 <meta itemprop="url" content="{{ route('news', [ $entry->id, ($entry->page->current == 1 ? null : $entry->page->current) ]) }}">
 
 <meta property="og:title" content="{{ $entry->title }}">
+@if ($entry->author->hasName())
 <meta property="article:author" content="{{ $entry->author->name }}">
+@endif
 <meta property="og:site_name" content="CCDirectLink (C2DL)">
 <meta property="article:published_time" content="{{ $entry->created('c', 'UTC', 'GR') }}">
 @if($entry->is_updated())
@@ -29,7 +31,11 @@ itemscope itemtype="http://schema.org/Article"
       <header class="c2dl-news-title">
         <h1 @isset($entry->page->before) itemprop="name" @else itemprop="articleSection" @endisset class="c2dl-news-title-text">{{ $entry->title }}</h1>
           <div class="c2dl-news-info">
-          <span itemprop="author" name="author" class="c2dl-news-info-elem c2dl-news-author">{{ $entry->author->name }}</span>
+              @if ($entry->author->hasName())
+                <span itemprop="author" name="author" class="c2dl-news-info-elem c2dl-news-author">{{ $entry->author->name }}</span>
+              @else
+                <span class="c2dl-news-info-elem c2dl-news-author c2dl-news-authorUnknown">{{ __('news.unknownUser') }}</span>
+              @endif
               <span class="c2dl-newscard-info-elem c2dl-newscard-sep" name="separator" hidden>&nbsp;&ndash;&nbsp;</span>
               <time datetime="{{ $entry->created('c', 'UTC', 'GR') }}" itemprop="datePublished" class="c2dl-news-info-elem c2dl-news-created" name="time_created">{!! $entry->created() !!}</time>
           @if($entry->is_updated())

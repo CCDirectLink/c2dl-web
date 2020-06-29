@@ -26,4 +26,16 @@ class User
         }
 
     }
+
+    function hasId(): bool {
+        return (!is_null($this->id));
+    }
+
+    function hasName(): bool {
+        return (!is_null($this->name));
+    }
+
+    function hasBio(): bool {
+        return (!is_null($this->bio));
+    }
 }
