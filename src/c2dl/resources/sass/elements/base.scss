@@ -54,6 +54,17 @@ figure {
     flex-direction: column;
 }
 
+figure > img {
+    max-width: 100%;
+}
+
+@media screen and (max-width: 839px) {
+    figure {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
 audio, canvas, iframe, img, svg, video {
     vertical-align: middle;
 }
