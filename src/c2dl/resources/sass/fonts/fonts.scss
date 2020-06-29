@@ -85,6 +85,15 @@
     }
     @else {
         $path: $dir-path + $name-lowercase + '-' + $weight-name;
+        @if $style == italic {
+            @if $is-regular {
+                $path: $dir-path + $name-lowercase + '-' + $style;
+            }
+            @else {
+                $styleCase: to-upper-case(str-slice(quote($style), 1, 1)) + str-slice(quote($style), 2);
+                $path: $dir-path + $name-lowercase + '-' + $weight-name + $styleCase;
+            }
+        }
         $src: append($src-base, url(unquote($path + '.' + $format)), comma);
         @font-face {
             font-family: quote($name);
