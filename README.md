@@ -4,7 +4,7 @@ Content of the c2dl.info website(s)
 
 ## Environment
 
-- PHP: 7.3
+- PHP: 7.4
 - Composer
 - NodeJS
 - MySQL
