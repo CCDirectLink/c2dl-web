@@ -48,6 +48,12 @@ h1 {
     letter-spacing: -0.02em;
 }
 
+figure {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 audio, canvas, iframe, img, svg, video {
     vertical-align: middle;
 }
