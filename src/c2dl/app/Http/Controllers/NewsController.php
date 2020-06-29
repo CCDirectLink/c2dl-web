@@ -119,7 +119,15 @@ class NewsController extends Controller
         if (isset($entry->author_id) && is_int($entry->author_id)) {
             $_author = $entry->author_id;
         }
-        $author = UserController::getUser($_author);
+
+        try {
+            $author = UserController::getUser($_author);
+        }
+        catch (\Throwable $e) {
+            // should never happen (multiple users with same id)
+            $author = null;
+        }
+
         if (is_null($author)) {
             $author = new \App\DTO\User();
         }
