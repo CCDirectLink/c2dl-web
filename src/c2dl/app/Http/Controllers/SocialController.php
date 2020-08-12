@@ -155,7 +155,7 @@ class SocialController extends Controller
             'type' => 'discord_arcane',
             'name' => 'Discord',
             'logo' => 'discord_logo',
-            'main' => 'CrossCode: Arcane Lab Mod',
+            'main' => 'CC: Arcane Lab Mod',
             'link' => 'https://discord.gg/dUbdmqh',
         ]);
 
@@ -163,7 +163,7 @@ class SocialController extends Controller
             'type' => 'discord_genesis',
             'name' => 'Discord',
             'logo' => 'discord_logo',
-            'main' => 'CrossCode: Autumn\'s Genesis Mod',
+            'main' => 'CC: Autumn\'s Genesis',
             'link' => 'https://discord.gg/Seq9Kfq',
         ]);
 
