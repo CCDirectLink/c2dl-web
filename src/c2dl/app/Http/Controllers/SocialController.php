@@ -140,4 +140,42 @@ class SocialController extends Controller
         ];
     }
 
+    static public function hasRecommended()
+    {
+        return true;
+    }
+
+    static public function getRecommended()
+    {
+        $_discord_arcane = new \App\DTO\Social([
+            'type' => 'discord_arcane',
+            'name' => 'Discord',
+            'logo' => 'discord_logo',
+            'main' => 'CrossCode: Arcane Lab Mod',
+            'link' => 'https://discord.gg/dUbdmqh',
+        ]);
+
+        $_discord_genesis = new \App\DTO\Social([
+            'type' => 'discord_genesis',
+            'name' => 'Discord',
+            'logo' => 'discord_logo',
+            'main' => 'CrossCode: Autumn\'s Genesis Mod',
+            'link' => 'https://discord.gg/Seq9Kfq',
+        ]);
+
+        $_discord_bee = new \App\DTO\Social([
+            'type' => 'discord_bee',
+            'name' => 'Discord',
+            'logo' => 'discord_logo',
+            'main' => 'CrossCode: BEE',
+            'link' => 'https://discord.gg/zVRnU9q',
+        ]);
+
+        return [
+            $_discord_arcane->type => $_discord_arcane,
+            $_discord_genesis->type => $_discord_genesis,
+            $_discord_bee->type => $_discord_bee
+        ];
+    }
+
 }

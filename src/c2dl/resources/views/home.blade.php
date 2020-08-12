@@ -48,6 +48,17 @@
                 @endsocialcard
                 @endforeach
             </main>
+            @if ($socialController::hasRecommended())
+            <header>
+                <h1>{{ __('home.recommended') }}</h1>
+            </header>
+            <main class="c2dl-social-list">
+                @foreach ($socialController::getRecommended() as $social_entry)
+                @socialcard([ 'entry' => $social_entry ])
+                @endsocialcard
+                @endforeach
+            </main>
+            @endif
         </article>
     </div>
 </div>
