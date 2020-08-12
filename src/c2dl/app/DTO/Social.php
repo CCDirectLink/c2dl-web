@@ -12,6 +12,7 @@ class Social
     public $side;
     public $link;
     public $link_type;
+    public $card_type;
 
     public function __construct($data = null)
     {
@@ -23,6 +24,7 @@ class Social
         $this->side = null;
         $this->link = null;
         $this->link_type = null;
+        $this->card_type = "full";
 
         if (isset($data['type']) && is_string($data['type'])) {
             $this->type = $data['type'];
@@ -54,6 +56,10 @@ class Social
 
         if (isset($data['link_type']) && is_string($data['link_type'])) {
             $this->link_type = $data['link_type'];
+        }
+
+        if (isset($data['card_type']) && is_string($data['card_type'])) {
+            $this->card_type = $data['card_type'];
         }
     }
 }

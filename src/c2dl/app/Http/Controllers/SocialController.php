@@ -87,6 +87,7 @@ class SocialController extends Controller
             'main' => 'CCDirectLink',
             'sub' => '@CCDirectLink',
             'link' => 'https://twitter.com/CCDirectLink',
+            'card_type' => 'half',
         ]);
     }
 
@@ -98,6 +99,7 @@ class SocialController extends Controller
             'logo' => 'github_logo',
             'main' => 'CCDirectLink',
             'link' => 'https://github.com/CCDirectLink',
+            'card_type' => 'half',
         ]);
     }
 
@@ -109,6 +111,7 @@ class SocialController extends Controller
             'logo' => 'gitlab_color_logo',
             'main' => 'CCDirectLink',
             'link' => 'https://gitlab.com/CCDirectLink',
+            'card_type' => 'half',
         ]);
     }
 
@@ -120,6 +123,7 @@ class SocialController extends Controller
             'logo' => 'reddit_logo',
             'main' => 'CCModding',
             'link' => 'https://www.reddit.com/r/CrossCodeModding/',
+            'card_type' => 'half',
         ]);
     }
 

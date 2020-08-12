@@ -1,6 +1,9 @@
 .c2dl-social-list {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     width: 100%;
 }
 
@@ -90,6 +93,14 @@
     margin-right: 0.5rem;
 }
 
+.c2dl-social-cardtype-half {
+    width: calc(50% - 0.6rem);
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+    height: min-content;
+    min-width: min-content;
+}
+
 .c2dl-social-github-logo .logo-github-fg {
     fill: var(--social-github-color);
 }
@@ -113,5 +124,15 @@ animation
 @media (prefers-reduced-motion: reduce) {
     .c2dl-social-link {
         transition: none;
+    }
+}
+
+@media screen and (max-width: 839px) {
+    .c2dl-social-cardtype-half {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        height: min-content;
+        min-width: min-content;
     }
 }

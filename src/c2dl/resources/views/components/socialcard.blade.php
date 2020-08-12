@@ -1,6 +1,6 @@
 @inject('svgController', 'App\Http\Controllers\SvgController')
 
-<article class="c2dl-social c2dl-social-{{ $entry->type }}">
+<article class="c2dl-social c2dl-social-{{ $entry->type }} c2dl-social-cardtype-{{ $entry->card_type }}">
     <header class="c2dl-social-header">
         <div class="c2dl-social-container">
         {!! $svgController::provide([
