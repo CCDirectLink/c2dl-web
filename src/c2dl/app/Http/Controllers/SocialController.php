@@ -171,10 +171,19 @@ class SocialController extends Controller
             'link' => 'https://discord.gg/zVRnU9q',
         ]);
 
+        $_discord_monMod = new \App\DTO\Social([
+            'type' => 'discord_mon_mod',
+            'name' => 'Discord',
+            'logo' => 'discord_logo',
+            'main' => 'MonMod and Emotes',
+            'link' => 'https://discord.gg/TfaPvqZ',
+        ]);
+
         return [
             $_discord_arcane->type => $_discord_arcane,
             $_discord_genesis->type => $_discord_genesis,
-            $_discord_bee->type => $_discord_bee
+            $_discord_bee->type => $_discord_bee,
+            $_discord_monMod->type => $_discord_monMod
         ];
     }
 
