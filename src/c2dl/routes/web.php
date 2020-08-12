@@ -60,5 +60,7 @@ Route::prefix('/cc')->group(function () {
 
 });
 
+Route::redirect('/wiki', 'https://wiki.c2dl.info')->name('wiki');
+
 Route::redirect('/r/yt-bye', 'https://www.youtube.com/watch?v=LcAFxc_sbYM');
 Route::get('/r/md', 'SocialController@redirectDiscordJoin');

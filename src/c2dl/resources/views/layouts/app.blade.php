@@ -58,6 +58,11 @@
                         <a class="c2dl-menu-link" href="{{ route('tools') }}">{{ __('tools.name') }}</a>
                     </li>
                 @endif
+                @if (Route::has('wiki'))
+                <li class="c2dl-menu-entry">
+                    <a class="c2dl-menu-link" href="{{ route('wiki') }}">{{ __('wiki.name') }}</a>
+                </li>
+                @endif
                 @if (Route::has('about'))
                 <li class="c2dl-menu-entry">
                     <a class="c2dl-menu-link" href="{{ route('about') }}">{{ __('info.about') }}</a>
