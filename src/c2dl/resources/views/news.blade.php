@@ -16,7 +16,7 @@ itemscope itemtype="http://schema.org/Article"
 @if ($entry->author->hasName())
 <meta property="article:author" content="{{ $entry->author->name }}">
 @endif
-<meta property="og:site_name" content="CCDirectLink (C2DL)">
+<meta property="og:site_name" content="{{ __('news.metaTitle') }}">
 <meta property="article:published_time" content="{{ $entry->created('c', 'UTC', 'GR') }}">
 @if($entry->is_updated())
 <meta property="article:modified_time" content="{{ $entry->updated('c', 'UTC', 'GR') }}">

@@ -4,15 +4,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | News Language Lines
+    | Base Language Lines
     |--------------------------------------------------------------------------
     |
     */
 
-    'metaTitle' => 'CCDirectLink (C2DL)',
-    'preTitle' => 'CCDirectLink News – ',
-    'postTitle' => '',
-
-    'unknownUser' => '(unknown)',
+    'desc' => '»Connects the CrossCode Community«',
 
 ];

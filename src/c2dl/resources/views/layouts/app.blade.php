@@ -40,7 +40,7 @@
         <div class="c2dl-content">
             @pageheader([
             'title' => Config::get('app.name'),
-            'desc' => '»Connects the CrossCode Community«'
+            'desc' => __('base.desc')
             ])
             <ul class="c2dl-menu-entry-list">
                 @if (Route::has('home'))
