@@ -4,7 +4,7 @@
     <li class="c2dl-list-entry">
           <div class="c2dl-entry">
               {!! $svgController::provide([
-                'path' => 'chevron_right.svg',
+                'name' => 'chevron_right',
                 'class' => 'c2dl-chevron-right',
                 'width' => '12.5px',
                 'height' => '16px'
@@ -22,9 +22,10 @@
         <div class="c2dl-entry-links">
             @if($data->metadata->homepageType === 'github')
             <a class="c2dl-link-button c2dl-data-link c2dl-github"
-               href="{{ $data->metadata->homepage }}" rel="noopener" target="_blank" title="GitHub">
+               href="{{ $data->metadata->homepage }}" rel="noopener" target="_blank" title="GitHub ({{ $data->metadata->name }})">
                 {!! $svgController::provide([
-                'path' => 'ext/github_logo.svg',
+                'name' => 'github_logo',
+                'extern' => true,
                 'class' => 'c2dl-link-icon c2dl-github-icon',
                 'width' => '22px',
                 'height' => '22px'
@@ -33,9 +34,10 @@
             @endif
             @if($data->metadata->homepageType === 'gitlab')
             <a class="c2dl-link-button c2dl-data-link c2dl-gitlab"
-               href="{{ $data->metadata->homepage }}" rel="noopener" target="_blank" title="GitLab">
+               href="{{ $data->metadata->homepage }}" rel="noopener" target="_blank" title="GitLab ({{ $data->metadata->name }})">
                 {!! $svgController::provide([
-                'path' => 'ext/gitlab_logo.svg',
+                'name' => 'gitlab_logo',
+                'extern' => true,
                 'class' => 'c2dl-link-icon c2dl-gitlab-icon',
                 'width' => '22px',
                 'height' => '22px'
@@ -43,9 +45,10 @@
             </a>
             @endif
             @isset($data->installation[0])
-            <a class="c2dl-link-button c2dl-data-link c2dl-download" href="{{ $data->installation[0]->url }}" rel="noopener" target="_blank" title="Download">
+            <a class="c2dl-link-button c2dl-data-link c2dl-download" href="{{ $data->installation[0]->url }}" rel="noopener" target="_blank" title="Download ({{ $data->metadata->name }})">
                 {!! $svgController::provide([
-                'path' => 'download_icon.svg',
+                'name' => 'download_icon',
+                'extern' => true,
                 'class' => 'c2dl-link-icon c2dl-download-icon',
                 'width' => '22px',
                 'height' => '22px'
