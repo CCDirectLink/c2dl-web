@@ -8,7 +8,8 @@
 /public/www-c2dl/media
 /public/www-c2dl/admin
 /public/www-c2dl/js
-/resources/images/svg/ext
+/resources/images/ext
+/resources/fonts/ext
 /storage/*.key
 /vendor
 .env

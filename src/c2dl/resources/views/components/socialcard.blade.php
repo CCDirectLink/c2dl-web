@@ -4,7 +4,8 @@
     <header class="c2dl-social-header">
         <div class="c2dl-social-container">
         {!! $svgController::provide([
-        'path' => '/ext/'.$entry->logo.'.svg',
+        'name' => $entry->logo,
+        'extern' => true,
         'class' => 'c2dl-social-logo c2dl-social-'.$entry->type.'-logo',
         'width' => '22px',
         'height' => '22px',

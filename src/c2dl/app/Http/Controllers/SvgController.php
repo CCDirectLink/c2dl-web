@@ -28,7 +28,7 @@ class SvgController extends Controller
     {
         $svgRequest = new SvgRequest($svg);
 
-        if ((is_null($svgRequest->path)) || (preg_match('~(\.\.[\\\/])~', $svgRequest->path))) {
+        if ((is_null($svgRequest->name)) || (preg_match('~(\.\.[\\\/])~', $svgRequest->name))) {
             return '';
         }
 
@@ -39,10 +39,16 @@ class SvgController extends Controller
             return '<span>'. $svgRequest->alt .'</span>';
         }
 
+        $basePathPre = 'resources/images/svg/';
+        if ($svgRequest->extern) {
+            $basePathPre = 'resources/images/ext/svg/';
+        }
+        $basePathPost = '.svg';
+
         $svg = new \DOMDocument();
 
         try {
-            $svg->load(base_path('resources/images/svg/' . $svgRequest->path));
+            $svg->load(base_path($basePathPre . $svgRequest->name . $basePathPost));
         } catch (\Throwable $e) {
             return '';
         }

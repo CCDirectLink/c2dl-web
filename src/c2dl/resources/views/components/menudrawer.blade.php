@@ -6,7 +6,7 @@
         <span class="c2dl-menu-trigger-label">Left side drawer switch (Hamburger Menu)</span>
         <span class="c2dl-menu-trigger-hamburger">
             {!! $svgController::provide([
-                'path' => 'hamburger_icon.svg',
+                'name' => 'hamburger_icon',
                 'class' => 'c2dl-svg-hamburger',
                 'id' => 'c2dl-hamburger-icon-1',
                 'width' => '2em',
@@ -21,12 +21,13 @@
             <div class="c2dl-menu-drawer-footer">
                 <div class="c2dl-menu-drawer-first">
                     {!! $svgController::provide([
-                        'path' => 'logo.svg',
+                        'name' => 'logo',
                         'class' => 'c2dl-menu-drawer-logo',
                         'id' => 'c2dl-menu-drawer-logo-1',
                         'width' => '2em',
                         'height' => '2em'
                     ]) !!}
+                    <!--<img class="c2dl-menu-drawer-logo" id="c2dl-menu-drawer-logo-1" src="{{ asset('/images/logo/CCDirectLink.min.svg') }}" width="2em" height="2em">-->
                     <span class="c2dl-menu-drawer-title">{{ $title }}</span>
                 </div>
                 <span class="c2dl-menu-drawer-info">{{ $desc }}</span>

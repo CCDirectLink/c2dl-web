@@ -14,6 +14,12 @@ const mix = require('laravel-mix');
 mix.setPublicPath('public/www-c2dl/');
 
 mix.js('resources/js/app.js', 'public/www-c2dl/js')
-   .sass('resources/sass/app.scss', 'public/www-c2dl/css').options({
-      processCssUrls: false
-});
+   .sass('resources/sass/app.scss', 'public/www-c2dl/css')
+   .sass('resources/sass/colorset/dark.scss', 'public/www-c2dl/css/colorset')
+   .sass('resources/sass/colorset/light.scss', 'public/www-c2dl/css/colorset')
+   .copyDirectory('resources/fonts', 'public/www-c2dl/fonts')
+   .copyDirectory('resources/images', 'public/www-c2dl/images');
+
+if (mix.inProduction()) {
+    mix.version();
+}
