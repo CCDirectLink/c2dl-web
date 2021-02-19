@@ -28,7 +28,7 @@ itemscope itemtype="http://schema.org/Article"
 @section('content')
 <div class="c2dl-news-box">
     <article class="c2dl-news-main">
-      <header class="c2dl-news-title">
+      <div class="c2dl-news-title" role="banner">
         <h1 @isset($entry->page->before) itemprop="name" @else itemprop="articleSection" @endisset class="c2dl-news-title-text">{{ $entry->title }}</h1>
           <div class="c2dl-news-info">
               @if ($entry->author->hasName())
@@ -42,12 +42,12 @@ itemscope itemtype="http://schema.org/Article"
             <time datetime="{{ $entry->updated('c', 'UTC', 'GR') }}" itemprop="dateModified" class="c2dl-news-info-elem c2dl-news-updated" name="time_modified">(last update: {!! $entry->updated() !!})</time>
           @endif
           </div>
-      </header>
-      <main itemprop="articleBody" class="c2dl-news-content">
+      </div>
+      <div itemprop="articleBody" class="c2dl-news-content" role="main">
         {!! $entry->content !!}
-      </main>
+      </div>
         @if ($entry->page->number != 1)
-        <nav class="c2dl-news-nav">
+        <div class="c2dl-news-nav" role="navigation">
             @isset($entry->page->before)
                 <a class="c2dl-bottom-nav-element c2dl-link-before" rel="prev" href="{{ route('news', [ $entry->id,  ($entry->page->before == 1 ? null : $entry->page->before) ]) }}">
                     {!! __('pagination.previous') !!}</a>
@@ -61,7 +61,7 @@ itemscope itemtype="http://schema.org/Article"
             @isset($entry->page->next)
                 <a class="c2dl-bottom-nav-element c2dl-link-next" rel="next" href="{{ route('news', [ $entry->id,  $entry->page->next ]) }}">{!! __('pagination.next') !!}</a>
             @endisset
-        </nav>
+        </div>
         @endif
     </article>
 </div>

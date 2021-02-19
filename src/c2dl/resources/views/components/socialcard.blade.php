@@ -1,7 +1,7 @@
 @inject('svgController', 'App\Http\Controllers\SvgController')
 
 <li class="c2dl-social c2dl-social-{{ $entry->type }} c2dl-social-cardtype-{{ $entry->card_type }}">
-    <div class="c2dl-social-header" role="banner" title="{{ $entry->type }}: {{ $entry->main }}">
+    <div class="c2dl-social-header" role="banner" title="{{ $entry->name }} - {{ $entry->main }}">
         <div class="c2dl-social-container">
         {!! $svgController::provide([
         'name' => $entry->logo,

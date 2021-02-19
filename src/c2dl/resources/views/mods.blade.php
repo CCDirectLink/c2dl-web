@@ -13,7 +13,7 @@
         @endmodentry
       @endforeach
       @if ($mod_info->maxPage != 1)
-      <nav class="c2dl-dataentry-nav">
+      <div class="c2dl-dataentry-nav" role="navigation">
           @if($mod_info->page > 1)
           <a class="c2dl-bottom-nav-element c2dl-link-before" rel="prev" href="{{ route('mods', [ $mod_info->page - 1 ]) }}">
               {!! __('pagination.previous') !!}</a>
@@ -27,7 +27,7 @@
           @if($mod_info->page < $mod_info->maxPage)
           <a class="c2dl-bottom-nav-element c2dl-link-next" rel="next" href="{{ route('mods', [ $mod_info->page + 1 ]) }}">{!! __('pagination.next') !!}</a>
           @endif
-      </nav>
+      </div>
       @endif
   </div>
 </div>
