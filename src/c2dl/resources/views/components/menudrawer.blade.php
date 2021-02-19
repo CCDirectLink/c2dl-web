@@ -20,14 +20,7 @@
             </nav>
             <div class="c2dl-menu-drawer-footer">
                 <div class="c2dl-menu-drawer-first">
-                    {!! $svgController::provide([
-                        'name' => 'logo',
-                        'class' => 'c2dl-menu-drawer-logo',
-                        'id' => 'c2dl-menu-drawer-logo-1',
-                        'width' => '2em',
-                        'height' => '2em'
-                    ]) !!}
-                    <!--<img class="c2dl-menu-drawer-logo" id="c2dl-menu-drawer-logo-1" src="{{ asset('/images/logo/CCDirectLink.min.svg') }}" width="2em" height="2em">-->
+                    <img class="c2dl-menu-drawer-logo" id="c2dl-menu-drawer-logo-1" src="{{ asset('/images/logo/svg/CCDirectLink.min.svg') }}" width="2em" height="2em" alt="CCDirectLink (C2DL) Logo" title="CCDirectLink">
                     <span class="c2dl-menu-drawer-title">{{ $title }}</span>
                 </div>
                 <span class="c2dl-menu-drawer-info">{{ $desc }}</span>
