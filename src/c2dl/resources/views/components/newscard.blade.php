@@ -1,5 +1,5 @@
 <article class="c2dl-newscard">
-    <header class="c2dl-newscard-title" itemscope itemtype="http://schema.org/Article">
+    <div class="c2dl-newscard-title" itemscope itemtype="http://schema.org/Article" role="banner">
         <h1 itemprop="name" class="c2dl-newscard-title-text">{{ $entry->title }}</h1>
         <div class="c2dl-newscard-info">
             @if ($entry->author->hasName())
@@ -13,17 +13,17 @@
                 <time datetime="{{ $entry->updated('c', 'UTC', 'GR') }}" itemprop="dateModified" class="c2dl-newscard-info-elem c2dl-newscard-updated" name="time_modified">(last update {!! $entry->updated() !!})</time>
             @endif
         </div>
-    </header>
-    <main itemprop="articleBody" class="c2dl-newscard-preview-text">
+    </div>
+    <div itemprop="articleBody" class="c2dl-newscard-preview-text" role="main">
         {{ $entry->preview->content }}
-    </main>
-    <nav class="c2dl-newscard-nav">
+    </div>
+    <div class="c2dl-newscard-nav" role="navigation">
         @if ($entry->page->number == 1)
-        <a class="c2dl-bottom-nav-element" href="{{ route('news', $entry->id) }}">{{ __('home.read_more') }}</a>
+        <a class="c2dl-bottom-nav-element" href="{{ route('news', $entry->id) }}" title="{{ __('home.read_desc', ['title' => $entry->title ]) }}">{{ __('home.read_more') }}</a>
         @else
             @foreach ($entry->page->list as $page)
-        <a class="c2dl-bottom-nav-element" href="{{ route('news', [ $entry->id, ($page == 1 ? null : $page) ]) }}">{{ __('home.page') }} @if ($loop->first)<span itemprop="pageStart">@endif @if ($loop->last)<span itemprop="pageEnd">@endif{{ $page }} @if ($loop->first)</span>@endif @if ($loop->last)</span>@endif</a>
+        <a class="c2dl-bottom-nav-element" href="{{ route('news', [ $entry->id, ($page == 1 ? null : $page) ]) }}" title="{{ __('home.page_desc', ['title' => $entry->title, 'pagenum' => $page ]) }}">@if ($loop->first)<span itemprop="pageStart">@endif @if ($loop->last)<span itemprop="pageEnd">@endif{{ __('home.page', [ 'pagenum' => $page ]) }} @if ($loop->first)</span>@endif @if ($loop->last)</span>@endif</a>
             @endforeach
         @endif
-    </nav>
+    </div>
 </article>

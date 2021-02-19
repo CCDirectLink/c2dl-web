@@ -57,6 +57,7 @@ class SocialController extends Controller
             return new \App\DTO\Social([
                 'type' => 'discord',
                 'name' => 'Discord',
+                'desc' => 'Join the CCDirectLink Discord',
                 'logo' => 'discord_logo',
                 'main' => $fallback['main'],
                 'sub' => $fallback['sub'],
@@ -69,6 +70,7 @@ class SocialController extends Controller
         return new \App\DTO\Social([
             'type' => 'discord',
             'name' => 'Discord',
+            'desc' => 'Join the CCDirectLink Discord',
             'logo' => 'discord_logo',
             'main' => $discord_widget_json['name'] ?? $fallback['main'],
             'sub' => '#' . $discord_widget_json['id'] ?? $fallback['sub'],
@@ -83,6 +85,7 @@ class SocialController extends Controller
         return new \App\DTO\Social([
             'type' => 'twitter',
             'name' => 'Twitter',
+            'desc' => 'Visit CCDirectLink on Twitter',
             'logo' => 'twitter_logo',
             'main' => 'CCDirectLink',
             'sub' => '@CCDirectLink',
@@ -96,6 +99,7 @@ class SocialController extends Controller
         return new \App\DTO\Social([
             'type' => 'github',
             'name' => 'GitHub',
+            'desc' => 'Visit CCDirectLink on GitHub',
             'logo' => 'github_logo',
             'main' => 'CCDirectLink',
             'link' => 'https://github.com/CCDirectLink',
@@ -108,6 +112,7 @@ class SocialController extends Controller
         return new \App\DTO\Social([
             'type' => 'gitlab',
             'name' => 'GitLab',
+            'desc' => 'Visit CCDirectLink on GitLab',
             'logo' => 'gitlab_color_logo',
             'main' => 'CCDirectLink',
             'link' => 'https://gitlab.com/CCDirectLink',
@@ -120,6 +125,7 @@ class SocialController extends Controller
         return new \App\DTO\Social([
             'type' => 'reddit',
             'name' => 'Reddit',
+            'desc' => 'Visit CCDirectLink on Reddit',
             'logo' => 'reddit_logo',
             'main' => 'CCModding',
             'link' => 'https://www.reddit.com/r/CrossCodeModding/',
@@ -154,6 +160,7 @@ class SocialController extends Controller
         $_discord_arcane = new \App\DTO\Social([
             'type' => 'discord_arcane',
             'name' => 'Discord',
+            'desc' => 'Join the recommended Discord "CC: Arcane Lab Mod"',
             'logo' => 'discord_logo',
             'main' => 'CC: Arcane Lab Mod',
             'link' => 'https://discord.gg/dUbdmqh',
@@ -162,6 +169,7 @@ class SocialController extends Controller
         $_discord_genesis = new \App\DTO\Social([
             'type' => 'discord_genesis',
             'name' => 'Discord',
+            'desc' => 'Join the recommended Discord "CC: Autumn\'s Genesis"',
             'logo' => 'discord_logo',
             'main' => 'CC: Autumn\'s Genesis',
             'link' => 'https://discord.gg/Seq9Kfq',
@@ -170,6 +178,7 @@ class SocialController extends Controller
         $_discord_bee = new \App\DTO\Social([
             'type' => 'discord_bee',
             'name' => 'Discord',
+            'desc' => 'Join the recommended Discord "CrossCode: BEE"',
             'logo' => 'discord_logo',
             'main' => 'CrossCode: BEE',
             'link' => 'https://discord.gg/zVRnU9q',
@@ -178,6 +187,7 @@ class SocialController extends Controller
         $_discord_monMod = new \App\DTO\Social([
             'type' => 'discord_mon_mod',
             'name' => 'Discord',
+            'desc' => 'Join the recommended Discord "MonMod and Emotes"',
             'logo' => 'discord_logo',
             'main' => 'MonMod and Emotes',
             'link' => 'https://discord.gg/TfaPvqZ',

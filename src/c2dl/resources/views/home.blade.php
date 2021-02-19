@@ -9,24 +9,24 @@
 
 @section('content')
 <div class="home-content">
-    <article class="home-main">
-        <header>
+    <div class="home-main">
+        <div>
             <h1>{{ __('home.news') }}</h1>
-        </header>
-        <main class="c2dl-news-list">
+        </div>
+        <div class="c2dl-news-list">
             @foreach ($newsController::getNewsList(true) as $news)
                 @newscard(['entry' => $news ])
                 @endnewscard
             @endforeach
-        </main>
-    </article>
+        </div>
+    </div>
     <div class="home-sidebar">
         @if (false)
-        <article>
-            <header>
+        <div class="home-media">
+            <div>
                 <h1>{{ __('home.media') }}</h1>
-            </header>
-            <main>
+            </div>
+            <div>
                 <ul>
                     <li><a class="mediaEntry" href="#" rel="noopener" target="_blank">
                             CrossCode Ultimate Logo Package (xx.x MiB / zip)
@@ -35,31 +35,35 @@
                             CCDirectLink Logo Package (xx.x MiB / zip)
                     </a></li>
                 </ul>
-            </main>
-        </article>
+            </div>
+        </div>
         @endif
-        <article>
-            <header>
-                <h1>{{ __('home.social_media') }}</h1>
-            </header>
-            <main class="c2dl-social-list">
-                @foreach ($socialController::getSocial() as $social_entry)
-                @socialcard([ 'entry' => $social_entry ])
-                @endsocialcard
-                @endforeach
-            </main>
+        <div class="home-social">
+            <div class="home-social-content home-social-self-content">
+                <div>
+                    <h1>{{ __('home.social_media') }}</h1>
+                </div>
+                <div class="c2dl-social-list">
+                    @foreach ($socialController::getSocial() as $social_entry)
+                    @socialcard([ 'entry' => $social_entry ])
+                    @endsocialcard
+                    @endforeach
+                </div>
+            </div>
             @if ($socialController::hasRecommended())
-            <header>
-                <h1>{{ __('home.recommended') }}</h1>
-            </header>
-            <main class="c2dl-social-list">
-                @foreach ($socialController::getRecommended() as $social_entry)
-                @socialcard([ 'entry' => $social_entry ])
-                @endsocialcard
-                @endforeach
-            </main>
+            <div class="home-social-content home-social-recommend-content">
+                <div>
+                    <h1>{{ __('home.recommended') }}</h1>
+                </div>
+                <div class="c2dl-social-list">
+                    @foreach ($socialController::getRecommended() as $social_entry)
+                    @socialcard([ 'entry' => $social_entry ])
+                    @endsocialcard
+                    @endforeach
+                </div>
+            </div>
             @endif
-        </article>
+        </div>
     </div>
 </div>
 @endsection

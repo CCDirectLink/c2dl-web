@@ -15,5 +15,6 @@ return [
     'about' => 'About',
     'admins' => 'Admins',
     'publicMember' => 'Public Member',
+    'desc' => 'About CCDirectLink',
 
 ];

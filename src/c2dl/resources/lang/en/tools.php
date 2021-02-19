@@ -11,5 +11,6 @@ return [
 
     'title' => 'CCDirectLink - CrossCode Tools',
     'name' => 'Tools',
+    'desc' => 'Tools',
 
 ];

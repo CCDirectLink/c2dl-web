@@ -1,4 +1,4 @@
-<header class="c2dl-header">
+<header class="c2dl-header" role="banner">
     @isNotTextBrowser
         @menudrawer(['title' => $title, 'desc' => $desc])
             {{ $slot }}

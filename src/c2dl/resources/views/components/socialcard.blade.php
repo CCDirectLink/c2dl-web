@@ -26,7 +26,7 @@
     </header>
     <nav class="c2dl-social-nav">
         <a class="c2dl-link-button c2dl-social-link c2dl-social-{{ $entry->type }}-link" rel="noopener" target="_blank"
-           href="{{ $entry->link }}">
+           href="{{ $entry->link }}" @if ($entry->desc) title="{{ $entry->desc }}" @endif>
             @if ($entry->link_type == 'join')
                 {{ __('home.join') }}
             @else

@@ -45,27 +45,27 @@
             <ul class="c2dl-menu-entry-list">
                 @if (Route::has('home'))
                     <li class="c2dl-menu-entry">
-                        <a class="c2dl-menu-link" href="{{ route('home') }}">{{ __('home.name') }}</a>
+                        <a class="c2dl-menu-link" href="{{ route('home') }}" title="{{ __('home.desc') }}">{{ __('home.name') }}</a>
                     </li>
                 @endif
                 @if (Route::has('mods'))
                     <li class="c2dl-menu-entry">
-                        <a class="c2dl-menu-link" href="{{ route('mods') }}">{{ __('mods.name') }}</a>
+                        <a class="c2dl-menu-link" href="{{ route('mods') }}" title="{{ __('mods.desc') }}">{{ __('mods.name') }}</a>
                     </li>
                 @endif
                 @if (Route::has('mods'))
                     <li class="c2dl-menu-entry">
-                        <a class="c2dl-menu-link" href="{{ route('tools') }}">{{ __('tools.name') }}</a>
+                        <a class="c2dl-menu-link" href="{{ route('tools') }}" title="{{ __('tools.desc') }}">{{ __('tools.name') }}</a>
                     </li>
                 @endif
                 @if (Route::has('wiki'))
                 <li class="c2dl-menu-entry">
-                    <a class="c2dl-menu-link" href="{{ route('wiki') }}">{{ __('wiki.name') }}</a>
+                    <a class="c2dl-menu-link" href="{{ route('wiki') }}" title="{{ __('wiki.desc') }}">{{ __('wiki.name') }}</a>
                 </li>
                 @endif
                 @if (Route::has('about'))
                 <li class="c2dl-menu-entry">
-                    <a class="c2dl-menu-link" href="{{ route('about') }}">{{ __('info.about') }}</a>
+                    <a class="c2dl-menu-link" href="{{ route('about') }}" title="{{ __('info.desc') }}">{{ __('info.about') }}</a>
                 </li>
                 @endif
                 @if (false)
@@ -83,7 +83,7 @@
                 @endif
             </ul>
             @endpageheader
-            <main class="c2dl-main" id="c2dl-main-app">
+            <main class="c2dl-main" id="c2dl-main-app" role="main">
                 @yield('content')
             </main>
         </div>
