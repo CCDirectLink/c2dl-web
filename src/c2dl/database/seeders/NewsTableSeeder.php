@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use App\Models\News;
 
@@ -12,7 +14,6 @@ class NewsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(News::class, 2)->create();
-        factory(News::class, 8)->create();
+        News::factory()->count(8)->create();
     }
 }
