@@ -11,6 +11,6 @@ return [
 
     'title' => 'CCDirectLink - CrossCode Mods',
     'name' => 'Mods',
-    'desc' => 'Mods',
+    'desc' => 'Switch to "Mods" page',
 
 ];

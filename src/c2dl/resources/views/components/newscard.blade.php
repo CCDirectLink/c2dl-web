@@ -1,6 +1,6 @@
 <article class="c2dl-newscard">
     <div class="c2dl-newscard-title" itemscope itemtype="http://schema.org/Article" role="banner">
-        <h1 itemprop="name" class="c2dl-newscard-title-text">{{ $entry->title }}</h1>
+        <h2 itemprop="name" class="c2dl-newscard-title-text">{{ $entry->title }}</h2>
         <div class="c2dl-newscard-info">
             @if ($entry->author->hasName())
                 <span itemprop="author" name="author" class="c2dl-newscard-info-elem c2dl-newscard-author">{{ $entry->author->name }}</span>
@@ -19,7 +19,7 @@
     </div>
     <div class="c2dl-newscard-nav" role="navigation">
         @if ($entry->page->number == 1)
-        <a class="c2dl-bottom-nav-element" href="{{ route('news', $entry->id) }}" title="{{ __('home.read_desc', ['title' => $entry->title ]) }}">{{ __('home.read_more') }}</a>
+        <a class="c2dl-bottom-nav-element" href="{{ route('news', $entry->id) }}" title="{{ __('home.read_desc', ['title' => $entry->title ]) }}">{{ __('home.read_more', ['title' => $entry->title ]) }}</a>
         @else
             @foreach ($entry->page->list as $page)
         <a class="c2dl-bottom-nav-element" href="{{ route('news', [ $entry->id, ($page == 1 ? null : $page) ]) }}" title="{{ __('home.page_desc', ['title' => $entry->title, 'pagenum' => $page ]) }}">@if ($loop->first)<span itemprop="pageStart">@endif @if ($loop->last)<span itemprop="pageEnd">@endif{{ __('home.page', [ 'pagenum' => $page ]) }} @if ($loop->first)</span>@endif @if ($loop->last)</span>@endif</a>

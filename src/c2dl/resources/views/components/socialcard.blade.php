@@ -1,7 +1,7 @@
 @inject('svgController', 'App\Http\Controllers\SvgController')
 
-<article class="c2dl-social c2dl-social-{{ $entry->type }} c2dl-social-cardtype-{{ $entry->card_type }}">
-    <header class="c2dl-social-header">
+<li class="c2dl-social c2dl-social-{{ $entry->type }} c2dl-social-cardtype-{{ $entry->card_type }}">
+    <div class="c2dl-social-header" role="banner" title="{{ $entry->type }}: {{ $entry->main }}">
         <div class="c2dl-social-container">
         {!! $svgController::provide([
         'name' => $entry->logo,
@@ -23,8 +23,8 @@
         </div>
         @endisset
         </div>
-    </header>
-    <nav class="c2dl-social-nav">
+    </div>
+    <div class="c2dl-social-nav" role="navigation">
         <a class="c2dl-link-button c2dl-social-link c2dl-social-{{ $entry->type }}-link" rel="noopener" target="_blank"
            href="{{ $entry->link }}" @if ($entry->desc) title="{{ $entry->desc }}" @endif>
             @if ($entry->link_type == 'join')
@@ -33,5 +33,5 @@
                 {{ __('home.visit') }}
             @endif
         </a>
-    </nav>
-</article>
+    </div>
+</li>

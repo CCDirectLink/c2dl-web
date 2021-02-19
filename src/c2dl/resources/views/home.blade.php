@@ -43,24 +43,24 @@
                 <div>
                     <h1>{{ __('home.social_media') }}</h1>
                 </div>
-                <div class="c2dl-social-list">
+                <ul class="c2dl-social-list">
                     @foreach ($socialController::getSocial() as $social_entry)
                     @socialcard([ 'entry' => $social_entry ])
                     @endsocialcard
                     @endforeach
-                </div>
+                </ul>
             </div>
             @if ($socialController::hasRecommended())
             <div class="home-social-content home-social-recommend-content">
                 <div>
                     <h1>{{ __('home.recommended') }}</h1>
                 </div>
-                <div class="c2dl-social-list">
+                <ul class="c2dl-social-list">
                     @foreach ($socialController::getRecommended() as $social_entry)
                     @socialcard([ 'entry' => $social_entry ])
                     @endsocialcard
                     @endforeach
-                </div>
+                </ul>
             </div>
             @endif
         </div>
