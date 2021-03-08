@@ -18,17 +18,17 @@
         <link rel="icon" href="/images/logo/png/CCDirectLink-512x512.png" type="image/png" sizes="512x512" />
 
 		<link rel="stylesheet" type="text/css"
-              href="{{ asset('/css/app.css') }}" media="all" id="c2dl-style">
+              href="{{ mix('/css/app.css') }}" media="all" id="c2dl-style">
         @if(Config::get('app.debug') == 1)
         <link rel="stylesheet" type="text/css"
-              href="{{ asset('/css/.dev.css') }}" media="all" id="c2dl-aditional">
+              href="/css/.dev.css" media="all" id="c2dl-aditional">
         @endif
 
         @yield('head')
 
-        <script src="{{ asset('/js/app.js') }}"></script>
+        <script src="{{ mix('/js/app.js') }}"></script>
         @if(Config::get('app.debug') == 1)
-        <script src="{{ asset('/js/.dev.js') }}"></script>
+        <script src="/js/.dev.js"></script>
         @endif
 	</head>
 	<body class="c2dl-body">
