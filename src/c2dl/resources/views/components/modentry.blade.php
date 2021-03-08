@@ -48,7 +48,6 @@
             <a class="c2dl-link-button c2dl-data-link c2dl-download" href="{{ $data->installation[0]->url }}" rel="noopener" target="_blank" title="Download ({{ $data->metadata->name }})">
                 {!! $svgController::provide([
                 'name' => 'download_icon',
-                'extern' => true,
                 'class' => 'c2dl-link-icon c2dl-download-icon',
                 'width' => '22px',
                 'height' => '22px'
