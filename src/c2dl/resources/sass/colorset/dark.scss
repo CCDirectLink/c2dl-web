@@ -1,8 +1,8 @@
 @mixin c2dl-header-background-small {
     --header-background: linear-gradient(to right, transparent,
     var(--header-background-40) 40%, var(--header-background-60) 60%) no-repeat left,
-    url('/images/bg/cc-lea-small.png') no-repeat left 23.5em top 6px,
-    url('/images/bg/cc-sergey-small.png') no-repeat left 27em top -28px,
+    url('/images/ext/bg/cc-lea-small.png') no-repeat left 23.5em top 6px,
+    url('/images/ext/bg/cc-sergey-small.png') no-repeat left 27em top -28px,
     url('/images/bg/circuit_pattern_dark.svg') repeat left,
     linear-gradient(var(--header-background-a), var(--header-background-b)) no-repeat left;
 }
@@ -10,8 +10,8 @@
 @mixin c2dl-header-background-full {
     --header-background: linear-gradient(to right, transparent,
         var(--header-background-40) 40%, var(--header-background-60) 60%) no-repeat left,
-    url('/images/bg/cc-lea.png') no-repeat left 19.5em top 6px,
-    url('/images/bg/cc-sergey.png') no-repeat left 25em top -56px,
+    url('/images/ext/bg/cc-lea.png') no-repeat left 19.5em top 6px,
+    url('/images/ext/bg/cc-sergey.png') no-repeat left 25em top -56px,
     url('/images/bg/circuit_pattern_dark.svg') repeat left,
     linear-gradient(var(--header-background-a), var(--header-background-b)) no-repeat left;
 }
