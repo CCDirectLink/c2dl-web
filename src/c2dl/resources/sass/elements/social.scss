@@ -28,6 +28,10 @@
 .c2dl-social-header {
 }
 
+.c2dl-social-github .c2dl-social-header {
+    min-height: 5em;
+}
+
 .c2dl-social-container {
     display: flex;
     flex-direction: row;
@@ -131,6 +135,10 @@ animation
 }
 
 @media screen and (max-width: 839px) {
+    .c2dl-social-github .c2dl-social-header {
+        min-height: inherit;
+    }
+
     .c2dl-social-cardtype-half {
         width: 100%;
         margin-left: 0;
