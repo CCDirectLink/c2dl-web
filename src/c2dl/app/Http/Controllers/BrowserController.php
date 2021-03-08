@@ -17,7 +17,7 @@ class BrowserController extends Controller
     }
 
     /**
-     * Trrue if text brrowser
+     * True if text browser
      *
      * @return boolean Text Browser
      */
