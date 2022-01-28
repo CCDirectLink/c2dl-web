@@ -17,6 +17,22 @@ class NewsController extends Controller
 
     }
 
+    static public function rssFeed()
+    {
+        $posts = [];
+        $_newsList = News::all();
+
+        if (!isset($_newsList[0])) {
+            return 'Something went horribly wrong, and no posts were found. Did you forget to seed the database?';
+        }
+
+        foreach ($_newsList as $post) {
+            array_push($posts, NewsController::compileData($post));
+        }
+
+        return response()->view('feed', ['posts' => $posts])->header('Content-Type', 'text/xml');
+    }
+
     static public function getNewsList(bool $pinned = false,
                                        int $limit = 10,
                                        string $lang = null) : array
