@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +45,9 @@ Route::prefix('/cc')->group(function () {
     Route::get('/news/{news_id}/{page?}', 'NewsController@show')->name('news')
         ->where('news_id', '^[1-9]([0-9]*)$')
         ->where('page', '^[1-9]([0-9]*)$');
+
+    // RSS Feed
+    Route::get('/news/feed', 'NewsController@rssFeed')->name('news.feed');
 
     // Authentication
     // Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
