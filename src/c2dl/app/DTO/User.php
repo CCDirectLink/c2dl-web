@@ -6,36 +6,46 @@ class User
 {
     public $id; // int
     public $name; // string
-    public $bio; // string
+    public $bio; // string|array
 
-    function __construct($data = null) {
-        $this->id = null;
-        $this->name = null;
-        $this->bio = null;
-
-        if (isset($data[0]) && is_int($data[0])) {
-            $this->id = $data[0];
+    /**
+     * @param int $id
+     * @param string $name
+     * @param string|array $bio
+     */
+    function __construct($id, $name, $bio)
+    {
+        if (is_int($id)) {
+            $this->id = $id;
+        } else {
+            throw new \InvalidArgumentException('$id must be an integer');
         }
 
-        if (isset($data[1]) && is_string($data[1])) {
-            $this->name = $data[1];
+        if (is_string($name)) {
+            $this->name = $name;
+        } else {
+            throw new \InvalidArgumentException('$name must be a string');
         }
 
-        if (isset($data[2]) && is_string($data[2])) {
-            $this->bio = $data[2];
+        if (is_string($bio) || is_array($bio)) {
+            $this->bio = $bio;
+        } else {
+            throw new \InvalidArgumentException('$bio must be a string or an array');
         }
-
     }
 
-    function hasId(): bool {
+    function hasId(): bool
+    {
         return (!is_null($this->id));
     }
 
-    function hasName(): bool {
+    function hasName(): bool
+    {
         return (!is_null($this->name));
     }
 
-    function hasBio(): bool {
+    function hasBio(): bool
+    {
         return (!is_null($this->bio));
     }
 }
