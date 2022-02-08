@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\DTO\User;
 
 class InfoController extends Controller
 {
@@ -19,13 +19,11 @@ class InfoController extends Controller
     static public function adminList()
     {
         $admin_list = [
-            new \App\DTO\User([ 0, 'Nnubes256', '<ul><li>CCDirectLink admin</li><li>c2dl.info management</li>'.
-                '<li>CrossCode discord mod</li></ul>' ]),
-            new \App\DTO\User([ 1, '2767mr', '<ul><li>CCDirectLink admin</li><li>c2dl.info management</li></ul>' ]),
-            new \App\DTO\User([ 2, 'ac2pic', '<ul><li>CCDirectLink admin</li><li>c2dl.info management</li></ul>' ]),
-            new \App\DTO\User([ 3, 'omega12', '<ul><li>CCDirectLink admin</li><li>c2dl.info management</li></ul>' ]),
-            new \App\DTO\User([ 4, 'Streetclaw', '<ul><li>CCDirectLink admin</li>' .
-                    '<li>c2dl.info host & management</li><li>CrossCode discord mod</li></ul>' ]),
+            new User(0, 'Nnubes256', ['CCDirectLink admin', 'c2dl.info management', 'CrossCode Discord moderator']),
+            new User(1, '2767mr', ['CCDirectLink admin', 'c2dl.info management']),
+            new User(2, 'ac2pic', ['CCDirectLink admin', 'c2dl.info management']),
+            new User(3, 'omega12', ['CCDirectLink admin', 'c2dl.info management']),
+            new User(4, 'Streetclaw', ['CCDirectLink admin', 'c2dl.info management', 'CrossCode Discord moderator']),
         ];
 
         return $admin_list;
@@ -34,10 +32,10 @@ class InfoController extends Controller
     static public function publicMemberList()
     {
         $public_member_list = [
-            new \App\DTO\User([ 0, 'Keanu', '<ul><li>CCDirectLink member</li><li>c2dl.info management</li></ul>' ]),
-            new \App\DTO\User([ 1, 'dmitmel', 'CCDirectLink member' ]),
-            new \App\DTO\User([ 2, 'Vankerkom', 'CCDirectLink member' ]),
-            new \App\DTO\User([ 3, 'Alwinfy', '<ul><li>CCDirectLink member</li><li>Article editor</li></ul>' ]),
+            new User(0, 'Keanu', ['CCDirectLink member', 'c2dl.info management']),
+            new User(1, 'dmitmel', 'CCDirectLink member'),
+            new User(2, 'Vankerkom', 'CCDirectLink member'),
+            new User(3, 'Alwinfy', ['CCDirectLink member', 'Article editor']),
         ];
 
         return $public_member_list;
