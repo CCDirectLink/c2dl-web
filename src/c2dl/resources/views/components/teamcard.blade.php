@@ -2,6 +2,7 @@
     <div class="c2dl-teamcard-title">
         <h1 class="c2dl-teamcard-title-text">{{ $name }}</h1>
     </div>
+    @if ($bio != null)
     <div class="c2dl-teamcard-text">
         @if (gettype($bio) == 'string')
             {!! $bio !!}
@@ -13,4 +14,5 @@
             </ul>
         @endif
     </div>
+    @endif
 </div>

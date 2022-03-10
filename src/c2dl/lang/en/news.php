@@ -13,6 +13,4 @@ return [
     'preTitle' => 'CCDirectLink News – ',
     'postTitle' => '',
 
-    'unknownUser' => '(unknown)',
-
 ];

@@ -17,10 +17,16 @@ class NewsController extends Controller
 
     }
 
-    static public function rssFeed()
+    static public function rssFeed(int $limit = 20)
     {
         $posts = [];
-        $_newsList = News::all();
+        $_newsList = News::where('active', 1)
+            ->where('page_number', 1)
+            ->orderBy('news_id', 'desc')
+            ->take($limit)
+            ->get();
+
+        $_lastUpdate = NewsController::getLastUpdate();
 
         if (!isset($_newsList[0])) {
             return 'Something went horribly wrong, and no posts were found. Did you forget to seed the database?';
@@ -30,7 +36,29 @@ class NewsController extends Controller
             array_push($posts, NewsController::compileData($post));
         }
 
-        return response()->view('feed', ['posts' => $posts])->header('Content-Type', 'text/xml');
+        return response()->view(
+            'feed',
+            [ 'posts' => $posts, 'lastUpdate' => $_lastUpdate ])
+            ->header('Content-Type', 'application/atom+xml');
+    }
+
+    static public function getLastUpdate()
+    {
+        $_latest_created = News::where('active', 1)
+            ->latest()
+            ->first()?->created_at;
+
+        $_latest_updated = News::where('active', 1)
+            ->whereNotNull('updated_at')
+            ->orderBy('updated_at', 'desc')
+            ->first()?->updated_at;
+
+        if ($_latest_updated < $_latest_created) {
+            return $_latest_created ?? new DateTime();
+        }
+        else {
+            return $_latest_updated ?? new DateTime();
+        }
     }
 
     static public function getNewsList(bool $pinned = false,
@@ -145,7 +173,7 @@ class NewsController extends Controller
         }
 
         if (is_null($author)) {
-            $author = new \App\DTO\User();
+            $author = new \App\DTO\User(0, "CCDirectLink");
         }
 
         return new \App\DTO\News($entry, $preview, $author, $page_data);

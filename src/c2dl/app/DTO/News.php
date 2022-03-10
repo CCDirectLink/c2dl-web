@@ -152,12 +152,12 @@ class News
         return $this->_convertGregorian($dateTime, $format, $calender);
     }
 
-    function created(string $format = null, string $timezone = 'UTC', string $calender = 'HE.HTML') : string
+    function created(string $format = null, string $timezone = 'UTC', string $calender = 'HE') : string
     {
         return $this->_getDateTimeString($this->_created, $timezone, $calender, $format);
     }
 
-    function updated(string $format = null, string $timezone = 'UTC', string $calender = 'HE.HTML') : string
+    function updated(string $format = null, string $timezone = 'UTC', string $calender = 'HE') : string
     {
         return $this->_getDateTimeString($this->_updated, $timezone, $calender, $format);
     }
