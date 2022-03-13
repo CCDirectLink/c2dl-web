@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+{!! '<'.'?xml version="1.0" encoding="utf-8"?>' !!}
 <feed xmlns="http://www.w3.org/2005/Atom">
 
     <title>News | CCDirectLink</title>
@@ -11,7 +11,7 @@
        <name>CCDirectLink</name>
     </author>
     <id>{{ url('/cc/news/feed') }}</id>
-    <generator version="1.0.0">c2dl-feedly</generator>
+    {!! '<generator version="1.0.0">c2dl-feedly</generator>' !!}
 
     @foreach ($posts as $post)
     <entry>

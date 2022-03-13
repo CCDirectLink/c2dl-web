@@ -14,9 +14,9 @@ class News
     public $author; // User
     public $page; // Parination
 
-    function __construct($data = null,
+    function __construct(\App\DTO\User $author,
+                         $data = null,
                          string $preview = null,
-                         \App\DTO\User $author = null,
                          \App\DTO\Pagination $page_data = null) {
         $this->id = null;
         $this->_created = null;
@@ -24,6 +24,7 @@ class News
         $this->language = 'en';
         $this->title = null;
         $this->content = null;
+        $this->author = $author;
 
         if (isset($data->news_id) && is_int($data->news_id)) {
             $this->id = $data->news_id;
@@ -64,13 +65,6 @@ class News
         }
 
         $this->preview = new \App\DTO\NewsPreview($_preview);
-
-        if (isset($author) && is_object($author)) {
-            $this->author = $author;
-        }
-        else {
-            $this->author = new \App\DTO\User();
-        }
 
         if (isset($page_data) && is_object($page_data)) {
             $this->page = $page_data;

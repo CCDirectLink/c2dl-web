@@ -169,14 +169,10 @@ class NewsController extends Controller
         }
         catch (\Throwable $e) {
             // should never happen (multiple users with same id)
-            $author = null;
+            $author = UserController::getUser(0);
         }
 
-        if (is_null($author)) {
-            $author = new \App\DTO\User(0, "CCDirectLink");
-        }
-
-        return new \App\DTO\News($entry, $preview, $author, $page_data);
+        return new \App\DTO\News($author, $entry, $preview, $page_data);
     }
 
     /**
