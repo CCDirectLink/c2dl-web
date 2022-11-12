@@ -68,7 +68,6 @@
                     <a class="c2dl-menu-link" href="{{ route('about') }}" title="{{ __('info.desc') }}">{{ __('info.about') }}</a>
                 </li>
                 @endif
-                @if (false)
                 @guest
                     <li class="c2dl-menu-entry">
                         <a class="c2dl-menu-link" href="{{ route('login') }}">{{ __('auth.login') }}</a>
@@ -78,9 +77,7 @@
                             <a class="c2dl-menu-link" href="{{ route('register') }}">{{ __('auth.register') }}</a>
                         </li>
                     @endif
-                @else
                 @endguest
-                @endif
             </ul>
             @endpageheader
             <main class="c2dl-main" id="c2dl-main-app" role="main">

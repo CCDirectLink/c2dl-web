@@ -20,7 +20,7 @@ class CreateMainNewsTable extends Migration
             $table->primary(['news_id', 'page_number', 'lang']);
             // not foreign (seperate database)
             $table->unsignedBigInteger('author_id')
-                ->comment('Author id (acc.acc_user/user_id)');
+                ->comment('Author id (acc.users/user_id)');
             $table->string('title', 64)->nullable()->comment('News title');
             $table->longText('content')->comment('News content');
             $table->string('preview_image')->comment('Preview image path')->nullable();

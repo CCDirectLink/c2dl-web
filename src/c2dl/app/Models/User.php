@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     protected $connection = 'acc';
-    protected $table = 'acc_user';
+    protected $table = 'users';
     protected $primaryKey = 'user_id';
 
     use HasFactory, Notifiable;
@@ -22,6 +22,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'email',
+        'password',
     ];
 
     /**
@@ -30,6 +32,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
+        'password',
         'remember_token',
     ];
 
