@@ -16,12 +16,12 @@ class CreateAccUserTable extends Migration
         Schema::connection('acc')->create('users', function (Blueprint $table) {
             $table->id('user_id');
             $table->string('name', 64)->unique()->comment('Unique user name');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->comment('Unique user email');
             $table->boolean('active')->default(false)
                 ->comment('True if user is usable/active - False user not exist (anymore)');
             $table->dateTime('validate_at')->nullable()
                 ->comment('Date if user validated (usable) - null unvalidated');
-            $table->string('password');
+            $table->string('password')->comment('User chosen password');
             $table->rememberToken();
             $table->timestamps();
         });
