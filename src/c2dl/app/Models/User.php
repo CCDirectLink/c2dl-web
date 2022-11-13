@@ -44,4 +44,9 @@ class User extends Authenticatable
     protected $casts = [
         'validate_at' => 'datetime',
     ];
+
+    public function currentAccessToken()
+    {
+        return $this->current_token;
+    }
 }

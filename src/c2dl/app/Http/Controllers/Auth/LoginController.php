@@ -117,10 +117,14 @@ class LoginController extends Controller
     public function apiLogin(Request $request)
     {
         if ($this->attemptLogin($request)) {
-            Auth::user()->tokens()->delete();
+            $user = Auth::user();
+            $token = $user->createToken("{$request->name}_token");
+            $user->current_token = $token->accessToken->token;
+            $user->save();
+
             return response()->json([
                 'name' => "{$request->name}_token",
-                'token' => Auth::user()->createToken("{$request->name}_token")->accessToken->token
+                'token' => $token->accessToken->token
             ]);
         } else {
             return response()->json([
@@ -136,8 +140,7 @@ class LoginController extends Controller
      */
     public function userByToken(Request $request)
     {
-        $token = DB::table('personal_access_tokens')->where('token', $request->get('token'))->first();
-        $user = User::where('user_id', $token->tokenable_id)->first();
+        $user = User::where('current_token', $request->get('token'))->first();
         return $user->toJson();
     }
 
