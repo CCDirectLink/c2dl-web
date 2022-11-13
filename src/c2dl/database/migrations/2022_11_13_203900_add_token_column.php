@@ -15,7 +15,7 @@ return new class extends Migration
     {
         //
         Schema::connection('acc')->table('users', function (Blueprint $table) {
-            $table->string('current_token', 64)->unique();
+            $table->string('current_token', 64)->unique()->nullable();
         });
     }
 
