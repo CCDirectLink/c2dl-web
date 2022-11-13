@@ -16,7 +16,7 @@ class CreateAccMailTable extends Migration
         Schema::connection('acc')->create('acc_mail', function (Blueprint $table) {
             $table->string('mail', 64)->primary()->comment('Unique Mail Address');
             $table->unsignedBigInteger('user_id')->comment('User reference');
-            $table->foreign('user_id')->references('user_id')->on('users')
+            $table->foreign('user_id')->references('user_id')->on('acc_user')
                 ->onDelete('cascade')->onUpdate('cascade');
             $table->string('label', 64)->nullable()->comment('User-Custom Mail label');
             $table->boolean('prim_addr')->default(true)->comment('True if primary');

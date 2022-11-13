@@ -13,17 +13,16 @@ class CreateAccUserTable extends Migration
      */
     public function up()
     {
-        Schema::connection('acc')->create('users', function (Blueprint $table) {
-            $table->id('user_id');
+        Schema::connection('acc')->create('acc_user', function (Blueprint $table) {
+            $table->bigIncrements('user_id')->comment('Unique user id');
             $table->string('name', 64)->unique()->comment('Unique user name');
-            $table->string('email')->unique()->comment('Unique user email');
             $table->boolean('active')->default(false)
                 ->comment('True if user is usable/active - False user not exist (anymore)');
             $table->dateTime('validate_at')->nullable()
                 ->comment('Date if user validated (usable) - null unvalidated');
-            $table->string('password')->comment('User chosen password');
             $table->rememberToken();
-            $table->timestamps();
+            $table->dateTime('created_at')->useCurrent()->comment('Created');
+            $table->dateTime('updated_at')->nullable()->comment('Updated, null if not');
         });
     }
 
@@ -34,6 +33,6 @@ class CreateAccUserTable extends Migration
      */
     public function down()
     {
-        Schema::connection('acc')->dropIfExists('users');
+        Schema::connection('acc')->dropIfExists('acc_user');
     }
 }

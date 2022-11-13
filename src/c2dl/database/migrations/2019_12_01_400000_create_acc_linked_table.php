@@ -18,7 +18,7 @@ class CreateAccLinkedTable extends Migration
             $table->string('link_ident', 64)->comment('Unique link identifier');
             $table->primary(['link_service', 'link_ident']);
             $table->unsignedBigInteger('user_id')->comment('User reference');
-            $table->foreign('user_id')->references('user_id')->on('users')
+            $table->foreign('user_id')->references('user_id')->on('acc_user')
                 ->onDelete('cascade')->onUpdate('cascade');
             $table->string('label', 64)->nullable()->comment('User-Custom Link label');
             $table->dateTime('validate_at')->nullable()

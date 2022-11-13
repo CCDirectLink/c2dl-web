@@ -15,7 +15,7 @@ class CreateAccAuthTable extends Migration
     {
         Schema::connection('acc')->create('acc_auth', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->comment('User reference');
-            $table->foreign('user_id')->references('user_id')->on('users')
+            $table->foreign('user_id')->references('user_id')->on('acc_user')
                 ->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('auth_id')->default(0)->comment('Id for auth entry');
             $table->primary(['user_id', 'auth_id']);
