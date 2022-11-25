@@ -8,8 +8,6 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use \Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class LoginController extends Controller
 {
@@ -83,7 +81,7 @@ class LoginController extends Controller
      */
     public function username()
     {
-        return FacadesRequest::wantsJson() ? 'name' : 'user';
+        return 'username';
     }
 
     /**
@@ -118,12 +116,12 @@ class LoginController extends Controller
     {
         if ($this->attemptLogin($request)) {
             $user = Auth::user();
-            $token = $user->createToken("{$request->name}_token");
+            $token = $user->createToken("{$request->username}_token");
             $user->current_token = $token->accessToken->token;
             $user->save();
 
             return response()->json([
-                'name' => "{$request->name}_token",
+                'name' => "{$request->username}_token",
                 'token' => $token->accessToken->token
             ]);
         } else {
