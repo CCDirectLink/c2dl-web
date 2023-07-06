@@ -12,7 +12,7 @@
         "ext-dom": "*",
         "fruitcake/laravel-cors": "^3.0",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^9.2",
+        "laravel/framework": "^9.3",
         "laravel/tinker": "^2.7",
         "laravel/sanctum": "^2.14.1",
         "laravel/ui": "^3.0",

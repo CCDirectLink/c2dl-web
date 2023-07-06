@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use \Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use mysql_xdevapi\Exception;
+use Illuminate\Http\Response as HttpResponse;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -80,7 +81,7 @@ class LoginController extends Controller
      */
     public function username()
     {
-        return 'user';
+        return 'username';
     }
 
     /**
@@ -98,11 +99,47 @@ class LoginController extends Controller
                 $this->username() => 'required|string',
                 'password' => 'required|string',
             ]);
-        }
-        catch (\Illuminate\Validation\ValidationException $err) {
+        } catch (\Illuminate\Validation\ValidationException $err) {
             $err->redirectTo = $this->redirectToFailed;
             throw $err;
         }
+    }
+
+    /**
+     * Login through /api/login.
+     *
+     * @param \Illuminate\Http\Request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiLogin(Request $request)
+    {
+        if ($this->attemptLogin($request)) {
+            $user = Auth::user();
+            $token = $user->createToken("{$request->username}_token");
+            $user->current_token = $token->accessToken->token;
+            $user->save();
+
+            return response()->json([
+                'name' => "{$request->username}_token",
+                'token' => $token->accessToken->token
+            ]);
+        } else {
+            return response()->json([
+                'error' => 'Something went wrong.'
+            ], HttpResponse::HTTP_FORBIDDEN);
+        }
+    }
+
+    /**
+     * Get a user by their token using /api/validate.
+     *
+     * @param \Illuminate\Http\Request
+     */
+    public function userByToken(Request $request)
+    {
+        $user = User::where('current_token', $request->get('token'))->first();
+        return $user->toJson();
     }
 
     /**
@@ -123,8 +160,10 @@ class LoginController extends Controller
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
-        if (method_exists($this, 'hasTooManyLoginAttempts') &&
-            $this->hasTooManyLoginAttempts($request)) {
+        if (
+            method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)
+        ) {
             $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
