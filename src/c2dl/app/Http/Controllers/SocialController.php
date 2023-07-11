@@ -13,7 +13,6 @@ class SocialController extends Controller
      */
     public function __construct()
     {
-
     }
 
     static public function redirectDiscordJoin(string $widget_url = null)
@@ -80,20 +79,6 @@ class SocialController extends Controller
         ]);
     }
 
-    static public function getTwitterData() : \App\DTO\Social
-    {
-        return new \App\DTO\Social([
-            'type' => 'twitter',
-            'name' => 'Twitter',
-            'desc' => 'Visit CCDirectLink on Twitter',
-            'logo' => 'twitter_logo',
-            'main' => 'CCDirectLink',
-            'sub' => '@CCDirectLink',
-            'link' => 'https://twitter.com/CCDirectLink',
-            'card_type' => 'half',
-        ]);
-    }
-
     static public function getGithubData() : \App\DTO\Social
     {
         return new \App\DTO\Social([
@@ -129,21 +114,18 @@ class SocialController extends Controller
             'logo' => 'reddit_logo',
             'main' => 'CCModding',
             'link' => 'https://www.reddit.com/r/CrossCodeModding/',
-            'card_type' => 'half',
         ]);
     }
 
     static public function getSocial()
     {
         $discord_social = SocialController::getDiscordData();
-        $twitter_social = SocialController::getTwitterData();
         $github_social = SocialController::getGithubData();
         $gitlab_social = SocialController::getGitlabData();
         $reddit_social = SocialController::getRedditData();
 
         return [
             $discord_social->type => $discord_social,
-            $twitter_social->type => $twitter_social,
             $github_social->type => $github_social,
             $gitlab_social->type => $gitlab_social,
             $reddit_social->type => $reddit_social,

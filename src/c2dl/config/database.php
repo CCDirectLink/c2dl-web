@@ -17,6 +17,12 @@ return [
 
     'default' => env('DB_DEFAULT', 'main'),
 
+    'connection-to-drop' => [
+        'main',
+        'acc',
+        'ext'
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Database Connections

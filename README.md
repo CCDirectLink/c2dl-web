@@ -4,14 +4,14 @@ Content of the c2dl.info website(s)
 
 ## Environment
 
-- PHP: 8.0
+- PHP: 8.1
 - Composer
 - NodeJS
 - MySQL
 
 ## Environment Variables
 
-- <https://c2dl.info> page root: `/src/c2dl/public/www-c2dl/`
+- <https://c2dl.info> page root: `/src/c2dl/public`
 - `/src/c2dl/.env` required see [example](/src/c2dl/.env.example)
 
 ## Setup
@@ -21,9 +21,8 @@ Content of the c2dl.info website(s)
 - Configure `/src/c2dl/.env` (see also `php artisan key:generate`)
 - Run `php artisan migrate` for setting up the database
 **[OR]** Run `php artisan migrate --seed` for setting up the database and seed it
-- Add required *svg data* to `/src/c2dl/resources/images/svg/ext`
-- Add required *images* to `/src/c2dl/public/www-c2dl/images`
-- Add required *fonts* to `/src/c2dl/public/www-c2dl/fonts`
+- Add required *images* to `/src/c2dl/public/images`
+- Add required *fonts* to `/src/c2dl/public/fonts`
 
 -------
 
