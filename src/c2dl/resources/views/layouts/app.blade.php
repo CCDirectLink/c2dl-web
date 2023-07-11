@@ -10,26 +10,23 @@
 		<meta name="referrer" content="never"/>
 		<meta name="referrer" content="no-referrer"/>
 
-        <link rel="icon" href="/images/logo/png/CCDirectLink-16x16.png" type="image/png" sizes="16x16" />
-        <link rel="icon" href="/images/logo/png/CCDirectLink-32x32.png" type="image/png" sizes="32x32" />
-        <link rel="icon" href="/images/logo/png/CCDirectLink-64x64.png" type="image/png" sizes="64x64" />
-        <link rel="icon" href="/images/logo/png/CCDirectLink-128x128.png" type="image/png" sizes="128x128" />
-        <link rel="icon" href="/images/logo/png/CCDirectLink-256x256.png" type="image/png" sizes="256x256" />
-        <link rel="icon" href="/images/logo/png/CCDirectLink-512x512.png" type="image/png" sizes="512x512" />
+        <link rel="icon" href="https://storage.c2dl.info/assets/images/logo/c2dl/png/CCDirectLink-16x16.png" type="image/png" sizes="16x16" />
+        <link rel="icon" href="https://storage.c2dl.info/assets/images/logo/c2dl/png/CCDirectLink-32x32.png" type="image/png" sizes="32x32" />
+        <link rel="icon" href="https://storage.c2dl.info/assets/images/logo/c2dl/png/CCDirectLink-64x64.png" type="image/png" sizes="64x64" />
+        <link rel="icon" href="https://storage.c2dl.info/assets/images/logo/c2dl/png/CCDirectLink-128x128.png" type="image/png" sizes="128x128" />
+        <link rel="icon" href="https://storage.c2dl.info/assets/images/logo/c2dl/png/CCDirectLink-256x256.png" type="image/png" sizes="256x256" />
+        <link rel="icon" href="https://storage.c2dl.info/assets/images/logo/c2dl/png/CCDirectLink-512x512.png" type="image/png" sizes="512x512" />
 
-		<link rel="stylesheet" type="text/css"
-              href="{{ mix('/css/app.css') }}" media="all" id="c2dl-style">
+        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
         @if(Config::get('app.debug') == 1)
-        <link rel="stylesheet" type="text/css"
-              href="/css/.dev.css" media="all" id="c2dl-aditional">
+            <link rel="stylesheet" type="text/css" href="/css/.dev.css" media="all" id="c2dl-aditional">
+        @endif
+        @if(Config::get('app.debug') == 1)
+            <script src="/js/.dev.js"></script>
         @endif
 
         @yield('head')
 
-        <script src="{{ mix('/js/app.js') }}"></script>
-        @if(Config::get('app.debug') == 1)
-        <script src="/js/.dev.js"></script>
-        @endif
 	</head>
 	<body class="c2dl-body">
         @if(Config::get('app.debug') == 1)

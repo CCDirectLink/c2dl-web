@@ -1,16 +1,16 @@
-@inject('svgController', 'App\Http\Controllers\SvgController')
-
 <li class="c2dl-social c2dl-social-{{ $entry->type }} c2dl-social-cardtype-{{ $entry->card_type }}">
     <div class="c2dl-social-header" role="banner" title="{{ $entry->name }} - {{ $entry->main }}">
         <div class="c2dl-social-container">
-        {!! $svgController::provide([
-        'name' => $entry->logo,
-        'extern' => true,
-        'class' => 'c2dl-social-logo c2dl-social-'.$entry->type.'-logo',
-        'width' => '22px',
-        'height' => '22px',
-        'alt' => '['.$entry->name.']'
-        ]) !!}
+            <picture class="{{ 'c2dl-social-logo c2dl-social-'.$entry->type.'-logo' }}"
+                     id="c2dl-menu-bar-logo-1"
+                     width="22px"
+                     height="22px"
+                     alt="{{ '['.$entry->name.']' }}"
+                     title="{{ $entry->logo }}">
+                    <source srcset="{{ asset('https://storage.c2dl.info/assets/images/logo/other/dark/'.$entry->logo) }}"
+                            media="(prefers-color-scheme: dark)">
+                    <img src="{{ asset('https://storage.c2dl.info/assets/images/logo/other/light/'.$entry->logo) }}">
+            </picture>
         <div class="c2dl-social-title">
             <span class="c2dl-social-title-text c2dl-social-{{ $entry->type }}-main">{{ $entry->main }}</span>
             @isset($entry->sub)

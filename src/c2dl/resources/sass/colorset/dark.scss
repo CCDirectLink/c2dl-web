@@ -1,18 +1,18 @@
 @mixin c2dl-header-background-small {
     --header-background: linear-gradient(to right, transparent,
     var(--header-background-40) 40%, var(--header-background-60) 60%) no-repeat left,
-    url('/images/ext/bg/cc-lea-small.png') no-repeat left 23.5em top 6px,
-    url('/images/ext/bg/cc-sergey-small.png') no-repeat left 27em top -28px,
-    url('/images/bg/circuit_pattern_dark.svg') repeat left,
+    url('https://storage.c2dl.info/assets/images/character/cc-lea-small.png') no-repeat left 23.5em top 6px,
+    url('https://storage.c2dl.info/assets/images/character/cc-sergey-small.png') no-repeat left 27em top -28px,
+    url('https://storage.c2dl.info/assets/images/background/circuit_pattern_dark.svg') repeat left,
     linear-gradient(var(--header-background-a), var(--header-background-b)) no-repeat left;
 }
 
 @mixin c2dl-header-background-full {
     --header-background: linear-gradient(to right, transparent,
         var(--header-background-40) 40%, var(--header-background-60) 60%) no-repeat left,
-    url('/images/ext/bg/cc-lea.png') no-repeat left 19.5em top 6px,
-    url('/images/ext/bg/cc-sergey.png') no-repeat left 25em top -56px,
-    url('/images/bg/circuit_pattern_dark.svg') repeat left,
+    url('https://storage.c2dl.info/assets/images/character/cc-lea.png') no-repeat left 19.5em top 6px,
+    url('https://storage.c2dl.info/assets/images/character/cc-sergey.png') no-repeat left 25em top -56px,
+    url('https://storage.c2dl.info/assets/images/background/circuit_pattern_dark.svg') repeat left,
     linear-gradient(var(--header-background-a), var(--header-background-b)) no-repeat left;
 }
 
@@ -63,7 +63,7 @@
     --drawer-hover-foreground: rgb(25, 25, 25);
     --drawer-hover-background: rgba(125, 185, 215, 0.6);
 
-    --drawer-img-background: url('/images/bg/circuit_pattern_dark.svg') repeat left,
+    --drawer-img-background: url('https://storage.c2dl.info/assets/images/background/circuit_pattern_dark.svg') repeat left,
     linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
     --drawer-safari-background:
         linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
@@ -122,8 +122,6 @@
     --social-hover-foreground: rgb(45, 45, 55);
 
     --social-subtext: rgba(210, 210, 220, 0.6);
-
-    --social-github-color: rgb(210, 210, 220);
 
     --c2dl-chevron-color: rgb(210, 210, 220);
 

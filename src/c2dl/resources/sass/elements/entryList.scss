@@ -1,14 +1,64 @@
+/*
+chevron-right
+*/
+
 .c2dl-chevron-right {
+    font-family: 'c2dl-iconic' !important;
+    font-size:16px;
     width: 12.5px;
     height: 16px;
     flex-grow: 0;
     flex-shrink: 0;
     margin-right: 1em;
+    color: var(--c2dl-chevron-color);
 }
 
-.c2dl-chevron-right .c2dl-lcv-fg {
-    fill: var(--c2dl-chevron-color);
+.c2dl-chevron-right:before {
+    content: "\ea00";
 }
+
+/*
+download-icon
+*/
+
+.c2dl-download-icon {
+    font-family: 'c2dl-iconic' !important;
+    font-size:20px;
+}
+
+.c2dl-download-icon:before {
+    content: "\ea01";
+}
+
+/*
+github-icon
+*/
+
+.c2dl-github-icon {
+    font-family: 'c2dl-iconic' !important;
+    font-size:20px;
+}
+
+.c2dl-github-icon:before {
+    content: "\ea03";
+}
+
+/*
+gitlab-icon
+*/
+
+.c2dl-gitlab-icon {
+    font-family: 'c2dl-iconic' !important;
+    font-size:20px;
+}
+
+.c2dl-gitlab-icon:before {
+    content: "\ea04";
+}
+
+/*
+links
+*/
 
 .c2dl-data-link {
     min-width: 36px;
@@ -43,13 +93,13 @@
     font-style: italic;
 }
 
-.c2dl-data-link .c2dl-link-icon .svg-fg {
-    transition: fill 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    fill: var(--base-link-foreground);
+.c2dl-data-link .c2dl-link-icon {
+    transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--base-link-foreground);
 }
 
-.c2dl-data-link:hover .c2dl-link-icon .svg-fg, .c2dl-data-link:focus .c2dl-link-icon .svg-fg {
-    fill: var(--base-link-hover-foreground);
+.c2dl-data-link:hover .c2dl-link-icon, .c2dl-data-link:focus .c2dl-link-icon {
+    color: var(--base-link-hover-foreground);
 }
 
 .c2dl-list-entry {

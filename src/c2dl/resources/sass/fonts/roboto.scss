@@ -7,18 +7,18 @@
 $name: 'Roboto';
 $ext: 'woff2';
 
-@include font-face($name, '/fonts/ext/roboto/v19/light/', 'light', normal, $ext, (
+@include font-face($name, 'https://storage.c2dl.info/assets/fonts/roboto/v19/light/', 'light', normal, $ext, (
     'cyrillic-ext', 'cyrillic', 'greek-ext', 'greek', 'vietnamese', 'latin-ext', 'latin'
 ));
 
-@include font-face($name, '/fonts/ext/roboto/v19/regular/', 'regular', normal, $ext, (
+@include font-face($name, 'https://storage.c2dl.info/assets/fonts/roboto/v19/regular/', 'regular', normal, $ext, (
     'cyrillic-ext', 'cyrillic', 'greek-ext', 'greek', 'vietnamese', 'latin-ext', 'latin'
 ));
 
-@include font-face($name, '/fonts/ext/roboto/v19/medium/', 'medium', normal, $ext, (
+@include font-face($name, 'https://storage.c2dl.info/assets/fonts/roboto/v19/medium/', 'medium', normal, $ext, (
     'cyrillic-ext', 'cyrillic', 'greek-ext', 'greek', 'vietnamese', 'latin-ext', 'latin'
 ));
 
-@include font-face($name, '/fonts/ext/roboto/v19/bold/', 'bold', normal, $ext, (
+@include font-face($name, 'https://storage.c2dl.info/assets/fonts/roboto/v19/bold/', 'bold', normal, $ext, (
     'cyrillic-ext', 'cyrillic', 'greek-ext', 'greek', 'vietnamese', 'latin-ext', 'latin'
 ));

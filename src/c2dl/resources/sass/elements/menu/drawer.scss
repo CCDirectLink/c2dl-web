@@ -27,13 +27,16 @@
 }
 
 .c2dl-svg-hamburger {
-    width: 2em;
-    height: 2em;
+    font-family: 'c2dl-iconic' !important;
+    font-size:2em;
+    text-align: center;
+    vertical-align: middle;
+    color: var(--header-foreground-hamburger);
+    transition: color var(--c2dl-transition-effect);
 }
 
-.c2dl-svg-hamburger .c2dl-hamburger-icon-fg {
-    fill: var(--header-foreground-hamburger);
-    transition: fill var(--c2dl-transition-effect);
+.c2dl-svg-hamburger:before {
+    content: "\ea02";
 }
 
 .c2dl-menu-trigger-label {
@@ -62,8 +65,8 @@
     background: var(--header-hover-hamburger-background);
 }
 
-.c2dl-menu-trigger-hamburger:hover .c2dl-hamburger-icon-fg {
-    fill: var(--header-hover-hamburger-foreground);
+.c2dl-menu-trigger-hamburger:hover .c2dl-svg-hamburger {
+    color: var(--header-hover-hamburger-foreground);
 }
 
 .c2dl-menu-drawer {
@@ -111,8 +114,8 @@
     background: var(--header-hover-hamburger-background);
 }
 
-#c2dl-menu-trigger-t1:focus ~ .c2dl-menu-trigger-hamburger .c2dl-hamburger-icon-fg {
-    fill: var(--header-hover-hamburger-foreground);
+#c2dl-menu-trigger-t1:focus ~ .c2dl-menu-trigger-hamburger .c2dl-svg-hamburger {
+    color: var(--header-hover-hamburger-foreground);
 }
 
 #c2dl-menu-trigger-t1:checked ~ .c2dl-menu-drawer {
@@ -205,7 +208,7 @@ animation
         transition: none;
     }
 
-    .c2dl-svg-hamburger .c2dl-hamburger-icon-fg {
+    .c2dl-svg-hamburger {
         transition: none;
     }
 

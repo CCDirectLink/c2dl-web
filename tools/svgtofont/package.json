@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "main": "src/build.js",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node ."
+  },
+  "devDependencies": {
+    "svgtofont": "^3.23.0"
+  }
+}
