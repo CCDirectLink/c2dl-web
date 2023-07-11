@@ -1,0 +1,85 @@
+# C2DL Docker Environment
+#
+# Copyright 2021 CCDirectLink
+
+version: "3"
+
+services:
+
+  # Database: MySQL
+  db:
+    container_name: "c2dl-mysql"
+    image: mysql:5.7.28
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./.run/mysql:/var/lib/mysql
+    networks:
+      - back
+
+  # Adminer
+  adminer:
+    container_name: "c2dl-adminer"
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - back
+      - front
+
+  # PHP
+  php:
+    container_name: "c2dl-php"
+    image: php:8.0-fpm
+    volumes_from:
+      - apache
+    volumes:
+      - ./conf/php/php.ini:/usr/local/etc/php/conf.d/user-php.ini
+    ports:
+      - "9000:9000"
+    networks:
+      - back
+
+  # Composer
+  composer:
+    container_name: "c2dl-composer"
+    restart: 'no'
+    image: composer/composer:2.2.6
+    command: install
+    volumes:
+      - ../src/c2dl:/app
+    working_dir: /app
+    command: install
+    networks:
+      - back
+
+  # Apache
+  apache:
+    container_name: "c2dl-apache"
+    image: httpd:2.4
+    volumes:
+      - ./.run/logs:/usr/local/apache2/logs
+      - ./conf/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./conf/apache/httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
+      - ../src/c2dl:/usr/local/apache2/htdocs
+      - ./servertest:/usr/local/apache2/servertest
+    ports:
+      - 8088:80
+      - 8888:8888
+    networks:
+      - back
+      - front
+
+networks:
+  front:
+    driver: bridge
+  back:
+    driver: bridge

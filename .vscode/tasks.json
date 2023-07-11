@@ -1,0 +1,65 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "php: start server",
+			"type": "shell",
+			"command": "php -S localhost:8080 -t ${workspaceFolder}/src/c2dl/public",
+            "isBackground": true,
+			"group": "build",
+			"problemMatcher": {
+				"base": "$tsc",
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^PHP .*? Development Server Started.*$",
+                    "endsPattern": "^Press Ctrl-C to quit.$"
+                }
+			},
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false
+            }
+		},
+        {
+            "label": "php: stop server",
+            "type": "shell",
+            "command": "kill -2 $(ps aux | grep \"php -S\" | grep -v grep | awk '{print $2}')",
+			"isBackground": true,
+			"problemMatcher": {
+                "base": "$tsc",
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^.*$",
+                    "endsPattern": "^The terminal process terminated with exit code.*$"
+                }
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false
+            }
+        },
+		{
+            "label": "browser",
+            "type": "shell",
+            "command": "open http://localhost:8080/${fileBasename}",
+            "windows": {
+                "command": "explorer 'http://localhost:8080/${fileBasename}'"
+            },
+            "group": "build",
+            "problemMatcher": []
+        },
+		{
+            "label": "php: execute file",
+            "type": "shell",
+            "command": "php ${file}",
+            "group": "none",
+            "problemMatcher": []
+        }
+	]
+}
