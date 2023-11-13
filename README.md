@@ -4,7 +4,7 @@ Content of the c2dl.info website(s)
 
 ## Environment
 
-- PHP: 8.1
+- PHP: 8.1 or 8.2
 - Composer
 - NodeJS
 - MySQL
@@ -20,9 +20,7 @@ Content of the c2dl.info website(s)
 - Run `npm install`
 - Configure `/src/c2dl/.env` (see also `php artisan key:generate`)
 - Run `php artisan migrate` for setting up the database
-**[OR]** Run `php artisan migrate --seed` for setting up the database and seed it
-- Add required *images* to `/src/c2dl/public/images`
-- Add required *fonts* to `/src/c2dl/public/fonts`
+- **[OR]** Run `php artisan migrate --seed` for setting up the database and seed it
 
 -------
 
