@@ -92,19 +92,6 @@ class SocialController extends Controller
         ]);
     }
 
-    static public function getGitlabData() : \App\DTO\Social
-    {
-        return new \App\DTO\Social([
-            'type' => 'gitlab',
-            'name' => 'GitLab',
-            'desc' => 'Visit CCDirectLink on GitLab',
-            'logo' => 'gitlab_color_logo',
-            'main' => 'CCDirectLink',
-            'link' => 'https://gitlab.com/CCDirectLink',
-            'card_type' => 'half',
-        ]);
-    }
-
     static public function getRedditData() : \App\DTO\Social
     {
         return new \App\DTO\Social([
@@ -114,6 +101,7 @@ class SocialController extends Controller
             'logo' => 'reddit_logo',
             'main' => 'CCModding',
             'link' => 'https://www.reddit.com/r/CrossCodeModding/',
+            'card_type' => 'half',
         ]);
     }
 
@@ -121,13 +109,11 @@ class SocialController extends Controller
     {
         $discord_social = SocialController::getDiscordData();
         $github_social = SocialController::getGithubData();
-        $gitlab_social = SocialController::getGitlabData();
         $reddit_social = SocialController::getRedditData();
 
         return [
             $discord_social->type => $discord_social,
             $github_social->type => $github_social,
-            $gitlab_social->type => $gitlab_social,
             $reddit_social->type => $reddit_social,
         ];
     }
