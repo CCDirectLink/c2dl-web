@@ -24,7 +24,7 @@ class BasePolicy extends Basic
                 ->addDirective(Directive::OBJECT, Keyword::NONE)
                 ->addDirective(Directive::SCRIPT, Keyword::SELF)
                 ->addDirective(Directive::STYLE, [Keyword::SELF, Keyword::UNSAFE_INLINE])
-                ->addDirective(Directive::FONT, Keyword::SELF)
+                ->addDirective(Directive::FONT, [Keyword::SELF, "storage.c2dl.info"])
                 ->addNonceForDirective(Directive::SCRIPT);
             // ->addNonceForDirective(Directive::STYLE)
         }
