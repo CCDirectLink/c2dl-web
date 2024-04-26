@@ -13,15 +13,15 @@
               </div>
           </div>
         <div class="c2dl-entry-links">
-            @if($data->metadata->homepageType === 'github')
+            @if($data->metadata->repositoryType === 'github')
             <a class="c2dl-link-button c2dl-data-link c2dl-github"
-               href="{{ $data->metadata->homepage }}" rel="noopener" target="_blank" title="GitHub ({{ $data->metadata->name }})">
+               href="{{ $data->metadata->repository }}" rel="noopener" target="_blank" title="GitHub ({{ $data->metadata->name }})">
                 <div class="c2dl-link-icon c2dl-github-icon"></div>
             </a>
             @endif
-            @if($data->metadata->homepageType === 'gitlab')
+            @if($data->metadata->repositoryType === 'gitlab')
             <a class="c2dl-link-button c2dl-data-link c2dl-gitlab"
-               href="{{ $data->metadata->homepage }}" rel="noopener" target="_blank" title="GitLab ({{ $data->metadata->name }})">
+               href="{{ $data->metadata->repository }}" rel="noopener" target="_blank" title="GitLab ({{ $data->metadata->name }})">
                 <div class="c2dl-link-icon c2dl-gitlab-icon"></div>
             </a>
             @endif
