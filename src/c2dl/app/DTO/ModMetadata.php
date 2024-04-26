@@ -82,7 +82,7 @@ class ModMetadata
         return (!is_null($this->readableName));
     }
 
-    private function getStringFromLanguageLabel($label, $language = 'en_US') {
+    public static function getStringFromLanguageLabel($label, $language = 'en_US') {
         $_str = $label;
         if (!is_string($label)) {
             $_str = $label[$language];
