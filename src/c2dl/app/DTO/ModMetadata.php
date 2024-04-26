@@ -74,7 +74,12 @@ class ModMetadata
         }
 
         if (isset($_metadata['tags'])) {
-            $this->tags = join(', ', $_metadata['tags']);
+            $_tags = array_filter($_metadata['tags'], function($v) {
+                return $v != 'externaltool';
+            }, ARRAY_FILTER_USE_BOTH);
+            if (count($_tags) > 0) {
+                $this->tags = join(', ', $_tags);
+            }
         }
     }
 
