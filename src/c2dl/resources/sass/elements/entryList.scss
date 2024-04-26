@@ -93,6 +93,16 @@ links
     font-style: italic;
 }
 
+.c2dl-entry-authors {
+    font-style: italic;
+}
+.c2dl-entry-stars {}
+
+.c2dl-entry-tags {
+    @extend .c2dl-entry-description;
+    font-style: italic;
+}
+
 .c2dl-data-link .c2dl-link-icon {
     transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     color: var(--base-link-foreground);

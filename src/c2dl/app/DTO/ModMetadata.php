@@ -11,8 +11,11 @@ class ModMetadata
     public $version;
     public $repository;
     public $repositoryType;
+    public $authors;
+    public $stars;
+    public $tags;
 
-    function __construct($data = null) {
+    function __construct($data = null, $stars = 0) {
         $this->name = null;
         $this->readableName = null;
         $this->description = null;
@@ -20,6 +23,8 @@ class ModMetadata
         $this->version = null;
         $this->repository = null;
         $this->repositoryType = null;
+        $this->stars = null;
+        $this->tags = null;
 
         if (isset($data['id']) && is_string($data['id'])) {
             $this->name = $data['id'];
@@ -54,6 +59,19 @@ class ModMetadata
             }
         }
 
+        if (isset($data['authors'])) {
+            if (is_string($data['authors'])) {
+                $this->authors = $data['authors'];
+            } else {
+                $this->authors = join(', ', $data['authors']);
+            }
+        }
+
+        $this->stars = $stars;
+
+        if (isset($data['tags'])) {
+            $this->tags = join(', ', $data['tags']);
+        }
     }
 
     public function getVisibleName(): string {

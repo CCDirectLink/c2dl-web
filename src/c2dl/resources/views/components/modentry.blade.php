@@ -3,13 +3,19 @@
           <div class="c2dl-entry">
               <div class="c2dl-chevron-right"></div>
               <div class="c2dl-entry-content">
-                <span class="c2dl-entry-name">
-                    <span class="c2dl-entry-title">{{ $data->metadata->getVisibleName() }}</span> – <span class="c2dl-entry-version">{{ $data->metadata->version }}</span>
-                </span>
+                  <span class="c2dl-entry-name">
+                      <span class="c2dl-entry-title">{{ $data->metadata->getVisibleName() }}</span>
+                      (<span class="c2dl-entry-version">{{ $data->metadata->version }})</span>
+                      by <span class="c2dl-entry-authors">{{ $data->metadata->authors }}</span>
+                      (⭐<span class="c2dl-entry-stars">{{ $data->metadata->stars }}</span>)
+                  </span>
                   @if($data->metadata->hasReadableName())
                   <span class="c2dl-entry-codename">({{ $data->metadata->name }})</span>
                   @endif
                   <span class="c2dl-entry-description">{{ $data->metadata->description }}</span>
+                  @if($data->metadata->tags)
+                  <span class="c2dl-entry-tags">Tags: {{ $data->metadata->tags}}</span>
+                  @endif
               </div>
           </div>
         <div class="c2dl-entry-links">
