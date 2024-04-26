@@ -18,6 +18,18 @@ chevron-right
 }
 
 /*
+homepage-icon
+*/
+
+.c2dl-homepage-icon {
+    font-family: 'c2dl-iconic' !important;
+    font-size:20px;
+}
+
+.c2dl-homepage-icon:before {
+    content: "\ea05";
+}
+/*
 download-icon
 */
 

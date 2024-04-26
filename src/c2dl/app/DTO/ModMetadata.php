@@ -11,6 +11,7 @@ class ModMetadata
     public $version;
     public $repository;
     public $repositoryType;
+    public $homepage;
     public $authors;
     public $stars;
     public $tags;
@@ -25,6 +26,7 @@ class ModMetadata
         $this->version = null;
         $this->repository = null;
         $this->repositoryType = null;
+        $this->homepage = null;
         $this->stars = null;
         $this->tags = null;
 
@@ -59,6 +61,10 @@ class ModMetadata
             else {
                 $this->repositoryType = 'web';
             }
+        }
+
+        if (isset($_metadata['homepage']) && is_string($_metadata['homepage'])) {
+            $this->homepage = $_metadata['homepage'];
         }
 
         if (isset($_metadata['authors'])) {

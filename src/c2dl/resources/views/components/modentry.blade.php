@@ -19,6 +19,12 @@
               </div>
           </div>
         <div class="c2dl-entry-links">
+            @isset($data->metadata->homepage)
+            <a class="c2dl-link-button c2dl-data-link c2dl-homepage"
+               href="{{ $data->metadata->homepage }}" rel="noopener" target="_blank" title="Homepage ({{ $data->metadata->name }})">
+                <div class="c2dl-link-icon c2dl-homepage-icon"></div>
+            </a>
+            @endisset
             @if($data->metadata->repositoryType === 'github')
             <a class="c2dl-link-button c2dl-data-link c2dl-github"
                href="{{ $data->metadata->repository }}" rel="noopener" target="_blank" title="GitHub ({{ $data->metadata->name }})">
