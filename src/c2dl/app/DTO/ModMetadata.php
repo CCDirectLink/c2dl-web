@@ -15,7 +15,9 @@ class ModMetadata
     public $stars;
     public $tags;
 
-    function __construct($data = null, $stars = 0) {
+    function __construct($pkg = null) {
+        $_metadata = $pkg['metadataCCMod'];
+
         $this->name = null;
         $this->readableName = null;
         $this->description = null;
@@ -26,28 +28,28 @@ class ModMetadata
         $this->stars = null;
         $this->tags = null;
 
-        if (isset($data['id']) && is_string($data['id'])) {
-            $this->name = $data['id'];
+        if (isset($_metadata['id']) && is_string($_metadata['id'])) {
+            $this->name = $_metadata['id'];
         }
 
-        if (isset($data['title'])) {
-            $this->readableName = $this->getStringFromLanguageLabel($data['title']);
+        if (isset($_metadata['title'])) {
+            $this->readableName = $this->getStringFromLanguageLabel($_metadata['title']);
         }
 
-        if (isset($data['description'])) {
-            $this->description = $this->getStringFromLanguageLabel($data['description']);
+        if (isset($_metadata['description'])) {
+            $this->description = $this->getStringFromLanguageLabel($_metadata['description']);
         }
 
         $_version = '0.0.0';
 
-        if (isset($data['version']) && is_string($data['version'])) {
-            $_version = $data['version'];
+        if (isset($_metadata['version']) && is_string($_metadata['version'])) {
+            $_version = $_metadata['version'];
         }
 
         $this->version = $_version;
 
-        if (isset($data['repository']) && is_string($data['repository'])) {
-            $this->repository = $data['repository'];
+        if (isset($_metadata['repository']) && is_string($_metadata['repository'])) {
+            $this->repository = $_metadata['repository'];
             if (preg_match('~^http(s)?://(www\.)?github\.com/~', $this->repository)) {
                 $this->repositoryType = 'github';
             }
@@ -59,18 +61,20 @@ class ModMetadata
             }
         }
 
-        if (isset($data['authors'])) {
-            if (is_string($data['authors'])) {
-                $this->authors = $data['authors'];
+        if (isset($_metadata['authors'])) {
+            if (is_string($_metadata['authors'])) {
+                $this->authors = $_metadata['authors'];
             } else {
-                $this->authors = join(', ', $data['authors']);
+                $this->authors = join(', ', $_metadata['authors']);
             }
         }
 
-        $this->stars = $stars;
+        if (isset($pkg['stars'])) {
+            $this->stars = $pkg['stars'];
+        }
 
-        if (isset($data['tags'])) {
-            $this->tags = join(', ', $data['tags']);
+        if (isset($_metadata['tags'])) {
+            $this->tags = join(', ', $_metadata['tags']);
         }
     }
 
