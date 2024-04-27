@@ -41,6 +41,7 @@ services:
   # PHP
   php:
     container_name: "c2dl-php"
+    restart: always
     build:
       context: .
       dockerfile: ./conf/php/Dockerfile
@@ -76,6 +77,7 @@ services:
   apache:
     container_name: "c2dl-apache"
     image: httpd:2.4
+    restart: always
     volumes:
       - ./.run/logs:/usr/local/apache2/logs
       - ./conf/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
