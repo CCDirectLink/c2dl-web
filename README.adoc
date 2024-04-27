@@ -47,6 +47,25 @@ Used Laravel version: link:https://laravel.com/docs/11.x/[11.x] (see also link:h
 
 == Docker setup
 
+|===
+|URL |Service
+
+|http://localhost:8088/
+|Website
+
+|http://localhost:8888/
+|PHP-Infopage
+
+|http://localhost:8888/ping.php
+|Ping, usable for health monitoring
+
+|http://localhost:8080/
+|Adminer DB management UI
+|===
+
+
+=== Setup
+
 Run link:docker/dev_setup.sh[/docker/dev_setup.sh]
 
 **[OR]:**
