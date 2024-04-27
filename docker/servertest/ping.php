@@ -8,4 +8,4 @@
     ];
 
     header('Content-Type: application/json');
-    echo $ECHO_MESSAGE;
+    echo json_encode($ECHO_MESSAGE);
