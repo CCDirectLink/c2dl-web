@@ -1,4 +1,5 @@
 # C2DL Docker Environment
+# DEV-Environment only
 #
 # Copyright 2021-2024 CCDirectLink
 
@@ -11,10 +12,10 @@ services:
     image: mariadb:10.5
     restart: always
     environment:
-      MARIADB_ROOT_PASSWORD: c2dl
-      MARIADB_DATABASE: c2dl
-      MARIADB_USER: c2dl
-      MARIADB_PASSWORD: c2dl
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-c2dl}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-c2dl}
+      MARIADB_USER: ${MARIADB_USER:-c2dl}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:-c2dl}
     ports:
       - '3306:3306'
     volumes:
