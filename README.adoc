@@ -85,6 +85,7 @@ Run link:docker/dev_cleanup.sh[/docker/dev_cleanup.sh]
 
 * Stops and removes container:
 ** c2dl-mysql
+** c2dl-mariadb
 ** c2dl-adminer
 ** c2dl-php
 ** c2dl-composer
@@ -94,6 +95,7 @@ Run link:docker/dev_cleanup.sh[/docker/dev_cleanup.sh]
 * Removes images:
 ** docker-php (old php build with default name)
 ** c2dl-php
+** mariadb
 ** mysql
 ** composer/composer
 ** httpd
