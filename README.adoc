@@ -1,25 +1,32 @@
-= https://c2dl.info
+= C2DL-Website
+CCDirectLink <info@c2dl.info>
+2024-04-27
 
-Content of the c2dl.info website(s)
+Content of the link:https://c2dl.info[c2dl.info] website(s)
 
 == Environment Variables
 
-* <https://c2dl.info> page root: `/src/c2dl/public`
-* `/src/c2dl/.env` required for running laravel
+* link:https://c2dl.info[] page root: `/src/c2dl/public`
+* `/src/c2dl/.env` required to run link:https://laravel.com/[Laravel framework].
 
 ** Example: link:src/c2dl/.env.example[example]
 ** Docker Template: link:docker/conf/env/dev_env[dev_env]
 
 == Local setup
 
+Used Laravel version: link:https://laravel.com/docs/11.x/[11.x] (see also link:https://laravel.com/docs/master/releases#support-policy[Support Policy])
+
 === Requirements
 
 * link:https://www.php.net[PHP]: 8.3 (see also: link:https://www.php.net/supported-versions.php[Supported Versions])
-* link:https://getcomposer.org/[Composer]
+* link:https://getcomposer.org/[Composer] (latest recommended)
 * link:https://nodejs.org[NodeJS] (version 20+ recommended - see link:https://nodejs.org/en/about/previous-releases[Release Schedule])
 * Database (see also: link:https://laravel.com/docs/11.x/database[Supported by Laravel])
 ** link:https://mariadb.org/[MariaDB] (10.3 minimal, 10.5+ recommended - see also link:https://mariadb.org/download/#release-schedule[Release Schedule])
-** **[OR]** link:https://www.mysql.com/[MySQL] (5.7 minimal, 8.0 recommended - see also link:https://en.wikipedia.org/wiki/MySQL#Release_history[Release history])
+** **[OR]** link:https://www.mysql.com/[MySQL] (5.7 minimal, 8.0 recommended - see also link:https://en.wikipedia.org/wiki/MySQL#Release_history[Release history]
+** **[OR]** link:https://www.postgresql.org/[PostgreSQL] (10.0 minimal, 13.0+ recommended - see also link:https://www.postgresql.org/support/versioning/[Versioning Policy])
+** **[OR]** link:https://www.sqlite.org/[SQLite] (3.35.0 minimal, latest recommended)
+** **[OR]** SQL Server (2017 minimal see also link:https://learn.microsoft.com/en-us/lifecycle/products/?products=sql-server[Services Lifecycle])
 
 === Setup
 
@@ -77,7 +84,3 @@ Run link:docker/dev_cleanup.sh[/docker/dev_cleanup.sh]
 * Removes composer vendor folder (`/src/c2dl/vendor`)
 * Cleans all docker logs at `.run/logs`
 * Removes database data **[IF REQUESTED]** (located at `.run/mysql`)
-
--------
-
-CCDirectLink <info@c2dl.info>
