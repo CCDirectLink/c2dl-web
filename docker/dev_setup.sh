@@ -27,7 +27,7 @@ else
   echo ".env file found in c2dl directory - skipped"
 fi
 
-$container_tool compose up -d --wait
+$container_tool compose up -d --wait --build
 
 if [ $blank_dev_env -eq 1 ]; then
   echo "Create key for blank .env"

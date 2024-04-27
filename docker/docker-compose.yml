@@ -1,9 +1,8 @@
 # C2DL Docker Environment
 #
-# Copyright 2021 CCDirectLink
+# Copyright 2021-2024 CCDirectLink
 
-version: "3"
-
+# noinspection SpellCheckingInspection
 services:
 
   # Database: MySQL
@@ -50,6 +49,7 @@ services:
       - apache
     volumes:
       - ./conf/php/php.ini:/usr/local/etc/php/conf.d/user-php.ini
+    image: c2dl-php:latest
     working_dir: /usr/local/apache2/htdocs
     ports:
       - "9000:9000"
