@@ -1,0 +1,83 @@
+# APP
+#
+
+APP_NAME=CCDirectLink
+APP_ENV=local
+APP_KEY=
+APP_URL=http://localhost
+
+#
+# Service
+#
+
+DISCORD_SOCIAL_WIDGET=
+DISCORD_JOIN_FALLBACK=
+
+#
+# Dev / Production
+#
+
+APP_DEBUG=true
+CSP_IN_DEBUG=false
+NODE_ENV=development
+
+#
+# Logging
+#
+
+LOG_CHANNEL=stack
+LOG_DISCORD_WEBHOOK_URL=
+
+#
+# Database
+#
+
+DB_DEFAULT=main
+
+# DB: Main
+
+DB_MAIN_HOST=c2dl-mysql
+DB_MAIN_PORT=3306
+DB_MAIN_DATABASE=c2dl
+DB_MAIN_USERNAME=c2dl
+DB_MAIN_PASSWORD=c2dl
+
+# DB: Account (can be the same)
+
+DB_ACC_HOST=c2dl-mysql
+DB_ACC_PORT=3306
+DB_ACC_DATABASE=c2dl
+DB_ACC_USERNAME=c2dl
+DB_ACC_PASSWORD=c2dl
+
+# DB: External / Services (can be the same)
+
+DB_EXT_HOST=c2dl-mysql
+DB_EXT_PORT=3306
+DB_EXT_DATABASE=c2dl
+DB_EXT_USERNAME=c2dl
+DB_EXT_PASSWORD=c2dl
+
+#
+# Driver
+#
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+#
+# Mail
+#
+
+MAIL_DRIVER=smtp
+MAIL_HOST=localhost
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+
+#
+# --
