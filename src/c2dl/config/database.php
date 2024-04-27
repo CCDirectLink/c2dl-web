@@ -42,7 +42,7 @@ return [
     'connections' => [
 
         'main' => [
-            'driver' => 'mysql',
+            'driver' => env('DB_MAIN_DRIVER', 'mysql'),
             'url' => env('DATABASE_URL_MAIN'),
             'host' => env('DB_MAIN_HOST', 'localhost'),
             'port' => env('DB_MAIN_PORT', '3306'),
@@ -62,7 +62,7 @@ return [
         ],
 
         'acc' => [
-            'driver' => 'mysql',
+            'driver' => env('DB_ACC_DRIVER', 'mysql'),
             'url' => env('DATABASE_URL_ACC'),
             'host' => env('DB_ACC_HOST', 'localhost'),
             'port' => env('DB_ACC_PORT', '3306'),
@@ -82,7 +82,7 @@ return [
         ],
 
         'ext' => [
-            'driver' => 'mysql',
+            'driver' => env('DB_EXT_DRIVER', 'mysql'),
             'url' => env('DATABASE_URL_EXT'),
             'host' => env('DB_EXT_HOST', 'localhost'),
             'port' => env('DB_EXT_PORT', '3306'),
