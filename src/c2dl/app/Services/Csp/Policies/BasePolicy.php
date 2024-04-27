@@ -13,9 +13,9 @@ class BasePolicy extends Basic
     private const string LOCALHOST_DEV_VITE_HTTP = "http://localhost:5173";
     private const string LOCALHOST_DEV_VITE_WS = "ws://localhost:5173";
 
-    public function configure()
+    public function configure(): void
     {
-        if ((config('app.debug') == false) || (config('app.csp-in-debug') == true)) {
+        if ( ! config('app.debug') || config('app.csp-in-debug')) {
             $this
                 //->addDirective(Directive::UPGRADE_INSECURE_REQUESTS, Value::NO_VALUE)
                 //->addDirective(Directive::BLOCK_ALL_MIXED_CONTENT, Value::NO_VALUE)
