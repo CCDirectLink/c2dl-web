@@ -1,4 +1,4 @@
-cd "$( dirname "$0" )"
+cd "$( dirname "$0" )" || return 1
 
 blank_dev_env=0
 no_db=0
