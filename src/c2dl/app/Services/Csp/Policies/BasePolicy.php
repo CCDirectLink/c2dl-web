@@ -9,9 +9,9 @@ use Spatie\Csp\Keyword;
 class BasePolicy extends Basic
 {
 
-    private const STORAGE_HOST = "http://storage.c2dl.info";
-    private const LOCALHOST_DEV_VITE_HTTP = "http://localhost:5173";
-    private const LOCALHOST_DEV_VITE_WS = "ws://localhost:5173";
+    private const string STORAGE_HOST = "https://storage.c2dl.info";
+    private const string LOCALHOST_DEV_VITE_HTTP = "http://localhost:5173";
+    private const string LOCALHOST_DEV_VITE_WS = "ws://localhost:5173";
 
     public function configure()
     {
