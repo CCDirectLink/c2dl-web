@@ -36,7 +36,7 @@ DB_DEFAULT=main
 
 # DB: Main
 
-DB_MAIN_HOST=c2dl-mysql
+DB_MAIN_HOST=c2dl-mariadb
 DB_MAIN_PORT=3306
 DB_MAIN_DATABASE=c2dl
 DB_MAIN_USERNAME=c2dl
@@ -44,7 +44,7 @@ DB_MAIN_PASSWORD=c2dl
 
 # DB: Account (can be the same)
 
-DB_ACC_HOST=c2dl-mysql
+DB_ACC_HOST=c2dl-mariadb
 DB_ACC_PORT=3306
 DB_ACC_DATABASE=c2dl
 DB_ACC_USERNAME=c2dl
@@ -52,7 +52,7 @@ DB_ACC_PASSWORD=c2dl
 
 # DB: External / Services (can be the same)
 
-DB_EXT_HOST=c2dl-mysql
+DB_EXT_HOST=c2dl-mariadb
 DB_EXT_PORT=3306
 DB_EXT_DATABASE=c2dl
 DB_EXT_USERNAME=c2dl

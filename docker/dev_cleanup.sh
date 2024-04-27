@@ -33,7 +33,13 @@ fi
 $container_tool image rm mysql:5.7.28 2> /dev/null
 done=$?
 if [ $done -eq 0 ]; then
-  echo "image removed: mysql:5.7.28"
+  echo "image removed: mysql:5.7.28 (old mysql)"
+fi
+
+$container_tool image rm mariadb:10.5 2> /dev/null
+done=$?
+if [ $done -eq 0 ]; then
+  echo "image removed: mariadb:10.5"
 fi
 
 $container_tool image rm composer/composer:2.7.4 2> /dev/null
