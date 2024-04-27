@@ -9,51 +9,84 @@ class ModMetadata
     public $description;
     public $license;
     public $version;
+    public $repository;
+    public $repositoryType;
     public $homepage;
-    public $homepageType;
+    public $authors;
+    public $stars;
+    public $tags;
 
-    function __construct($data = null) {
+    function __construct($pkg = null) {
+        $_metadata = $pkg['metadataCCMod'];
+
         $this->name = null;
         $this->readableName = null;
         $this->description = null;
         $this->license = null;
         $this->version = null;
+        $this->repository = null;
+        $this->repositoryType = null;
         $this->homepage = null;
-        $this->homepageType = null;
+        $this->stars = null;
+        $this->tags = null;
 
-        if (isset($data['name']) && is_string($data['name'])) {
-            $this->name = $data['name'];
+        if (isset($_metadata['id']) && is_string($_metadata['id'])) {
+            $this->name = $_metadata['id'];
         }
 
-        if (isset($data['ccmodHumanName']) && is_string($data['ccmodHumanName'])) {
-            $this->readableName = $data['ccmodHumanName'];
+        if (isset($_metadata['title'])) {
+            $this->readableName = $this->getStringFromLanguageLabel($_metadata['title']);
         }
 
-        if (isset($data['description']) && is_string($data['description'])) {
-            $this->description = $data['description'];
+        if (isset($_metadata['description'])) {
+            $this->description = $this->getStringFromLanguageLabel($_metadata['description']);
         }
 
         $_version = '0.0.0';
 
-        if (isset($data['version']) && is_string($data['version'])) {
-            $_version = $data['version'];
+        if (isset($_metadata['version']) && is_string($_metadata['version'])) {
+            $_version = $_metadata['version'];
         }
 
         $this->version = $_version;
 
-        if (isset($data['homepage']) && is_string($data['homepage'])) {
-            $this->homepage = $data['homepage'];
-            if (preg_match('~^http(s)?://(www\.)?github\.com/~', $this->homepage)) {
-                $this->homepageType = 'github';
+        if (isset($_metadata['repository']) && is_string($_metadata['repository'])) {
+            $this->repository = $_metadata['repository'];
+            if (preg_match('~^http(s)?://(www\.)?github\.com/~', $this->repository)) {
+                $this->repositoryType = 'github';
             }
-            else if (preg_match('~^http(s)?://(www\.)?gitlab\.com/~', $this->homepage)) {
-                $this->homepageType = 'gitlab';
+            else if (preg_match('~^http(s)?://(www\.)?gitlab\.com/~', $this->repository)) {
+                $this->repositoryType = 'gitlab';
             }
             else {
-                $this->homepageType = 'web';
+                $this->repositoryType = 'web';
             }
         }
 
+        if (isset($_metadata['homepage']) && is_string($_metadata['homepage'])) {
+            $this->homepage = $_metadata['homepage'];
+        }
+
+        if (isset($_metadata['authors'])) {
+            if (is_string($_metadata['authors'])) {
+                $this->authors = $_metadata['authors'];
+            } else {
+                $this->authors = join(', ', $_metadata['authors']);
+            }
+        }
+
+        if (isset($pkg['stars'])) {
+            $this->stars = $pkg['stars'];
+        }
+
+        if (isset($_metadata['tags'])) {
+            $_tags = array_filter($_metadata['tags'], function($v) {
+                return $v != 'externaltool';
+            }, ARRAY_FILTER_USE_BOTH);
+            if (count($_tags) > 0) {
+                $this->tags = join(', ', $_tags);
+            }
+        }
     }
 
     public function getVisibleName(): string {
@@ -62,5 +95,17 @@ class ModMetadata
 
     public function hasReadableName(): bool {
         return (!is_null($this->readableName));
+    }
+
+    public static function getStringFromLanguageLabel($label, $language = 'en_US') {
+        $_str = $label;
+        if (!is_string($label)) {
+            $_str = $label[$language];
+        }
+        /* remove crosscode icons and colors */
+        $_str = preg_replace('/\\\\c\[[^\]]*\]/', '', $_str);
+        $_str = preg_replace('/\\\\s\[[^\]]*\]/', '', $_str);
+        $_str = preg_replace('/\\\\i\[[^\]]*\]/', '', $_str);
+        return $_str;
     }
 }

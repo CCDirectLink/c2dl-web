@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\DTO\ToolInfo;
 use Illuminate\Http\Request;
 
 class ToolController extends Controller
@@ -17,20 +16,20 @@ class ToolController extends Controller
         //$this->middleware('auth');
     }
 
-    static public function getToolList(int $page = 1): \App\DTO\ToolInfo
+    static public function getToolList(int $page = 1): \App\DTO\ModInfo
     {
         try {
             $tool_list_raw = file_get_contents(
-                'https://raw.githubusercontent.com/CCDirectLink/CCModDB/master/tools.json'
+                'https://raw.githubusercontent.com/krypciak/CCModDB/master/tools.json'
             );
             $tool_list_json = json_decode($tool_list_raw, true);
         }
         catch (\Throwable $e)
         {
-            return new \App\DTO\ToolInfo();
+            return new \App\DTO\ModInfo();
         }
 
-        return new \App\DTO\ToolInfo($tool_list_json, $page);
+        return new \App\DTO\ModInfo($tool_list_json, $page);
     }
 
     /**

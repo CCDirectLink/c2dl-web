@@ -9,7 +9,7 @@
   <div class="dataentry-main">
     <h1>{{ __('tools.name') }}</h1>
       @foreach ($tool_info->list as $tool)
-      @toolentry([ 'data' => $tool ])
+      @modentry([ 'data' => $tool ])
       @endtoolentry
       @endforeach
       @if ($tool_info->maxPage != 1)

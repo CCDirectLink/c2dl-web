@@ -20,7 +20,7 @@ class ModController extends Controller
     {
         try {
             $mod_list_raw = file_get_contents(
-                'https://raw.githubusercontent.com/CCDirectLink/CCModDB/master/npDatabase.json'
+                'https://raw.githubusercontent.com/krypciak/CCModDB/master/npDatabase.json'
             );
             $mod_list_json = json_decode($mod_list_raw, true);
         }
