@@ -76,11 +76,6 @@ if [ -d ../src/c2dl/vendor ]; then
   echo "Composer: vendors removed"
 fi
 
-if [ -d ../tools/svgtofont/node_modules ]; then
-  rm -r ../tools/svgtofont/node_modules
-  echo "Tooling: Node modules removed (svg to font)"
-fi
-
 if [ -d .run/logs ]; then
   rm -r .run/logs
   echo "Logs: Docker logs removed"
