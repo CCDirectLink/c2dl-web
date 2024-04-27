@@ -1,0 +1,12 @@
+= Font Generator
+
+Generates svg based fonts:
+
+|===
+|Font |Version |Author |License
+
+|link:svg/c2dl-iconic[c2dl-iconic]
+|1.0.0
+|CCDirectLink
+|MIT
+|===

@@ -1,0 +1,83 @@
+= https://c2dl.info
+
+Content of the c2dl.info website(s)
+
+== Environment Variables
+
+* <https://c2dl.info> page root: `/src/c2dl/public`
+* `/src/c2dl/.env` required for running laravel
+
+** Example: link:src/c2dl/.env.example[example]
+** Docker Template: link:docker/conf/env/dev_env[dev_env]
+
+== Local setup
+
+=== Requirements
+
+* link:https://www.php.net[PHP]: 8.3 (see also: link:https://www.php.net/supported-versions.php[Supported Versions])
+* link:https://getcomposer.org/[Composer]
+* link:https://nodejs.org[NodeJS] (version 20+ recommended - see link:https://nodejs.org/en/about/previous-releases[Release Schedule])
+* Database (see also: link:https://laravel.com/docs/11.x/database[Supported by Laravel])
+** link:https://mariadb.org/[MariaDB] (10.3 minimal, 10.5+ recommended - see also link:https://mariadb.org/download/#release-schedule[Release Schedule])
+** **[OR]** link:https://www.mysql.com/[MySQL] (5.7 minimal, 8.0 recommended - see also link:https://en.wikipedia.org/wiki/MySQL#Release_history[Release history])
+
+=== Setup
+
+* Navigate to directory link:src/c2dl[/src/c2dl]
+* Run `composer install` to install all php dependencies and set up laravel
+* Run `npm install` to install vite for building all assets
+* Build the assets
+
+** Run `npm run dev` for the dev server that updates assets live
+** **[OR]** `npm run build` for static assets used in production
+
+* Create `/src/c2dl/.env` based on link:src/c2dl/.env.example[/src/c2dl/.env.example] **[OR]** link:docker/conf/env/dev_env[/docker/conf/env/dev_env]
+* Run `php artisan key:generate` to add the app key to the .env file
+* Create Database
+
+** Run `php artisan migrate` for setting up the database
+** **[OR]** Run `php artisan migrate --seed` for setting up the database and seed it
+
+== Docker setup
+
+Run link:docker/dev_setup.sh[/docker/dev_setup.sh]
+
+**[OR]:**
+
+* Copy link:docker/conf/env/dev_env[/docker/conf/env/dev_env] to `/src/c2dl/.env`
+* Run `docker compose up -d --wait`
+* Wait for c2dl-node (exits when finished), c2dl-composer (exits when finished) and c2dl-mysql (keeps running) to finish/start
+* Set up the app key by running `docker exec -it c2dl-php sh -c "php artisan key:generate"`
+* Create Database
+
+** Run `docker exec -it c2dl-php sh -c "php artisan migrate"` for setting up the database
+** **[OR]** Run `docker exec -it c2dl-php sh -c "php artisan migrate --seed"` for setting up the database and seed it
+
+== Dev environment cleanup
+
+Run link:docker/dev_cleanup.sh[/docker/dev_cleanup.sh]
+
+* Stops and removes container:
+** c2dl-mysql
+** c2dl-adminer
+** c2dl-php
+** c2dl-composer
+** c2dl-apache
+** c2dl-node
+* Removes networks
+* Removes images:
+** docker-php (old php build with default name)
+** c2dl-php
+** mysql
+** composer/composer
+** httpd
+** node
+* Prunes docker build cache
+* Remove asset builds in `/src/c2dl/public/build`
+* Removes composer vendor folder (`/src/c2dl/vendor`)
+* Cleans all docker logs at `.run/logs`
+* Removes database data **[IF REQUESTED]** (located at `.run/mysql`)
+
+-------
+
+CCDirectLink <info@c2dl.info>
