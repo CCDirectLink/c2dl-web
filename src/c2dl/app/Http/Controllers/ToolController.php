@@ -20,7 +20,7 @@ class ToolController extends Controller
     {
         try {
             $tool_list_raw = file_get_contents(
-                'https://raw.githubusercontent.com/krypciak/CCModDB/master/tools.json'
+                'https://raw.githubusercontent.com/krypciak/CCModDB/stable/tools.json'
             );
             $tool_list_json = json_decode($tool_list_raw, true);
         }
