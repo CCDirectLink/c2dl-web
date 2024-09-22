@@ -1,6 +1,13 @@
-const svgtofont = require("svgtofont");
+// noinspection SpellCheckingInspection
+import svgtofont from 'svgtofont';
 
-async function generate_font(config) {
+export async function generate_font(config) {
+
+    console.log(
+        `Generate font '${config.fontName}' with config:` +
+        `\n${JSON.stringify(config, null, 2)}`)
+
+    // noinspection SpellCheckingInspection
     return svgtofont({
         src: config.inputPath,
         dist: config.outputPath,
@@ -60,5 +67,3 @@ async function generate_font(config) {
         }
     });
 }
-
-module.exports = generate_font;
