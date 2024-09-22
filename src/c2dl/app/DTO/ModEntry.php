@@ -8,7 +8,7 @@ class ModEntry
     public $installation;
 
     function __construct($data = null) {
-        $this->metadata = new \App\DTO\ModMetadata($data['metadata']);
+        $this->metadata = new \App\DTO\ModMetadata($data);
         $this->installation = [];
 
         foreach ($data['installation'] as $installation) {
