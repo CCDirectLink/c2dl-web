@@ -9,7 +9,7 @@ services:
   # Database: MariaDB
   db:
     container_name: "c2dl-mariadb"
-    image: mariadb:10.5
+    image: mariadb:10.11
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-c2dl}
