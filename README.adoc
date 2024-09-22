@@ -2,6 +2,8 @@
 CCDirectLink <info@c2dl.info>
 2024-04-27
 
+image:https://storage.c2dl.info/assets/images/logo/c2dl/png/CCDirectLink-256x256.png[C2DL Logo with trail,align="center"]
+
 Content of the link:https://c2dl.info[c2dl.info] website(s)
 
 == Environment Variables
@@ -22,7 +24,7 @@ Used Laravel version: link:https://laravel.com/docs/11.x/[11.x] (see also link:h
 * link:https://getcomposer.org/[Composer] (latest recommended)
 * link:https://nodejs.org[NodeJS] (version 20+ recommended - see link:https://nodejs.org/en/about/previous-releases[Release Schedule])
 * Database (see also: link:https://laravel.com/docs/11.x/database[Supported by Laravel])
-** link:https://mariadb.org/[MariaDB] (10.3 minimal, 10.5+ recommended - see also link:https://mariadb.org/download/#release-schedule[Release Schedule])
+** link:https://mariadb.org/[MariaDB] (10.3 minimal, 10.11+ recommended - see also link:https://mariadb.org/download/#release-schedule[Release Schedule])
 ** **[OR]** link:https://www.mysql.com/[MySQL] (5.7 minimal, 8.0 recommended - see also link:https://en.wikipedia.org/wiki/MySQL#Release_history[Release history]
 ** **[OR]** link:https://www.postgresql.org/[PostgreSQL] (10.0 minimal, 13.0+ recommended - see also link:https://www.postgresql.org/support/versioning/[Versioning Policy])
 ** **[OR]** link:https://www.sqlite.org/[SQLite] (3.35.0 minimal, latest recommended)
@@ -95,8 +97,8 @@ Run link:docker/dev_cleanup.sh[/docker/dev_cleanup.sh]
 * Removes images:
 ** docker-php (old php build with default name)
 ** c2dl-php
-** mariadb
-** mysql
+** mariadb (10.5 / 10.11)
+** mysql (old database - 5.7.28)
 ** composer/composer
 ** httpd
 ** node
