@@ -1,31 +1,34 @@
-// Fonts
-@import 'fonts/merriweather';
-@import 'fonts/roboto';
-@import 'fonts/c2dl-iconic';
+// Elements
+@use 'elements/base';
+@use 'elements/scrollbar';
 
-// Colorset
-@import 'colorset/light';
+@use 'elements/menu/header';
+@use 'elements/menu/drawer';
+
+@use 'elements/pagination';
+@use 'elements/linkButton';
+
+@use 'elements/entryList';
+@use 'elements/teamcard';
+@use 'elements/newscard';
+@use 'elements/social';
+
+@use 'page/home';
+@use 'page/news';
+@use 'page/dataentry';
+@use 'page/about';
+
+// Fonts
+@use 'fonts/merriweather';
+@use 'fonts/roboto';
+@use 'fonts/c2dl-iconic';
+
+// Color-set
+@use 'colorset/light';
+@use 'colorset/dark';
+
+@include light.c2dl-light-root-color;
 
 @media (prefers-color-scheme: dark) {
-    @import 'colorset/dark';
+    @include dark.c2dl-dark-root-color;
 }
-
-// Elements
-@import 'elements/base';
-@import 'elements/scrollbar';
-
-@import 'elements/menu/header';
-@import 'elements/menu/drawer';
-
-@import 'elements/pagination';
-@import 'elements/linkButton';
-
-@import 'elements/entryList';
-@import 'elements/teamcard';
-@import 'elements/newscard';
-@import 'elements/social';
-
-@import 'page/home';
-@import 'page/news';
-@import 'page/dataentry';
-@import 'page/about';

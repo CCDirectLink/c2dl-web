@@ -1,4 +1,4 @@
-@mixin c2dl-header-background-small {
+@mixin c2dl-light-header-background-small {
     --header-background: linear-gradient(to right, transparent,
         var(--header-background-40) 40%, var(--header-background-60) 60%) no-repeat left,
     url('https://storage.c2dl.info/assets/images/character/cc-lea-small.png') no-repeat left 23.5em top 6px,
@@ -7,7 +7,7 @@
     linear-gradient(var(--header-background-a), var(--header-background-b)) no-repeat left;
 }
 
-@mixin c2dl-header-background-full {
+@mixin c2dl-light-header-background-full {
     --header-background: linear-gradient(to right, transparent,
         var(--header-background-40) 40%, var(--header-background-60) 60%) no-repeat left,
     url('https://storage.c2dl.info/assets/images/character/cc-lea.png') no-repeat left 19.5em top 6px,
@@ -16,120 +16,109 @@
     linear-gradient(var(--header-background-a), var(--header-background-b)) no-repeat left;
 }
 
-:root {
-    --debug-background: rgb(230, 155, 165);
+@mixin c2dl-light-root-color {
+    :root {
+        --debug-background: rgb(230, 155, 165);
 
-    --base-color: rgb(25, 25, 25);
-    --base-background: rgb(255, 255, 255);
+        --base-color: rgb(25, 25, 25);
+        --base-background: rgb(255, 255, 255);
 
-    --base-link-foreground: rgb(20, 90, 160);
+        --base-link-foreground: rgb(20, 90, 160);
 
-    --base-link-hover-background: rgb(20, 90, 160);
-    --base-link-hover-foreground: rgb(255, 255, 255);
+        --base-link-hover-background: rgb(20, 90, 160);
+        --base-link-hover-foreground: rgb(255, 255, 255);
 
-    --base-dotlink-foreground: inherit;
+        --base-dotlink-foreground: inherit;
 
-    --selection-background: rgba(125, 185, 215, 0.5);
+        --selection-background: rgba(125, 185, 215, 0.5);
 
-    --header-foreground: rgb(25, 25, 25);
+        --header-foreground: rgb(25, 25, 25);
 
-    --header-link: rgb(20, 90, 160);
-    --header-hover-foreground: rgb(255, 255, 255);
-    --header-hover-background: rgb(20, 90, 160);
+        --header-link: rgb(20, 90, 160);
+        --header-hover-foreground: rgb(255, 255, 255);
+        --header-hover-background: rgb(20, 90, 160);
 
-    --header-foreground-hamburger: rgb(20, 90, 160);
-    --header-hover-hamburger-foreground: rgb(255, 255, 255);
-    --header-hover-hamburger-background: rgb(20, 90, 160);
+        --header-foreground-hamburger: rgb(20, 90, 160);
+        --header-hover-hamburger-foreground: rgb(255, 255, 255);
+        --header-hover-hamburger-background: rgb(20, 90, 160);
 
-    --header-background-a: rgb(255, 255, 255);
-    --header-background-b: rgb(205, 230, 245);
-    --header-background-40: rgba(205, 230, 245, 0.7);
-    --header-background-60: rgb(205, 230, 245);
+        --header-background-a: rgb(255, 255, 255);
+        --header-background-b: rgb(205, 230, 245);
+        --header-background-40: rgba(205, 230, 245, 0.7);
+        --header-background-60: rgb(205, 230, 245);
 
-    @include c2dl-header-background-small;
+        @include c2dl-light-header-background-small;
 
-    --header-shadow: 0 2px 2px 0
-    rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0
-    rgba(0, 0, 0, 0.12);
+        --header-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 
 
-    --drawer-foreground: rgba(25, 25, 25, 1.0);
-    --drawer-background-a: rgb(205, 230, 245);
-    --drawer-background-b: rgb(255, 255, 255);
-    --drawer-separator: rgba(25, 25, 25, 0.6);
+        --drawer-foreground: rgba(25, 25, 25, 1.0);
+        --drawer-background-a: rgb(205, 230, 245);
+        --drawer-background-b: rgb(255, 255, 255);
+        --drawer-separator: rgba(25, 25, 25, 0.6);
 
-    --drawer-link: rgb(20, 90, 160);
+        --drawer-link: rgb(20, 90, 160);
 
-    --drawer-hover-foreground: rgb(255, 255, 255);
-    --drawer-hover-background: rgba(20, 90, 160, 0.9);
+        --drawer-hover-foreground: rgb(255, 255, 255);
+        --drawer-hover-background: rgba(20, 90, 160, 0.9);
 
-    --drawer-img-background: url('https://storage.c2dl.info/assets/images/background/circuit_pattern_light.svg') repeat left,
+        --drawer-img-background: url('https://storage.c2dl.info/assets/images/background/circuit_pattern_light.svg') repeat left,
         linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
-    --drawer-safari-background:
-        linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
+        --drawer-safari-background: linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
 
 
-    --newscard-background: rgb(255, 255, 255);
-    --newscard-shadow: 0 2px 2px 0
-    rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0
-    rgba(0, 0, 0, 0.12);
+        --newscard-background: rgb(255, 255, 255);
+        --newscard-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 
-    --newscard-hover-shadow: 0 8px 10px 1px
-    rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px
-    rgba(0, 0, 0, .2);
+        --newscard-hover-shadow: 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px rgba(0, 0, 0, .2);
 
-    --newscard-title: rgb(25, 25, 25);
-    --newscard-info: rgba(25, 25, 25, 0.6);
-    --newscard-text: rgba(25, 25, 25, 0.6);
-    --newscard-separator: rgba(25, 25, 25, 0.2);
+        --newscard-title: rgb(25, 25, 25);
+        --newscard-info: rgba(25, 25, 25, 0.6);
+        --newscard-text: rgba(25, 25, 25, 0.6);
+        --newscard-separator: rgba(25, 25, 25, 0.2);
 
 
-    --teamcard-background: rgb(255, 255, 255);
-    --teamcard-shadow: 0 2px 2px 0
-    rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0
-    rgba(0, 0, 0, 0.12);
+        --teamcard-background: rgb(255, 255, 255);
+        --teamcard-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 
-    --teamcard-hover-shadow: 0 8px 10px 1px
-    rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px
-    rgba(0, 0, 0, .2);
+        --teamcard-hover-shadow: 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px rgba(0, 0, 0, .2);
 
-    --teamcard-title: rgb(25, 25, 25);
-    --teamcard-text: rgba(25, 25, 25, 0.6);
-    --teamcard-separator: rgba(25, 25, 25, 0.2);
+        --teamcard-title: rgb(25, 25, 25);
+        --teamcard-text: rgba(25, 25, 25, 0.6);
+        --teamcard-separator: rgba(25, 25, 25, 0.2);
 
 
-    --nav-hover-foreground: rgb(255, 255, 255);
-    --nav-hover-background: rgb(20, 90, 160);
+        --nav-hover-foreground: rgb(255, 255, 255);
+        --nav-hover-background: rgb(20, 90, 160);
 
-    --nav-foreground: rgb(20, 90, 160);
+        --nav-foreground: rgb(20, 90, 160);
 
-    --nav-current-foreground: rgb(25, 25, 25);
-    --nav-current-background: none;
-    --nav-current-border: rgba(25, 25, 25, 0.2);
+        --nav-current-foreground: rgb(25, 25, 25);
+        --nav-current-background: none;
+        --nav-current-border: rgba(25, 25, 25, 0.2);
 
-    --news-separator: rgba(25, 25, 25, 0.2);
-    --dataentry-separator: rgba(25, 25, 25, 0.2);
-
-
-    --social-background: rgb(255, 255, 255);
-    --social-shadow: 0 2px 2px 0
-    rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0
-    rgba(0, 0, 0, 0.12);
-
-    --social-nav-foreground: rgb(20, 90, 160);
-
-    --linkbutton-hover-background: rgb(20, 90, 160);
-    --social-hover-foreground: rgb(255, 255, 255);
-
-    --social-subtext: rgba(25, 25, 25, 0.6);
-
-    --c2dl-chevron-color: rgb(25, 25, 25);
+        --news-separator: rgba(25, 25, 25, 0.2);
+        --dataentry-separator: rgba(25, 25, 25, 0.2);
 
 
-    --entrylist-foreground: rgb(25, 25, 25);
-    --entrylist-description-foreground: rgba(25, 25, 25, 0.6);
+        --social-background: rgb(255, 255, 255);
+        --social-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+
+        --social-nav-foreground: rgb(20, 90, 160);
+
+        --linkbutton-hover-background: rgb(20, 90, 160);
+        --social-hover-foreground: rgb(255, 255, 255);
+
+        --social-subtext: rgba(25, 25, 25, 0.6);
+
+        --c2dl-chevron-color: rgb(25, 25, 25);
 
 
-    --scrollbar-track: rgb(255, 255, 255);
-    --scrollbar-thumb: rgba(25, 25, 25, 0.6);
+        --entrylist-foreground: rgb(25, 25, 25);
+        --entrylist-description-foreground: rgba(25, 25, 25, 0.6);
+
+
+        --scrollbar-track: rgb(255, 255, 255);
+        --scrollbar-thumb: rgba(25, 25, 25, 0.6);
+    }
 }

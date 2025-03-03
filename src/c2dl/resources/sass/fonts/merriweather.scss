@@ -4,16 +4,16 @@
 // Contributors: https://github.com/EbenSorkin/Merriweather/blob/master/CONTRIBUTORS.txt
 // Trademarks: https://github.com/EbenSorkin/Merriweather/blob/master/TRADEMARKS.txt
 
-@import 'fonts';
+@use 'fonts';
 
 $name: 'Merriweather';
 $ext: 'otf';
 
-@include font-face($name, 'https://storage.c2dl.info/assets/fonts/merriweather/v2-002/', 'light', normal, $ext);
-@include font-face($name, 'https://storage.c2dl.info/assets/fonts/merriweather/v2-002/', 'light', italic, $ext);
-@include font-face($name, 'https://storage.c2dl.info/assets/fonts/merriweather/v2-002/', 'regular', normal, $ext);
-@include font-face($name, 'https://storage.c2dl.info/assets/fonts/merriweather/v2-002/', 'regular', italic, $ext);
-@include font-face($name, 'https://storage.c2dl.info/assets/fonts/merriweather/v2-002/', 'bold', normal, $ext);
-@include font-face($name, 'https://storage.c2dl.info/assets/fonts/merriweather/v2-002/', 'bold', italic, $ext);
-@include font-face($name, 'https://storage.c2dl.info/assets/fonts/merriweather/v2-002/', 'black', normal, $ext);
-@include font-face($name, 'https://storage.c2dl.info/assets/fonts/merriweather/v2-002/', 'black', italic, $ext);
+@include fonts.font-face($name, 'https://storage.c2dl.info/assets/fonts/merriweather/v2-002/', 'light', normal, $ext);
+@include fonts.font-face($name, 'https://storage.c2dl.info/assets/fonts/merriweather/v2-002/', 'light', italic, $ext);
+@include fonts.font-face($name, 'https://storage.c2dl.info/assets/fonts/merriweather/v2-002/', 'regular', normal, $ext);
+@include fonts.font-face($name, 'https://storage.c2dl.info/assets/fonts/merriweather/v2-002/', 'regular', italic, $ext);
+@include fonts.font-face($name, 'https://storage.c2dl.info/assets/fonts/merriweather/v2-002/', 'bold', normal, $ext);
+@include fonts.font-face($name, 'https://storage.c2dl.info/assets/fonts/merriweather/v2-002/', 'bold', italic, $ext);
+@include fonts.font-face($name, 'https://storage.c2dl.info/assets/fonts/merriweather/v2-002/', 'black', normal, $ext);
+@include fonts.font-face($name, 'https://storage.c2dl.info/assets/fonts/merriweather/v2-002/', 'black', italic, $ext);

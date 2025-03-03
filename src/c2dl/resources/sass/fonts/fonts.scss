@@ -1,3 +1,7 @@
+@use "sass:string";
+@use "sass:map";
+@use "sass:list";
+
 @mixin font-face-range($range-type) {
     $font-range-types: ('cyrillic-ext': (U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F),
         'cyrillic': (U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116),
@@ -11,8 +15,8 @@
         U+2212, U+2215, U+FEFF, U+FFFD)
     );
 
-    @if map-has-key($font-range-types, $range-type) {
-        unicode-range: map-get($font-range-types, $range-type);
+    @if map.has-key($font-range-types, $range-type) {
+        unicode-range: map.get($font-range-types, $range-type);
     }
     @else {
         @error 'Font range #{$range-type} not found';
@@ -24,8 +28,8 @@
     $format-list: ('woff2': 'woff2', 'otf': 'opentype');
     $format-name: $format;
 
-    @if map-has-key($format-list, $format) {
-        $format-name: map-get($format-list, $format);
+    @if map.has-key($format-list, $format) {
+        $format-name: map.get($format-list, $format);
     }
     @else {
         @error 'Font name for #{$format} not found';
@@ -35,47 +39,49 @@
     $src-base: null;
     $is-regular: true;
 
-    $name-lowercase: to-lower-case($name);
+    $name-lowercase: string.to-lower-case($name);
 
     $weight-name: 'regular';
     $weight-name-case: 'Regular';
     $weight-numeric: 400;
 
-    @if map-has-key($font-weights, $weight) {
+    @if map.has-key($font-weights, $weight) {
         $weight-name: $weight;
-        $weight-name-case: to-upper-case(str-slice($weight, 1, 1)) + str-slice($weight, 2);
-        $weight-numeric: map-get($font-weights, $weight);
+        $weight-name-case: string.to-upper-case(string.slice($weight, 1, 1)) + string.slice($weight, 2);
+        $weight-numeric: map.get($font-weights, $weight);
         @if ($weight != 'regular') {
             $is-regular: false;
         }
     }
 
     @if $style == italic {
-        $styleCase: to-upper-case(str-slice(quote($style), 1, 1)) + str-slice(quote($style), 2);
+        $styleCase: string.to-upper-case(
+        string.slice(string.quote($style), 1, 1)) + string.slice(string.quote($style), 2);
         @if $is-regular {
-            $src-base: append($src-base, local(quote($name + ' ' + $styleCase)), comma);
+            $src-base: list.append($src-base, local(string.quote($name + ' ' + $styleCase)), comma);
         }
         @else {
-            $src-base: append($src-base, local(quote($name + ' ' + $weight-name-case + $styleCase)), comma);
+            $src-base: list.append($src-base, local(string.quote($name + ' ' + $weight-name-case + $styleCase)), comma);
         }
-        $src-base: append($src-base, local(quote($name + '-' + $weight-name-case + $styleCase)), comma);
+        $src-base: list.append($src-base, local(string.quote($name + '-' + $weight-name-case + $styleCase)), comma);
     }
     @else {
         @if $is-regular {
-            $src-base: append($src-base, local(quote($name)), comma);
+            $src-base: list.append($src-base, local(string.quote($name)), comma);
         }
         @else {
-            $src-base: append($src-base, local(quote($name + ' ' + $weight-name-case)), comma);
+            $src-base: list.append($src-base, local(string.quote($name + ' ' + $weight-name-case)), comma);
         }
-        $src-base: append($src-base, local(quote($name + '-' + $weight-name-case)), comma);
+        $src-base: list.append($src-base, local(string.quote($name + '-' + $weight-name-case)), comma);
     }
 
     @if $range-type != null {
         @each $range in $range-type {
             $path: $dir-path + $name-lowercase + '-' + $weight-name + '-' + $range;
-            $src: append($src-base, url(unquote($path + '.' + $format)), comma);
+            $unquotedUrl: string.unquote($path + '.' + $format);
+            $src: list.append($src-base, url($unquotedUrl), comma);
             @font-face {
-                font-family: quote($name);
+                font-family: string.quote($name);
                 font-style: $style;
                 font-weight: $weight-numeric;
                 src: $src format($format);
@@ -90,13 +96,15 @@
                 $path: $dir-path + $name-lowercase + '-' + $style;
             }
             @else {
-                $styleCase: to-upper-case(str-slice(quote($style), 1, 1)) + str-slice(quote($style), 2);
+                $styleCase: string.to-upper-case(
+                string.slice(string.quote($style), 1, 1)) + string.slice(string.quote($style), 2);
                 $path: $dir-path + $name-lowercase + '-' + $weight-name + $styleCase;
             }
         }
-        $src: append($src-base, url(unquote($path + '.' + $format)), comma);
+        $unquotedUrl: string.unquote($path + '.' + $format);
+        $src: list.append($src-base, url($unquotedUrl), comma);
         @font-face {
-            font-family: quote($name);
+            font-family: string.quote($name);
             font-style: $style;
             font-weight: $weight-numeric;
             src: $src format($format-name);

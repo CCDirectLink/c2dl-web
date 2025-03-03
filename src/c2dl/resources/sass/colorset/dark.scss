@@ -1,4 +1,4 @@
-@mixin c2dl-header-background-small {
+@mixin c2dl-dark-header-background-small {
     --header-background: linear-gradient(to right, transparent,
     var(--header-background-40) 40%, var(--header-background-60) 60%) no-repeat left,
     url('https://storage.c2dl.info/assets/images/character/cc-lea-small.png') no-repeat left 23.5em top 6px,
@@ -7,7 +7,7 @@
     linear-gradient(var(--header-background-a), var(--header-background-b)) no-repeat left;
 }
 
-@mixin c2dl-header-background-full {
+@mixin c2dl-dark-header-background-full {
     --header-background: linear-gradient(to right, transparent,
         var(--header-background-40) 40%, var(--header-background-60) 60%) no-repeat left,
     url('https://storage.c2dl.info/assets/images/character/cc-lea.png') no-repeat left 19.5em top 6px,
@@ -16,120 +16,109 @@
     linear-gradient(var(--header-background-a), var(--header-background-b)) no-repeat left;
 }
 
-:root {
-    --debug-background: rgb(230, 155, 165);
+@mixin c2dl-dark-root-color {
+    :root {
+        --debug-background: rgb(230, 155, 165);
 
-    --base-color: rgb(210, 210, 220);
-    --base-background: rgb(30, 30, 35);
+        --base-color: rgb(210, 210, 220);
+        --base-background: rgb(30, 30, 35);
 
-    --base-link-foreground: rgb(125, 185, 215);
+        --base-link-foreground: rgb(125, 185, 215);
 
-    --base-link-hover-background: rgb(125, 185, 215);
-    --base-link-hover-foreground: rgb(25, 25, 25);
+        --base-link-hover-background: rgb(125, 185, 215);
+        --base-link-hover-foreground: rgb(25, 25, 25);
 
-    --base-dotlink-foreground: inherit;
+        --base-dotlink-foreground: inherit;
 
-    --selection-background: rgba(125, 185, 215, 0.5);
+        --selection-background: rgba(125, 185, 215, 0.5);
 
-    --header-foreground: rgb(190, 190, 200);
+        --header-foreground: rgb(190, 190, 200);
 
-    --header-link: rgb(125, 185, 215);
-    --header-hover-foreground: rgb(25, 25, 25);
-    --header-hover-background: rgba(125, 185, 215, 0.8);
+        --header-link: rgb(125, 185, 215);
+        --header-hover-foreground: rgb(25, 25, 25);
+        --header-hover-background: rgba(125, 185, 215, 0.8);
 
-    --header-foreground-hamburger: rgb(125, 185, 215);
-    --header-hover-hamburger-foreground: rgb(25, 25, 25);
-    --header-hover-hamburger-background: rgba(125, 185, 215, 0.8);
+        --header-foreground-hamburger: rgb(125, 185, 215);
+        --header-hover-hamburger-foreground: rgb(25, 25, 25);
+        --header-hover-hamburger-background: rgba(125, 185, 215, 0.8);
 
-    --header-background-a: rgb(45, 45, 55);
-    --header-background-b: rgba(25, 25, 25, 0.6);
-    --header-background-40: rgba(25, 25, 25, 0.7);
-    --header-background-60: rgb(25, 25, 25);
+        --header-background-a: rgb(45, 45, 55);
+        --header-background-b: rgba(25, 25, 25, 0.6);
+        --header-background-40: rgba(25, 25, 25, 0.7);
+        --header-background-60: rgb(25, 25, 25);
 
-    @include c2dl-header-background-small;
+        @include c2dl-dark-header-background-small;
 
-    --header-shadow: 0 2px 2px 0
-    rgba(125, 185, 215, 0.14), 0 3px 1px -2px rgba(125, 185, 215, 0.2), 0 1px 5px 0
-    rgba(125, 185, 215, 0.12);
+        --header-shadow: 0 2px 2px 0 rgba(125, 185, 215, 0.14), 0 3px 1px -2px rgba(125, 185, 215, 0.2), 0 1px 5px 0 rgba(125, 185, 215, 0.12);
 
 
-    --drawer-foreground: rgb(190, 190, 200);
-    --drawer-background-a: rgb(45, 45, 55);
-    --drawer-background-b: rgb(25, 25, 25);
-    --drawer-separator: rgba(190, 190, 200, 0.6);
+        --drawer-foreground: rgb(190, 190, 200);
+        --drawer-background-a: rgb(45, 45, 55);
+        --drawer-background-b: rgb(25, 25, 25);
+        --drawer-separator: rgba(190, 190, 200, 0.6);
 
-    --drawer-link: rgb(125, 185, 215);
+        --drawer-link: rgb(125, 185, 215);
 
-    --drawer-hover-foreground: rgb(25, 25, 25);
-    --drawer-hover-background: rgba(125, 185, 215, 0.6);
+        --drawer-hover-foreground: rgb(25, 25, 25);
+        --drawer-hover-background: rgba(125, 185, 215, 0.6);
 
-    --drawer-img-background: url('https://storage.c2dl.info/assets/images/background/circuit_pattern_dark.svg') repeat left,
-    linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
-    --drawer-safari-background:
+        --drawer-img-background: url('https://storage.c2dl.info/assets/images/background/circuit_pattern_dark.svg') repeat left,
         linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
+        --drawer-safari-background: linear-gradient(var(--drawer-background-a), var(--drawer-background-b)) no-repeat left;
 
 
-    --newscard-background: rgb(30, 30, 35);
-    --newscard-shadow: 0 2px 2px 0
-    rgba(125, 185, 215, 0.14), 0 3px 1px -2px rgba(125, 185, 215, 0.2), 0 1px 5px 0
-    rgba(125, 185, 215, 0.12);
+        --newscard-background: rgb(30, 30, 35);
+        --newscard-shadow: 0 2px 2px 0 rgba(125, 185, 215, 0.14), 0 3px 1px -2px rgba(125, 185, 215, 0.2), 0 1px 5px 0 rgba(125, 185, 215, 0.12);
 
-    --newscard-hover-shadow: 0 8px 10px 1px
-    rgba(125, 185, 215, .14), 0 3px 14px 2px rgba(125, 185, 215, .12), 0 5px 5px -3px
-    rgba(125, 185, 215, .2);
+        --newscard-hover-shadow: 0 8px 10px 1px rgba(125, 185, 215, .14), 0 3px 14px 2px rgba(125, 185, 215, .12), 0 5px 5px -3px rgba(125, 185, 215, .2);
 
-    --newscard-title: rgb(210, 210, 220);
-    --newscard-info: rgba(210, 210, 220, 0.7);
-    --newscard-text: rgba(210, 210, 220, 0.7);
-    --newscard-separator: rgba(210, 210, 220, 0.2);
+        --newscard-title: rgb(210, 210, 220);
+        --newscard-info: rgba(210, 210, 220, 0.7);
+        --newscard-text: rgba(210, 210, 220, 0.7);
+        --newscard-separator: rgba(210, 210, 220, 0.2);
 
 
-    --teamcard-background: rgb(30, 30, 35);
-    --teamcard-shadow: 0 2px 2px 0
-    rgba(125, 185, 215, 0.14), 0 3px 1px -2px rgba(125, 185, 215, 0.2), 0 1px 5px 0
-    rgba(125, 185, 215, 0.12);
+        --teamcard-background: rgb(30, 30, 35);
+        --teamcard-shadow: 0 2px 2px 0 rgba(125, 185, 215, 0.14), 0 3px 1px -2px rgba(125, 185, 215, 0.2), 0 1px 5px 0 rgba(125, 185, 215, 0.12);
 
-    --teamcard-hover-shadow: 0 8px 10px 1px
-    rgba(125, 185, 215, .14), 0 3px 14px 2px rgba(125, 185, 215, .12), 0 5px 5px -3px
-    rgba(125, 185, 215, .2);
+        --teamcard-hover-shadow: 0 8px 10px 1px rgba(125, 185, 215, .14), 0 3px 14px 2px rgba(125, 185, 215, .12), 0 5px 5px -3px rgba(125, 185, 215, .2);
 
-    --teamcard-title: rgb(210, 210, 220);
-    --teamcard-text: rgba(210, 210, 220, 0.7);
-    --teamcard-separator: rgba(210, 210, 220, 0.2);
+        --teamcard-title: rgb(210, 210, 220);
+        --teamcard-text: rgba(210, 210, 220, 0.7);
+        --teamcard-separator: rgba(210, 210, 220, 0.2);
 
 
-    --nav-hover-foreground: rgb(30, 30, 35);
-    --nav-hover-background: rgb(125, 185, 215);
+        --nav-hover-foreground: rgb(30, 30, 35);
+        --nav-hover-background: rgb(125, 185, 215);
 
-    --nav-foreground: rgb(125, 185, 215);
+        --nav-foreground: rgb(125, 185, 215);
 
-    --nav-current-foreground: rgb(210, 210, 220);
-    --nav-current-background: none;
-    --nav-current-border: rgba(210, 210, 220, 0.2);
+        --nav-current-foreground: rgb(210, 210, 220);
+        --nav-current-background: none;
+        --nav-current-border: rgba(210, 210, 220, 0.2);
 
-    --news-separator: rgba(210, 210, 220, 0.2);
-    --dataentry-separator: rgba(210, 210, 220, 0.2);
-
-
-    --social-background: rgb(30, 30, 35);
-    --social-shadow: 0 2px 2px 0
-    rgba(125, 185, 215, 0.14), 0 3px 1px -2px rgba(125, 185, 215, 0.2), 0 1px 5px 0
-    rgba(125, 185, 215, 0.12);
-
-    --social-nav-foreground: rgb(125, 185, 215);
-
-    --linkbutton-hover-background: rgb(125, 185, 215);
-    --social-hover-foreground: rgb(45, 45, 55);
-
-    --social-subtext: rgba(210, 210, 220, 0.6);
-
-    --c2dl-chevron-color: rgb(210, 210, 220);
+        --news-separator: rgba(210, 210, 220, 0.2);
+        --dataentry-separator: rgba(210, 210, 220, 0.2);
 
 
-    --entrylist-foreground: rgb(210, 210, 220);
-    --entrylist-description-foreground: rgba(210, 210, 220, 0.7);
+        --social-background: rgb(30, 30, 35);
+        --social-shadow: 0 2px 2px 0 rgba(125, 185, 215, 0.14), 0 3px 1px -2px rgba(125, 185, 215, 0.2), 0 1px 5px 0 rgba(125, 185, 215, 0.12);
+
+        --social-nav-foreground: rgb(125, 185, 215);
+
+        --linkbutton-hover-background: rgb(125, 185, 215);
+        --social-hover-foreground: rgb(45, 45, 55);
+
+        --social-subtext: rgba(210, 210, 220, 0.6);
+
+        --c2dl-chevron-color: rgb(210, 210, 220);
 
 
-    --scrollbar-track: rgb(30, 30, 35);
-    --scrollbar-thumb: rgb(210, 210, 220);
+        --entrylist-foreground: rgb(210, 210, 220);
+        --entrylist-description-foreground: rgba(210, 210, 220, 0.7);
+
+
+        --scrollbar-track: rgb(30, 30, 35);
+        --scrollbar-thumb: rgb(210, 210, 220);
+    }
 }
