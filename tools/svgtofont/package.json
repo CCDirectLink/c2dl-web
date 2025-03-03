@@ -7,6 +7,6 @@
     "build": "node ."
   },
   "devDependencies": {
-    "svgtofont": "^6.0.0"
+    "svgtofont": "^6.3"
   }
 }

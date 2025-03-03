@@ -16,15 +16,15 @@ Content of the link:https://c2dl.info[c2dl.info] website(s)
 
 == Local setup
 
-Used Laravel version: link:https://laravel.com/docs/11.x/[11.x] (see also link:https://laravel.com/docs/master/releases#support-policy[Support Policy])
+Used Laravel version: link:https://laravel.com/docs/12.x/[12.x] (see also link:https://laravel.com/docs/master/releases#support-policy[Support Policy])
 
 === Requirements
 
-* link:https://www.php.net[PHP]: 8.3 (see also: link:https://www.php.net/supported-versions.php[Supported Versions])
+* link:https://www.php.net[PHP]: 8.4 (see also: link:https://www.php.net/supported-versions.php[Supported Versions])
 * link:https://getcomposer.org/[Composer] (latest recommended)
-* link:https://nodejs.org[NodeJS] (version 20+ recommended - see link:https://nodejs.org/en/about/previous-releases[Release Schedule])
-* Database (see also: link:https://laravel.com/docs/11.x/database[Supported by Laravel])
-** link:https://mariadb.org/[MariaDB] (10.3 minimal, 10.11+ recommended - see also link:https://mariadb.org/download/#release-schedule[Release Schedule])
+* link:https://nodejs.org[NodeJS] (version 22+ recommended - see link:https://nodejs.org/en/about/previous-releases[Release Schedule])
+* Database (see also: link:https://laravel.com/docs/12.x/database[Supported by Laravel])
+** link:https://mariadb.org/[MariaDB] (10.3 minimal, 10.11+ recommended - see also link:https://en.wikipedia.org/wiki/MariaDB#Versioning[Release history])
 ** **[OR]** link:https://www.mysql.com/[MySQL] (5.7 minimal, 8.0 recommended - see also link:https://en.wikipedia.org/wiki/MySQL#Release_history[Release history]
 ** **[OR]** link:https://www.postgresql.org/[PostgreSQL] (10.0 minimal, 13.0+ recommended - see also link:https://www.postgresql.org/support/versioning/[Versioning Policy])
 ** **[OR]** link:https://www.sqlite.org/[SQLite] (3.35.0 minimal, latest recommended)
