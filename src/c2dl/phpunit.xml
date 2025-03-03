@@ -6,23 +6,28 @@
 >
     <testsuites>
         <testsuite name="Unit">
-            <directory suffix="Test.php">./tests/Unit</directory>
+            <directory>tests/Unit</directory>
         </testsuite>
         <testsuite name="Feature">
-            <directory suffix="Test.php">./tests/Feature</directory>
+            <directory>./tests/Feature</directory>
         </testsuite>
     </testsuites>
-    <coverage>
-        <include>
-            <directory suffix=".php">./App</directory>
-        </include>
+    <coverage ignoreDeprecatedCodeUnits="true"
+              disableCodeCoverageIgnore="true">
+        <report>
+            <clover outputFile=".coverage/clover.xml"/>
+            <cobertura outputFile=".coverage/cobertura.xml"/>
+            <crap4j outputFile=".coverage/crap4j.xml" threshold="50"/>
+            <html outputDirectory=".coverage/html-coverage"/>
+            <php outputFile=".coverage/coverage.php"/>
+            <text outputFile=".coverage/coverage.txt" showOnlySummary="true"/>
+            <xml outputDirectory=".coverage/xml-coverage"/>
+        </report>
     </coverage>
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="CACHE_DRIVER" value="array"/>
-        <!-- <env name="DB_CONNECTION" value="sqlite"/> -->
-        <!-- <env name="DB_DATABASE" value=":memory:"/> -->
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
