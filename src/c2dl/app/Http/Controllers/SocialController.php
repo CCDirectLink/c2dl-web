@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\DTO\Social;
 
 class SocialController extends Controller
 {
@@ -11,11 +11,9 @@ class SocialController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
-    static public function redirectDiscordJoin(string $widget_url = null)
+    public static function redirectDiscordJoin(string $widget_url = null)
     {
         $fallback = config('social.discord_join_fallback');
 
@@ -35,7 +33,7 @@ class SocialController extends Controller
         return redirect($discord_widget_json['instant_invite'] ?? $fallback);
     }
 
-    static public function getDiscordData(string $widget_url = null): \App\DTO\Social
+    public static function getDiscordData(string $widget_url = null): Social
     {
         $fallback = [
             'main' => 'CrossCode Modding',
@@ -51,9 +49,9 @@ class SocialController extends Controller
             $discord_widget = file_get_contents($widget_url);
             $discord_widget_json = json_decode($discord_widget, true);
         }
-        catch (\Throwable $e)
+        catch (\Throwable $_)
         {
-            return new \App\DTO\Social([
+            return new Social([
                 'type' => 'discord',
                 'name' => 'Discord',
                 'desc' => 'Join the CCDirectLink Discord',
@@ -66,7 +64,7 @@ class SocialController extends Controller
             ]);
         }
 
-        return new \App\DTO\Social([
+        return new Social([
             'type' => 'discord',
             'name' => 'Discord',
             'desc' => 'Join the CCDirectLink Discord',
@@ -79,9 +77,9 @@ class SocialController extends Controller
         ]);
     }
 
-    static public function getGithubData() : \App\DTO\Social
+    public static function getGithubData(): Social
     {
-        return new \App\DTO\Social([
+        return new Social([
             'type' => 'github',
             'name' => 'GitHub',
             'desc' => 'Visit CCDirectLink on GitHub',
@@ -92,9 +90,9 @@ class SocialController extends Controller
         ]);
     }
 
-    static public function getRedditData() : \App\DTO\Social
+    public static function getRedditData(): Social
     {
-        return new \App\DTO\Social([
+        return new Social([
             'type' => 'reddit',
             'name' => 'Reddit',
             'desc' => 'Visit CCDirectLink on Reddit',
@@ -105,7 +103,7 @@ class SocialController extends Controller
         ]);
     }
 
-    static public function getSocial()
+    public static function getSocial(): iterable
     {
         $discord_social = SocialController::getDiscordData();
         $github_social = SocialController::getGithubData();
@@ -118,14 +116,14 @@ class SocialController extends Controller
         ];
     }
 
-    static public function hasRecommended()
+    public static function hasRecommended(): bool
     {
         return true;
     }
 
-    static public function getRecommended()
+    public static function getRecommended(): iterable
     {
-        $_discord_arcane = new \App\DTO\Social([
+        $_discord_arcane = new Social([
             'type' => 'discord_arcane',
             'name' => 'Discord',
             'desc' => 'Join the recommended Discord "CC: Arcane Lab Mod"',
@@ -134,7 +132,7 @@ class SocialController extends Controller
             'link' => 'https://discord.gg/dUbdmqh',
         ]);
 
-        $_discord_genesis = new \App\DTO\Social([
+        $_discord_genesis = new Social([
             'type' => 'discord_genesis',
             'name' => 'Discord',
             'desc' => 'Join the recommended Discord "CC: Autumn\'s Genesis"',
@@ -143,7 +141,7 @@ class SocialController extends Controller
             'link' => 'https://discord.gg/Seq9Kfq',
         ]);
 
-        $_discord_bee = new \App\DTO\Social([
+        $_discord_bee = new Social([
             'type' => 'discord_bee',
             'name' => 'Discord',
             'desc' => 'Join the recommended Discord "CrossCode: BEE"',
@@ -152,7 +150,7 @@ class SocialController extends Controller
             'link' => 'https://discord.gg/zVRnU9q',
         ]);
 
-        $_discord_monMod = new \App\DTO\Social([
+        $_discord_monMod = new Social([
             'type' => 'discord_mon_mod',
             'name' => 'Discord',
             'desc' => 'Join the recommended Discord "MonMod and Emotes"',

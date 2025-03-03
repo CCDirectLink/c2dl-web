@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\Pagination;
+use DateTime;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Models\News;
+use Illuminate\Http\Response;
 
 class NewsController extends Controller
 {
@@ -12,12 +16,9 @@ class NewsController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {}
 
-    }
-
-    static public function rssFeed(int $limit = 20)
+    public static function rssFeed(int $limit = 20): Response
     {
         $posts = [];
         $_newsList = News::where('active', 1)
@@ -28,12 +29,8 @@ class NewsController extends Controller
 
         $_lastUpdate = NewsController::getLastUpdate();
 
-        if (!isset($_newsList[0])) {
-            return 'Something went horribly wrong, and no posts were found. Did you forget to seed the database?';
-        }
-
         foreach ($_newsList as $post) {
-            array_push($posts, NewsController::compileData($post));
+            $posts[] = NewsController::compileData($post);
         }
 
         return response()->view(
@@ -42,7 +39,7 @@ class NewsController extends Controller
             ->header('Content-Type', 'application/atom+xml');
     }
 
-    static public function getLastUpdate()
+    public static function getLastUpdate()
     {
         $_latest_created = News::where('active', 1)
             ->latest()
@@ -55,13 +52,12 @@ class NewsController extends Controller
 
         if ($_latest_updated < $_latest_created) {
             return $_latest_created ?? new DateTime();
-        }
-        else {
+        } else {
             return $_latest_updated ?? new DateTime();
         }
     }
 
-    static public function getNewsList(bool $pinned = false,
+    public static function getNewsList(bool $pinned = false,
                                        int $limit = 10,
                                        string $lang = null) : array
     {
@@ -87,7 +83,7 @@ class NewsController extends Controller
         return $list;
     }
 
-    static public function getNews(int $id,
+    public static function getNews(int $id,
                                    int $page = 1,
                                    string $lang = 'en') : ?\App\DTO\News
     {
@@ -102,9 +98,9 @@ class NewsController extends Controller
         return null;
     }
 
-    static public function getNewsPages(int $id,
+    public static function getNewsPages(int $id,
                                         string $lang,
-                                        int $current = null) : ?\App\DTO\Pagination
+                                        int $current = null) : ?Pagination
     {
         $_apge = [
             'list' => [],
@@ -137,10 +133,10 @@ class NewsController extends Controller
             array_push($_apge['list'], $news->page_number);
         }
 
-        return new \App\DTO\Pagination($_apge);
+        return new Pagination($_apge);
     }
 
-    static public function contentToPreview(string $content) : string
+    public static function contentToPreview(string $content) : string
     {
         // no tags
         $content = strip_tags($content);
@@ -154,7 +150,7 @@ class NewsController extends Controller
         return $substring;
     }
 
-    static public function compileData(object $entry) : \App\DTO\News
+    public static function compileData(object $entry) : \App\DTO\News
     {
         $page_data = NewsController::getNewsPages($entry->news_id, $entry->lang, $entry->page_number);
         $preview = NewsController::contentToPreview($entry->content);
@@ -181,17 +177,12 @@ class NewsController extends Controller
      * @param Request $request
      * @param int $news_id
      * @param int $page
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function show(Request $request,
                          int $news_id,
-                         int $page = 1) : \Illuminate\Contracts\Support\Renderable
+                         int $page = 1) : Renderable
     {
-
-        if (is_null($news_id)) {
-            abort(404,'Page not found');
-        }
-
         $result = NewsController::getNews($news_id, $page);
 
         if (is_null($result)) {

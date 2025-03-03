@@ -10,12 +10,9 @@ class UserController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        //$this->middleware('auth');
-    }
+    public function __construct() {}
 
-    static public function getUser(int $userId = 0): ?\App\DTO\User
+    public static function getUser(int $userId = 0): ?\App\DTO\User
     {
         if ($userId == 0) {
             return new \App\DTO\User(0, 'CCDirectLink');
@@ -28,16 +25,13 @@ class UserController extends Controller
             throw new \Error('Multiple entries found');
         }
 
-        if (sizeof($_userList) != 1) {
+        if ((sizeof($_userList) != 1)
+            && (!isset($_userList[0]))) {
             return null;
         }
 
-        if (isset($_userList[0])) {
-            $_id = $_userList[0]->user_id;
-            $_name = $_userList[0]->name;
-
-            return new \App\DTO\User($_id, $_name);
-        }
-
+        $_id = $_userList[0]->user_id;
+        $_name = $_userList[0]->name;
+        return new \App\DTO\User($_id, $_name);
     }
 }

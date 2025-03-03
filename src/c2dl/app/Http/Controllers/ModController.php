@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\DTO\ModInfo;
+use Illuminate\Contracts\Support\Renderable;
 
 class ModController extends Controller
 {
@@ -11,12 +12,9 @@ class ModController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        //$this->middleware('auth');
-    }
+    public function __construct() {}
 
-    static public function getModList(int $page = 1): \App\DTO\ModInfo
+    public static function getModList(int $page = 1): ModInfo
     {
         try {
             $mod_list_raw = file_get_contents(
@@ -26,22 +24,19 @@ class ModController extends Controller
         }
         catch (\Throwable $e)
         {
-            return new \App\DTO\ModInfo();
+            return new ModInfo();
         }
 
-        return new \App\DTO\ModInfo($mod_list_json, $page);
+        return new ModInfo($mod_list_json, $page);
     }
 
     /**
      * Show mods
      *
-     * @param Request $request
-     * @param int $news_id
      * @param int $page
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
-    public function show(Request $request,
-                         int $page = 1) : \Illuminate\Contracts\Support\Renderable
+    public function show(int $page = 1) : Renderable
     {
         $result = ModController::getModList($page);
 

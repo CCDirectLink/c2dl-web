@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ModController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\SocialController;
+use App\Http\Controllers\ToolController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
@@ -18,55 +23,37 @@ Route::redirect('/', '/cc');
 
 Route::prefix('/cc')->group(function () {
 
+    $_numeric = '^[1-9]([0-9]*)$';
+
     App::setLocale('en');
 
     // Main
-    Route::get('/', 'HomeController@show')->name('home');
+    Route::get('/', [HomeController::class, 'show'])->name('home');
 
     // Mods
     Route::redirect('/mods/1', '/cc/mods');
-    Route::get('/mods/{page?}', 'ModController@show')->name('mods')
-        ->where('page', '^[1-9]([0-9]*)$');
+    Route::get('/mods/{page?}', [ModController::class, 'show'])->name('mods')
+        ->where('page', $_numeric);
 
     // Tools
     Route::redirect('/tools/1', '/cc/tools');
-    Route::get('/tools/{page?}', 'ToolController@show')->name('tools')
-        ->where('page', '^[1-9]([0-9]*)$');
-
-    // Info
-    Route::get('/about', 'InfoController@about')->name('about');
-    // Route::get('/impressum', 'InfoController@impressum')->name('impressum');
-    // Route::get('/privacy', 'InfoController@privacy')->name('privacy');
+    Route::get('/tools/{page?}',  [ToolController::class, 'show'])->name('tools')
+        ->where('page', $_numeric);
 
     // News
     Route::redirect('/news/{news_id}/1', '/cc/news/{news_id}')
-        ->where('news_id', '^[1-9]([0-9]*)$');
+        ->where('news_id', $_numeric);
 
-    Route::get('/news/{news_id}/{page?}', 'NewsController@show')->name('news')
-        ->where('news_id', '^[1-9]([0-9]*)$')
-        ->where('page', '^[1-9]([0-9]*)$');
+    Route::get('/news/{news_id}/{page?}', [NewsController::class, 'show'])->name('news')
+        ->where('news_id', $_numeric)
+        ->where('page', $_numeric);
 
     // RSS Feed
-    Route::get('/news/feed', 'NewsController@rssFeed')->name('news.feed');
-
-    // Authentication
-    // Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-    // Route::post('login', 'Auth\LoginController@login');
-    // Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-
-    // Registration
-    // Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-    // Route::post('register', 'Auth\RegisterController@register');
-
-    // Password Reset
-    // Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
-    // Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-    // Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
-    // Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+    Route::get('/news/feed', [NewsController::class, 'rssFeed'])->name('news.feed');
 
 });
 
 Route::redirect('/wiki', 'https://wiki.c2dl.info')->name('wiki');
 
 Route::redirect('/r/yt-bye', 'https://www.youtube.com/watch?v=LcAFxc_sbYM');
-Route::get('/r/md', 'SocialController@redirectDiscordJoin');
+Route::get('/r/md', [SocialController::class, 'redirectDiscordJoin']);

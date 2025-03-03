@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\DTO\ModInfo;
+use Illuminate\Contracts\Support\Renderable;
 
 class ToolController extends Controller
 {
@@ -11,12 +12,9 @@ class ToolController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        //$this->middleware('auth');
-    }
+    public function __construct() {}
 
-    static public function getToolList(int $page = 1): \App\DTO\ModInfo
+    public static function getToolList(int $page = 1): ModInfo
     {
         try {
             $tool_list_raw = file_get_contents(
@@ -26,22 +24,18 @@ class ToolController extends Controller
         }
         catch (\Throwable $e)
         {
-            return new \App\DTO\ModInfo();
+            return new ModInfo();
         }
 
-        return new \App\DTO\ModInfo($tool_list_json, $page);
+        return new ModInfo($tool_list_json, $page);
     }
 
     /**
      * Show tools
      *
-     * @param Request $request
-     * @param int $news_id
-     * @param int $page
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
-    public function show(Request $request,
-                         int $page = 1) : \Illuminate\Contracts\Support\Renderable
+    public function show() : Renderable
     {
         $result = ToolController::getToolList();
 

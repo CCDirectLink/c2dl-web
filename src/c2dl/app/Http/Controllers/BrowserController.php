@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class BrowserController extends Controller
 {
     /**
@@ -11,17 +9,14 @@ class BrowserController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        //$this->middleware('auth');
-    }
+    public function __construct() {}
 
     /**
      * True if text browser
      *
      * @return boolean Text Browser
      */
-    static public function isTextBrowser()
+    public static function isTextBrowser(): bool
     {
         $_userAgent = request()->header('user-agent');
         if (preg_match('~^((E)?Links|Lynx|w3m)~', $_userAgent)) {

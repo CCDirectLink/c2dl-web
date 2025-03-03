@@ -60,11 +60,6 @@
                     <a class="c2dl-menu-link" href="{{ route('wiki') }}" title="{{ __('wiki.desc') }}">{{ __('wiki.name') }}</a>
                 </li>
                 @endif
-                @if (Route::has('about'))
-                <li class="c2dl-menu-entry">
-                    <a class="c2dl-menu-link" href="{{ route('about') }}" title="{{ __('info.desc') }}">{{ __('info.about') }}</a>
-                </li>
-                @endif
                 @if (false)
                 @guest
                     <li class="c2dl-menu-entry">
