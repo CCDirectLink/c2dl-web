@@ -61,7 +61,7 @@ services:
   composer:
     container_name: "c2dl-composer"
     restart: 'no'
-    image: composer/composer:2.7.4
+    image: composer/composer:2.8.6
     command: install
     healthcheck:
       test: [ "CMD-SHELL", 'bash -c "[ -d vendors ]"' ]
