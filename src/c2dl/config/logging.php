@@ -54,13 +54,6 @@ return [
             'days' => 14,
         ],
 
-        'discord' => [
-            'driver' => 'custom',
-            'via'    => MarvinLabs\DiscordLogger\Logger::class,
-            'url' => env('LOG_DISCORD_WEBHOOK_URL'),
-            'level' => 'critical',
-        ],
-
         'papertrail' => [
             'driver' => 'monolog',
             'level' => 'debug',

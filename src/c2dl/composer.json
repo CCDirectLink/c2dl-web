@@ -15,7 +15,6 @@
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.5",
-        "marvinlabs/laravel-discord-logger": "^1.4.2",
         "spatie/laravel-csp": "^2.9"
     },
     "require-dev": {
