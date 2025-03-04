@@ -1,109 +1,95 @@
-cd "$( dirname "$0" )" || return 1
+#!/usr/bin/env sh
 
-container_tool="_missing"
-
-if [[ $(which docker) && $(docker --version) ]]; then
-  echo "Docker found"
-  container_tool="docker"
+# shellcheck disable=SC3054
+# shellcheck disable=SC3028
+if [ "${BASH_SOURCE[0]}" = "" ]; then
+  _DEV_C_SELF_DIR="$(cd -- "$(dirname -- "$0")" >/dev/null 2>&1 ||
+  exit 1; pwd -P )"
 else
-  echo "Docker missing but required"
-  return 1
+  # shellcheck disable=SC3054
+  # shellcheck disable=SC3028
+  _DEV_C_SELF_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")">/dev/null 2>&1||
+  exit 1; pwd -P )"
+fi
+cd "${_DEV_C_SELF_DIR}" || exit 1
+
+if which docker > /dev/null; then
+  if docker info > /dev/null 2> /dev/null; then
+    _DEV_C_C_TOOL="docker"
+  fi
+elif which podman > /dev/null; then
+  if podman info > /dev/null 2> /dev/null; then
+    _DEV_C_C_TOOL="podman"
+  fi
 fi
 
-$container_tool compose down
-done=$?
-if [ $done -eq 0 ]; then
-  echo "Docker compose -> down"
+if [ -z "${_DEV_C_C_TOOL}" ]; then
+  printf "No running container environment\nDocker or podman required\n" >&2
+  exit 1
 fi
 
-echo "Docker image cleanup"
-
-$container_tool image rm docker-php 2> /dev/null
-done=$?
-if [ $done -eq 0 ]; then
-  echo "image removed: docker-php"
+if "${_DEV_C_C_TOOL}" compose down > /dev/null; then
+  printf "Compose down\n"
 fi
 
-$container_tool image rm c2dl-php 2> /dev/null
-done=$?
-if [ $done -eq 0 ]; then
-  echo "image removed: c2dl-php"
+remove_image()
+{
+  if "${_DEV_C_C_TOOL}" image rm "${1}" 2> /dev/null; then
+    if [ -n "${2}" ]; then
+      _DEV_C_NOTE=" (${2})"
+    fi
+    printf "Image removed: %s%s\n" "${1}" "${_DEV_C_NOTE}"
+    unset _DEV_C_NOTE
+  fi
+}
+
+remove_image "docker-php"
+remove_image "c2dl-php"
+remove_image "mysql:5.7.28" "old mysql"
+remove_image "mariadb:10.5"
+remove_image "mariadb:10.11"
+remove_image "composer/composer:2.7.4"
+remove_image "httpd:2.4"
+remove_image "node:current-bookworm-slim"
+
+if "${_DEV_C_C_TOOL}" builder prune -f > /dev/null; then
+  printf "Builder cache pruned\n"
 fi
 
-$container_tool image rm mysql:5.7.28 2> /dev/null
-done=$?
-if [ $done -eq 0 ]; then
-  echo "image removed: mysql:5.7.28 (old mysql)"
+remove_folder()
+{
+  if [ -d "${1}" ]; then
+    rm -r "${1}"
+    printf "%s: %s removed\n" "${2}" "${3}"
+  fi
+}
+
+_DEV_C_C2DL_DIR="${_DEV_C_SELF_DIR}/../src/c2dl"
+_DEV_C_RUN_DIR="${_DEV_C_SELF_DIR}/.run"
+
+remove_folder "${_DEV_C_C2DL_DIR}/node_modules" "Assets" "Node modules"
+remove_folder "${_DEV_C_C2DL_DIR}/build" "Assets" "Asset builds"
+remove_folder "${_DEV_C_C2DL_DIR}/vendor" "Composer" "Vendors"
+remove_folder "${_DEV_C_RUN_DIR}/logs" "Logs" "Docker logs"
+
+_DEV_C_RM_DB="false"
+if [ -d "${_DEV_C_RUN_DIR}/mysql" ]; then
+  if which read > /dev/null; then
+    if [ -z "${DEV_C_RM_DB}" ]; then
+      printf "Remove database [y/n]: "
+      read -r _DEV_C_RM_DB_INPUT
+    else
+      _DEV_C_RM_DB="${DEV_C_RM_DB}"
+    fi
+  fi
+  if [ "${_DEV_C_RM_DB_INPUT}" = "y" ]; then
+    _DEV_C_RM_DB="true"
+  elif [ "${_DEV_C_RM_DB_INPUT}" = "yes" ]; then
+    _DEV_C_RM_DB="true"
+  fi
+  unset _DEV_C_RM_DB_INPUT
 fi
 
-$container_tool image rm mariadb:10.5 2> /dev/null
-done=$?
-if [ $done -eq 0 ]; then
-  echo "image removed: mariadb:10.5"
-fi
-
-$container_tool image rm mariadb:10.11 2> /dev/null
-done=$?
-if [ $done -eq 0 ]; then
-  echo "image removed: mariadb:10.11"
-fi
-
-$container_tool image rm composer/composer:2.7.4 2> /dev/null
-done=$?
-if [ $done -eq 0 ]; then
-  echo "image removed: composer/composer:2.7.4"
-fi
-
-$container_tool image rm httpd:2.4 2> /dev/null
-done=$?
-if [ $done -eq 0 ]; then
-  echo "image removed: httpd:2.4"
-fi
-
-$container_tool image rm node:current-bookworm-slim 2> /dev/null
-done=$?
-if [ $done -eq 0 ]; then
-  echo "image removed: node:current-bookworm-slim"
-fi
-
-echo "Prune Docker builder cache"
-$container_tool builder prune -f
-done=$?
-if [ $done -eq 0 ]; then
-  echo "builder cache pruned"
-fi
-
-if [ -d ../src/c2dl/node_modules ]; then
-  rm -r ../src/c2dl/node_modules
-  echo "Assets: Node modules removed"
-fi
-
-if [ -d ../src/c2dl/public/build ]; then
-  rm -r ../src/c2dl/public/build
-  echo "Assets: Asset builds removed"
-fi
-
-if [ -d ../src/c2dl/vendor ]; then
-  rm -r ../src/c2dl/vendor
-  echo "Composer: vendors removed"
-fi
-
-if [ -d .run/logs ]; then
-  rm -r .run/logs
-  echo "Logs: Docker logs removed"
-fi
-
-if [ -d .run/mysql ]; then
-  dialog --stdout --title "Database removal" \
-     --backtitle "Database removal" \
-     --yesno "Do you want to remove the database content?" 7 60
-  db_remove=$?
-  clear
-else
-  db_remove=1
-fi
-
-if [ $db_remove -eq 0 ]; then
-  rm -r .run/mysql
-  echo "Database removed"
+if [ "${_DEV_C_RM_DB}" = "true" ]; then
+  remove_folder "${_DEV_C_RUN_DIR}/mysql" "Database" "Database"
 fi
