@@ -27,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
         // Components
         Blade::aliasComponent('components.newscard', 'newscard');
         Blade::aliasComponent('components.pageheader', 'pageheader');
+        Blade::aliasComponent('components.icons', 'icons');
 
         Blade::aliasComponent('components.menudrawer', 'menudrawer');
         Blade::aliasComponent('components.menucontainer', 'menucontainer');
