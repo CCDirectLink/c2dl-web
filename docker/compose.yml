@@ -102,7 +102,7 @@ services:
     image: node:current-bookworm-slim
     command: sh -c "npm install && npm run build"
     healthcheck:
-      test: ["CMD-SHELL", 'bash -c "[ -d node_modules ]"']
+      test: [ "CMD-SHELL", 'bash -c "[ -d node_modules ]"' ]
       interval: 45s
       timeout: 10s
       retries: 4

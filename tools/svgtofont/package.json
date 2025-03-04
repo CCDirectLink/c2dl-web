@@ -1,15 +1,15 @@
 {
-    "version": "1.1.0",
-    "main": "src/build.js",
-    "private": true,
-    "type": "module",
-    "engines": {
+  "version": "1.1.0",
+  "main": "src/build.js",
+  "private": true,
+  "type": "module",
+  "engines": {
     "node": "^18.0.0 || ^20.0.0 || >=22.0.0"
-    },
-        "scripts": {
-        "build": "node ."
-    },
-        "devDependencies": {
-        "svgtofont": "^6.3"
-    }
+  },
+  "scripts": {
+    "build": "node ."
+  },
+  "devDependencies": {
+    "svgtofont": "^6.3"
+  }
 }

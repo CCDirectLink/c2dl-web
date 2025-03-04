@@ -1,17 +1,17 @@
 {
-    "private": true,
-    "type": "module",
-    "engines": {
-        "node": "^18.0.0 || ^20.0.0 || >=22.0.0"
-    },
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build"
-    },
-    "devDependencies": {
-        "axios": "^1.8",
-        "laravel-vite-plugin": "^1.2",
-        "vite": "^6.2",
-        "sass": "^1.85"
-    }
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^18.0.0 || ^20.0.0 || >=22.0.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "axios": "^1.8",
+    "laravel-vite-plugin": "^1.2",
+    "vite": "^6.2",
+    "sass": "^1.85"
+  }
 }
