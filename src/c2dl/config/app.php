@@ -66,7 +66,9 @@ return [
 
     'url' => env('APP_URL', 'https://c2dl.info'),
 
-    'asset_url' => env('ASSET_URL', null),
+    'maintenance-message' => env('APP_MAINTENANCE_MESSAGE'),
+
+    'asset_url' => env('ASSET_URL'),
 
     /*
     |--------------------------------------------------------------------------

@@ -1,0 +1,30 @@
+.errorTextContainer {
+}
+
+.errorLogo {
+    width: 256px;
+    height: 256px;
+}
+
+.errorContainer {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: "Manrope", Helvetica, sans-serif;
+}
+
+.errorCode {
+    background-color: #000000;
+    color: #ffffff;
+    margin-right: 8pt;
+    padding: 4pt;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.errorText {
+    font-weight: bold;
+}
+
