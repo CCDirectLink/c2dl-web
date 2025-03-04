@@ -24,6 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(VerifyCsrfToken::class);
         $middleware->append(AddCspHeaders::class);
     })
-    ->withExceptions(function (Exceptions $exceptions) {
+    ->withExceptions(function (Exceptions $_) {
         // unused
-    })->create();
+    })
+    ->create();
