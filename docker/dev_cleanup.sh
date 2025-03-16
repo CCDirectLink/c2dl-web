@@ -14,17 +14,18 @@ fi
 cd "${_DEV_C_SELF_DIR}" || exit 1
 
 if which docker > /dev/null; then
-  if docker info > /dev/null 2> /dev/null; then
+  if docker compose ls > /dev/null 2> /dev/null; then
     _DEV_C_C_TOOL="docker"
   fi
 elif which podman > /dev/null; then
-  if podman info > /dev/null 2> /dev/null; then
+  if podman compose ls > /dev/null 2> /dev/null; then
     _DEV_C_C_TOOL="podman"
   fi
 fi
 
 if [ -z "${_DEV_C_C_TOOL}" ]; then
-  printf "No running container environment\nDocker or podman required\n" >&2
+  printf "No running container environment with compose\n" >&2
+  printf "Requires docker compose or podman compose\n" >&2
   exit 1
 fi
 
