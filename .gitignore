@@ -12,6 +12,9 @@ logs/*/*.log
 .coverage
 .phpunit.cache
 
+# Local composer
+composer.phar
+
 # IDEs
 .idea
 
