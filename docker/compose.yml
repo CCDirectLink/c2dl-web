@@ -39,17 +39,17 @@ services:
       - back
       - front
 
-  # PHP
-  php:
-    container_name: "c2dl-php"
+  # PHP, Composer & Bun
+  c2dl-sys:
+    container_name: "c2dl-sys"
     restart: always
     build:
       context: ..
-      dockerfile: ./docker/conf/php/Dockerfile
+      dockerfile: ./docker/conf/sys/Dockerfile
     volumes_from:
       - apache
     volumes:
-      - ./conf/php/php.ini:/usr/local/etc/php/conf.d/user-php.ini
+      - ./conf/sys/php.ini:/usr/local/etc/php/conf.d/user-php.ini
     working_dir: /usr/local/apache2/htdocs
     ports:
       - "9000:9000"

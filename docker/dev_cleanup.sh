@@ -46,6 +46,7 @@ remove_image()
 
 remove_image "docker-php"
 remove_image "c2dl-php"
+remove_image "docker-c2dl-sys"
 remove_image "mysql:5.7.28" "old mysql"
 remove_image "mariadb:10.5"
 remove_image "mariadb:10.11"

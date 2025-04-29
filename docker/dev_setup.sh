@@ -38,7 +38,7 @@ fi
 run_c_command()
 {
   "${_DEV_S_C_TOOL}" exec \
-  -it "${DEV_S_PHP_CONTAINER_NAME:-"c2dl-php"}" sh -c "${1}"
+  -it "${DEV_S_SYS_CONTAINER_NAME:-"c2dl-sys"}" sh -c "${1}"
 }
 
 run_c_command "composer install"
