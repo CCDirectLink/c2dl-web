@@ -69,7 +69,6 @@ services:
       - ./servertest:/usr/local/apache2/servertest
     depends_on:
       - db
-      - node
     working_dir: /usr/local/apache2/htdocs
     ports:
       - 8088:80
@@ -77,20 +76,6 @@ services:
     networks:
       - back
       - front
-
-  # Node
-  node:
-    container_name: "c2dl-node"
-    image: node:current-bookworm-slim
-    command: sh -c "npm install && npm run build"
-    healthcheck:
-      test: [ "CMD-SHELL", 'bash -c "[ -d node_modules ]"' ]
-      interval: 45s
-      timeout: 10s
-      retries: 4
-    volumes:
-      - ../src/c2dl:/c2dl
-    working_dir: /c2dl
 
 networks:
   front:

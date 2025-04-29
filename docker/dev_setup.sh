@@ -10,11 +10,11 @@ else
   printf "Database not found\n" >&2
 fi
 
-if which docker; then
+if which docker > /dev/null; then
   if docker --version > /dev/null; then
     _DEV_S_C_TOOL="docker"
   fi
-elif which podman; then
+elif which podman > /dev/null; then
   if podman --version > /dev/null; then
     _DEV_S_C_TOOL="podman"
   fi
@@ -42,6 +42,7 @@ run_c_command()
 }
 
 run_c_command "composer install"
+run_c_command "bun install && bun run build"
 
 if [ "${_DEV_S_ENV_INIT}" = "false" ]; then
   run_c_command "php artisan key:generate"
