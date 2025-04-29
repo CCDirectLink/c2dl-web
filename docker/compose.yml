@@ -44,33 +44,15 @@ services:
     container_name: "c2dl-php"
     restart: always
     build:
-      context: .
-      dockerfile: ./conf/php/Dockerfile
+      context: ..
+      dockerfile: ./docker/conf/php/Dockerfile
     volumes_from:
       - apache
     volumes:
       - ./conf/php/php.ini:/usr/local/etc/php/conf.d/user-php.ini
-    image: c2dl-php:latest
     working_dir: /usr/local/apache2/htdocs
     ports:
       - "9000:9000"
-    networks:
-      - back
-
-  # Composer
-  composer:
-    container_name: "c2dl-composer"
-    restart: 'no'
-    image: composer/composer:2.8.6
-    command: install
-    healthcheck:
-      test: [ "CMD-SHELL", 'bash -c "[ -d vendors ]"' ]
-      interval: 45s
-      timeout: 10s
-      retries: 4
-    volumes:
-      - ../src/c2dl:/app
-    working_dir: /app
     networks:
       - back
 
