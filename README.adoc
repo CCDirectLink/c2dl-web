@@ -22,7 +22,9 @@ Used Laravel version: link:https://laravel.com/docs/12.x/[12.x] (see also link:h
 
 * link:https://www.php.net[PHP]: 8.4 (see also: link:https://www.php.net/supported-versions.php[Supported Versions])
 * link:https://getcomposer.org/[Composer] (latest recommended)
-* link:https://nodejs.org[NodeJS] (18 minimal, 22+ recommended - see link:https://nodejs.org/en/about/previous-releases[Release Schedule])
+* JavaScript-Engine (for styles & resources)
+** link:https://bun.sh/[Bun] (1.2+ recommended)
+** **[OR]** link:https://nodejs.org[NodeJS] (18 minimal, 22+ recommended - see link:https://nodejs.org/en/about/previous-releases[Release Schedule])
 * Database (see also: link:https://laravel.com/docs/12.x/database[Supported by Laravel])
 ** link:https://mariadb.org/[MariaDB] (10.3 minimal, 10.11+ recommended - see also link:https://en.wikipedia.org/wiki/MariaDB#Versioning[Release history])
 ** **[OR]** link:https://www.mysql.com/[MySQL] (5.7 minimal, 8.0 recommended - see also link:https://en.wikipedia.org/wiki/MySQL#Release_history[Release history]
@@ -34,11 +36,11 @@ Used Laravel version: link:https://laravel.com/docs/12.x/[12.x] (see also link:h
 
 * Navigate to directory link:src/c2dl[/src/c2dl]
 * Run `composer install` to install all php dependencies and set up laravel
-* Run `npm install` to install vite for building all assets
+* Run `bun install` to install vite for building all assets
 * Build the assets
 
-** Run `npm run dev` for the dev server that updates assets live
-** **[OR]** `npm run build` for static assets used in production
+** Run `bun run dev` for the dev server that updates assets live
+** **[OR]** `bun run build` for static assets used in production
 
 * Create `/src/c2dl/.env` based on link:src/c2dl/.env.example[/src/c2dl/.env.example] **[OR]** link:docker/conf/env/dev_env[/docker/conf/env/dev_env]
 * Run `php artisan key:generate` to add the app key to the .env file
@@ -74,7 +76,9 @@ Run link:docker/dev_setup.sh[/docker/dev_setup.sh]
 
 * Copy link:docker/conf/env/dev_env[/docker/conf/env/dev_env] to `/src/c2dl/.env`
 * Run `docker compose up -d --wait`
-* Wait for c2dl-node (exits when finished), c2dl-composer (exits when finished) and c2dl-mysql (keeps running) to finish/start
+* Wait for c2dl-mysql (keeps running) to finish/start
+* Set up php dependencies by running `docker exec -it c2dl-php sh -c "composer install"`
+* Set up resources by running `docker exec -it c2dl-php sh -c "bun install && bun run build"`
 * Set up the app key by running `docker exec -it c2dl-php sh -c "php artisan key:generate"`
 * Create Database
 
@@ -86,17 +90,19 @@ Run link:docker/dev_setup.sh[/docker/dev_setup.sh]
 Run link:docker/dev_cleanup.sh[/docker/dev_cleanup.sh]
 
 * Stops and removes container:
+** c2dl-php (old php container)
+** c2dl-composer (old composer container)
+** c2dl-node (old node container)
 ** c2dl-mysql
 ** c2dl-mariadb
 ** c2dl-adminer
-** c2dl-php
-** c2dl-composer
+** c2dl-sys
 ** c2dl-apache
-** c2dl-node
 * Removes networks
 * Removes images:
 ** docker-php (old php build with default name)
-** c2dl-php
+** c2dl-php (old php image)
+** docker-c2dl-sys
 ** mariadb (10.5 / 10.11)
 ** mysql (old database - 5.7.28)
 ** composer/composer

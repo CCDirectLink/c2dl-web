@@ -1,10 +1,11 @@
 = Font Generator
 
-Requirements:
+== Build
 
-`node`: v20
+- With bun: `bun run build`
+- With node: `node .`
 
-Generates svg based fonts:
+== Generates svg based fonts
 
 |===
 |Font |Version |Author |License
