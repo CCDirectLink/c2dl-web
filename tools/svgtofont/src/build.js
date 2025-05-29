@@ -7,7 +7,8 @@ const rootPath = path.resolve(process.cwd());
 const fonts = [
     {
         fontName: 'c2dl-iconic',
-        fontVersion: '1.1.0'
+        fontVersion: '2.0.0',
+        origin: 'Phosphor Icons'
     }
 ]
 
@@ -22,21 +23,23 @@ function generate_config(fontEntry) {
         outputPath: path.resolve(rootPath, 'fonts', _fontName),
         fontName: _fontName,
         description: 'C2DL icon font',
-        startUnicode: 0xea00,
+        startUnicode: fontEntry.startUnicode ?? 0xEA00,
         logo: path.resolve(rootPath, 'assets', 'logo.svg'),
         favicon: path.resolve(rootPath, 'assets', 'favicon.png'),
         github: 'https://github.com/CCDirectLink/c2dl-web',
         footer: 'Licensed under MIT',
         license: 'MIT',
-        author: 'CCDirectLink',
+        author: fontEntry.origin + ' (Icons) and CCDirectLink (Font composition)',
     };
 }
 
-const _results = fonts
-    .map(entry => generate_config(entry))
-    .map(config => generate_font(config))
+// Note: svgtofont can not be executed in parallel - not thread safe
+async function generate_all_fonts(configs) {
+    for (const config of configs) {
+        await generate_font(config);
+    }
+}
 
-Promise.all(_results)
-.then(() => {
-    console.log('Builds finished');
-});
+generate_all_fonts(fonts
+    .map(entry => generate_config(entry)))
+    .then(() => console.log('Builds finished'));

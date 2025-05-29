@@ -1,8 +1,10 @@
+$version: 'v2_0_0';
+
 @font-face {
     font-family: 'c2dl-iconic';
     src:
         local('c2dl-iconic'),
-        url('https://storage.c2dl.info/assets/fonts/c2dl-iconic/v1_1/c2dl-iconic.woff2') format('woff2'),
-        url('https://storage.c2dl.info/assets/fonts/c2dl-iconic/v1_1/c2dl-iconic.woff') format('woff'),
-        url('https://storage.c2dl.info/assets/fonts/c2dl-iconic/v1_1/c2dl-iconic.ttf') format('truetype');
+        url('https://storage.c2dl.info/assets/fonts/c2dl-iconic/' + $version + '/c2dl-iconic.woff2') format('woff2'),
+        url('https://storage.c2dl.info/assets/fonts/c2dl-iconic/' + $version + '/c2dl-iconic.woff') format('woff'),
+        url('https://storage.c2dl.info/assets/fonts/c2dl-iconic/' + $version + '/c2dl-iconic.ttf') format('truetype');
 }

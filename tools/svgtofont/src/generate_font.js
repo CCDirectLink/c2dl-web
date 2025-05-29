@@ -8,7 +8,7 @@ export async function generate_font(config) {
         `\n${JSON.stringify(config, null, 2)}`)
 
     // noinspection SpellCheckingInspection
-    return svgtofont({
+    return await svgtofont({
         src: config.inputPath,
         dist: config.outputPath,
         fontName: config.fontName,
@@ -16,6 +16,11 @@ export async function generate_font(config) {
         outSVGReact: true,
         outSVGPath: true,
         startUnicode: config.startUnicode,
+        getIconUnicode: (name, unicode, startUnicode) => {
+            const _nameSplit = name.split('-');
+            const _unicodeLocation = parseInt(_nameSplit[0], 16);
+            return String.fromCharCode(_unicodeLocation);
+        },
         svgicons2svgfont: {
             fontHeight: 1000,
             normalize: true
