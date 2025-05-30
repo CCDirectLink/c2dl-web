@@ -69,6 +69,45 @@ gitlab-icon
 }
 
 /*
+moon-icon
+*/
+
+.c2dl-moon-icon {
+    font-family: 'c2dl-iconic' !important;
+    font-size:20px;
+}
+
+.c2dl-moon-icon:before {
+    content: "\ea04";
+}
+
+/*
+sun-icon
+*/
+
+.c2dl-sun-icon {
+    font-family: 'c2dl-iconic' !important;
+    font-size:20px;
+}
+
+.c2dl-sun-icon:before {
+    content: "\ea05";
+}
+
+/*
+system-icon
+*/
+
+.c2dl-system-icon {
+    font-family: 'c2dl-iconic' !important;
+    font-size:20px;
+}
+
+.c2dl-system-icon:before {
+    content: "\ea06";
+}
+
+/*
 links
 */
 

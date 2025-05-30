@@ -99,6 +99,16 @@
     text-decoration: underline;
 }
 
+.c2dl-menu-bar-nav .c2dl-menu-link:has(.c2dl-link-icon) {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    text-decoration: none;
+}
+
+.c2dl-menu-link .c2dl-link-icon {
+    height: 100%;
+}
+
 .c2dl-menu-bar-nav .c2dl-menu-entry {
     padding: 0;
     margin: 0;
