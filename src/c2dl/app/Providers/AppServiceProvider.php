@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Http\Controllers\BrowserController;
+use App\Http\ViewComposers\ColorsetComposer;
+use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 
@@ -24,6 +26,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+        EncryptCookies::except('c2dl_colorset');
+
+        // Color set
+        view()->composer('*', ColorsetComposer::class);
+
         // Components
         Blade::aliasComponent('components.newscard', 'newscard');
         Blade::aliasComponent('components.pageheader', 'pageheader');

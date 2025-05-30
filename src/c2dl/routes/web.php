@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserConfigController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModController;
 use App\Http\Controllers\NewsController;
@@ -24,6 +25,7 @@ Route::redirect('/', '/cc');
 Route::prefix('/cc')->group(function () {
 
     $_numeric = '^[1-9]([0-9]*)$';
+    $_alpha = '^[a-z]*$';
 
     App::setLocale('en');
 
@@ -47,6 +49,9 @@ Route::prefix('/cc')->group(function () {
     Route::get('/news/{news_id}/{page?}', [NewsController::class, 'show'])->name('news')
         ->where('news_id', $_numeric)
         ->where('page', $_numeric);
+
+    Route::get('/user/config/colorset', [UserConfigController::class, 'colorset'])
+        ->name('colorset');
 
     // RSS Feed
     Route::get('/news/feed', [NewsController::class, 'rssFeed'])->name('news.feed');
