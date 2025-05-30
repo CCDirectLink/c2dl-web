@@ -3,11 +3,11 @@ html {
     height: 100%;
     touch-action: manipulation;
     scroll-behavior: smooth;
-    background: var(--base-background);
 }
 
 body {
     position: absolute;
+    background: var(--base-background);
     color: var(--base-color);
     min-height: 100%;
     width: 100%;

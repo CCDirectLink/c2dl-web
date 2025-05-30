@@ -84,6 +84,7 @@
     padding: 0;
     margin: 0;
     width: min-content;
+    height: min-content;
 }
 
 .c2dl-menu-entry {
@@ -104,7 +105,7 @@
 }
 
 .c2dl-menu-bar-nav .c2dl-menu-link {
-    display: block;
+    display: flex;
     color: var(--header-link);
     padding: 0.5em 1.5em 0.5em 1.5em;
     transition: color 0.4s, padding 0.4s, background 0.4s;
