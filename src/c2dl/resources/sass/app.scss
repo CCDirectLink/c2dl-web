@@ -28,8 +28,20 @@
 @use 'colorset/light';
 @use 'colorset/dark';
 
-@include light.c2dl-light-root-color;
+:root {
+    @include light.c2dl-light-root-color;
+}
 
 @media (prefers-color-scheme: dark) {
+    :root {
+        @include dark.c2dl-dark-root-color;
+    }
+}
+
+.c2dl-colorset-light {
+    @include light.c2dl-light-root-color;
+}
+
+.c2dl-colorset-dark {
     @include dark.c2dl-dark-root-color;
 }
