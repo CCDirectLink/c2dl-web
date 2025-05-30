@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Middleware\CheckForMaintenanceMode;
-use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\TrustProxies;
 use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Foundation\Application;
@@ -19,7 +18,6 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(CheckForMaintenanceMode::class);
         $middleware->append(StartSession::class);
-        $middleware->append(EncryptCookies::class);
         $middleware->append(TrustProxies::class);
         $middleware->append(VerifyCsrfToken::class);
         $middleware->append(AddCspHeaders::class);
