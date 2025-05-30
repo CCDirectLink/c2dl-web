@@ -24,7 +24,7 @@
         @yield('head')
 
 	</head>
-	<body class="c2dl-body">
+	<body id="c2dl-body" class="c2dl-body {{ $colorset }}">
         @if(Config::get('app.debug') == 1)
             <div class="c2dl-debug-container">
                 <code>@yield('debugcontent')</code>
@@ -69,6 +69,21 @@
                 @else
                 @endguest
                 @endif
+                <li class="c2dl-menu-entry">
+                    @if($colorset == 'c2dl-colorset-dark')
+                        <a class="c2dl-menu-link c2dl-colorset-switcher" href="{{ route('colorset', 'name=light') }}" title="{{ __('colorset.dark') }}">
+                            <div class="c2dl-link-icon c2dl-colorset-icon c2dl-moon-icon"></div>
+                        </a>
+                    @elseif($colorset == 'c2dl-colorset-light')
+                        <a class="c2dl-menu-link c2dl-colorset-switcher" href="{{ route('colorset', 'name=system') }}" title="{{ __('colorset.light') }}">
+                            <div class="c2dl-link-icon c2dl-colorset-icon c2dl-sun-icon"></div>
+                        </a>
+                    @elseif($colorset == 'c2dl-colorset-system')
+                        <a class="c2dl-menu-link c2dl-colorset-switcher" href="{{ route('colorset', 'name=dark') }}" title="{{ __('colorset.system') }}">
+                            <div class="c2dl-link-icon c2dl-colorset-icon c2dl-system-icon"></div>
+                        </a>
+                    @endif
+                </li>
             </ul>
             @endpageheader
             <main class="c2dl-main" id="c2dl-main-app" role="main">
