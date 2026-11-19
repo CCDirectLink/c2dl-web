@@ -24,3 +24,6 @@ bun-install-content.sh
 # Web root
 cgi-bin
 usage
+
+# sys folder
+src/c2dl/public/sys
