@@ -5,6 +5,11 @@
 
     RewriteEngine On
 
+    # Maintenance mopde if .active present
+    RewriteCond %{DOCUMENT_ROOT}/sys/maintenance/.active -f
+    RewriteCond %{REQUEST_URI} !^/sys/
+    RewriteRule ^ - [R=503,L]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -19,3 +24,7 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+<If "-f '%{DOCUMENT_ROOT}/sys/maintenance/.active'">
+    ErrorDocument 503 /sys/maintenance/index.html
+    ErrorDocument 403 /sys/maintenance/index.html
+</If>
